@@ -10,24 +10,11 @@ all : $(EXECS)
 
 # build the project
 build : 
-	@if [ -d "build" ]; then       \
-		cd build;                  \
-		if [ -f "Makefile" ]; then \
-			make -j;               \
-		else                       \
-			cmake ..;              \
-			make -j;               \
-		fi                         \
-	else                           \
-		mkdir build;               \
-		cd build;                  \
-		cmake ..;                  \
-		make -j;                   \
-	fi
+	./scripts/make_helper.sh build
 .PHONY : build
 
 
 # remove compiled files and generated headers
 clean :
-	
+	./scripts/make_helper.sh clean
 .PHONY : clean
