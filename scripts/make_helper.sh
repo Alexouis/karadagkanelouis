@@ -19,7 +19,7 @@ if [ $1 = "build" ]; then
 	echo $1;
 	if [ -d $BUILD_DIR ]; then
         	cd $BUILD_DIR;
-        	if [ -f $MEKEFILE_PATH ]; then
+        	if [ -f $MAKEFILE_PATH ]; then
                 	make -j;
         	else
                 	cmake ..;
