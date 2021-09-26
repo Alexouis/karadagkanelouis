@@ -21,7 +21,6 @@ clean :
 
 
 # install all requirements
-
 install-requirements :
 	./scripts/requirements.sh
 .PHONY : install-requirements
