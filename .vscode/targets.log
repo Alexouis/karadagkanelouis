@@ -6,7 +6,7 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 # This is free software: you are free to change and redistribute it.
 # There is NO WARRANTY, to the extent permitted by law.
 
-# Make data base, printed on Sat Sep 25 11:24:39 2021
+# Make data base, printed on Sun Sep 26 11:35:54 2021
 
 # Variables
 
@@ -17,7 +17,7 @@ LC_ALL = C
 # environment
 GJS_DEBUG_OUTPUT = stderr
 # environment
-VSCODE_IPC_HOOK_EXTHOST = /run/user/1000/vscode-ipc-d47ebb86-70c5-44e7-9151-d9dda687f33b.sock
+VSCODE_IPC_HOOK_EXTHOST = /run/user/1000/vscode-ipc-885d4650-07f2-4df0-a314-e8464e3f5f87.sock
 # environment
 VSCODE_CWD = /home/mkas
 # environment
@@ -87,13 +87,13 @@ MAKEFILE_LIST := Makefile
 # environment
 VSCODE_VERBOSE_LOGGING = true
 # environment
-VSCODE_PID = 3603
+VSCODE_PID = 4430
 # environment
 XDG_SESSION_TYPE = x11
 # automatic
 ?D = $(patsubst %/,%,$(dir $?))
 # environment
-SESSION_MANAGER = local/kalikane:@/tmp/.ICE-unix/1573,unix/kalikane:/tmp/.ICE-unix/1573
+SESSION_MANAGER = local/kalikane:@/tmp/.ICE-unix/1532,unix/kalikane:/tmp/.ICE-unix/1532
 # automatic
 *F = $(notdir $*)
 # environment
@@ -137,7 +137,7 @@ COMMAND_NOT_FOUND_INSTALL_PROMPT = 1
 # makefile (from 'Makefile', line 2)
 BINARIES := bin
 # environment
-INVOCATION_ID = 67102b0a2c574f648704812f5b7a1d81
+INVOCATION_ID = e49c26888e404700b45afcab0306778b
 # environment
 VSCODE_LOG_NATIVE = false
 # environment
@@ -169,11 +169,11 @@ GTK_MODULES = gail:atk-bridge
 # default
 MAKE_VERSION := 4.3
 # environment
-MANAGERPID = 1340
+MANAGERPID = 1289
 # environment
-GIO_LAUNCHED_DESKTOP_FILE_PID = 3603
+GIO_LAUNCHED_DESKTOP_FILE_PID = 4430
 # environment
-SSH_AGENT_PID = 1530
+SSH_AGENT_PID = 1489
 # environment
 _ = /usr/share/code/code
 # environment
@@ -183,7 +183,7 @@ GPG_AGENT_INFO = /run/user/1000/gnupg/S.gpg-agent:0:1
 # environment
 POWERSHELL_TELEMETRY_OPTOUT = 1
 # environment
-JOURNAL_STREAM = 8:24000
+JOURNAL_STREAM = 8:20253
 # environment
 XDG_SESSION_CLASS = user
 # environment
@@ -225,10 +225,10 @@ GDMSESSION = gnome
 
 # Directories
 
-# . (device 2051, inode 1187067): 19 files, no impossibilities.
-# bin: could not be stat'd.
+# . (device 2051, inode 1187067): 20 files, no impossibilities.
+# bin (device 2051, inode 1187706): 2 files, no impossibilities.
 
-# 19 files, no impossibilities in 2 directories.
+# 22 files, no impossibilities in 2 directories.
 
 # Implicit Rules
 
@@ -239,7 +239,7 @@ GDMSESSION = gnome
 # Not a target:
 Makefile:
 #  Implicit rule search has been done.
-#  Last modified 2021-09-24 22:41:58.122551391
+#  Last modified 2021-09-26 00:30:09.424843478
 #  File has been updated.
 #  Successfully updated.
 
@@ -248,8 +248,8 @@ clean:
 #  Implicit rule search has not been done.
 #  File does not exist.
 #  File has not been updated.
-#  recipe to execute (from 'Makefile', line 32):
-	
+#  recipe to execute (from 'Makefile', line 19):
+	./scripts/make_helper.sh clean
 
 # Not a target:
 .DEFAULT:
@@ -279,10 +279,10 @@ all:
 # ^ := 
 # automatic
 # ? := 
+ 
 # automatic
 # | := 
 # variable set hash-table stats:
- 
 # Load=8/32=25%, Rehash=0, Collisions=1/9=11%
 #  recipe to execute (from 'Makefile', line 7):
 	$(EXECS:%=./%)
@@ -293,20 +293,7 @@ build:
 #  File does not exist.
 #  File has not been updated.
 #  recipe to execute (from 'Makefile', line 13):
-	@if [ -d "build" ]; then       \
-		cd build;                  \
-		if [ -f "Makefile" ]; then \
-			make -j;               \
-		else                       \
-			cmake ..;              \
-			make -j;               \
-		fi                         \
-	else                           \
-		mkdir build;               \
-		cd build;                  \
-		cmake ..;                  \
-		make -j;                   \
-	fi
+	./scripts/make_helper.sh build
 
 # Not a target:
 .SUFFIXES:
@@ -330,9 +317,9 @@ build:
 # strcache buffers: 1 (0) / strings = 28 / storage = 217 B / avg = 7 B
 # current buf: size = 8162 B / used = 217 B / count = 28 / avg = 7 B
 
-# strcache performance: lookups = 45 / hit rate = 37%
+# strcache performance: lookups = 48 / hit rate = 41%
 # hash-table stats:
-# Load=28/8192=0%, Rehash=0, Collisions=0/45=0%
-# Finished Make data base on Sat Sep 25 11:24:39 2021
+# Load=28/8192=0%, Rehash=0, Collisions=0/48=0%
+# Finished Make data base on Sun Sep 26 11:35:54 2021
 
  

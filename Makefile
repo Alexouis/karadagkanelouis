@@ -2,7 +2,7 @@
 BINARIES := bin
 EXECS := $(wildcard $(BINARIES)/*)
 
-# Execute all binaries in the inside bin directory
+# Execute all binaries inside bin directory
 all : $(EXECS)
 	$(EXECS:%=./%)
 .PHONY : all
@@ -18,3 +18,10 @@ build :
 clean :
 	./scripts/make_helper.sh clean
 .PHONY : clean
+
+
+# install all requirements
+
+install-requirements :
+	./scripts/requirements.sh
+.PHONY : install-requirements
