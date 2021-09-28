@@ -1,5 +1,5 @@
 make --dry-run --always-make --keep-going --print-directory
 make: Entering directory '/home/mkas/ENSEA/karadagkanelouis'
-make: Nothing to be done for 'all'.
+./bin/client ./bin/dia2code
 make: Leaving directory '/home/mkas/ENSEA/karadagkanelouis'
  
