@@ -5,7 +5,9 @@
     make install-requirements
 #### Création et compilation du projet :
     make build
-#### Suppression des fichiers générés :
+#### Suppression de tous les fichiers générés :
     make clean
+#### Suppression des fichiers headers :
+    make clean-headers
 #### Execution de code :
     make

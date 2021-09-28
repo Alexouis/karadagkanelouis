@@ -19,6 +19,10 @@ clean :
 	./scripts/make_helper.sh clean
 .PHONY : clean
 
+clean-headers :
+	./scripts/make_helper.sh clean-headers
+.PHONY : clean-headers
+
 
 # install all requirements
 install-requirements :
