@@ -42,6 +42,13 @@ elif [ $1 = "clean" ]; then
 		echo `pwd`;
 		rm -rf $BUILD_DIR;
 	fi
+elif [ $1 = "clean-headers" ]; then
+	if [ -d $BUILD_DIR ]; then
+		cd  $BUILD_DIR;
+		echo `pwd`;
+		make clean-headers;
+		cd $BASE_PATH;
+	fi
 else
 	exit 0;
 fi

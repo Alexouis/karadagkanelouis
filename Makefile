@@ -19,6 +19,7 @@ clean :
 	./scripts/make_helper.sh clean
 .PHONY : clean
 
+# remove headers only
 clean-headers :
 	./scripts/make_helper.sh clean-headers
 .PHONY : clean-headers
