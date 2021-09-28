@@ -1,11 +1,11 @@
 # Projet Logiciel Transverse de Nouhou, Mustafa et Alexandre
 
 ## Installation de d'environnement de projet : Le builder
-### Logiciels requis :
+#### Logiciels requis :
     make install-requirements
-### Création et compilation du projet :
+#### Création et compilation du projet :
     make build
-### Suppression des fichiers générés :
+#### Suppression des fichiers générés :
     make clean
-### Execution de code :
+#### Execution de code :
     make
