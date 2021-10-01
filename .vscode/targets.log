@@ -6,7 +6,7 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 # This is free software: you are free to change and redistribute it.
 # There is NO WARRANTY, to the extent permitted by law.
 
-# Make data base, printed on Tue Sep 28 10:53:07 2021
+# Make data base, printed on Fri Oct  1 08:03:47 2021
 
 # Variables
 
@@ -17,7 +17,7 @@ LC_ALL = C
 # environment
 GJS_DEBUG_OUTPUT = stderr
 # environment
-VSCODE_IPC_HOOK_EXTHOST = /run/user/1000/vscode-ipc-a17c5c90-1367-4f66-8fac-15f21fe8337c.sock
+VSCODE_IPC_HOOK_EXTHOST = /run/user/1000/vscode-ipc-3ac1015c-a771-4486-be1d-4bd6274b2f08.sock
 # environment
 VSCODE_CWD = /home/mkas
 # environment
@@ -87,13 +87,13 @@ MAKEFILE_LIST := Makefile
 # environment
 VSCODE_VERBOSE_LOGGING = true
 # environment
-VSCODE_PID = 7334
+VSCODE_PID = 2113
 # environment
 XDG_SESSION_TYPE = x11
 # automatic
 ?D = $(patsubst %/,%,$(dir $?))
 # environment
-SESSION_MANAGER = local/kalikane:@/tmp/.ICE-unix/1571,unix/kalikane:/tmp/.ICE-unix/1571
+SESSION_MANAGER = local/kalikane:@/tmp/.ICE-unix/1574,unix/kalikane:/tmp/.ICE-unix/1574
 # automatic
 *F = $(notdir $*)
 # environment
@@ -137,7 +137,7 @@ COMMAND_NOT_FOUND_INSTALL_PROMPT = 1
 # makefile (from 'Makefile', line 2)
 BINARIES := bin
 # environment
-INVOCATION_ID = 1baa904f8f0c421c8c7ecb23f7c7fd14
+INVOCATION_ID = 2c5ee517c4c44a72a6fb693a57ee8857
 # environment
 VSCODE_LOG_NATIVE = false
 # environment
@@ -169,11 +169,11 @@ GTK_MODULES = gail:atk-bridge
 # default
 MAKE_VERSION := 4.3
 # environment
-MANAGERPID = 1320
+MANAGERPID = 1332
 # environment
-GIO_LAUNCHED_DESKTOP_FILE_PID = 7334
+GIO_LAUNCHED_DESKTOP_FILE_PID = 2113
 # environment
-SSH_AGENT_PID = 1526
+SSH_AGENT_PID = 1533
 # environment
 _ = /usr/share/code/code
 # environment
@@ -183,7 +183,7 @@ GPG_AGENT_INFO = /run/user/1000/gnupg/S.gpg-agent:0:1
 # environment
 POWERSHELL_TELEMETRY_OPTOUT = 1
 # environment
-JOURNAL_STREAM = 8:27663
+JOURNAL_STREAM = 8:16320
 # environment
 XDG_SESSION_CLASS = user
 # environment
@@ -225,10 +225,10 @@ GDMSESSION = gnome
 
 # Directories
 
-# . (device 2051, inode 1187067): 21 files, no impossibilities.
+# . (device 2051, inode 1187067): 20 files, no impossibilities.
 # bin (device 2051, inode 1187706): 4 files, no impossibilities.
 
-# 25 files, no impossibilities in 2 directories.
+# 24 files, no impossibilities in 2 directories.
 
 # Implicit Rules
 
@@ -241,20 +241,20 @@ clean-headers:
 #  Implicit rule search has not been done.
 #  File does not exist.
 #  File has not been updated.
-#  recipe to execute (from 'Makefile', line 23):
+#  recipe to execute (from 'Makefile', line 24):
 	./scripts/make_helper.sh clean-headers
 
 # Not a target:
 bin/client:
 #  Implicit rule search has been done.
-#  Last modified 2021-09-27 15:11:39.846715664
+#  Last modified 2021-09-28 13:59:20.743586952
 #  File has been updated.
 #  Successfully updated.
 
 # Not a target:
 Makefile:
 #  Implicit rule search has been done.
-#  Last modified 2021-09-28 10:16:25.9395833
+#  Last modified 2021-09-28 11:39:03.29572493
 #  File has been updated.
 #  Successfully updated.
 
@@ -279,7 +279,6 @@ all: bin/client bin/dia2code
 #  Implicit/static pattern stem: ''
 #  File does not exist.
 #  File has been updated.
- 
 #  Needs to be updated (-q is set).
 # automatic
 # @ := all
@@ -290,6 +289,7 @@ all: bin/client bin/dia2code
 # automatic
 # + := bin/client bin/dia2code
 # automatic
+ 
 # % := 
 # automatic
 # ^ := bin/client bin/dia2code
@@ -315,13 +315,13 @@ install-requirements:
 #  Implicit rule search has not been done.
 #  File does not exist.
 #  File has not been updated.
-#  recipe to execute (from 'Makefile', line 29):
+#  recipe to execute (from 'Makefile', line 30):
 	./scripts/requirements.sh
 
 # Not a target:
 bin/dia2code:
 #  Implicit rule search has been done.
-#  Last modified 2021-09-27 15:11:35.434715538
+#  Last modified 2021-09-28 13:59:19.675586921
 #  File has been updated.
 #  Successfully updated.
 
@@ -344,12 +344,12 @@ bin/dia2code:
 
 # No general ('VPATH' variable) search path.
 
-# strcache buffers: 1 (0) / strings = 34 / storage = 292 B / avg = 8 B
-# current buf: size = 8162 B / used = 292 B / count = 34 / avg = 8 B
+# strcache buffers: 1 (0) / strings = 33 / storage = 288 B / avg = 8 B
+# current buf: size = 8162 B / used = 288 B / count = 33 / avg = 8 B
 
-# strcache performance: lookups = 63 / hit rate = 46%
+# strcache performance: lookups = 62 / hit rate = 46%
 # hash-table stats:
-# Load=34/8192=0%, Rehash=0, Collisions=0/63=0%
-# Finished Make data base on Tue Sep 28 10:53:07 2021
+# Load=33/8192=0%, Rehash=0, Collisions=0/62=0%
+# Finished Make data base on Fri Oct  1 08:03:47 2021
 
  
