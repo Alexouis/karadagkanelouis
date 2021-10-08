@@ -1,1 +1,1 @@
-{"buildTargets":["all","build","clean","clean-headers","install-requirements"],"launchTargets":[],"customConfigurationProvider":{"workspaceBrowse":{"browsePath":[],"compilerArgs":[]},"fileIndex":[]}}
+{"buildTargets":["all","build","clean","clean-headers","install-requirements","push_git"],"launchTargets":[],"customConfigurationProvider":{"workspaceBrowse":{"browsePath":[],"compilerArgs":[]},"fileIndex":[]}}

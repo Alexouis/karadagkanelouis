@@ -29,3 +29,11 @@ clean-headers :
 install-requirements :
 	./scripts/requirements.sh
 .PHONY : install-requirements
+
+
+push_git:
+	git status
+	git add -A
+	git commit -m "$m"
+	git push -u origin "$b" 
+.PHONY : push_git
