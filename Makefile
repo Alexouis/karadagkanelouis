@@ -35,5 +35,5 @@ push_git:
 	git status
 	git add -A
 	git commit -m "$m"
-	git push -u origin "$b" 
+	git push origin "$b" 
 .PHONY : push_git
