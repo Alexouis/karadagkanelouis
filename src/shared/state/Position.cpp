@@ -19,9 +19,9 @@ namespace state
     int Position::getY() const{
         return Position::x;
     };
-    void Position::setY(int y{
+    void Position::setY(int y){
         Position::y = y;
-    });
+    };
 
     Position::~Position(){};
 
