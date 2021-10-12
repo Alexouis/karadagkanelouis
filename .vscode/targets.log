@@ -1,6 +1,4 @@
 make all --print-data-base --no-builtin-variables --no-builtin-rules --question
-Makefile:35: *** missing separator.  Stop.
- 
 # GNU Make 4.3
 # Built for x86_64-pc-linux-gnu
 # Copyright (C) 1988-2020 Free Software Foundation, Inc.
@@ -8,7 +6,7 @@ Makefile:35: *** missing separator.  Stop.
 # This is free software: you are free to change and redistribute it.
 # There is NO WARRANTY, to the extent permitted by law.
 
-# Make data base, printed on Fri Oct  8 08:05:56 2021
+# Make data base, printed on Tue Oct 12 13:41:12 2021
 
 # Variables
 
@@ -19,7 +17,7 @@ LC_ALL = C
 # environment
 GJS_DEBUG_OUTPUT = stderr
 # environment
-VSCODE_IPC_HOOK_EXTHOST = /run/user/1000/vscode-ipc-ac6da333-6122-4acf-a0c5-7f5e51bf975b.sock
+VSCODE_IPC_HOOK_EXTHOST = /run/user/1000/vscode-ipc-e1cc3ad0-1454-495e-94e6-231bc1059810.sock
 # environment
 VSCODE_CWD = /home/mkas
 # environment
@@ -33,7 +31,7 @@ QT_ACCESSIBILITY = 1
 # automatic
 @D = $(patsubst %/,%,$(dir $@))
 # makefile (from 'Makefile', line 3)
-EXECS := bin/client bin/dia2code
+EXECS := 
 # environment
 VSCODE_HANDLES_UNCAUGHT_ERRORS = true
 # default
@@ -51,7 +49,7 @@ VSCODE_LOG_STACK = false
 # automatic
 %F = $(notdir $%)
 # environment
-VSCODE_CODE_CACHE_PATH = /home/mkas/.config/Code/CachedData/7f6ab5485bbc008386c4386d08766667e155244e
+VSCODE_CODE_CACHE_PATH = /home/mkas/.config/Code/CachedData/ee8c7def80afc00dd6e593ef12f37756d8f504ea
 # environment
 LANG = C
 # environment
@@ -89,13 +87,13 @@ MAKEFILE_LIST := Makefile
 # environment
 VSCODE_VERBOSE_LOGGING = true
 # environment
-VSCODE_PID = 2047
+VSCODE_PID = 33353
 # environment
 XDG_SESSION_TYPE = x11
 # automatic
 ?D = $(patsubst %/,%,$(dir $?))
 # environment
-SESSION_MANAGER = local/kalikane:@/tmp/.ICE-unix/1541,unix/kalikane:/tmp/.ICE-unix/1541
+SESSION_MANAGER = local/kalikane:@/tmp/.ICE-unix/1639,unix/kalikane:/tmp/.ICE-unix/1639
 # automatic
 *F = $(notdir $*)
 # environment
@@ -139,7 +137,9 @@ COMMAND_NOT_FOUND_INSTALL_PROMPT = 1
 # makefile (from 'Makefile', line 2)
 BINARIES := bin
 # environment
-INVOCATION_ID = 7e90480ebda24e0d81fe092da80a0c98
+INVOCATION_ID = 632b84b7564c4018b188aa68399c46f5
+# environment
+QSYS_ROOTDIR = /home/mkas/intelFPGA_lite/20.1/quartus/sopc_builder/bin
 # environment
 VSCODE_LOG_NATIVE = false
 # environment
@@ -154,7 +154,7 @@ XDG_CURRENT_DESKTOP = GNOME
 DESKTOP_SESSION = gnome
 # environment
 ORIGINAL_XDG_CURRENT_DESKTOP = GNOME
-# environment
+# 'override' directive
 GNUMAKEFLAGS := 
 # environment
 LOGNAME = mkas
@@ -171,11 +171,11 @@ GTK_MODULES = gail:atk-bridge
 # default
 MAKE_VERSION := 4.3
 # environment
-MANAGERPID = 1307
+MANAGERPID = 1409
 # environment
-GIO_LAUNCHED_DESKTOP_FILE_PID = 2047
+GIO_LAUNCHED_DESKTOP_FILE_PID = 33353
 # environment
-SSH_AGENT_PID = 1500
+SSH_AGENT_PID = 1596
 # environment
 _ = /usr/share/code/code
 # environment
@@ -185,7 +185,7 @@ GPG_AGENT_INFO = /run/user/1000/gnupg/S.gpg-agent:0:1
 # environment
 POWERSHELL_TELEMETRY_OPTOUT = 1
 # environment
-JOURNAL_STREAM = 8:22351
+JOURNAL_STREAM = 8:25800
 # environment
 XDG_SESSION_CLASS = user
 # environment
@@ -199,7 +199,7 @@ _JAVA_OPTIONS = -Dawt.useSystemAAFontSettings=on -Dswing.aatext=true
 # environment
 ELECTRON_RUN_AS_NODE = 1
 # environment
-VSCODE_IPC_HOOK = /run/user/1000/vscode-dbd344ef-1.60.2-main.sock
+VSCODE_IPC_HOOK = /run/user/1000/vscode-dbd344ef-1.61.0-main.sock
 # environment
 DOTNET_CLI_TELEMETRY_OPTOUT = 1
 # environment
@@ -219,7 +219,7 @@ XDG_MENU_PREFIX = gnome-
 # environment
 GDMSESSION = gnome
 # variable set hash-table stats:
-# Load=103/1024=10%, Rehash=0, Collisions=5/119=4%
+# Load=104/1024=10%, Rehash=0, Collisions=5/137=4%
 
 # Pattern-specific Variable Values
 
@@ -227,10 +227,10 @@ GDMSESSION = gnome
 
 # Directories
 
-# . (device 2051, inode 1187067): 21 files, no impossibilities.
-# bin (device 2051, inode 1187706): 4 files, no impossibilities.
+# . (device 2051, inode 25036745): 20 files, no impossibilities.
+# bin (device 2051, inode 25041086): 2 files, no impossibilities.
 
-# 25 files, no impossibilities in 2 directories.
+# 22 files, no impossibilities in 2 directories.
 
 # Implicit Rules
 
@@ -239,27 +239,25 @@ GDMSESSION = gnome
 # Files
 
 clean-headers:
+#  Phony target (prerequisite of .PHONY).
 #  Implicit rule search has not been done.
-#  Modification time never checked.
+#  File does not exist.
 #  File has not been updated.
 #  recipe to execute (from 'Makefile', line 24):
 	./scripts/make_helper.sh clean-headers
 
 # Not a target:
-bin/client:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
-
-# Not a target:
 Makefile:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
+#  Implicit rule search has been done.
+#  Last modified 2021-10-10 20:11:44.691502939
+#  File has been updated.
+#  Successfully updated.
+ 
 
 clean:
+#  Phony target (prerequisite of .PHONY).
 #  Implicit rule search has not been done.
-#  Modification time never checked.
+#  File does not exist.
 #  File has not been updated.
 #  recipe to execute (from 'Makefile', line 19):
 	./scripts/make_helper.sh clean
@@ -270,59 +268,87 @@ clean:
 #  Modification time never checked.
 #  File has not been updated.
 
-all: bin/client bin/dia2code
+all:
+#  Phony target (prerequisite of .PHONY).
 #  Command line target.
 #  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
+#  Implicit/static pattern stem: ''
+#  File does not exist.
+#  File has been updated.
+#  Successfully updated.
+# automatic
+# @ := all
+# automatic
+# * := 
+# automatic
+# < := 
+# automatic
+# + := 
+# automatic
+# % := 
+# automatic
+# ^ := 
+# automatic
+# ? := 
+# automatic
+# | := 
+# variable set hash-table stats:
+# Load=8/32=25%, Rehash=0, Collisions=1/9=11%
 #  recipe to execute (from 'Makefile', line 7):
 	$(EXECS:%=./%)
 
 push_git:
+#  Phony target (prerequisite of .PHONY).
 #  Implicit rule search has not been done.
-#  Modification time never checked.
+#  File does not exist.
 #  File has not been updated.
+#  recipe to execute (from 'Makefile', line 35):
+	git status
+	git add -A
+	git commit -m "$m"
+	git push origin "$b" 
 
 build:
+#  Phony target (prerequisite of .PHONY).
 #  Implicit rule search has not been done.
-#  Modification time never checked.
+#  File does not exist.
 #  File has not been updated.
- 
 #  recipe to execute (from 'Makefile', line 13):
 	./scripts/make_helper.sh build
 
 install-requirements:
+#  Phony target (prerequisite of .PHONY).
 #  Implicit rule search has not been done.
-#  Modification time never checked.
+#  File does not exist.
 #  File has not been updated.
 #  recipe to execute (from 'Makefile', line 30):
 	./scripts/requirements.sh
 
 # Not a target:
-bin/dia2code:
+.SUFFIXES:
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
 
-.PHONY: all build clean clean-headers install-requirements
+.PHONY: all build clean clean-headers install-requirements push_git
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
 
 # files hash-table stats:
-# Load=12/1024=1%, Rehash=0, Collisions=0/25=0%
+# Load=10/1024=1%, Rehash=0, Collisions=0/33=0%
 # VPATH Search Paths
 
 # No 'vpath' search paths.
 
 # No general ('VPATH' variable) search path.
 
-# strcache buffers: 1 (0) / strings = 35 / storage = 301 B / avg = 8 B
-# current buf: size = 8162 B / used = 301 B / count = 35 / avg = 8 B
+# strcache buffers: 1 (0) / strings = 31 / storage = 261 B / avg = 8 B
+# current buf: size = 8162 B / used = 261 B / count = 31 / avg = 8 B
 
-# strcache performance: lookups = 64 / hit rate = 45%
+# strcache performance: lookups = 63 / hit rate = 50%
 # hash-table stats:
-# Load=35/8192=0%, Rehash=0, Collisions=0/64=0%
-# Finished Make data base on Fri Oct  8 08:05:56 2021
+# Load=31/8192=0%, Rehash=0, Collisions=0/63=0%
+# Finished Make data base on Tue Oct 12 13:41:12 2021
 
  
