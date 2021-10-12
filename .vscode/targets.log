@@ -6,7 +6,7 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 # This is free software: you are free to change and redistribute it.
 # There is NO WARRANTY, to the extent permitted by law.
 
-# Make data base, printed on Tue Oct 12 13:41:12 2021
+# Make data base, printed on Tue Oct 12 14:26:46 2021
 
 # Variables
 
@@ -17,7 +17,7 @@ LC_ALL = C
 # environment
 GJS_DEBUG_OUTPUT = stderr
 # environment
-VSCODE_IPC_HOOK_EXTHOST = /run/user/1000/vscode-ipc-e1cc3ad0-1454-495e-94e6-231bc1059810.sock
+VSCODE_IPC_HOOK_EXTHOST = /run/user/1000/vscode-ipc-31d539c2-98c2-49ea-a0aa-5727e39d4652.sock
 # environment
 VSCODE_CWD = /home/mkas
 # environment
@@ -87,13 +87,13 @@ MAKEFILE_LIST := Makefile
 # environment
 VSCODE_VERBOSE_LOGGING = true
 # environment
-VSCODE_PID = 33353
+VSCODE_PID = 2063
 # environment
 XDG_SESSION_TYPE = x11
 # automatic
 ?D = $(patsubst %/,%,$(dir $?))
 # environment
-SESSION_MANAGER = local/kalikane:@/tmp/.ICE-unix/1639,unix/kalikane:/tmp/.ICE-unix/1639
+SESSION_MANAGER = local/kalikane:@/tmp/.ICE-unix/1554,unix/kalikane:/tmp/.ICE-unix/1554
 # automatic
 *F = $(notdir $*)
 # environment
@@ -137,7 +137,7 @@ COMMAND_NOT_FOUND_INSTALL_PROMPT = 1
 # makefile (from 'Makefile', line 2)
 BINARIES := bin
 # environment
-INVOCATION_ID = 632b84b7564c4018b188aa68399c46f5
+INVOCATION_ID = 0e65091dcb9b41ef9967755ad85f78d4
 # environment
 QSYS_ROOTDIR = /home/mkas/intelFPGA_lite/20.1/quartus/sopc_builder/bin
 # environment
@@ -171,11 +171,11 @@ GTK_MODULES = gail:atk-bridge
 # default
 MAKE_VERSION := 4.3
 # environment
-MANAGERPID = 1409
+MANAGERPID = 1317
 # environment
-GIO_LAUNCHED_DESKTOP_FILE_PID = 33353
+GIO_LAUNCHED_DESKTOP_FILE_PID = 2063
 # environment
-SSH_AGENT_PID = 1596
+SSH_AGENT_PID = 1512
 # environment
 _ = /usr/share/code/code
 # environment
@@ -185,7 +185,7 @@ GPG_AGENT_INFO = /run/user/1000/gnupg/S.gpg-agent:0:1
 # environment
 POWERSHELL_TELEMETRY_OPTOUT = 1
 # environment
-JOURNAL_STREAM = 8:25800
+JOURNAL_STREAM = 8:25801
 # environment
 XDG_SESSION_CLASS = user
 # environment
@@ -252,7 +252,6 @@ Makefile:
 #  Last modified 2021-10-10 20:11:44.691502939
 #  File has been updated.
 #  Successfully updated.
- 
 
 clean:
 #  Phony target (prerequisite of .PHONY).
@@ -293,6 +292,7 @@ all:
 # automatic
 # | := 
 # variable set hash-table stats:
+ 
 # Load=8/32=25%, Rehash=0, Collisions=1/9=11%
 #  recipe to execute (from 'Makefile', line 7):
 	$(EXECS:%=./%)
@@ -349,6 +349,6 @@ install-requirements:
 # strcache performance: lookups = 63 / hit rate = 50%
 # hash-table stats:
 # Load=31/8192=0%, Rehash=0, Collisions=0/63=0%
-# Finished Make data base on Tue Oct 12 13:41:12 2021
+# Finished Make data base on Tue Oct 12 14:26:46 2021
 
  
