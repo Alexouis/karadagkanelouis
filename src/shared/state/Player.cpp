@@ -66,11 +66,11 @@ namespace state {
         Player::playing = playing;
     };
 
-    const std::vector<Attack>& Player::getAttacks() const{
+    const std::map<char,struct attack>& Player::getAttacks() const{
         return Player::attacks;
     };
 
-    void Player::setAttacks(const std::vector<Attack>& attacks){
+    void Player::setAttacks(const std::map<char,struct attack>& attacks){
         Player::attacks = attacks;
     };
 
