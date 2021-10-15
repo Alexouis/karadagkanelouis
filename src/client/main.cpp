@@ -30,8 +30,6 @@ void testSFML() {
 }
 
 // Fin test SFML
-#include <state/Player.h> 
-#include <state/Position.h> 
 
 #include  <state.h>
 
@@ -45,12 +43,19 @@ int main(int argc,char* argv[])
 
     cout << "It works !" << endl;
 
+<<<<<<< HEAD
     state::Player p{};
     
     //const string name = "Erza";
     //Position position{1,2};
     //Player player{};
     //player.setName("Alex"); 
+=======
+    Position pos;
+    pos.setX(12);
+
+    cout << pos.getX() << endl;
+>>>>>>> 6e0998b1c3e460cec29a6dd6c7c1b4650f8ef02a
 
     return 0;
 }
