@@ -1,7 +1,9 @@
 #include <state/Exemple.h>  // Included from library shared_static
 #include "Exemple.h"
 #include "state/Player.h"
+#include <iostream>
 
+using namespace std;
 
 namespace client {
 
@@ -11,16 +13,12 @@ namespace client {
         y.setX(x);
 
         this->x = x;
+
+        state::Player p{};
+        p.setName("baba");
+
+        cout<< p.getName();
     }
-
-void Player::setName (std::string name) {
-    // Create an object from "shared" library
-    state::Exemple y {};
-    y.setX(x);
-
-    this->x = x;
-}
-
 
 }
 
