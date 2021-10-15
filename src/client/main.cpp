@@ -8,8 +8,10 @@ void testSFML() {
 }
 
 // Fin test SFML
+#include <state/Player.h> 
+#include <state/Position.h> 
 
-#include <state.h>
+#include  <state.h>
 
 using namespace std;
 using namespace state;
@@ -20,6 +22,11 @@ int main(int argc,char* argv[])
     exemple.setX(53);
 
     cout << "It works !" << endl;
+    
+    //const string name = "Erza";
+    //Position position{1,2};
+    Player player{};
+    player.setName("Alex"); 
 
     return 0;
 }
