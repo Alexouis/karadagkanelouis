@@ -9,7 +9,7 @@ void testSFML() {
 
 // Fin test SFML
 
-#include <state.h>
+#include  <state.h>
 
 using namespace std;
 using namespace state;
@@ -20,6 +20,11 @@ int main(int argc,char* argv[])
     exemple.setX(53);
 
     cout << "It works !" << endl;
+
+    Position pos;
+    pos.setX(12);
+
+    cout << pos.getX() << endl;
 
     return 0;
 }
