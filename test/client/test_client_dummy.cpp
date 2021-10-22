@@ -36,9 +36,17 @@ BOOST_AUTO_TEST_CASE(TestSFML)
     attacks.push_back(powerfulStrike);
 
     //Test Position
-    Position pos{5,5};
+    Position pos{};
+    pos.setX(1);
+    pos.setY(9);
 
-    return 0;
+    BOOST_CHECK_EQUAL(pos.getX(),1);
+    BOOST_CHECK_EQUAL(erza.getY(),9);
+
+
+
+    //Test Stats
+    Stats stat{}
     
     //Test Player
     Player erza{};
