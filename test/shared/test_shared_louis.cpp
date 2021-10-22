@@ -83,6 +83,7 @@ BOOST_AUTO_TEST_CASE(TestSFML)
     erza.setOrientation(WEST);
     BOOST_CHECK_EQUAL(erza.getOrientation(),WEST);
 
+    erza.setPlaying(true);
     BOOST_CHECK(erza.getPlaying());
 
     erza.setStatus(PLAYING);
@@ -102,6 +103,7 @@ BOOST_AUTO_TEST_CASE(TestSFML)
     erza.setPosition(pos);
     BOOST_CHECK_EQUAL(erza.getPosition().getX(),1);
     BOOST_CHECK_EQUAL(erza.getPosition().getY(),9);
+
 
 
   }

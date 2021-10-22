@@ -8,7 +8,7 @@ namespace state {
     void State::init (){
 
     };
-    void State::initPlayer (char index){
+    void State::initPlayer (){
         
     };
     void State::initMap (){
@@ -39,16 +39,16 @@ namespace state {
     void State::setGameMap(const std::vector<std::vector<MapTile>>& gameMap){
         this->gameMap = gameMap;
     };
-    const std::map<std::string,Player>& State::getHeroes() const{
+    const std::map<std::string,Player*>& State::getHeroes() const{
         return this->heroes;
     };
-    void State::setHeroes(const std::map<std::string,Player>& heroes){
+    void State::setHeroes(const std::map<std::string,Player*>& heroes){
         this->heroes = heroes;
     };
-    const std::map<std::string,Player>& State::getEnemies() const{
+    const std::map<std::string,Player*>& State::getEnemies() const{
         return this->enemies;
     };
-    void State::setEnemies(const std::map<std::string,Player>& enemies){
+    void State::setEnemies(const std::map<std::string,Player*>& enemies){
         this->enemies = enemies;
     };
     int State::getTurn() const{
@@ -70,7 +70,7 @@ namespace state {
         this->timeLeft= timeLeft;
     };
     const std::vector<std::string>& State::getPlayer_id() const{
-        return State::player_id;
+        return this->player_id;
     };
     void State::setPlayer_id(const std::vector<std::string>& player_id){
         this->player_id = player_id;

@@ -1,0 +1,53 @@
+/*
+ * File             temp
+ * Directory        shared
+ * Created Date     Saturday, October 23rd 2021, 12:34:53 am
+ * Author           Nouhou KANE
+ * Email            nouhou.kane@ensea.fr
+ * 
+ * Copyright (c) 2021 MEDAL-CTB-UMP(ES) && ENSEA(FR)
+ * __________________________________________________________________________
+ */
+
+State s{};
+    std::map<std::string, Player*> heroes;
+    heroes.at("erza") = &erza;
+
+    std::vector<std::string> player_id;
+    player_id.push_back("erza");
+
+    int turn = 0;
+    char playing = 25;
+    char timeLeft = 25;
+
+    //s.setPlaying(playing);
+    //s.setHeroes(heroes);
+    //s.setPlayer_id(player_id);
+    //s.setTurn(turn);
+    //s.setTimeLeft(timeLeft);
+
+    //BOOST_CHECK_EQUAL(s.getPlaying(), playing);
+    //BOOST_CHECK_EQUAL(s.getHeroes().find("erza")->second, heroes.find("erza")->second);
+
+
+
+    //BOOST_CHECK_EQUAL(s.getPlayer_id(), player_id);
+    //BOOST_CHECK_EQUAL(s.getTurn(), turn);
+    //BOOST_CHECK_EQUAL(s.getTimeLeft(), timeLeft);
+
+    //s.incrementTurn();
+    //BOOST_CHECK_EQUAL(s.getTurn(), turn+1);
+    //BOOST_CHECK_EQUAL(s.isDead(*s.getHeroes().find("erza")->second), true);
+    
+    //BOOST_CHECK_EQUAL(s.getHeroes().find("erza")->second->getStatus(),PLAYING);
+    //BOOST_CHECK_EQUAL(s.getHeroes().find("erza")->second->getStatus(),WAITING);
+    //BOOST_CHECK_EQUAL(s.getHeroes().find("erza")->second->getStatus(),DEAD);
+//
+    //BOOST_CHECK_EQUAL(s.getHeroes().find("erza")->second->getStats().getHp(),200);
+    //BOOST_CHECK_EQUAL(s.getHeroes().find("erza")->second->getStats().getMp(),4);
+    //BOOST_CHECK_EQUAL(s.getHeroes().find("erza")->second->getStats().getAp(),5);
+    //BOOST_CHECK_EQUAL(s.getHeroes().find("erza")->second->getStats().getShield(),40);
+    //BOOST_CHECK_EQUAL(s.getHeroes().find("erza")->second->getStats().getAttack(),30);
+//
+    //BOOST_CHECK_EQUAL(s.getHeroes().find("erza")->second->getPosition().getX(),1);
+    //BOOST_CHECK_EQUAL(s.getHeroes().find("erza")->second->getPosition().getY(),9);
