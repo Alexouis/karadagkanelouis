@@ -5,6 +5,7 @@
 
 #include  <state.h>
 
+
 BOOST_AUTO_TEST_CASE(TestStaticAssert)
 {
   BOOST_CHECK(1);
