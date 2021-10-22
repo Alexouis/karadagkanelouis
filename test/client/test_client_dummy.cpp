@@ -3,12 +3,15 @@
 
 #include <SFML/Graphics.hpp>
 
-#include <state.h>
+#include "/media/sf_Dossier_partage/PLT/karadagkanelouis/src/shared/state.h"
+
 
 BOOST_AUTO_TEST_CASE(TestStaticAssert)
 {
   BOOST_CHECK(1);
 }
+
+using namespace state;
 
 BOOST_AUTO_TEST_CASE(TestSFML)
 {
@@ -16,7 +19,7 @@ BOOST_AUTO_TEST_CASE(TestSFML)
     ::sf::Texture texture;
     BOOST_CHECK(texture.getSize() == ::sf::Vector2<unsigned int> {});
 
-    vector<Attack> attacks;
+    std::vector<Attack> attacks;
 
     struct Attack strike;
 
@@ -30,7 +33,7 @@ BOOST_AUTO_TEST_CASE(TestSFML)
     powerfulStrike.name=POWERFULSTRIKE;
     powerfulStrike.type=CONTACT;
     powerfulStrike.damage=80;
-    powerfulstrike.range=2;
+    powerfulStrike.range=2;
 
     attacks.push_back(strike);
     attacks.push_back(powerfulStrike);
@@ -41,12 +44,23 @@ BOOST_AUTO_TEST_CASE(TestSFML)
     pos.setY(9);
 
     BOOST_CHECK_EQUAL(pos.getX(),1);
-    BOOST_CHECK_EQUAL(erza.getY(),9);
+    BOOST_CHECK_EQUAL(pos.getY(),9);
 
 
 
     //Test Stats
-    Stats stat{}
+    Stats stat{};
+    stat.setAp(5);
+    stat.setAttack(30);
+    stat.setHp(200);
+    stat.setMp(4);
+    stat.setShield(40);
+
+    BOOST_CHECK_EQUAL(stat.getAp(),5);
+    BOOST_CHECK_EQUAL(stat.getAttack(),30);
+    BOOST_CHECK_EQUAL(stat.getHp(),200);
+    BOOST_CHECK_EQUAL(stat.getMp(),4);
+    BOOST_CHECK_EQUAL(stat.getShield(),40);
     
     //Test Player
     Player erza{};
@@ -69,9 +83,25 @@ BOOST_AUTO_TEST_CASE(TestSFML)
     erza.setOrientation(WEST);
     BOOST_CHECK_EQUAL(erza.getOrientation(),WEST);
 
+    BOOST_CHECK(erza.getPlaying());
 
-    BOOST_CHECK_EQUAL(erza.getPlaying(),false);
+    erza.setStatus(PLAYING);
+    BOOST_CHECK_EQUAL(erza.getStatus(),PLAYING);
+    erza.setStatus(WAITING);
+    BOOST_CHECK_EQUAL(erza.getStatus(),WAITING);
+    erza.setStatus(DEAD);
+    BOOST_CHECK_EQUAL(erza.getStatus(),DEAD);
 
+    erza.setStats(stat);
+    BOOST_CHECK_EQUAL(erza.getStats().getHp(),200);
+    BOOST_CHECK_EQUAL(erza.getStats().getMp(),4);
+    BOOST_CHECK_EQUAL(erza.getStats().getAp(),5);
+    BOOST_CHECK_EQUAL(erza.getStats().getShield(),40);
+    BOOST_CHECK_EQUAL(erza.getStats().getAttack(),30);
+
+    erza.setPosition(pos);
+    BOOST_CHECK_EQUAL(erza.getPosition().getX(),1);
+    BOOST_CHECK_EQUAL(erza.getPosition().getY(),9);
 
 
   }
