@@ -116,6 +116,16 @@ BOOST_AUTO_TEST_CASE(TestSFML)
     BOOST_CHECK_EQUAL(erza.getPosition().getY(),9);
 
 
+
+    State s{};
+    std::map<std::string, Player> heroes;
+    heroes.insert(std::make_pair("earth", erza));
+
+    int turn = 0;
+    char timeLeft = 25;
+    
+
+
   }
 }
 
