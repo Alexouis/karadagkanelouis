@@ -21,10 +21,4 @@ int main(int argc,char* argv[])
 
     cout << "It works !" << endl;
 
-    Position pos;
-    pos.setX(12);
-
-    cout << pos.getX() << endl;
-
-    return 0;
 }

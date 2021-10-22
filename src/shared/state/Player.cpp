@@ -8,6 +8,7 @@ namespace state {
         Player::playerClass = playerClass;
         Player::position = position;
         Player::level = level;
+        Player::playing = false;
     }
 
     void Player::init (){
@@ -88,6 +89,10 @@ namespace state {
 
     void Player::setStatus(playerStatus status){
         Player::status = status;
+    };
+
+    void Player::setLevel(char level){
+        Player::level = level;
     };
 
     char Player::getLevel() const{
