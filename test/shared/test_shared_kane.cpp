@@ -1,9 +1,22 @@
+/*
+ * File             kane_test.cpp
+ * Directory        shared
+ * Created Date     Friday, October 22nd 2021, 8:34:48 pm
+ * Author           Nouhou KANE
+ * Email            nouhou.kane@ensea.fr
+ * 
+ * Copyright (c) 2021 MEDAL-CTB-UMP(ES) && ENSEA(FR)
+ * __________________________________________________________________________
+ */
+
+
 
 #include <boost/test/unit_test.hpp>
 
 #include <SFML/Graphics.hpp>
 
 #include  <state.h>
+
 
 BOOST_AUTO_TEST_CASE(TestStaticAssert)
 {
@@ -107,3 +120,5 @@ BOOST_AUTO_TEST_CASE(TestSFML)
 }
 
 /* vim: set sw=2 sts=2 et : */
+
+
