@@ -8,7 +8,6 @@ namespace state {
         Player::playerClass = playerClass;
         Player::position = position;
         Player::level = level;
-        Player::playing = false;
     }
 
     void Player::init (){
