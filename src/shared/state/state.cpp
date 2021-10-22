@@ -9,22 +9,22 @@ namespace state {
 
     };
     void State::initPlayer (char index){
+        
+    };
+    void State::initMap (){
 
     };
-    void State::initMap (char index){
-
-    };
-    bool State::isDead (){
-        //return State::gameOver;
+    bool State::isDead (Player p){
+        return (p.getStatus() == DEAD);
     };
     void State::passTurn (){
-
+        this->playing++;
     };
     void State::incrementTurn (){
-        State::turn++;
+        this->turn++;
     };
     void State::endGame (){
-        State::gameOver = true;
+        this->gameOver = true;
     };
     void State::initPositions (){
         //efter
@@ -34,52 +34,52 @@ namespace state {
     };
     // Setters and Getters
     const std::vector<std::vector<MapTile>>& State::getGameMap() const{
-        return State::gameMap;
+        return this->gameMap;
     };
     void State::setGameMap(const std::vector<std::vector<MapTile>>& gameMap){
-        State::gameMap = gameMap;
+        this->gameMap = gameMap;
     };
     const std::map<std::string,Player>& State::getHeroes() const{
-
+        return this->heroes;
     };
     void State::setHeroes(const std::map<std::string,Player>& heroes){
-
+        this->heroes = heroes;
     };
     const std::map<std::string,Player>& State::getEnemies() const{
-
+        return this->enemies;
     };
     void State::setEnemies(const std::map<std::string,Player>& enemies){
-
+        this->enemies = enemies;
     };
     int State::getTurn() const{
-        return State::turn;
+        return this->turn;
     };
     void State::setTurn(int turn){
-        State::turn = turn;
+        this->turn = turn;
     };
     char State::getPlaying() const{
-        return State::playing;
+        return this->playing;
     };
     void State::setPlaying(char playing){
-        State::playing = playing;
+        this->playing = playing;
     };
     char State::getTimeLeft() const{
-        return State::timeLeft;
+        return this->timeLeft;
     };
     void State::setTimeLeft(char timeLeft){
-        State::timeLeft= timeLeft;
+        this->timeLeft= timeLeft;
     };
     const std::vector<std::string>& State::getPlayer_id() const{
         return State::player_id;
     };
     void State::setPlayer_id(const std::vector<std::string>& player_id){
-        State::player_id = player_id;
+        this->player_id = player_id;
     };
     bool State::getGameOver() const{
-        return State::gameOver;
+        return this->gameOver;
     };
     void State::setGameOver(bool gameOver){
-        State::gameOver = gameOver;
+        this->gameOver = gameOver;
     };
 
 };
