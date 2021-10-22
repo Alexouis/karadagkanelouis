@@ -21,10 +21,26 @@ int main(int argc,char* argv[])
 
     cout << "It works !" << endl;
 
-    Position pos;
-    pos.setX(12);
-
-    cout << pos.getX() << endl;
+    //Test Position
+    Position pos{5,5};
 
     return 0;
+
+    //Test Player
+    Player erza{"Elsa",DEMON,pos,5};
+    
+    pos.setX(1);
+    pos.setY(1);
+
+    erza.setName("Erza");
+    erza.setPlayerClass(HERO);
+    erza.setPosition(pos);
+    erza.setLevel(10);
+
+    if (erza.getName() == "Erza" && erza.getPosition().getX() == 1 && erza.getPlayerClass()==HERO && erza.getLevel()==10)
+    {
+        cout << "Test Player: OK !" << endl;
+    }
+
+    
 }

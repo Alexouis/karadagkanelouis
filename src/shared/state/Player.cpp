@@ -90,6 +90,10 @@ namespace state {
         Player::status = status;
     };
 
+    void Player::setLevel(char level){
+        Player::level = level;
+    };
+
     char Player::getLevel() const{
         return Player::level;
     };
