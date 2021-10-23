@@ -73,7 +73,7 @@ BOOST_AUTO_TEST_CASE(TestSFML)
 
     BOOST_CHECK_EQUAL(s.getPlaying(), playing);
 
-    //BOOST_CHECK_EQUAL(s.getPlayer_id(), player_id);
+    BOOST_CHECK_EQUAL(s.getPlayer_id()[0], player_id[0]);
     BOOST_CHECK_EQUAL(s.getTurn(), turn);
     BOOST_CHECK_EQUAL(s.getTimeLeft(), timeLeft);
     s.incrementTurn();
