@@ -3,8 +3,7 @@
 
 #include <SFML/Graphics.hpp>
 
-#include "/media/sf_Dossier_partage/PLT/karadagkanelouis/src/shared/state.h"
-
+#include  <../../src/shared/state.h>
 
 BOOST_AUTO_TEST_CASE(TestStaticAssert)
 {

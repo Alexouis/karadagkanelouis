@@ -3,7 +3,7 @@
 
 #include <SFML/Graphics.hpp>
 
-#include "../../src/shared/state.h"
+#include  <state.h>
 
 
 BOOST_AUTO_TEST_CASE(TestStaticAssert)
@@ -16,6 +16,7 @@ using namespace state;
 BOOST_AUTO_TEST_CASE(TestSFML)
 {
   {
+    /*
     ::sf::Texture texture;
     BOOST_CHECK(texture.getSize() == ::sf::Vector2<unsigned int> {});
 
@@ -37,6 +38,30 @@ BOOST_AUTO_TEST_CASE(TestSFML)
 
     attacks.push_back(strike);
     attacks.push_back(powerfulStrike);
+
+    BOOST_CHECK_EQUAL(attacks[0].name,STRIKE);
+    BOOST_CHECK_EQUAL(attacks[0].type,CONTACT);
+    BOOST_CHECK_EQUAL(attacks[0].damage,20);
+    BOOST_CHECK_EQUAL(attacks[0].range,1);
+    BOOST_CHECK_EQUAL(attacks[1].name,POWERFULSTRIKE);
+    BOOST_CHECK_EQUAL(attacks[1].type,CONTACT);
+    BOOST_CHECK_EQUAL(attacks[1].damage,855);
+    BOOST_CHECK_EQUAL(attacks[1].range,2);
+
+    std::vector<std::vector<MapTile>> gameMap;
+
+    struct MapTile grass;
+
+    grass.type=GRASS;
+    grass.state=FREE;
+
+    struct MapTile house;
+
+    house.type=HOUSE;
+    house.state=OBSTACLE;
+    
+
+
 
     //Test Position
     Position pos{};
@@ -103,8 +128,14 @@ BOOST_AUTO_TEST_CASE(TestSFML)
     BOOST_CHECK_EQUAL(erza.getPosition().getX(),1);
     BOOST_CHECK_EQUAL(erza.getPosition().getY(),9);
 
+    */
 
-  }
+
+    //
+
+
+
+  }  
 }
 
 /* vim: set sw=2 sts=2 et : */

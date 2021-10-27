@@ -1,9 +1,8 @@
-
 #include <boost/test/unit_test.hpp>
 
 #include <SFML/Graphics.hpp>
 
-#include "../../src/shared/state.h"
+#include  <state.h>
 
 
 BOOST_AUTO_TEST_CASE(TestStaticAssert)
@@ -43,9 +42,6 @@ BOOST_AUTO_TEST_CASE(TestSFML)
     pos.setX(1);
     pos.setY(9);
 
-    BOOST_CHECK_EQUAL(pos.getX(),1);
-    BOOST_CHECK_EQUAL(pos.getY(),9);
-
 
 
     //Test Stats
@@ -55,15 +51,34 @@ BOOST_AUTO_TEST_CASE(TestSFML)
     stat.setHp(200);
     stat.setMp(4);
     stat.setShield(40);
-
-    BOOST_CHECK_EQUAL(stat.getAp(),5);
-    BOOST_CHECK_EQUAL(stat.getAttack(),30);
-    BOOST_CHECK_EQUAL(stat.getHp(),200);
-    BOOST_CHECK_EQUAL(stat.getMp(),4);
-    BOOST_CHECK_EQUAL(stat.getShield(),40);
     
     //Test Player
     Player erza{};
+    
+    //State test
+    State s{};
+
+    std::vector<std::string> player_id;
+    player_id.push_back("erza");
+
+    int turn = 0;
+    char playing = 25;
+    char timeLeft = 25;
+
+    s.setHeroes({{"erza",&erza}});
+    s.setPlaying(playing);
+    s.setPlayer_id(player_id);
+    s.setTurn(turn);
+    s.setTimeLeft(timeLeft);
+
+    BOOST_CHECK_EQUAL(s.getPlaying(), playing);
+
+    BOOST_CHECK_EQUAL(s.getPlayer_id()[0], player_id[0]);
+    BOOST_CHECK_EQUAL(s.getTurn(), turn);
+    BOOST_CHECK_EQUAL(s.getTimeLeft(), timeLeft);
+    s.incrementTurn();
+    BOOST_CHECK_EQUAL(s.getTurn(), turn+1);
+    
 
     erza.setName("Erza");
     BOOST_CHECK_EQUAL(erza.getName(),"Erza");
@@ -83,27 +98,30 @@ BOOST_AUTO_TEST_CASE(TestSFML)
     erza.setOrientation(WEST);
     BOOST_CHECK_EQUAL(erza.getOrientation(),WEST);
 
+    erza.setPlaying(true);
     BOOST_CHECK(erza.getPlaying());
-
+    
     erza.setStatus(PLAYING);
-    BOOST_CHECK_EQUAL(erza.getStatus(),PLAYING);
+    BOOST_CHECK_EQUAL(s.getHeroes().find("erza")->second->getStatus(),PLAYING);
     erza.setStatus(WAITING);
-    BOOST_CHECK_EQUAL(erza.getStatus(),WAITING);
+    BOOST_CHECK_EQUAL(s.getHeroes().find("erza")->second->getStatus(),WAITING);
     erza.setStatus(DEAD);
-    BOOST_CHECK_EQUAL(erza.getStatus(),DEAD);
-
+    BOOST_CHECK_EQUAL(s.getHeroes().find("erza")->second->getStatus(),DEAD);
+    BOOST_CHECK_EQUAL(s.isDead(*s.getHeroes().find("erza")->second), true);
+    
     erza.setStats(stat);
-    BOOST_CHECK_EQUAL(erza.getStats().getHp(),200);
-    BOOST_CHECK_EQUAL(erza.getStats().getMp(),4);
-    BOOST_CHECK_EQUAL(erza.getStats().getAp(),5);
-    BOOST_CHECK_EQUAL(erza.getStats().getShield(),40);
-    BOOST_CHECK_EQUAL(erza.getStats().getAttack(),30);
+    BOOST_CHECK_EQUAL(s.getHeroes().find("erza")->second->getStats().getHp(),200);
+    BOOST_CHECK_EQUAL(s.getHeroes().find("erza")->second->getStats().getMp(),4);
+    BOOST_CHECK_EQUAL(s.getHeroes().find("erza")->second->getStats().getAp(),5);
+    BOOST_CHECK_EQUAL(s.getHeroes().find("erza")->second->getStats().getShield(),40);
+    BOOST_CHECK_EQUAL(s.getHeroes().find("erza")->second->getStats().getAttack(),30);
 
     erza.setPosition(pos);
-    BOOST_CHECK_EQUAL(erza.getPosition().getX(),1);
-    BOOST_CHECK_EQUAL(erza.getPosition().getY(),9);
+    BOOST_CHECK_EQUAL(s.getHeroes().find("erza")->second->getPosition().getX(),1);
+    BOOST_CHECK_EQUAL(s.getHeroes().find("erza")->second->getPosition().getY(),9);
 
 
+    
   }
 }
 
