@@ -1,7 +1,10 @@
 #include "State.h"
 
 namespace state {
-
+    /*
+    The State class corresponds to the state of the entire game
+    
+    */
     State::State (){
 
     };
@@ -18,7 +21,7 @@ namespace state {
         return (p.getStatus() == DEAD);
     };
     void State::passTurn (){
-        this->playing++;
+        this->actualPlayerIndex++;
     };
     void State::incrementTurn (){
         this->turn++;
@@ -57,11 +60,12 @@ namespace state {
     void State::setTurn(int turn){
         this->turn = turn;
     };
-    char State::getPlaying() const{
-        return this->playing;
+    // get the index of the actual player
+    char State::getActualPlayerIndex() const{
+        return this->actualPlayerIndex;
     };
-    void State::setPlaying(char playing){
-        this->playing = playing;
+    void State::setActualPlayerIndex(char actualPlayerIndex){
+        this->actualPlayerIndex = actualPlayerIndex;
     };
     char State::getTimeLeft() const{
         return this->timeLeft;
@@ -69,11 +73,12 @@ namespace state {
     void State::setTimeLeft(char timeLeft){
         this->timeLeft= timeLeft;
     };
-    const std::vector<std::string>& State::getPlayer_id() const{
-        return this->player_id;
+    //get the player 
+    const std::vector<std::string>& State::getPlayers_id() const{
+        return this->players_id;
     };
-    void State::setPlayer_id(const std::vector<std::string>& player_id){
-        this->player_id = player_id;
+    void State::setPlayers_id(const std::vector<std::string>& player_id){
+        this->players_id = player_id;
     };
     bool State::getGameOver() const{
         return this->gameOver;
