@@ -147,3 +147,8 @@ push_git:
 	git commit -m "$m"
 	git push origin "$b" 
 .PHONY : push_git
+
+
+code-coverage:
+	./scripts/code-coverage.sh
+.PHONY : code-coverage

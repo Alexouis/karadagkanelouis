@@ -5,8 +5,9 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 # License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>
 # This is free software: you are free to change and redistribute it.
 # There is NO WARRANTY, to the extent permitted by law.
+ 
 
-# Make data base, printed on Wed Oct 27 21:51:34 2021
+# Make data base, printed on Wed Oct 27 22:25:44 2021
 
 # Variables
 
@@ -185,6 +186,7 @@ GPG_AGENT_INFO = /run/user/1000/gnupg/S.gpg-agent:0:1
 # environment
 POWERSHELL_TELEMETRY_OPTOUT = 1
 # environment
+ 
 JOURNAL_STREAM = 8:25867
 # environment
 XDG_SESSION_CLASS = user
@@ -237,6 +239,15 @@ GDMSESSION = gnome
 
 # Files
 
+code-coverage:
+#  Phony target (prerequisite of .PHONY).
+#  Implicit rule search has not been done.
+#  File does not exist.
+#  File has not been updated.
+#  recipe to execute (from 'Makefile', line 153):
+	cd build;
+	make code-coverage;
+
 distclean: clean
 #  Implicit rule search has not been done.
 #  Modification time never checked.
@@ -280,7 +291,6 @@ testdocker:
 #  recipe to execute (from 'Makefile', line 92):
 	docker build -t plt-initial -f docker/plt-initial .
 	./docker/validate.sh plt-test
- 
 	./docker/run_docker_bash.sh plt-test
 
 configure:
@@ -309,7 +319,7 @@ src/engine.dia:
 # Not a target:
 Makefile:
 #  Implicit rule search has been done.
-#  Last modified 2021-10-27 21:41:07.377469151
+#  Last modified 2021-10-27 22:24:20.085543223
 #  File has been updated.
 #  Successfully updated.
 
@@ -462,6 +472,7 @@ rapport/engine.pdf: src/engine.dia
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
+ 
 #  recipe to execute (from 'Makefile', line 113):
 	dia -e rapport/engine.ps $<
 	ps2pdf rapport/engine.ps $@
@@ -473,25 +484,25 @@ rapport/engine.pdf: src/engine.dia
 #  Modification time never checked.
 #  File has not been updated.
 
-.PHONY: configure build clean extern test testdocker list install-requirements push_git
+.PHONY: configure build clean extern test testdocker list install-requirements push_git code-coverage
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
 
 # files hash-table stats:
-# Load=28/1024=3%, Rehash=0, Collisions=0/75=0%
+# Load=29/1024=3%, Rehash=0, Collisions=0/78=0%
 # VPATH Search Paths
 
 # No 'vpath' search paths.
 
 # No general ('VPATH' variable) search path.
 
-# strcache buffers: 1 (0) / strings = 50 / storage = 500 B / avg = 10 B
-# current buf: size = 8162 B / used = 500 B / count = 50 / avg = 10 B
+# strcache buffers: 1 (0) / strings = 51 / storage = 514 B / avg = 10 B
+# current buf: size = 8162 B / used = 514 B / count = 51 / avg = 10 B
 
-# strcache performance: lookups = 102 / hit rate = 50%
+# strcache performance: lookups = 107 / hit rate = 52%
 # hash-table stats:
-# Load=50/8192=1%, Rehash=0, Collisions=0/102=0%
-# Finished Make data base on Wed Oct 27 21:51:34 2021
+# Load=51/8192=1%, Rehash=0, Collisions=0/107=0%
+# Finished Make data base on Wed Oct 27 22:25:44 2021
 
  
