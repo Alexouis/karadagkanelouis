@@ -62,18 +62,18 @@ BOOST_AUTO_TEST_CASE(TestSFML)
     player_id.push_back("erza");
 
     int turn = 0;
-    char playing = 25;
+    char actualPlayerIndex = 25;
     char timeLeft = 25;
 
     s.setHeroes({{"erza",&erza}});
-    s.setPlaying(playing);
-    s.setPlayer_id(player_id);
+    s.setActualPlayerIndex(actualPlayerIndex);
+    s.setPlayers_id(player_id);
     s.setTurn(turn);
     s.setTimeLeft(timeLeft);
 
-    BOOST_CHECK_EQUAL(s.getPlaying(), playing);
+    BOOST_CHECK_EQUAL(s.getActualPlayerIndex(), actualPlayerIndex);
 
-    BOOST_CHECK_EQUAL(s.getPlayer_id()[0], player_id[0]);
+    BOOST_CHECK_EQUAL(s.getPlayers_id()[0], player_id[0]);
     BOOST_CHECK_EQUAL(s.getTurn(), turn);
     BOOST_CHECK_EQUAL(s.getTimeLeft(), timeLeft);
     s.incrementTurn();

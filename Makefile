@@ -132,3 +132,23 @@ list:
 	@$(MAKE) -pRrq -f $(lastword $(MAKEFILE_LIST)) : 2>/dev/null | awk -v RS= -F: '/^# File/,/^# Finished Make data base/ {if ($$1 !~ "^[#.]") {print $$1}}' | sort | egrep -v -e '^[^[:alnum:]]' -e '^$@$$'
 
 .PHONY: configure build clean extern test testdocker list
+
+
+
+# install all requirements
+install-requirements :
+	./scripts/requirements.sh
+.PHONY : install-requirements
+
+
+push_git:
+	git status
+	git add -A
+	git commit -m "$m"
+	git push origin "$b" 
+.PHONY : push_git
+
+
+code-coverage:
+	./scripts/code-coverage.sh
+.PHONY : code-coverage

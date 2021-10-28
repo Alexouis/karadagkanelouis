@@ -5,8 +5,9 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 # License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>
 # This is free software: you are free to change and redistribute it.
 # There is NO WARRANTY, to the extent permitted by law.
+ 
 
-# Make data base, printed on Sat Oct 23 18:30:46 2021
+# Make data base, printed on Wed Oct 27 22:25:44 2021
 
 # Variables
 
@@ -17,7 +18,7 @@ LC_ALL = C
 # environment
 GJS_DEBUG_OUTPUT = stderr
 # environment
-VSCODE_IPC_HOOK_EXTHOST = /run/user/1000/vscode-ipc-ca9ff0e4-1af5-4dbb-8bbe-0b73ede4af67.sock
+VSCODE_IPC_HOOK_EXTHOST = /run/user/1000/vscode-ipc-cc3f1429-242e-4395-8a93-ecb1423f545b.sock
 # environment
 VSCODE_CWD = /home/mkas
 # environment
@@ -85,13 +86,13 @@ MAKEFILE_LIST := Makefile
 # environment
 VSCODE_VERBOSE_LOGGING = true
 # environment
-VSCODE_PID = 15092
+VSCODE_PID = 20639
 # environment
 XDG_SESSION_TYPE = x11
 # automatic
 ?D = $(patsubst %/,%,$(dir $?))
 # environment
-SESSION_MANAGER = local/kalikane:@/tmp/.ICE-unix/1552,unix/kalikane:/tmp/.ICE-unix/1552
+SESSION_MANAGER = local/kalikane:@/tmp/.ICE-unix/1565,unix/kalikane:/tmp/.ICE-unix/1565
 # automatic
 *F = $(notdir $*)
 # environment
@@ -135,7 +136,7 @@ MAKEFILES :=
 # environment
 COMMAND_NOT_FOUND_INSTALL_PROMPT = 1
 # environment
-INVOCATION_ID = 29b8119d518447ac91e2f428aca610c3
+INVOCATION_ID = be7ffb6e165e4e9585e000918bb7d4dd
 # environment
 QSYS_ROOTDIR = /home/mkas/intelFPGA_lite/20.1/quartus/sopc_builder/bin
 # environment
@@ -171,11 +172,11 @@ MAKE_VERSION := 4.3
 # 'override' directive
 .SHELLSTATUS := 0
 # environment
-MANAGERPID = 1314
+MANAGERPID = 1334
 # environment
-GIO_LAUNCHED_DESKTOP_FILE_PID = 15092
+GIO_LAUNCHED_DESKTOP_FILE_PID = 20639
 # environment
-SSH_AGENT_PID = 1511
+SSH_AGENT_PID = 1523
 # environment
 _ = /usr/share/code/code
 # environment
@@ -185,7 +186,8 @@ GPG_AGENT_INFO = /run/user/1000/gnupg/S.gpg-agent:0:1
 # environment
 POWERSHELL_TELEMETRY_OPTOUT = 1
 # environment
-JOURNAL_STREAM = 8:22979
+ 
+JOURNAL_STREAM = 8:25867
 # environment
 XDG_SESSION_CLASS = user
 # environment
@@ -236,6 +238,15 @@ GDMSESSION = gnome
 # No implicit rules.
 
 # Files
+
+code-coverage:
+#  Phony target (prerequisite of .PHONY).
+#  Implicit rule search has not been done.
+#  File does not exist.
+#  File has not been updated.
+#  recipe to execute (from 'Makefile', line 153):
+	cd build;
+	make code-coverage;
 
 distclean: clean
 #  Implicit rule search has not been done.
@@ -308,8 +319,7 @@ src/engine.dia:
 # Not a target:
 Makefile:
 #  Implicit rule search has been done.
- 
-#  Last modified 2021-10-22 22:05:38.351674152
+#  Last modified 2021-10-27 22:24:20.085543223
 #  File has been updated.
 #  Successfully updated.
 
@@ -407,6 +417,17 @@ all: | clean extern configure build
 # variable set hash-table stats:
 # Load=0/32=0%, Rehash=0, Collisions=0/7=0%
 
+push_git:
+#  Phony target (prerequisite of .PHONY).
+#  Implicit rule search has not been done.
+#  File does not exist.
+#  File has not been updated.
+#  recipe to execute (from 'Makefile', line 145):
+	git status
+	git add -A
+	git commit -m "$m"
+	git push origin "$b" 
+
 # Not a target:
 src/module.dia:
 #  Implicit rule search has not been done.
@@ -422,6 +443,14 @@ build:
 	@echo [DEBUG] Root Makefile : build
 	@cd build && cmake --build .
 	
+
+install-requirements:
+#  Phony target (prerequisite of .PHONY).
+#  Implicit rule search has not been done.
+#  File does not exist.
+#  File has not been updated.
+#  recipe to execute (from 'Makefile', line 140):
+	./scripts/requirements.sh
 
 test:
 #  Phony target (prerequisite of .PHONY).
@@ -443,6 +472,7 @@ rapport/engine.pdf: src/engine.dia
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
+ 
 #  recipe to execute (from 'Makefile', line 113):
 	dia -e rapport/engine.ps $<
 	ps2pdf rapport/engine.ps $@
@@ -454,25 +484,25 @@ rapport/engine.pdf: src/engine.dia
 #  Modification time never checked.
 #  File has not been updated.
 
-.PHONY: configure build clean extern test testdocker list
+.PHONY: configure build clean extern test testdocker list install-requirements push_git code-coverage
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
 
 # files hash-table stats:
-# Load=26/1024=3%, Rehash=0, Collisions=0/69=0%
+# Load=29/1024=3%, Rehash=0, Collisions=0/78=0%
 # VPATH Search Paths
 
 # No 'vpath' search paths.
 
 # No general ('VPATH' variable) search path.
 
-# strcache buffers: 1 (0) / strings = 48 / storage = 470 B / avg = 9 B
-# current buf: size = 8162 B / used = 470 B / count = 48 / avg = 9 B
+# strcache buffers: 1 (0) / strings = 51 / storage = 514 B / avg = 10 B
+# current buf: size = 8162 B / used = 514 B / count = 51 / avg = 10 B
 
-# strcache performance: lookups = 92 / hit rate = 47%
+# strcache performance: lookups = 107 / hit rate = 52%
 # hash-table stats:
-# Load=48/8192=1%, Rehash=0, Collisions=0/92=0%
-# Finished Make data base on Sat Oct 23 18:30:46 2021
+# Load=51/8192=1%, Rehash=0, Collisions=0/107=0%
+# Finished Make data base on Wed Oct 27 22:25:44 2021
 
  
