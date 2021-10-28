@@ -5,17 +5,19 @@
 
 #### Logiciels requis :
     make install-requirements
+#### clean extern configure build :
+    make
+#### Création et compilation du projet :
+    make build
+#### Configuration du projet :
+    make configure
+#### Lancer les tests :
+    make test
+#### code covereage :
+    make code-covereage
 #### Suppression de tous les fichiers générés :
     make clean
 #### Suppression des fichiers headers :
     make clean-headers
-#### Configuration du projet :
-    make configure
-#### Création et compilation du projet :
-    make build
-#### Lancer les tests :
-    make test
 #### configuration et compilation des dependences externes:
     make extern
-#### clean extern configure build :
-    make
