@@ -6,7 +6,7 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 # This is free software: you are free to change and redistribute it.
 # There is NO WARRANTY, to the extent permitted by law.
 
-# Make data base, printed on Fri Oct 29 08:48:23 2021
+# Make data base, printed on Fri Oct 29 08:53:20 2021
 
 # Variables
 
@@ -17,7 +17,7 @@ LC_ALL = C
 # environment
 GJS_DEBUG_OUTPUT = stderr
 # environment
-VSCODE_IPC_HOOK_EXTHOST = /run/user/1000/vscode-ipc-ec549d34-cc28-4290-8d1a-aaa6378538e3.sock
+VSCODE_IPC_HOOK_EXTHOST = /run/user/1000/vscode-ipc-ac17edc4-dd4d-4433-bf14-68ac6b0d8487.sock
 # environment
 VSCODE_CWD = /home/mkas
 # environment
@@ -87,7 +87,7 @@ MAKEFILE_LIST := Makefile
 # environment
 VSCODE_VERBOSE_LOGGING = true
 # environment
-VSCODE_PID = 1905
+VSCODE_PID = 5051
 # environment
 XDG_SESSION_TYPE = x11
 # automatic
@@ -119,7 +119,7 @@ MAKECMDGOALS := all
 # environment
 XMODIFIERS = @im=ibus
 # makefile (from 'Makefile', line 15)
-HEADERS := 
+HEADERS := src/shared/state/playerOrientation.h src/shared/state/playerStatus.h src/shared/state/attackName.h src/shared/state/State.h src/shared/state/playerClass.h src/shared/state/Exemple.h src/shared/state/Attack.h src/shared/state/Stats.h src/shared/state/Player.h src/shared/state/tileType.h src/shared/state/tileState.h src/shared/state/MapTile.h src/shared/state/Position.h src/shared/state/attackType.h src/shared/state.h src/client/client.h src/client/client/Exemple.h
 # environment
 GJS_DEBUG_TOPICS = JS ERROR;JS LOG
 # environment
@@ -175,7 +175,7 @@ MAKE_VERSION := 4.3
 # environment
 MANAGERPID = 1260
 # environment
-GIO_LAUNCHED_DESKTOP_FILE_PID = 1905
+GIO_LAUNCHED_DESKTOP_FILE_PID = 5051
 # environment
 SSH_AGENT_PID = 1452
 # environment
@@ -229,9 +229,9 @@ GDMSESSION = gnome
 
 # Directories
 
-# . (device 2051, inode 25036745): 22 files, no impossibilities.
+# . (device 2051, inode 25036745): 23 files, no impossibilities.
 
-# 22 files, no impossibilities in 1 directories.
+# 23 files, no impossibilities in 1 directories.
 
 # Implicit Rules
 
@@ -298,6 +298,7 @@ configure:
 #  File does not exist.
 #  File has not been updated.
 #  recipe to execute (from 'Makefile', line 61):
+ 
 	@echo [DEBUG] Root Makefile : configure
 	@mkdir -p build
 	@cd build && cmake ..
@@ -370,7 +371,6 @@ src/ai.dia:
 #  File has not been updated.
 
 rapport/render.pdf: src/render.dia
- 
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
@@ -496,12 +496,12 @@ rapport/engine.pdf: src/engine.dia
 
 # No general ('VPATH' variable) search path.
 
-# strcache buffers: 1 (0) / strings = 49 / storage = 498 B / avg = 10 B
-# current buf: size = 8162 B / used = 498 B / count = 49 / avg = 10 B
+# strcache buffers: 1 (0) / strings = 50 / storage = 502 B / avg = 10 B
+# current buf: size = 8162 B / used = 502 B / count = 50 / avg = 10 B
 
-# strcache performance: lookups = 105 / hit rate = 53%
+# strcache performance: lookups = 106 / hit rate = 52%
 # hash-table stats:
-# Load=49/8192=1%, Rehash=0, Collisions=0/105=0%
-# Finished Make data base on Fri Oct 29 08:48:23 2021
+# Load=50/8192=1%, Rehash=0, Collisions=0/106=0%
+# Finished Make data base on Fri Oct 29 08:53:20 2021
 
  

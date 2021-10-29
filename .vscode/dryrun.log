@@ -2,7 +2,7 @@ make --dry-run --always-make --keep-going --print-directory
 make: Entering directory '/home/mkas/ENSEA/karadagkanelouis'
 echo [DEBUG] Root Makefile : clean
 rm -rf bin build
-rm -f 
+rm -f src/shared/state/playerOrientation.h src/shared/state/playerStatus.h src/shared/state/attackName.h src/shared/state/State.h src/shared/state/playerClass.h src/shared/state/Exemple.h src/shared/state/Attack.h src/shared/state/Stats.h src/shared/state/Player.h src/shared/state/tileType.h src/shared/state/tileState.h src/shared/state/MapTile.h src/shared/state/Position.h src/shared/state/attackType.h src/shared/state.h src/client/client.h src/client/client/Exemple.h
 #@echo [DEBUG] Root Makefile : extern
 echo [DEBUG] Root Makefile : configure
 mkdir -p build
