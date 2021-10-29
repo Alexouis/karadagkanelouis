@@ -15,7 +15,7 @@ namespace state {
     };
     
     void Player::attack(std::string chosenAttack, Position aim){
-
+        
     };
 
     void Player::pass (){

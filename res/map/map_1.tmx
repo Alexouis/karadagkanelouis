@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" tiledversion="1.0.3" orientation="isometric" renderorder="right-down" width="20" height="20" tilewidth="519" tileheight="268" nextobjectid="1">
+ <tileset firstgid="1" source="ground.tsx"/>
+ <tileset firstgid="13" source="buildings.tsx"/>
+ <tileset firstgid="125" source="trees.tsx"/>
+ <tileset firstgid="160" source="perso.tsx"/>
+ <layer name="ground" width="20" height="20">
+  <data encoding="base64" compression="zlib">
+   eJxjZGBgYBzFo3gUj+JRPIpJxADrnAGR
+  </data>
+ </layer>
+ <layer name="buildings" width="20" height="20">
+  <data encoding="base64" compression="zlib">
+   eJytlEsOgzAMRH0E7tJ2HXXLghXXIarCObhrG8kWluuxQ9WRRs7HPIyc0Iio/dnVuGvluA1YJLxI2T7ibU5utJ7xkH6p7/7xwmuFY+U9nX8zEfEOdlRXSeaap1Xpu/9dM8fd4US8SLuyfr9YeBOd5877Dsu8Ut/iJQ5K99c7Zw2MrSbD8+p8sdFc9KTzbgpndvKE4Y2RrvY342S8YsYrSjTc7M6PKuJFdeu93g/bX/RvHOF59SE/OM/G6Jk3WrhI6Q==
+  </data>
+ </layer>
+ <layer name="Calque 3" width="20" height="20">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFowAVLBtoB4yCUTAKhgQAALrmAKc=
+  </data>
+ </layer>
+</map>
