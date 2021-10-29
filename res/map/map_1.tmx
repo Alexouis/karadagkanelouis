@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.0" tiledversion="1.0.3" orientation="isometric" renderorder="right-down" width="20" height="20" tilewidth="519" tileheight="268" nextobjectid="1">
  <tileset firstgid="1" source="ground.tsx"/>
- <tileset firstgid="13" source="buildings.tsx"/>
- <tileset firstgid="125" source="trees.tsx"/>
- <tileset firstgid="160" source="perso.tsx"/>
+ <tileset firstgid="14" source="buildings.tsx"/>
+ <tileset firstgid="86" source="trees.tsx"/>
+ <tileset firstgid="121" source="perso.tsx"/>
  <layer name="ground" width="20" height="20">
   <data encoding="base64" compression="zlib">
    eJxjZGBgYBzFo3gUj+JRPIpJxADrnAGR
@@ -11,12 +11,17 @@
  </layer>
  <layer name="buildings" width="20" height="20">
   <data encoding="base64" compression="zlib">
-   eJytlEsOgzAMRH0E7tJ2HXXLghXXIarCObhrG8kWluuxQ9WRRs7HPIyc0Iio/dnVuGvluA1YJLxI2T7ibU5utJ7xkH6p7/7xwmuFY+U9nX8zEfEOdlRXSeaap1Xpu/9dM8fd4US8SLuyfr9YeBOd5877Dsu8Ut/iJQ5K99c7Zw2MrSbD8+p8sdFc9KTzbgpndvKE4Y2RrvY342S8YsYrSjTc7M6PKuJFdeu93g/bX/RvHOF59SE/OM/G6Jk3WrhI6Q==
+   eJytlEsKhDAMhnMF7+LMurh14UrLUM8x558pJBhiXoo//KSP+BlI2wYA7WFX4a4V45YwiXieon2Ltym53nrEs3SnvtffC64VjBX3eP4oosX7or26SjDnPK4K5/53zRh3hePxPO3M/P9k4g1wnLuSYF6pb9ESk+L91c5ZM8ZSg+BpdX7Q1pw0wXE3iTMrecTQxpau9jfiRLwixqueduJGdz4rj+fVzfd6P2R/rbcxw9Pqs/zGPBm9b35jHzS/
   </data>
  </layer>
- <layer name="Calque 3" width="20" height="20">
+ <layer name="Valla" width="20" height="20" offsetx="50" offsety="-100">
   <data encoding="base64" compression="zlib">
-   eJxjYBgFowAVLBtoB4yCUTAKhgQAALrmAKc=
+   eJxjYBgFo2AUDGZQSWXzeAe5eaNg6AAAebMAlA==
+  </data>
+ </layer>
+ <layer name="Demon" width="20" height="20" offsetx="-70" offsety="-70">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo2AUjDRQNcjNGwVDAwAADN4A9Q==
   </data>
  </layer>
 </map>
