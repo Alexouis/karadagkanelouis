@@ -34,7 +34,7 @@
  <tile id="10">
   <image width="1024" height="1024" source="../synthetic grass/ground_grass_gen_10.png"/>
  </tile>
- <tile id="12">
-  <image width="360" height="480" source="../Valla/valla/valla_attack_se/1_g.png"/>
+ <tile id="11">
+  <image width="32" height="36" source="../grass/grass6.png"/>
  </tile>
 </tileset>
