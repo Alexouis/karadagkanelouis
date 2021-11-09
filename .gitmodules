@@ -1,0 +1,3 @@
+[submodule "extern/tmx-loader"]
+	path = extern/tmx-loader
+	url = git@github.com:nskley/tmx-loader.git

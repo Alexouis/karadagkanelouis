@@ -6,7 +6,7 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 # This is free software: you are free to change and redistribute it.
 # There is NO WARRANTY, to the extent permitted by law.
 
-# Make data base, printed on Fri Oct 29 08:53:20 2021
+# Make data base, printed on Tue Nov  9 16:20:01 2021
 
 # Variables
 
@@ -17,7 +17,7 @@ LC_ALL = C
 # environment
 GJS_DEBUG_OUTPUT = stderr
 # environment
-VSCODE_IPC_HOOK_EXTHOST = /run/user/1000/vscode-ipc-ac17edc4-dd4d-4433-bf14-68ac6b0d8487.sock
+VSCODE_IPC_HOOK_EXTHOST = /run/user/1000/vscode-ipc-01adb0f5-434c-4d49-9552-46a58305896b.sock
 # environment
 VSCODE_CWD = /home/mkas
 # environment
@@ -50,8 +50,6 @@ VSCODE_LOG_STACK = false
 VSCODE_CODE_CACHE_PATH = /home/mkas/.config/Code/CachedData/ee8c7def80afc00dd6e593ef12f37756d8f504ea
 # environment
 LANG = C
-# environment
-LATEXWORKSHOP_DOCKER_LATEX = 
 # environment
 XAUTHORITY = /run/user/1000/gdm/Xauthority
 # default
@@ -87,13 +85,13 @@ MAKEFILE_LIST := Makefile
 # environment
 VSCODE_VERBOSE_LOGGING = true
 # environment
-VSCODE_PID = 5051
+VSCODE_PID = 5993
 # environment
 XDG_SESSION_TYPE = x11
 # automatic
 ?D = $(patsubst %/,%,$(dir $?))
 # environment
-SESSION_MANAGER = local/kalikane:@/tmp/.ICE-unix/1493,unix/kalikane:/tmp/.ICE-unix/1493
+SESSION_MANAGER = local/kalikane:@/tmp/.ICE-unix/1572,unix/kalikane:/tmp/.ICE-unix/1572
 # automatic
 *F = $(notdir $*)
 # environment
@@ -137,7 +135,7 @@ MAKEFILES :=
 # environment
 COMMAND_NOT_FOUND_INSTALL_PROMPT = 1
 # environment
-INVOCATION_ID = 63e53862747b46909f7fb8955d9283ef
+INVOCATION_ID = 053ed62eff654e54839bf305ddf30791
 # environment
 QSYS_ROOTDIR = /home/mkas/intelFPGA_lite/20.1/quartus/sopc_builder/bin
 # environment
@@ -173,11 +171,11 @@ MAKE_VERSION := 4.3
 # 'override' directive
 .SHELLSTATUS := 0
 # environment
-MANAGERPID = 1260
+MANAGERPID = 1338
 # environment
-GIO_LAUNCHED_DESKTOP_FILE_PID = 5051
+GIO_LAUNCHED_DESKTOP_FILE_PID = 5993
 # environment
-SSH_AGENT_PID = 1452
+SSH_AGENT_PID = 1531
 # environment
 _ = /usr/share/code/code
 # environment
@@ -187,7 +185,7 @@ GPG_AGENT_INFO = /run/user/1000/gnupg/S.gpg-agent:0:1
 # environment
 POWERSHELL_TELEMETRY_OPTOUT = 1
 # environment
-JOURNAL_STREAM = 8:25986
+JOURNAL_STREAM = 8:25742
 # environment
 XDG_SESSION_CLASS = user
 # environment
@@ -221,7 +219,7 @@ XDG_MENU_PREFIX = gnome-
 # environment
 GDMSESSION = gnome
 # variable set hash-table stats:
-# Load=105/1024=10%, Rehash=0, Collisions=7/145=5%
+# Load=104/1024=10%, Rehash=0, Collisions=7/144=5%
 
 # Pattern-specific Variable Values
 
@@ -229,9 +227,9 @@ GDMSESSION = gnome
 
 # Directories
 
-# . (device 2051, inode 25036745): 23 files, no impossibilities.
+# . (device 2051, inode 25036745): 24 files, no impossibilities.
 
-# 23 files, no impossibilities in 1 directories.
+# 24 files, no impossibilities in 1 directories.
 
 # Implicit Rules
 
@@ -298,8 +296,8 @@ configure:
 #  File does not exist.
 #  File has not been updated.
 #  recipe to execute (from 'Makefile', line 61):
- 
 	@echo [DEBUG] Root Makefile : configure
+ 
 	@mkdir -p build
 	@cd build && cmake ..
 
@@ -496,12 +494,12 @@ rapport/engine.pdf: src/engine.dia
 
 # No general ('VPATH' variable) search path.
 
-# strcache buffers: 1 (0) / strings = 50 / storage = 502 B / avg = 10 B
-# current buf: size = 8162 B / used = 502 B / count = 50 / avg = 10 B
+# strcache buffers: 1 (0) / strings = 51 / storage = 514 B / avg = 10 B
+# current buf: size = 8162 B / used = 514 B / count = 51 / avg = 10 B
 
-# strcache performance: lookups = 106 / hit rate = 52%
+# strcache performance: lookups = 107 / hit rate = 52%
 # hash-table stats:
-# Load=50/8192=1%, Rehash=0, Collisions=0/106=0%
-# Finished Make data base on Fri Oct 29 08:53:20 2021
+# Load=51/8192=1%, Rehash=0, Collisions=0/107=0%
+# Finished Make data base on Tue Nov  9 16:20:01 2021
 
  

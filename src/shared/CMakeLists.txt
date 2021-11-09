@@ -17,4 +17,3 @@ target_include_directories(${lib_shared_target} PUBLIC
   )
 
 # vim: set sw=2 sts=2 et:
-

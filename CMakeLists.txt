@@ -102,6 +102,9 @@ if(NOT ${MACHINE_ENSEA})
   set(SFML_LIBRARIES sfml-graphics sfml-network sfml-window sfml-system)
 endif()
 
+# Find STP library
+set(STP_LIB ${PROJECT_SOURCE_DIR}/build/lib/libSTP-d.so)
+
 # Find library libmicrohttpd
 find_library(
   MHD_LIBRARY
@@ -110,6 +113,7 @@ find_library(
 )
 
 # Add source subdirectories
+add_subdirectory(extern/tmx-loader)
 add_subdirectory(src/shared)
 add_subdirectory(src/client)
 #add_subdirectory(src/server)
@@ -127,4 +131,3 @@ if(BUILD_TESTING)
 endif()
 
 # vim: set sw=2 sts=2 et:
-
