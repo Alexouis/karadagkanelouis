@@ -116,6 +116,7 @@ find_library(
 add_subdirectory(extern/tmx-loader)
 add_subdirectory(src/shared)
 add_subdirectory(src/client)
+add_subdirectory(src/examples)
 #add_subdirectory(src/server)
 
 # Rapport generation
