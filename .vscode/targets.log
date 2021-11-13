@@ -6,7 +6,7 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 # This is free software: you are free to change and redistribute it.
 # There is NO WARRANTY, to the extent permitted by law.
 
-# Make data base, printed on Tue Nov  9 16:20:01 2021
+# Make data base, printed on Sat Nov 13 17:54:35 2021
 
 # Variables
 
@@ -17,7 +17,7 @@ LC_ALL = C
 # environment
 GJS_DEBUG_OUTPUT = stderr
 # environment
-VSCODE_IPC_HOOK_EXTHOST = /run/user/1000/vscode-ipc-01adb0f5-434c-4d49-9552-46a58305896b.sock
+VSCODE_IPC_HOOK_EXTHOST = /run/user/1000/vscode-ipc-c833d5e0-f6cc-4cc8-b615-b53d04a19a5b.sock
 # environment
 VSCODE_CWD = /home/mkas
 # environment
@@ -85,13 +85,13 @@ MAKEFILE_LIST := Makefile
 # environment
 VSCODE_VERBOSE_LOGGING = true
 # environment
-VSCODE_PID = 5993
+VSCODE_PID = 18170
 # environment
 XDG_SESSION_TYPE = x11
 # automatic
 ?D = $(patsubst %/,%,$(dir $?))
 # environment
-SESSION_MANAGER = local/kalikane:@/tmp/.ICE-unix/1572,unix/kalikane:/tmp/.ICE-unix/1572
+SESSION_MANAGER = local/kalikane:@/tmp/.ICE-unix/1552,unix/kalikane:/tmp/.ICE-unix/1552
 # automatic
 *F = $(notdir $*)
 # environment
@@ -135,7 +135,7 @@ MAKEFILES :=
 # environment
 COMMAND_NOT_FOUND_INSTALL_PROMPT = 1
 # environment
-INVOCATION_ID = 053ed62eff654e54839bf305ddf30791
+INVOCATION_ID = b3f6fe19af2147c7a29baf930ad5e674
 # environment
 QSYS_ROOTDIR = /home/mkas/intelFPGA_lite/20.1/quartus/sopc_builder/bin
 # environment
@@ -171,11 +171,11 @@ MAKE_VERSION := 4.3
 # 'override' directive
 .SHELLSTATUS := 0
 # environment
-MANAGERPID = 1338
+MANAGERPID = 1325
 # environment
-GIO_LAUNCHED_DESKTOP_FILE_PID = 5993
+GIO_LAUNCHED_DESKTOP_FILE_PID = 18170
 # environment
-SSH_AGENT_PID = 1531
+SSH_AGENT_PID = 1511
 # environment
 _ = /usr/share/code/code
 # environment
@@ -185,7 +185,7 @@ GPG_AGENT_INFO = /run/user/1000/gnupg/S.gpg-agent:0:1
 # environment
 POWERSHELL_TELEMETRY_OPTOUT = 1
 # environment
-JOURNAL_STREAM = 8:25742
+JOURNAL_STREAM = 8:25721
 # environment
 XDG_SESSION_CLASS = user
 # environment
@@ -227,9 +227,9 @@ GDMSESSION = gnome
 
 # Directories
 
-# . (device 2051, inode 25036745): 24 files, no impossibilities.
+# . (device 2051, inode 25036745): 25 files, no impossibilities.
 
-# 24 files, no impossibilities in 1 directories.
+# 25 files, no impossibilities in 1 directories.
 
 # Implicit Rules
 
@@ -291,13 +291,13 @@ testdocker:
 	./docker/run_docker_bash.sh plt-test
 
 configure:
+ 
 #  Phony target (prerequisite of .PHONY).
 #  Implicit rule search has not been done.
 #  File does not exist.
 #  File has not been updated.
 #  recipe to execute (from 'Makefile', line 61):
 	@echo [DEBUG] Root Makefile : configure
- 
 	@mkdir -p build
 	@cd build && cmake ..
 
@@ -317,7 +317,7 @@ src/engine.dia:
 # Not a target:
 Makefile:
 #  Implicit rule search has been done.
-#  Last modified 2021-10-27 22:30:07.937553161
+#  Last modified 2021-11-09 17:01:07.308196497
 #  File has been updated.
 #  Successfully updated.
 
@@ -494,12 +494,12 @@ rapport/engine.pdf: src/engine.dia
 
 # No general ('VPATH' variable) search path.
 
-# strcache buffers: 1 (0) / strings = 51 / storage = 514 B / avg = 10 B
-# current buf: size = 8162 B / used = 514 B / count = 51 / avg = 10 B
+# strcache buffers: 1 (0) / strings = 52 / storage = 526 B / avg = 10 B
+# current buf: size = 8162 B / used = 526 B / count = 52 / avg = 10 B
 
-# strcache performance: lookups = 107 / hit rate = 52%
+# strcache performance: lookups = 108 / hit rate = 51%
 # hash-table stats:
-# Load=51/8192=1%, Rehash=0, Collisions=0/107=0%
-# Finished Make data base on Tue Nov  9 16:20:01 2021
+# Load=52/8192=1%, Rehash=0, Collisions=0/108=0%
+# Finished Make data base on Sat Nov 13 17:54:35 2021
 
  
