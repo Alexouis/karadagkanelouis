@@ -6,18 +6,19 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 # This is free software: you are free to change and redistribute it.
 # There is NO WARRANTY, to the extent permitted by law.
 
-# Make data base, printed on Sat Nov 13 17:54:35 2021
+# Make data base, printed on Sat Nov 13 21:22:57 2021
 
 # Variables
 
 # environment
+ 
 GDK_BACKEND = x11
 # environment
 LC_ALL = C
 # environment
 GJS_DEBUG_OUTPUT = stderr
 # environment
-VSCODE_IPC_HOOK_EXTHOST = /run/user/1000/vscode-ipc-c833d5e0-f6cc-4cc8-b615-b53d04a19a5b.sock
+VSCODE_IPC_HOOK_EXTHOST = /run/user/1000/vscode-ipc-92ae7176-b08f-46a6-b3fc-ecbb23609d94.sock
 # environment
 VSCODE_CWD = /home/mkas
 # environment
@@ -85,13 +86,13 @@ MAKEFILE_LIST := Makefile
 # environment
 VSCODE_VERBOSE_LOGGING = true
 # environment
-VSCODE_PID = 18170
+VSCODE_PID = 1998
 # environment
 XDG_SESSION_TYPE = x11
 # automatic
 ?D = $(patsubst %/,%,$(dir $?))
 # environment
-SESSION_MANAGER = local/kalikane:@/tmp/.ICE-unix/1552,unix/kalikane:/tmp/.ICE-unix/1552
+SESSION_MANAGER = local/kalikane:@/tmp/.ICE-unix/1571,unix/kalikane:/tmp/.ICE-unix/1571
 # automatic
 *F = $(notdir $*)
 # environment
@@ -117,7 +118,7 @@ MAKECMDGOALS := all
 # environment
 XMODIFIERS = @im=ibus
 # makefile (from 'Makefile', line 15)
-HEADERS := src/shared/state/playerOrientation.h src/shared/state/playerStatus.h src/shared/state/attackName.h src/shared/state/State.h src/shared/state/playerClass.h src/shared/state/Exemple.h src/shared/state/Attack.h src/shared/state/Stats.h src/shared/state/Player.h src/shared/state/tileType.h src/shared/state/tileState.h src/shared/state/MapTile.h src/shared/state/Position.h src/shared/state/attackType.h src/shared/state.h src/client/client.h src/client/client/Exemple.h
+HEADERS := src/shared/state/playerOrientation.h src/shared/state/playerStatus.h src/shared/state/attackName.h src/shared/state/State.h src/shared/state/playerClass.h src/shared/state/Exemple.h src/shared/state/Attack.h src/shared/state/Stats.h src/shared/state/Player.h src/shared/state/tileType.h src/shared/state/tileState.h src/shared/state/MapTile.h src/shared/state/Position.h src/shared/state/attackType.h src/shared/state.h src/client/client.h src/client/render.h src/client/client/Exemple.h src/client/render/buttonState.h src/client/render/Button.h src/client/render/FightScene.h src/client/render/Box.h src/client/render/GameFocus.h src/client/render/Scene.h src/client/render/BoxFactory.h src/client/render/GameWindow.h src/client/render/Info.h src/client/render/Background.h
 # environment
 GJS_DEBUG_TOPICS = JS ERROR;JS LOG
 # environment
@@ -135,7 +136,7 @@ MAKEFILES :=
 # environment
 COMMAND_NOT_FOUND_INSTALL_PROMPT = 1
 # environment
-INVOCATION_ID = b3f6fe19af2147c7a29baf930ad5e674
+INVOCATION_ID = 11de1470149648c0ae9802266f7b92b5
 # environment
 QSYS_ROOTDIR = /home/mkas/intelFPGA_lite/20.1/quartus/sopc_builder/bin
 # environment
@@ -167,15 +168,16 @@ USER = mkas
 # environment
 GTK_MODULES = gail:atk-bridge
 # default
+ 
 MAKE_VERSION := 4.3
 # 'override' directive
 .SHELLSTATUS := 0
 # environment
-MANAGERPID = 1325
+MANAGERPID = 1340
 # environment
-GIO_LAUNCHED_DESKTOP_FILE_PID = 18170
+GIO_LAUNCHED_DESKTOP_FILE_PID = 1998
 # environment
-SSH_AGENT_PID = 1511
+SSH_AGENT_PID = 1528
 # environment
 _ = /usr/share/code/code
 # environment
@@ -185,7 +187,7 @@ GPG_AGENT_INFO = /run/user/1000/gnupg/S.gpg-agent:0:1
 # environment
 POWERSHELL_TELEMETRY_OPTOUT = 1
 # environment
-JOURNAL_STREAM = 8:25721
+JOURNAL_STREAM = 8:22444
 # environment
 XDG_SESSION_CLASS = user
 # environment
@@ -291,7 +293,6 @@ testdocker:
 	./docker/run_docker_bash.sh plt-test
 
 configure:
- 
 #  Phony target (prerequisite of .PHONY).
 #  Implicit rule search has not been done.
 #  File does not exist.
@@ -487,6 +488,7 @@ rapport/engine.pdf: src/engine.dia
 #  File has not been updated.
 
 # files hash-table stats:
+ 
 # Load=29/1024=3%, Rehash=0, Collisions=0/78=0%
 # VPATH Search Paths
 
@@ -500,6 +502,6 @@ rapport/engine.pdf: src/engine.dia
 # strcache performance: lookups = 108 / hit rate = 51%
 # hash-table stats:
 # Load=52/8192=1%, Rehash=0, Collisions=0/108=0%
-# Finished Make data base on Sat Nov 13 17:54:35 2021
+# Finished Make data base on Sat Nov 13 21:22:57 2021
 
  

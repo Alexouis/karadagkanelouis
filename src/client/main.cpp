@@ -12,6 +12,11 @@
 #include <sstream>
 
 
+#include <stdio.h>      /* printf, scanf, puts, NULL */
+#include <stdlib.h>     /* srand, rand */
+#include <time.h>       /* time */
+
+
 // Fin test SFML
 
 #include  <state.h>
@@ -44,11 +49,43 @@ void testSFML() {
 
 
 
+vector<string> randMap(void){
+    vector<string> mapLoc; 
+    srand (time(NULL));
+    int randomNb = rand() % 2;
+    if(randomNb == 0){
+       mapLoc.push_back("/home/mkas/ENSEA/karadagkanelouis/res/map/");
+       mapLoc.push_back("map_1.tmx");
+    }
+    else{ 
+        mapLoc.push_back("/home/mkas/ENSEA/karadagkanelouis/res/maps/");
+        srand (time(NULL));
+        int randomNb = rand() % 3;
+        switch (randomNb)
+        {
+        case 0:
+            mapLoc.push_back("addRemove.tmx");
+            break; 
+        case 1:
+            mapLoc.push_back("addRemove.tmx");
+            break;
+        case 2:
+            mapLoc.push_back("addRemove.tmx");
+            break;
+        case 3:
+            mapLoc.push_back("addRemove.tmx");
+            break;
+        
+        default:
+            break;
+        }
+    }
+}
 
 
 void renderTest(void){
     //create map loader and load map
-	tmx::MapLoader ml("/home/mkas/ENSEA/test/karadagkanelouis/res/map/");
+	tmx::MapLoader ml("/home/mkas/ENSEA/karadagkanelouis/res/map/");
 	ml.load("map_1.tmx");
 	
 	sf::RenderWindow renderWindow(sf::VideoMode(2000u, 600u), "TMX Loader");
@@ -117,6 +154,8 @@ int main(int argc,char* argv[])
     else{
         std::cout << "Expected one argument like 'client' or 'render'" << std::endl;
     }
+
+    //system("./bin/BenchMark");
 
     return 0;
 
