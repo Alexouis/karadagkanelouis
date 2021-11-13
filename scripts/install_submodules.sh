@@ -12,4 +12,5 @@ fi
 
 EXTERN_DIR=$PREFIX_PATH"/extern"
 cd $EXTERN_DIR/tmx-loader/
-git submodule update --init
+git submodule init
+git submodule update 
