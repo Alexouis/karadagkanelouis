@@ -15,7 +15,7 @@
 HEADERS:=$(shell find src -type f -name '*.h')
 
 # clean everything, reconfig everything, recompile everything
-all: | clean extern configure build 
+all: | clean install_submodules extern configure build 
 
 # ------------------------------------------------------------------------------
 # clean
@@ -152,3 +152,8 @@ push_git:
 code-coverage:
 	./scripts/code-coverage.sh
 .PHONY : code-coverage
+
+
+install_submodules :
+	./scripts/install_submodules.sh
+.PHONY : install_submodules
