@@ -155,5 +155,6 @@ code-coverage:
 
 
 install_submodules :
-	./scripts/install_submodules.sh
+	@echo 'submodules intallation'
+	@./scripts/install_submodules.sh
 .PHONY : install_submodules
