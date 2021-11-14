@@ -156,5 +156,6 @@ code-coverage:
 
 install_submodules :
 	@echo 'submodules intallation'
-	@./scripts/install_submodules.sh
+	@git submodule init
+	@git submodule update 
 .PHONY : install_submodules

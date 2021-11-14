@@ -5,9 +5,8 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 # License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>
 # This is free software: you are free to change and redistribute it.
 # There is NO WARRANTY, to the extent permitted by law.
- 
 
-# Make data base, printed on Sun Nov 14 01:00:06 2021
+# Make data base, printed on Sun Nov 14 02:15:08 2021
 
 # Variables
 
@@ -194,7 +193,6 @@ VSCODE_AMD_ENTRYPOINT = vs/workbench/services/extensions/node/extensionHostProce
 # environment
 HOME = /home/mkas
 # environment
- 
 QT_IM_MODULE = ibus
 # environment
 _JAVA_OPTIONS = -Dawt.useSystemAAFontSettings=on -Dswing.aatext=true
@@ -278,6 +276,7 @@ src/render.dia:
 #  File has not been updated.
 
 diapdf: rapport/state.pdf rapport/render.pdf rapport/engine.pdf rapport/ai.pdf rapport/module.pdf
+ 
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
@@ -318,7 +317,7 @@ src/engine.dia:
 # Not a target:
 Makefile:
 #  Implicit rule search has been done.
-#  Last modified 2021-11-14 00:25:03.127396493
+#  Last modified 2021-11-14 02:00:21.491559864
 #  File has been updated.
 #  Successfully updated.
 
@@ -480,7 +479,9 @@ install_submodules:
 # variable set hash-table stats:
 # Load=8/32=25%, Rehash=0, Collisions=1/11=9%
 #  recipe to execute (from 'Makefile', line 158):
-	./scripts/install_submodules.sh
+	@echo 'submodules intallation'
+	@git submodule init
+	@git submodule update 
 
 # Not a target:
 .SUFFIXES:
@@ -506,7 +507,8 @@ install_submodules:
 
 # strcache performance: lookups = 114 / hit rate = 53%
 # hash-table stats:
+ 
 # Load=53/8192=1%, Rehash=0, Collisions=0/114=0%
-# Finished Make data base on Sun Nov 14 01:00:06 2021
+# Finished Make data base on Sun Nov 14 02:15:08 2021
 
  
