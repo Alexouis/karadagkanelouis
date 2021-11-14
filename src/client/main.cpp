@@ -53,7 +53,7 @@ void testSFML() {
 
 void renderRealMap(void){
     //create map loader and load map
-	tmx::MapLoader ml("/res/map/");
+	tmx::MapLoader ml("res/map/");
 	ml.load("map_1.tmx");
 	
 	sf::RenderWindow renderWindow(sf::VideoMode(2000u, 600u), "TMX Loader");
