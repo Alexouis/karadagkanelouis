@@ -51,7 +51,7 @@ void testSFML() {
 
 
 
-void renderRenderRealMap(void){
+void renderRealMap(void){
     //create map loader and load map
 	tmx::MapLoader ml("/res/map/");
 	ml.load("map_1.tmx");
@@ -113,7 +113,7 @@ void randomMap(void){
     switch (randomNb)
     {
     case 0:
-        renderRenderRealMap();
+        renderRealMap();
         break; 
     case 1:
         system("./bin/Isometric ");
@@ -132,7 +132,7 @@ void randomMap(void){
         break;
     
     default:
-        renderRenderRealMap();
+        renderRealMap();
         break;
     }
 
@@ -150,6 +150,8 @@ int main(int argc,char* argv[])
     if(strcmp(argv[1], "client") == 0){
         clientTest();
     }else if(strcmp(argv[1], "render") == 0){
+        renderRealMap();
+    }else if(strcmp(argv[1], "randomMap") == 0){
         randomMap();
     }
     else{
