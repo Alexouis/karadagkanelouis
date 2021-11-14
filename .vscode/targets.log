@@ -5,13 +5,13 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 # License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>
 # This is free software: you are free to change and redistribute it.
 # There is NO WARRANTY, to the extent permitted by law.
+ 
 
-# Make data base, printed on Sat Nov 13 21:22:57 2021
+# Make data base, printed on Sun Nov 14 01:00:06 2021
 
 # Variables
 
 # environment
- 
 GDK_BACKEND = x11
 # environment
 LC_ALL = C
@@ -168,7 +168,6 @@ USER = mkas
 # environment
 GTK_MODULES = gail:atk-bridge
 # default
- 
 MAKE_VERSION := 4.3
 # 'override' directive
 .SHELLSTATUS := 0
@@ -195,6 +194,7 @@ VSCODE_AMD_ENTRYPOINT = vs/workbench/services/extensions/node/extensionHostProce
 # environment
 HOME = /home/mkas
 # environment
+ 
 QT_IM_MODULE = ibus
 # environment
 _JAVA_OPTIONS = -Dawt.useSystemAAFontSettings=on -Dswing.aatext=true
@@ -221,7 +221,7 @@ XDG_MENU_PREFIX = gnome-
 # environment
 GDMSESSION = gnome
 # variable set hash-table stats:
-# Load=104/1024=10%, Rehash=0, Collisions=7/144=5%
+# Load=104/1024=10%, Rehash=0, Collisions=6/140=4%
 
 # Pattern-specific Variable Values
 
@@ -318,7 +318,7 @@ src/engine.dia:
 # Not a target:
 Makefile:
 #  Implicit rule search has been done.
-#  Last modified 2021-11-09 17:01:07.308196497
+#  Last modified 2021-11-14 00:25:03.127396493
 #  File has been updated.
 #  Successfully updated.
 
@@ -331,33 +331,11 @@ rapport/state.pdf: src/state.dia
 	ps2pdf rapport/state.ps $@
 	rm -f rapport/state.ps
 
-# 'override' directive
-clean: .SHELLSTATUS := 2
 clean:
 #  Phony target (prerequisite of .PHONY).
 #  Implicit rule search has not been done.
-#  Implicit/static pattern stem: ''
 #  File does not exist.
-#  File has been updated.
-#  Needs to be updated (-q is set).
-# automatic
-# @ := clean
-# automatic
-# * := 
-# automatic
-# < := 
-# automatic
-# + := 
-# automatic
-# % := 
-# automatic
-# ^ := 
-# automatic
-# ? := 
-# automatic
-# | := 
-# variable set hash-table stats:
-# Load=9/32=28%, Rehash=0, Collisions=2/16=12%
+#  File has not been updated.
 #  recipe to execute (from 'Makefile', line 26):
 	@echo [DEBUG] Root Makefile : clean
 	@rm -rf bin build
@@ -407,14 +385,14 @@ extern:
 #  recipe to execute (from 'Makefile', line 47):
 	#@echo [DEBUG] Root Makefile : extern
 
-all: | clean extern configure build
+all: install_submodules clean extern configure build
 #  Command line target.
 #  Implicit rule search has been done.
 #  File does not exist.
 #  File has been updated.
 #  Needs to be updated (-q is set).
 # variable set hash-table stats:
-# Load=0/32=0%, Rehash=0, Collisions=0/7=0%
+# Load=0/32=0%, Rehash=0, Collisions=0/3=0%
 
 push_git:
 #  Phony target (prerequisite of .PHONY).
@@ -476,32 +454,59 @@ rapport/engine.pdf: src/engine.dia
 	ps2pdf rapport/engine.ps $@
 	rm -f rapport/engine.ps
 
+install_submodules:
+#  Phony target (prerequisite of .PHONY).
+#  Implicit rule search has not been done.
+#  Implicit/static pattern stem: ''
+#  File does not exist.
+#  File has been updated.
+#  Needs to be updated (-q is set).
+# automatic
+# @ := install_submodules
+# automatic
+# * := 
+# automatic
+# < := 
+# automatic
+# + := 
+# automatic
+# % := 
+# automatic
+# ^ := 
+# automatic
+# ? := 
+# automatic
+# | := 
+# variable set hash-table stats:
+# Load=8/32=25%, Rehash=0, Collisions=1/11=9%
+#  recipe to execute (from 'Makefile', line 158):
+	./scripts/install_submodules.sh
+
 # Not a target:
 .SUFFIXES:
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
 
-.PHONY: configure build clean extern test testdocker list install-requirements push_git code-coverage
+.PHONY: configure build clean extern test testdocker list install-requirements push_git code-coverage install_submodules
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
 
 # files hash-table stats:
- 
-# Load=29/1024=3%, Rehash=0, Collisions=0/78=0%
+# Load=30/1024=3%, Rehash=0, Collisions=0/83=0%
 # VPATH Search Paths
 
 # No 'vpath' search paths.
 
 # No general ('VPATH' variable) search path.
 
-# strcache buffers: 1 (0) / strings = 52 / storage = 526 B / avg = 10 B
-# current buf: size = 8162 B / used = 526 B / count = 52 / avg = 10 B
+# strcache buffers: 1 (0) / strings = 53 / storage = 545 B / avg = 10 B
+# current buf: size = 8162 B / used = 545 B / count = 53 / avg = 10 B
 
-# strcache performance: lookups = 108 / hit rate = 51%
+# strcache performance: lookups = 114 / hit rate = 53%
 # hash-table stats:
-# Load=52/8192=1%, Rehash=0, Collisions=0/108=0%
-# Finished Make data base on Sat Nov 13 21:22:57 2021
+# Load=53/8192=1%, Rehash=0, Collisions=0/114=0%
+# Finished Make data base on Sun Nov 14 01:00:06 2021
 
  
