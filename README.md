@@ -1,6 +1,12 @@
 
 # Projet Logiciel Transverse de Nouhou, Mustafa et Alexandre
 
+## PROJET : PROFUS
+
+[![N|Solid](https://cldup.com/dTxpPi9lDf.thumb.png)](https://nodesource.com/products/nsolid)
+
+[![Build Status](https://travis-ci.org/joemccann/dillinger.svg?branch=master)](https://travis-ci.org/joemccann/dillinger)
+
 ## Installation de d'environnement de projet : Le builder
 
 #### Logiciels requis :
@@ -24,19 +30,19 @@
 #### install submodules
     make install_submodules
 
-::: jalon 1.1 et 1.final
-./bin/client client
-:::
 
-::: jalon 2.1
-./bin/client render
-./bin/client randomMap
-:::
+#
 
-::: danger Titre
-Texte
-:::
+## Executions jalons
 
-::: details Titre
-Texte
-:::
+
+---
+#### [Jalon 1] :   
+ 
+     ./bin/client client
+---
+#### [Jalon 2] :
+
+    ./bin/client render //(affiche de la map de jeu utilisée)
+    ./bin/client randomMap //(affichache aléatoire de map).
+---
