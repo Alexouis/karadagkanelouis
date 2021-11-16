@@ -21,16 +21,12 @@ foreach(example ${examples})
     add_executable(${EXECNAME} ${example})
     target_include_directories(${EXECNAME} PUBLIC 
         ${CMAKE_SOURCE_DIR}/src/client/client
+        ${jsoncpp_include_dir}
     )
-    message("ok"${jsoncpp_include_dir})
     target_link_libraries(${EXECNAME} 
         ${lib_client_target} 
         tmx-loader 
-        pugi 
-        ${SFML_LIBRARIES} 
-        ${SFML_DEPENDENCIES} 
-        ${ZLIB_LIBRARIES} 
-        ${JSONCPPLIB}
+        jsonCppLibrary
     )
     #message(${JSONCPPLIB})
 
