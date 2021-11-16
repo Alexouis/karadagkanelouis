@@ -83,7 +83,9 @@ set(MACHINE_ENSEA OFF CACHE BOOL
 
 # Find library jsoncpp
 set(jsoncpp_include_dir "${PROJECT_SOURCE_DIR}/extern/jsoncpp-1.8.0")
+include_directories(${jsoncpp_include_dir})
 file(GLOB_RECURSE jsoncpp_sources extern/jsoncpp-1.8.0/*.cpp)
+add_subdirectory(${jsoncpp_include_dir})
 
 # Find library SFML
 if(WIN32)

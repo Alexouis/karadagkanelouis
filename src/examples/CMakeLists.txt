@@ -22,6 +22,17 @@ foreach(example ${examples})
     target_include_directories(${EXECNAME} PUBLIC 
         ${CMAKE_SOURCE_DIR}/src/client/client
     )
-    target_link_libraries(${EXECNAME} ${lib_client_target} tmx-loader pugi ${SFML_LIBRARIES} ${SFML_DEPENDENCIES} ${ZLIB_LIBRARIES})
-endforeach()
+    message("ok"${jsoncpp_include_dir})
+    target_link_libraries(${EXECNAME} 
+        ${lib_client_target} 
+        tmx-loader 
+        pugi 
+        ${SFML_LIBRARIES} 
+        ${SFML_DEPENDENCIES} 
+        ${ZLIB_LIBRARIES} 
+        ${JSONCPPLIB}
+    )
+    #message(${JSONCPPLIB})
+
+    endforeach()
 
