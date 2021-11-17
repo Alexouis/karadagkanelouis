@@ -83,6 +83,7 @@ set(MACHINE_ENSEA OFF CACHE BOOL
 
 # Find library jsoncpp
 set(jsoncpp_include_dir "${PROJECT_SOURCE_DIR}/extern/jsoncpp-1.8.0")
+include_directories(${jsoncpp_include_dir} ${jsoncpp_include_dir}/json)
 file(GLOB_RECURSE jsoncpp_sources extern/jsoncpp-1.8.0/*.cpp)
 
 # Find library SFML
@@ -113,6 +114,7 @@ find_library(
 )
 
 # Add source subdirectories
+add_subdirectory(${jsoncpp_include_dir})
 add_subdirectory(extern/tmx-loader)
 add_subdirectory(src/shared)
 add_subdirectory(src/client)

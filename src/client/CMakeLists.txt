@@ -17,10 +17,12 @@ target_include_directories(${lib_client_target} PUBLIC
   ${SFML_INCLUDE_DIR}
   ${PROJECT_SOURCE_DIR}/extern/STP/include
   ${PROJECT_SOURCE_DIR}/extern/tmx-loader/include
+  ${jsoncpp_include_dir}
   )
 target_link_libraries(${lib_client_target} PUBLIC
   ${SFML_LIBRARIES}
   tmx-loader
+  ${JSONCPPLIB}
   $<TARGET_NAME:shared_static>
   )
 

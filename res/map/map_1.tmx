@@ -1,42 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.0" tiledversion="1.0.3" orientation="isometric" renderorder="right-down" width="20" height="20" tilewidth="519" tileheight="268" nextobjectid="1">
  <tileset firstgid="1" source="ground.tsx"/>
- <tileset firstgid="13" source="buildings.tsx"/>
- <tileset firstgid="85" source="trees.tsx"/>
- <tileset firstgid="120" source="perso.tsx"/>
+ <tileset firstgid="14" source="buildings.tsx"/>
+ <tileset firstgid="86" source="trees.tsx"/>
+ <tileset firstgid="121" source="perso.tsx"/>
  <layer name="ground" width="20" height="20">
   <data encoding="base64" compression="zlib">
    eJxjZGBgYBzFo3gUj+JRPIpJxADrnAGR
   </data>
  </layer>
- <layer name="Trees" width="20" height="20">
-  <data encoding="base64" compression="zlib">
-   eJyLYmBgiKIypiYgZB6p9lHbjbRwHzYQSqI55No/1MwLRcLUMA8d0NO8FDLsHcr+JcWMKCQ2NQG9zCPXHnqZRy4AAOwvEj8=
-  </data>
- </layer>
- <layer name="buildings_back" width="20" height="20">
-  <data encoding="base64" compression="zlib">
-   eJxjYBgFgw2YDLQDRsEoGAUjDpiSoQcABAMAag==
-  </data>
- </layer>
- <layer name="Trees_front" width="20" height="20">
-  <data encoding="base64" compression="zlib">
-   eJxjYBgFwx2kQPEoGAWjYBQQAqYkqAUAddkA/g==
-  </data>
- </layer>
  <layer name="buildings" width="20" height="20">
   <data encoding="base64" compression="zlib">
-   eJytlMEJgDAMRTOCu6jn4tWDJxXR/feQQIrhkzRV+yDExvJoTStRe3YIZpW8VUTmbLAWz+e5N6ce+b7i+RbJCd7r+T3kkg/BdykYe75d6jqYWfL1Yg0Rl4qSr6Pn3Fn7QKeHtb7FqNWSfQPF56xEBz793TOHhDfOTPTcTewdgr6IFvfjjS/B8+pNBN+fXrTw6X1xP7C/1r+x1mfV8b5a54cZg/kcN2ZOIMA=
+   eJytlEsKhDAMhnMF7+LMurh14UrLUM8x558pJBhiXoo//KSP+BlI2wYA7WFX4a4V45YwiXieon2Ltym53nrEs3SnvtffC64VjBX3eP4oosX7or26SjDnPK4K5/53zRh3hePxPO3M/P9k4g1wnLuSYF6pb9ESk+L91c5ZM8ZSg+BpdX7Q1pw0wXE3iTMrecTQxpau9jfiRLwixqueduJGdz4rj+fVzfd6P2R/rbcxw9Pqs/zGPBm9b35jHzS/
   </data>
  </layer>
  <layer name="Valla" width="20" height="20" offsetx="50" offsety="-100">
   <data encoding="base64" compression="zlib">
-   eJxjYBgFo2AUDGZQMdAOGAWjAAcAAD9vAHk=
+   eJxjYBgFo2AUDGZQSWXzeAe5eaNg6AAAebMAlA==
   </data>
  </layer>
  <layer name="Demon" width="20" height="20" offsetx="-70" offsety="-70">
   <data encoding="base64" compression="zlib">
-   eJxjYBgFo2AUDHZQOcLMGwVDAwAAQoUBbA==
+   eJxjYBgFo2AUjDRQNcjNGwVDAwAADN4A9Q==
   </data>
  </layer>
 </map>
