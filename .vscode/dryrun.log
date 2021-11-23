@@ -1,5 +1,6 @@
 make --dry-run --always-make --keep-going --print-directory
-make: Entering directory '/home/mkas/ENSEA/test2/karadagkanelouis'
+make: Entering directory '/home/mkas/ENSEA/karadagkanelouis'
+ 
 echo 'submodules intallation'
 git submodule init
 git submodule update 
@@ -14,5 +15,5 @@ mkdir -p build
 cd build && cmake ..
 echo [DEBUG] Root Makefile : build
 cd build && cmake --build .
-make: Leaving directory '/home/mkas/ENSEA/test2/karadagkanelouis'
+make: Leaving directory '/home/mkas/ENSEA/karadagkanelouis'
  
