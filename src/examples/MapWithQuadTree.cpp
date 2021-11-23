@@ -15,7 +15,7 @@ int main()
 	ml.load("desert.tmx");
 
 	//-----------------------------------//
-
+	
 	while(renderWindow.isOpen())
 	{
 		//poll input

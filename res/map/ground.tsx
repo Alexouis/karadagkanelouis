@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<tileset name="Ground" tilewidth="1024" tileheight="1024" tilecount="12" columns="0">
+<tileset name="Ground" tilewidth="1024" tileheight="1024" tilecount="11" columns="0">
  <grid orientation="orthogonal" width="1" height="1"/>
  <tile id="0">
   <image width="512" height="569" source="../grass/grass5.png"/>
@@ -33,8 +33,5 @@
  </tile>
  <tile id="10">
   <image width="1024" height="1024" source="../synthetic grass/ground_grass_gen_10.png"/>
- </tile>
- <tile id="12">
-  <image width="360" height="480" source="../Valla/valla/valla_attack_se/1_g.png"/>
  </tile>
 </tileset>
