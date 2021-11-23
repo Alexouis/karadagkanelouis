@@ -148,7 +148,7 @@ int main(int argc,char* argv[])
     }
 
     if(strcmp(argv[1], "client") == 0){
-        clientTest();
+        testSFML();
     }else if(strcmp(argv[1], "render") == 0){
         renderRealMap();
     }else if(strcmp(argv[1], "randomMap") == 0){
