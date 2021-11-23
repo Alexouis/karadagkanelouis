@@ -9,19 +9,24 @@
    eJxjZGBgYBzFo3gUj+JRPIpJxADrnAGR
   </data>
  </layer>
+ <layer name="Trees" width="20" height="20">
+  <data encoding="base64" compression="zlib">
+   eJyLZmBgiKYypiYgZB6p9lHbjbRwHzYQRqI55No/1MwLQ8LUMA8d0NO8VDLsHcr+JcWMaCQ2NQG9zCPXHnqZRy4AAMpOEnM=
+  </data>
+ </layer>
+ <layer name="buildings_back" width="20" height="20">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFgw2YDrQDRsEoGAUjDpiRoQcACOMAbA==
+  </data>
+ </layer>
+ <layer name="Trees_front" width="20" height="20">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFwx2kQvEoGAWjYBQQAmYkqAUAfrkBAQ==
+  </data>
+ </layer>
  <layer name="buildings" width="20" height="20">
   <data encoding="base64" compression="zlib">
-   eJytlEsKhDAMhnMF7+LMurh14UrLUM8x558pJBhiXoo//KSP+BlI2wYA7WFX4a4V45YwiXieon2Ltym53nrEs3SnvtffC64VjBX3eP4oosX7or26SjDnPK4K5/53zRh3hePxPO3M/P9k4g1wnLuSYF6pb9ESk+L91c5ZM8ZSg+BpdX7Q1pw0wXE3iTMrecTQxpau9jfiRLwixqueduJGdz4rj+fVzfd6P2R/rbcxw9Pqs/zGPBm9b35jHzS/
-  </data>
- </layer>
- <layer name="Valla" width="20" height="20" offsetx="50" offsety="-100">
-  <data encoding="base64" compression="zlib">
-   eJxjYBgFo2AUDGZQSWXzeAe5eaNg6AAAebMAlA==
-  </data>
- </layer>
- <layer name="Demon" width="20" height="20" offsetx="-70" offsety="-70">
-  <data encoding="base64" compression="zlib">
-   eJxjYBgFo2AUjDRQNcjNGwVDAwAADN4A9Q==
+   eJytlEEKhDAMRXMF76KzLm5ddKUyjPc/hwRSDH+SpmofhNi0PKppJerPDsGskreGKPw67MXzee7NqUe+p3i+LDnBvF4/Qq75EJxLwdjz7VLXwSySjxt7iDhU1HwDXecuNTg9rP1lo9ZK8U0Un7MaA/j0dy98JbxxYabrbmLvEPRF9Lgfd3wJnld72Z/vTS96+PR7cT+wv9a/sdVn1fG+WueH+QTrOU6YaSEm
   </data>
  </layer>
 </map>
