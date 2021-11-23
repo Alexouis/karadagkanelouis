@@ -15,7 +15,7 @@
 HEADERS:=$(shell find src -type f -name '*.h')
 
 # clean everything, reconfig everything, recompile everything
-all: install_submodules clean extern configure build 
+all: clean extern configure build 
 
 # ------------------------------------------------------------------------------
 # clean
