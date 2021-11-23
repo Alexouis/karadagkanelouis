@@ -47,7 +47,7 @@ def h_concat(images_path):
     return new_im, {'n':n,'w':w,'h':h}
 
 
-def merge(parsed:dict):
+def merge(parsed:dict, frames_out_path, frames_json_info_path):
     j = {}
     lines_im = [] # List[Image]
 
@@ -77,11 +77,11 @@ def merge(parsed:dict):
     for line_im in lines_im:
         tileset.paste(line_im, (0, y_offset))
         y_offset += line_im.size[1]
-    tileset.save('test.png')
+    tileset.save(frames_out_path)
 
     print('-'*60)
     pprint(j)
-    with open("tileset.json", "w") as f_json:
+    with open(frames_json_info_path, "w") as f_json:
         json.dump(j, f_json, indent=4)
             
 
@@ -90,16 +90,19 @@ def merge(parsed:dict):
 
 if __name__ == '__main__':
     
-    base = Path(__file__).resolve().parents[1] / 'res'
+    base = Path(__file__).resolve().parents[1]
+    print(base)
+    frames_out_path = str(base / 'res') + "/frames.png"
+    print("frames : ",frames_out_path)
+    frames_json_info_path = str(base / 'data') + "/frames_info.json"
+    print("json : ",frames_json_info_path)
     #print(base)
-                
-    characters_dir = get_characters_dir(base)
+  
+    characters_dir = get_characters_dir(base / 'res')
     #print(characters_dir)
 
     out = parse(characters_dir)
     #pprint(out)
 
-    merge(out)
-
-
+    merge(out, frames_out_path, frames_json_info_path)
 
