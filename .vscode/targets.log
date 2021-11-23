@@ -6,7 +6,7 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 # This is free software: you are free to change and redistribute it.
 # There is NO WARRANTY, to the extent permitted by law.
 
-# Make data base, printed on Tue Nov 16 12:47:34 2021
+# Make data base, printed on Mon Nov 22 15:21:53 2021
 
 # Variables
 
@@ -15,9 +15,9 @@ GDK_BACKEND = x11
 # environment
 LC_ALL = C
 # environment
-VSCODE_IPC_HOOK_EXTHOST = /run/user/1000/vscode-ipc-45fcbfdf-dc52-4e8c-91b6-5358d640bf56.sock
+VSCODE_IPC_HOOK_EXTHOST = /run/user/1000/vscode-ipc-ae8d7a37-0b78-49d1-8b27-0d5608b1dfd7.sock
 # environment
-VSCODE_CWD = /home/mkas/ENSEA/S9/multithreading/TD
+VSCODE_CWD = /home/mkas/ENSEA
 # environment
 WINDOWPATH = 2
 # environment
@@ -33,13 +33,13 @@ VSCODE_HANDLES_UNCAUGHT_ERRORS = true
 # default
 .VARIABLES := 
 # environment
-PWD = /home/mkas/ENSEA/test2/karadagkanelouis
+PWD = /home/mkas/ENSEA/karadagkanelouis
 # automatic
 %D = $(patsubst %/,%,$(dir $%))
 # environment
 XDG_DATA_DIRS = /usr/share/gnome:/usr/local/share/:/usr/share/
 # environment
-OLDPWD = /home/mkas/ENSEA/S9/multithreading
+OLDPWD = /home/mkas
 # automatic
 ^D = $(patsubst %/,%,$(dir $^))
 # environment
@@ -59,11 +59,11 @@ XAUTHORITY = /run/user/1000/gdm/Xauthority
 # default
 .INCLUDE_DIRS = /usr/local/include /usr/include /usr/include
 # environment
-GNOME_TERMINAL_SERVICE = :1.99
+GNOME_TERMINAL_SERVICE = :1.115
 # makefile
 MAKEFLAGS = pqrR
 # makefile
-CURDIR := /home/mkas/ENSEA/test2/karadagkanelouis
+CURDIR := /home/mkas/ENSEA/karadagkanelouis
 # environment
 VSCODE_PIPE_LOGGING = true
 # environment
@@ -91,7 +91,7 @@ CONDA_SHLVL = 1
 # environment
 VSCODE_VERBOSE_LOGGING = true
 # environment
-VSCODE_PID = 3772
+VSCODE_PID = 25139
 # environment
 XDG_SESSION_TYPE = x11
 # automatic
@@ -99,7 +99,7 @@ XDG_SESSION_TYPE = x11
 # environment
 CONDA_PYTHON_EXE = /home/mkas/anaconda3/bin/python
 # environment
-SESSION_MANAGER = local/kalikane:@/tmp/.ICE-unix/1563,unix/kalikane:/tmp/.ICE-unix/1563
+SESSION_MANAGER = local/kalikane:@/tmp/.ICE-unix/1799,unix/kalikane:/tmp/.ICE-unix/1799
 # automatic
 *F = $(notdir $*)
 # environment
@@ -135,7 +135,7 @@ HEADERS := src/shared/state/playerOrientation.h src/shared/state/playerStatus.h 
 # environment
 SHLVL = 1
 # environment
-GNOME_TERMINAL_SCREEN = /org/gnome/Terminal/screen/cdfbebe3_2faa_4b29_a142_337f74a2c8a0
+GNOME_TERMINAL_SCREEN = /org/gnome/Terminal/screen/1008a84f_129f_4b49_97c9_1e5ffb41973f
 # environment
 MAKELEVEL := 0
 # default
@@ -185,7 +185,7 @@ MAKE_VERSION := 4.3
 # 'override' directive
 .SHELLSTATUS := 0
 # environment
-SSH_AGENT_PID = 1518
+SSH_AGENT_PID = 1757
 # environment
 _ = /usr/bin/code
 # environment
@@ -251,7 +251,7 @@ GDMSESSION = gnome
 
 # Directories
 
-# . (device 2051, inode 21239334): 25 files, no impossibilities.
+# . (device 2051, inode 25036745): 25 files, no impossibilities.
 
 # 25 files, no impossibilities in 1 directories.
 
@@ -289,13 +289,13 @@ rapport/ai.pdf: src/ai.dia
 #  Modification time never checked.
 #  File has not been updated.
 #  recipe to execute (from 'Makefile', line 118):
- 
 	dia -e rapport/ai.ps $<
 	ps2pdf rapport/ai.ps $@
 	rm -f rapport/ai.ps
 
 # Not a target:
 src/render.dia:
+ 
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
@@ -341,7 +341,7 @@ src/engine.dia:
 # Not a target:
 Makefile:
 #  Implicit rule search has been done.
-#  Last modified 2021-11-14 02:42:26.503632003
+#  Last modified 2021-11-14 02:00:21.491559864
 #  File has been updated.
 #  Successfully updated.
 
@@ -526,12 +526,12 @@ install_submodules:
 
 # No general ('VPATH' variable) search path.
 
-# strcache buffers: 1 (0) / strings = 53 / storage = 545 B / avg = 10 B
-# current buf: size = 8162 B / used = 545 B / count = 53 / avg = 10 B
+# strcache buffers: 1 (0) / strings = 53 / storage = 546 B / avg = 10 B
+# current buf: size = 8162 B / used = 546 B / count = 53 / avg = 10 B
 
 # strcache performance: lookups = 114 / hit rate = 53%
 # hash-table stats:
 # Load=53/8192=1%, Rehash=0, Collisions=0/114=0%
-# Finished Make data base on Tue Nov 16 12:47:34 2021
+# Finished Make data base on Mon Nov 22 15:21:53 2021
 
  

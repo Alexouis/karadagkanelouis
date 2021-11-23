@@ -59,5 +59,6 @@
         "typeindex": "cpp",
         "typeinfo": "cpp"
     },
-    "C_Cpp.errorSquiggles": "Enabled"
+    "C_Cpp.errorSquiggles": "Enabled",
+    "jupyter.jupyterServerType": "local"
 }
