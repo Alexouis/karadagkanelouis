@@ -29,6 +29,7 @@ def parse(dirs:list):
     return out
 
 def h_concat(images_path):
+    images_path.sort()
     images = [Image.open(x) for x in images_path]
     widths, heights = zip(*(i.size for i in images))
 

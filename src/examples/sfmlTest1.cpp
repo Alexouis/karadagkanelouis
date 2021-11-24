@@ -259,8 +259,14 @@ void randomMap(void){
 
 }
 
+<<<<<<< HEAD
 /*
       // for std::cout
+=======
+#include <json/json.h>
+#include <dirent.h>
+#include <iostream>               // for std::cout
+>>>>>>> ceba3ed8c255c94f9aaa0d804b343f7c1e22f029
 
 
 /*
