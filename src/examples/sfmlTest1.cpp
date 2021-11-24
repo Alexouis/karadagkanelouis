@@ -18,6 +18,9 @@
 #include <string.h>
 
 
+#include <json/json.h>
+#include <dirent.h>
+#include <iostream>         
 
 #include <tmx/MapLoader.hpp>
 #include <sstream>
@@ -26,6 +29,8 @@
 #include <stdio.h>      /* printf, scanf, puts, NULL */
 #include <stdlib.h>     /* srand, rand */
 #include <time.h>       /* time */
+
+#include <fstream>
 
 
 // Fin test SFML
@@ -254,10 +259,8 @@ void randomMap(void){
 
 }
 
-#include <json/json.h>
-#include <dirent.h>
-#include "boost/filesystem.hpp"   // includes all needed Boost.Filesystem declarations
-#include <iostream>               // for std::cout
+/*
+      // for std::cout
 
 
 /*
@@ -290,9 +293,7 @@ int main(int argc,char* argv[])
 */
 
 
-#include "json/json.h"
-#include <iostream>
-#include <fstream>
+
 
 int main(){
     bool alive = true;

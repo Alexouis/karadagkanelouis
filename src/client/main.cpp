@@ -56,12 +56,12 @@ void renderRealMap(void){
 	tmx::MapLoader ml("res/map/");
 	ml.load("map_1.tmx");
 	
-	sf::RenderWindow renderWindow(sf::VideoMode(2000u, 600u), "TMX Loader");
+	sf::RenderWindow renderWindow(sf::VideoMode(1000u, 1000u), "TMX Loader");
 	renderWindow.setVerticalSyncEnabled(true);
 
 	//adjust the view to centre on map
 	sf::View view = renderWindow.getView();
-	view.zoom(3.0f);
+	view.zoom(7.0f);
 	view.setCenter(1024.0f, 2000.0f);
 	renderWindow.setView(view);
 
@@ -148,7 +148,7 @@ int main(int argc,char* argv[])
     }
 
     if(strcmp(argv[1], "client") == 0){
-        clientTest();
+        testSFML();
     }else if(strcmp(argv[1], "render") == 0){
         renderRealMap();
     }else if(strcmp(argv[1], "randomMap") == 0){
