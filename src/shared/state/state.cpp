@@ -67,11 +67,11 @@ namespace state {
     void State::setActualPlayerIndex(char actualPlayerIndex){
         this->actualPlayerIndex = actualPlayerIndex;
     };
-    char State::getTimeLeft() const{
-        return this->timeLeft;
+    char State::getChronoCount() const{
+        return this->chronoCount;
     };
-    void State::setTimeLeft(char timeLeft){
-        this->timeLeft= timeLeft;
+    void State::setChronoCount(char chronoCount){
+        this->chronoCount= chronoCount;
     };
     //get the player 
     const std::vector<std::string>& State::getPlayers_id() const{

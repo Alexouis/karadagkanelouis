@@ -69,13 +69,13 @@ BOOST_AUTO_TEST_CASE(TestSFML)
     s.setActualPlayerIndex(actualPlayerIndex);
     s.setPlayers_id(player_id);
     s.setTurn(turn);
-    s.setTimeLeft(timeLeft);
+    s.setChronoCount(timeLeft);
 
     BOOST_CHECK_EQUAL(s.getActualPlayerIndex(), actualPlayerIndex);
 
     BOOST_CHECK_EQUAL(s.getPlayers_id()[0], player_id[0]);
     BOOST_CHECK_EQUAL(s.getTurn(), turn);
-    BOOST_CHECK_EQUAL(s.getTimeLeft(), timeLeft);
+    BOOST_CHECK_EQUAL(s.getChronoCount(), timeLeft);
     s.incrementTurn();
     BOOST_CHECK_EQUAL(s.getTurn(), turn+1);
     

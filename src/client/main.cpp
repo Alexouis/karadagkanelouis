@@ -7,7 +7,6 @@
 #include <SFML/Graphics.hpp>
 #include <string.h>
 
-#include "jsoncpp/json/json.h"
 #include <iostream>
 #include <fstream>
 #include <math.h>
