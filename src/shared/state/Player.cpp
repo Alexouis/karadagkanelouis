@@ -23,7 +23,13 @@ namespace state {
     };
 
     void Player::move (Position destination){
+        Player::position.setX(destination.getX());
+        Player::position.setY(destination.getY());
+    };
 
+    void Player::move (int x, int y){
+        Player::position.setX(x);
+        Player::position.setY(y);
     };
 
     const std::string& Player::getName() const{

@@ -108,7 +108,7 @@ void test1(){
 
 void testSFML() {
     sf::Texture texture;
-    if (!texture.loadFromFile("res/map/map_1.png"))
+    if (!texture.loadFromFile("/home/ensea/karadagkanelouis/res/map/map_1.png"))
     {
         // error...
     }
@@ -125,7 +125,7 @@ void testSFML() {
 
 	//adjust the view to centre on map
 	sf::View view = renderWindow.getView();
-	view.zoom(2.0f);
+	view.zoom(5.0f);
 	view.setCenter(rect.width/2, rect.height/2);
 	renderWindow.setView(view);
 
@@ -297,7 +297,7 @@ int main(int argc,char* argv[])
 
 
 int main(){
-    bool alive = true;
+ /*   bool alive = true;
     while (alive){
 		Json::Value root;   // will contains the root value after parsing.
 		Json::Reader reader;
@@ -315,7 +315,7 @@ int main(){
 		const Json::Value mynames = root["b"];
 		cout << mynames << "\n";
 		alive = false;
-    }
-
+    }*/
+	testSFML();
     return 0;
 }
