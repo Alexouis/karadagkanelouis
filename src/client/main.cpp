@@ -173,7 +173,7 @@ void renderRealMap(void){
                 else posHero =1;
             if(event.type == sf::Event::MouseButtonPressed){
                 //Mustafa.setPosition(Position(floor(mousePosWorld.x/278),floor(mousePosWorld.y/278)));
-                Mustafa.move(Position(floor(mousePosWorld.x/278),floor(mousePosWorld.y/278)));
+                Mustafa.move(floor(mousePosWorld.x/278),floor(mousePosWorld.y/278));
                 mousePosWorld.x=floor(mousePosWorld.x/278)*270+270/2;
                 mousePosWorld.y=floor(mousePosWorld.y/278)*270+270/2;
                 
