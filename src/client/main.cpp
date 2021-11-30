@@ -20,6 +20,7 @@
 // Fin test SFML
 
 #include  <state.h>
+#include <json/json.h>
 
 using namespace std;
 using namespace state;
