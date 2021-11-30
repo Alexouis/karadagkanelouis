@@ -24,6 +24,8 @@
 // Fin test SFML
 #include <thread>
 #include  <state.h>
+#include <json/json.h>
+
 using namespace std;
 using namespace state;
 
