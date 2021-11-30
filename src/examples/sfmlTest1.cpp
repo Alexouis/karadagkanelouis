@@ -108,7 +108,7 @@ void test1(){
 
 void testSFML() {
     sf::Texture texture;
-    if (!texture.loadFromFile("res/map/map_1.png"))
+    if (!texture.loadFromFile("/home/ensea/karadagkanelouis/res/map/map_1.png"))
     {
         // error...
 		std::cout << texture.getMaximumSize() << endl;
@@ -126,7 +126,7 @@ void testSFML() {
 
 	//adjust the view to centre on map
 	sf::View view = renderWindow.getView();
-	view.zoom(2.0f);
+	view.zoom(5.0f);
 	view.setCenter(rect.width/2, rect.height/2);
 	renderWindow.setView(view);
 

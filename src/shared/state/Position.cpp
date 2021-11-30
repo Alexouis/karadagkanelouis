@@ -5,7 +5,8 @@ namespace state
     Position::Position(){};
 
     Position::Position(int x, int y){
-
+        setX(x);
+        setY(y);
     };
 
     
