@@ -22,7 +22,7 @@
 #include <dirent.h>
 #include <iostream>         
 
-#include <tmx/MapLoader.hpp>
+#include <tmx/MapLoader.h>
 #include <sstream>
 
 
@@ -108,7 +108,7 @@ void test1(){
 
 void testSFML() {
     sf::Texture texture;
-    if (!texture.loadFromFile("/home/ensea/karadagkanelouis/res/map/map_1.png"))
+    if (!texture.loadFromFile("/home/mkas/ENSEA/karadagkanelouis/res/map/map_1.png"))
     {
         // error...
 		std::cout << texture.getMaximumSize() << endl;

@@ -2,8 +2,8 @@
 #include <SFML/System.hpp>
 #include <SFML/Window.hpp>
 #include <SFML/Graphics.hpp>
-#include <tmx/MapLoader.hpp>
-#include <tmx/Log.hpp>
+#include <tmx/MapLoader.h>
+#include <tmx/Log.h>
 
 namespace
 {

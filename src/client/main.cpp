@@ -11,7 +11,7 @@
 #include <fstream>
 #include <math.h>
 
-#include <tmx/MapLoader.hpp>
+#include <tmx/MapLoader.h>
 #include <sstream>
 #include <string>
 
@@ -75,7 +75,7 @@ void renderRealMap(void){
 	tmx::MapLoader ml("res/map/");
 	ml.load("map_1.tmx");
 	
-	sf::RenderWindow renderWindow(sf::VideoMode(2000u, 600u), "TMX Loader");
+	sf::RenderWindow renderWindow(sf::VideoMode(3000u, 800u), "TMX Loader");
 	renderWindow.setVerticalSyncEnabled(true);
 
 	//adjust the view to centre on map

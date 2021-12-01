@@ -9,9 +9,13 @@ namespace state {
 
     };
     void State::init (){
-
+        this->turn = 0;
+        this->actualPlayerIndex = 0;
+        this->chronoCount = 60; //60 seconds
+        this->gameOver = false;
     };
     void State::initPlayer (){
+        
         
     };
     void State::initMap (){

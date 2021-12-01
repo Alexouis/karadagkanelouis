@@ -6,7 +6,7 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 # This is free software: you are free to change and redistribute it.
 # There is NO WARRANTY, to the extent permitted by law.
 
-# Make data base, printed on Tue Nov 30 08:12:40 2021
+# Make data base, printed on Wed Dec  1 13:40:30 2021
 
 # Variables
 
@@ -17,7 +17,7 @@ LC_ALL = C
 # environment
 GJS_DEBUG_OUTPUT = stderr
 # environment
-VSCODE_IPC_HOOK_EXTHOST = /run/user/1000/vscode-ipc-aefc286e-c58f-453c-9f0b-396295cb49e3.sock
+VSCODE_IPC_HOOK_EXTHOST = /run/user/1000/vscode-ipc-3908fd67-7388-414b-a154-da44dcb88d61.sock
 # environment
 VSCODE_CWD = /home/mkas
 # environment
@@ -42,6 +42,7 @@ PWD = /home/mkas/ENSEA/karadagkanelouis
 XDG_DATA_DIRS = /usr/share/gnome:/usr/local/share:/usr/share:/var/lib/snapd/desktop
 # automatic
 ^D = $(patsubst %/,%,$(dir $^))
+ 
 # environment
 VSCODE_LOG_STACK = false
 # automatic
@@ -85,14 +86,13 @@ MAKEFILE_LIST := Makefile
 # environment
 VSCODE_VERBOSE_LOGGING = true
 # environment
- 
-VSCODE_PID = 2477
+VSCODE_PID = 8430
 # environment
 XDG_SESSION_TYPE = x11
 # automatic
 ?D = $(patsubst %/,%,$(dir $?))
 # environment
-SESSION_MANAGER = local/kalikane:@/tmp/.ICE-unix/1926,unix/kalikane:/tmp/.ICE-unix/1926
+SESSION_MANAGER = local/kalikane:@/tmp/.ICE-unix/1890,unix/kalikane:/tmp/.ICE-unix/1890
 # automatic
 *F = $(notdir $*)
 # environment
@@ -118,7 +118,7 @@ MAKECMDGOALS := all
 # environment
 XMODIFIERS = @im=ibus
 # makefile (from 'Makefile', line 15)
-HEADERS := src/shared/engine/Command.h src/shared/engine/threadListener.h src/shared/engine/CommandType.h src/shared/engine/threadJail.h src/shared/engine/threadCommand.h src/shared/engine/Engine.h src/shared/engine/Actions.h src/shared/state/playerOrientation.h src/shared/state/playerStatus.h src/shared/state/attackName.h src/shared/state/State.h src/shared/state/IObserver.h src/shared/state/StateEventID.h src/shared/state/playerClass.h src/shared/state/Exemple.h src/shared/state/Attack.h src/shared/state/Stats.h src/shared/state/Player.h src/shared/state/tileType.h src/shared/state/tileState.h src/shared/state/Observable.h src/shared/state/MapTile.h src/shared/state/Position.h src/shared/state/attackType.h src/shared/state/StateEvent.h src/shared/state.h src/shared/engine.h src/client/client.h src/client/render.h src/client/client/Exemple.h src/client/render/Animation.h src/client/render/buttonState.h src/client/render/Button.h src/client/render/FightScene.h src/client/render/Box.h src/client/render/GameFocus.h src/client/render/AnimatedObject.h src/client/render/Scene.h src/client/render/BoxFactory.h src/client/render/GameWindow.h src/client/render/Info.h src/client/render/Background.h
+HEADERS := src/shared/engine/ThreadListener.h src/shared/engine/Command.h src/shared/engine/Chrono.h src/shared/engine/CommandExecutor.h src/shared/engine/ActionManager.h src/shared/engine/ThreadJail.h src/shared/engine/CommandType.h src/shared/engine/Engine.h src/shared/engine/Actions.h src/shared/state/playerOrientation.h src/shared/state/playerStatus.h src/shared/state/attackName.h src/shared/state/State.h src/shared/state/IObserver.h src/shared/state/StateEventID.h src/shared/state/playerClass.h src/shared/state/Exemple.h src/shared/state/Attack.h src/shared/state/Stats.h src/shared/state/Player.h src/shared/state/tileType.h src/shared/state/tileState.h src/shared/state/Observable.h src/shared/state/MapTile.h src/shared/state/Position.h src/shared/state/attackType.h src/shared/state/StateEvent.h src/shared/state.h src/shared/engine.h src/client/client.h src/client/render.h src/client/client/Exemple.h src/client/render/Animation.h src/client/render/buttonState.h src/client/render/Button.h src/client/render/FightScene.h src/client/render/Box.h src/client/render/GameFocus.h src/client/render/AnimatedObject.h src/client/render/Scene.h src/client/render/BoxFactory.h src/client/render/GameWindow.h src/client/render/Info.h src/client/render/Background.h
 # environment
 GJS_DEBUG_TOPICS = JS ERROR;JS LOG
 # environment
@@ -136,7 +136,7 @@ MAKEFILES :=
 # environment
 COMMAND_NOT_FOUND_INSTALL_PROMPT = 1
 # environment
-INVOCATION_ID = be791001dac54230b98d22c7fba38fe7
+INVOCATION_ID = d49389bdb7f745c1a7127f58c1d60899
 # environment
 QSYS_ROOTDIR = /home/mkas/intelFPGA_lite/20.1/quartus/sopc_builder/bin
 # environment
@@ -172,11 +172,11 @@ MAKE_VERSION := 4.3
 # 'override' directive
 .SHELLSTATUS := 0
 # environment
-MANAGERPID = 1718
+MANAGERPID = 1664
 # environment
-GIO_LAUNCHED_DESKTOP_FILE_PID = 2477
+GIO_LAUNCHED_DESKTOP_FILE_PID = 8430
 # environment
-SSH_AGENT_PID = 1885
+SSH_AGENT_PID = 1849
 # environment
 _ = /usr/share/code/code
 # environment
@@ -186,7 +186,7 @@ GPG_AGENT_INFO = /run/user/1000/gnupg/S.gpg-agent:0:1
 # environment
 POWERSHELL_TELEMETRY_OPTOUT = 1
 # environment
-JOURNAL_STREAM = 8:25901
+JOURNAL_STREAM = 8:27957
 # environment
 XDG_SESSION_CLASS = user
 # environment
@@ -228,9 +228,9 @@ GDMSESSION = gnome
 
 # Directories
 
-# . (device 2051, inode 25036745): 26 files, no impossibilities.
+# . (device 2051, inode 25036745): 27 files, no impossibilities.
 
-# 26 files, no impossibilities in 1 directories.
+# 27 files, no impossibilities in 1 directories.
 
 # Implicit Rules
 
@@ -262,6 +262,7 @@ bin/server:
 	@$(MAKE) -s -C build server
 
 rapport/ai.pdf: src/ai.dia
+ 
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
@@ -283,7 +284,6 @@ diapdf: rapport/state.pdf rapport/render.pdf rapport/engine.pdf rapport/ai.pdf r
 
 testdocker:
 #  Phony target (prerequisite of .PHONY).
- 
 #  Implicit rule search has not been done.
 #  File does not exist.
 #  File has not been updated.
@@ -318,7 +318,7 @@ src/engine.dia:
 # Not a target:
 Makefile:
 #  Implicit rule search has been done.
-#  Last modified 2021-11-23 08:43:01.751890854
+#  Last modified 2021-11-30 11:22:07.319833667
 #  File has been updated.
 #  Successfully updated.
 
@@ -407,7 +407,7 @@ extern:
 #  recipe to execute (from 'Makefile', line 47):
 	#@echo [DEBUG] Root Makefile : extern
 
-all: clean extern configure build
+all: clean install_submodules extern configure build
 #  Command line target.
 #  Implicit rule search has been done.
 #  File does not exist.
@@ -498,19 +498,19 @@ install_submodules:
 #  File has not been updated.
 
 # files hash-table stats:
-# Load=30/1024=3%, Rehash=0, Collisions=0/81=0%
+# Load=30/1024=3%, Rehash=0, Collisions=0/83=0%
 # VPATH Search Paths
 
 # No 'vpath' search paths.
 
 # No general ('VPATH' variable) search path.
 
-# strcache buffers: 1 (0) / strings = 54 / storage = 551 B / avg = 10 B
-# current buf: size = 8162 B / used = 551 B / count = 54 / avg = 10 B
+# strcache buffers: 1 (0) / strings = 55 / storage = 561 B / avg = 10 B
+# current buf: size = 8162 B / used = 561 B / count = 55 / avg = 10 B
 
-# strcache performance: lookups = 114 / hit rate = 52%
+# strcache performance: lookups = 116 / hit rate = 52%
 # hash-table stats:
-# Load=54/8192=1%, Rehash=0, Collisions=0/114=0%
-# Finished Make data base on Tue Nov 30 08:12:40 2021
+# Load=55/8192=1%, Rehash=0, Collisions=0/116=0%
+# Finished Make data base on Wed Dec  1 13:40:30 2021
 
  
