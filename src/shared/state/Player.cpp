@@ -1,16 +1,90 @@
 #include "Player.h"
+#include <vector>
 
 namespace state {
-    Player::Player(){};
+    Player::Player(){
+        name = "player";
+        playerClass = HERO;
+        position.setX(0);
+        position.setY(0);
+        level = 1;
+        orientation = WEST;
+        isAI = false;
+        playing = false;
+        status = WAITING;
+        stats = Stats(playerClass,level);
+        struct Attack punch;
+        punch.name=STRIKE;
+        punch.type=CONTACT;
+        punch.damage = 10;
+        punch.range = 1;
 
-    Player::Player(std::string name, char playerClass, Position position, char level){
+        attacks.push_back(punch);
+    };
+
+    Player::Player(std::string name, char playerClass, Position position, char level, bool isAI){
         Player::name = name;
         Player::playerClass = playerClass;
         Player::position = position;
         Player::level = level;
+        Player::orientation = orientation;
+        Player::isAI = isAI;
+
+        playing = false;
+        status = WAITING;
+        stats = Stats(playerClass,level);
+
+        switch(playerClass)
+        {
+            case HERO:
+                struct Attack shoot;
+                shoot.name=SHOOT;
+                shoot.type=DISTANCE;
+                shoot.damage = 20;
+                shoot.range = 5;
+
+                struct Attack powerfulShoot;
+                powerfulShoot.name=POWERFULSHOOT;
+                powerfulShoot.type=DISTANCE;
+                powerfulShoot.damage = 45;
+                powerfulShoot.range = 2;
+
+                attacks.push_back(shoot);
+                attacks.push_back(powerfulShoot);
+                break;
+            
+            case DEMON:
+                struct Attack strike;
+                strike.name=STRIKE;
+                strike.type=CONTACT;
+                strike.damage = 20;
+                strike.range = 2;
+
+                struct Attack powerfulStrike;
+                powerfulStrike.name=POWERFULSTRIKE;
+                powerfulStrike.type=CONTACT;
+                powerfulStrike.damage = 50;
+                powerfulStrike.range = 1;
+
+                attacks.push_back(strike);
+                attacks.push_back(powerfulStrike);
+                break;
+
+            default:
+                struct Attack hit;
+                hit.name=STRIKE;
+                hit.type=CONTACT;
+                hit.damage = 10;
+                hit.range = 1;
+
+                attacks.push_back(hit);
+                break;
+        }
     }
 
     void Player::init (){
+        
+
 
     };
     
@@ -60,7 +134,7 @@ namespace state {
         return Player::orientation;
     };
 
-    void Player::setOrientation(char orientation){
+    void Player::setOrientation(char playerOrientation){
         Player::orientation = orientation;
     };
 
