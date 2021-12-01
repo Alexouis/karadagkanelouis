@@ -3,7 +3,7 @@
  <tileset firstgid="1" source="ground.tsx"/>
  <tileset firstgid="12" source="buildings.tsx"/>
  <tileset firstgid="84" source="trees.tsx"/>
- <layer name="ground" width="22" height="22" offsetx="32" offsety="-528">
+ <layer name="ground" width="22" height="22" offsetx="0" offsety="-1304">
   <data encoding="base64" compression="zlib">
    eJxjYBiagJHKeNTcUXNHzR01d9TcUXMH0lwAY7sBkQ==
   </data>
