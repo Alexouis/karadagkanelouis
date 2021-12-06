@@ -6,7 +6,7 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 # This is free software: you are free to change and redistribute it.
 # There is NO WARRANTY, to the extent permitted by law.
 
-# Make data base, printed on Mon Dec  6 17:02:00 2021
+# Make data base, printed on Mon Dec  6 21:58:39 2021
 
 # Variables
 
@@ -17,7 +17,7 @@ LC_ALL = C
 # environment
 GJS_DEBUG_OUTPUT = stderr
 # environment
-VSCODE_IPC_HOOK_EXTHOST = /run/user/1000/vscode-ipc-185662a9-2cb1-4d5b-9acf-e78729adba3d.sock
+VSCODE_IPC_HOOK_EXTHOST = /run/user/1000/vscode-ipc-2d323faf-d6ff-4fb1-9cee-4f29a5f16ad2.sock
 # environment
 VSCODE_CWD = /home/mkas
 # environment
@@ -45,7 +45,6 @@ XDG_DATA_DIRS = /usr/share/gnome:/usr/local/share:/usr/share:/var/lib/snapd/desk
 # environment
 VSCODE_LOG_STACK = false
 # automatic
- 
 %F = $(notdir $%)
 # environment
 VSCODE_CODE_CACHE_PATH = /home/mkas/.config/Code/CachedData/ee8c7def80afc00dd6e593ef12f37756d8f504ea
@@ -118,7 +117,7 @@ MAKECMDGOALS := all
 # environment
 XMODIFIERS = @im=ibus
 # makefile (from 'Makefile', line 15)
-HEADERS := src/shared/engine/ThreadListener.h src/shared/engine/Command.h src/shared/engine/Chrono.h src/shared/engine/CommandExecutor.h src/shared/engine/ActionManager.h src/shared/engine/ThreadJail.h src/shared/engine/CommandType.h src/shared/engine/Engine.h src/shared/engine/Actions.h src/shared/state/playerOrientation.h src/shared/state/playerStatus.h src/shared/state/attackName.h src/shared/state/State.h src/shared/state/IObserver.h src/shared/state/StateEventID.h src/shared/state/playerClass.h src/shared/state/Exemple.h src/shared/state/Attack.h src/shared/state/Stats.h src/shared/state/Player.h src/shared/state/tileType.h src/shared/state/tileState.h src/shared/state/Observable.h src/shared/state/MapTile.h src/shared/state/Position.h src/shared/state/attackType.h src/shared/state/StateEvent.h src/shared/state.h src/shared/engine.h src/client/client.h src/client/render.h src/client/client/Exemple.h src/client/render/Animation.h src/client/render/buttonState.h src/client/render/Button.h src/client/render/FightScene.h src/client/render/Box.h src/client/render/GameFocus.h src/client/render/AnimatedObject.h src/client/render/Scene.h src/client/render/BoxFactory.h src/client/render/GameWindow.h src/client/render/Info.h src/client/render/Background.h
+HEADERS := src/shared/engine/ThreadListener.h src/shared/engine/Command.h src/shared/engine/Chrono.h src/shared/engine/CommandExecutor.h src/shared/engine/ActionManager.h src/shared/engine/ThreadJail.h src/shared/engine/CommandType.h src/shared/engine/Engine.h src/shared/engine/Actions.h src/shared/state/playerOrientation.h src/shared/state/playerStatus.h src/shared/state/attackName.h src/shared/state/State.h src/shared/state/IObserver.h src/shared/state/StateEventID.h src/shared/state/playerClass.h src/shared/state/Exemple.h src/shared/state/Attack.h src/shared/state/Stats.h src/shared/state/Player.h src/shared/state/tileType.h src/shared/state/tileState.h src/shared/state/Observable.h src/shared/state/MapTile.h src/shared/state/Position.h src/shared/state/attackType.h src/shared/state/StateEvent.h src/shared/state.h src/shared/engine.h src/client/client.h src/client/render.h src/client/client/Exemple.h src/client/render/TextOrTexture.h src/client/render/Animation.h src/client/render/TextureSprite.h src/client/render/buttonState.h src/client/render/Button.h src/client/render/FightScene.h src/client/render/Box.h src/client/render/GameFocus.h src/client/render/AnimatedObject.h src/client/render/Scene.h src/client/render/BoxFactory.h src/client/render/GameWindow.h src/client/render/Info.h src/client/render/Background.h src/client/render/SFinclude.h
 # environment
 GJS_DEBUG_TOPICS = JS ERROR;JS LOG
 # environment
@@ -276,7 +275,6 @@ src/render.dia:
 #  Modification time never checked.
 #  File has not been updated.
 
- 
 diapdf: rapport/state.pdf rapport/render.pdf rapport/engine.pdf rapport/ai.pdf rapport/module.pdf
 #  Implicit rule search has not been done.
 #  Modification time never checked.
@@ -311,6 +309,7 @@ bin/client:
 
 # Not a target:
 src/engine.dia:
+ 
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
@@ -511,6 +510,6 @@ install_submodules:
 # strcache performance: lookups = 115 / hit rate = 52%
 # hash-table stats:
 # Load=55/8192=1%, Rehash=0, Collisions=0/115=0%
-# Finished Make data base on Mon Dec  6 17:02:00 2021
+# Finished Make data base on Mon Dec  6 21:58:39 2021
 
  
