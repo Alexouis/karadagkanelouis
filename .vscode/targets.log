@@ -6,7 +6,7 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 # This is free software: you are free to change and redistribute it.
 # There is NO WARRANTY, to the extent permitted by law.
 
-# Make data base, printed on Wed Dec  1 13:40:30 2021
+# Make data base, printed on Mon Dec  6 17:02:00 2021
 
 # Variables
 
@@ -17,7 +17,7 @@ LC_ALL = C
 # environment
 GJS_DEBUG_OUTPUT = stderr
 # environment
-VSCODE_IPC_HOOK_EXTHOST = /run/user/1000/vscode-ipc-3908fd67-7388-414b-a154-da44dcb88d61.sock
+VSCODE_IPC_HOOK_EXTHOST = /run/user/1000/vscode-ipc-185662a9-2cb1-4d5b-9acf-e78729adba3d.sock
 # environment
 VSCODE_CWD = /home/mkas
 # environment
@@ -42,10 +42,10 @@ PWD = /home/mkas/ENSEA/karadagkanelouis
 XDG_DATA_DIRS = /usr/share/gnome:/usr/local/share:/usr/share:/var/lib/snapd/desktop
 # automatic
 ^D = $(patsubst %/,%,$(dir $^))
- 
 # environment
 VSCODE_LOG_STACK = false
 # automatic
+ 
 %F = $(notdir $%)
 # environment
 VSCODE_CODE_CACHE_PATH = /home/mkas/.config/Code/CachedData/ee8c7def80afc00dd6e593ef12f37756d8f504ea
@@ -86,13 +86,13 @@ MAKEFILE_LIST := Makefile
 # environment
 VSCODE_VERBOSE_LOGGING = true
 # environment
-VSCODE_PID = 8430
+VSCODE_PID = 27860
 # environment
 XDG_SESSION_TYPE = x11
 # automatic
 ?D = $(patsubst %/,%,$(dir $?))
 # environment
-SESSION_MANAGER = local/kalikane:@/tmp/.ICE-unix/1890,unix/kalikane:/tmp/.ICE-unix/1890
+SESSION_MANAGER = local/kalikane:@/tmp/.ICE-unix/1914,unix/kalikane:/tmp/.ICE-unix/1914
 # automatic
 *F = $(notdir $*)
 # environment
@@ -136,7 +136,7 @@ MAKEFILES :=
 # environment
 COMMAND_NOT_FOUND_INSTALL_PROMPT = 1
 # environment
-INVOCATION_ID = d49389bdb7f745c1a7127f58c1d60899
+INVOCATION_ID = 97151a0d7af64d3cb241e78155661978
 # environment
 QSYS_ROOTDIR = /home/mkas/intelFPGA_lite/20.1/quartus/sopc_builder/bin
 # environment
@@ -172,11 +172,11 @@ MAKE_VERSION := 4.3
 # 'override' directive
 .SHELLSTATUS := 0
 # environment
-MANAGERPID = 1664
+MANAGERPID = 1687
 # environment
-GIO_LAUNCHED_DESKTOP_FILE_PID = 8430
+GIO_LAUNCHED_DESKTOP_FILE_PID = 27860
 # environment
-SSH_AGENT_PID = 1849
+SSH_AGENT_PID = 1871
 # environment
 _ = /usr/share/code/code
 # environment
@@ -186,7 +186,7 @@ GPG_AGENT_INFO = /run/user/1000/gnupg/S.gpg-agent:0:1
 # environment
 POWERSHELL_TELEMETRY_OPTOUT = 1
 # environment
-JOURNAL_STREAM = 8:27957
+JOURNAL_STREAM = 8:27847
 # environment
 XDG_SESSION_CLASS = user
 # environment
@@ -262,7 +262,6 @@ bin/server:
 	@$(MAKE) -s -C build server
 
 rapport/ai.pdf: src/ai.dia
- 
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
@@ -277,6 +276,7 @@ src/render.dia:
 #  Modification time never checked.
 #  File has not been updated.
 
+ 
 diapdf: rapport/state.pdf rapport/render.pdf rapport/engine.pdf rapport/ai.pdf rapport/module.pdf
 #  Implicit rule search has not been done.
 #  Modification time never checked.
@@ -318,7 +318,7 @@ src/engine.dia:
 # Not a target:
 Makefile:
 #  Implicit rule search has been done.
-#  Last modified 2021-11-30 11:22:07.319833667
+#  Last modified 2021-12-01 14:13:54.185493609
 #  File has been updated.
 #  Successfully updated.
 
@@ -407,7 +407,7 @@ extern:
 #  recipe to execute (from 'Makefile', line 47):
 	#@echo [DEBUG] Root Makefile : extern
 
-all: clean install_submodules extern configure build
+all: clean extern configure build
 #  Command line target.
 #  Implicit rule search has been done.
 #  File does not exist.
@@ -498,7 +498,7 @@ install_submodules:
 #  File has not been updated.
 
 # files hash-table stats:
-# Load=30/1024=3%, Rehash=0, Collisions=0/83=0%
+# Load=30/1024=3%, Rehash=0, Collisions=0/81=0%
 # VPATH Search Paths
 
 # No 'vpath' search paths.
@@ -508,9 +508,9 @@ install_submodules:
 # strcache buffers: 1 (0) / strings = 55 / storage = 561 B / avg = 10 B
 # current buf: size = 8162 B / used = 561 B / count = 55 / avg = 10 B
 
-# strcache performance: lookups = 116 / hit rate = 52%
+# strcache performance: lookups = 115 / hit rate = 52%
 # hash-table stats:
-# Load=55/8192=1%, Rehash=0, Collisions=0/116=0%
-# Finished Make data base on Wed Dec  1 13:40:30 2021
+# Load=55/8192=1%, Rehash=0, Collisions=0/115=0%
+# Finished Make data base on Mon Dec  6 17:02:00 2021
 
  
