@@ -18,6 +18,7 @@ namespace state {
         punch.type=CONTACT;
         punch.damage = 10;
         punch.range = 1;
+        punch.cost = 2;
 
         attacks.push_back(punch);
     };
@@ -42,12 +43,14 @@ namespace state {
                 shoot.type=DISTANCE;
                 shoot.damage = 20;
                 shoot.range = 5;
+                shoot.cost = 2;
 
                 struct Attack powerfulShoot;
                 powerfulShoot.name=POWERFULSHOOT;
                 powerfulShoot.type=DISTANCE;
                 powerfulShoot.damage = 45;
                 powerfulShoot.range = 2;
+                powerfulShoot.range = 5;
 
                 attacks.push_back(shoot);
                 attacks.push_back(powerfulShoot);
@@ -59,12 +62,14 @@ namespace state {
                 strike.type=CONTACT;
                 strike.damage = 20;
                 strike.range = 2;
+                strike.cost = 3;
 
                 struct Attack powerfulStrike;
                 powerfulStrike.name=POWERFULSTRIKE;
                 powerfulStrike.type=CONTACT;
                 powerfulStrike.damage = 50;
                 powerfulStrike.range = 1;
+                powerfulStrike.cost = 6;
 
                 attacks.push_back(strike);
                 attacks.push_back(powerfulStrike);
@@ -76,6 +81,7 @@ namespace state {
                 hit.type=CONTACT;
                 hit.damage = 10;
                 hit.range = 1;
+                hit.cost = 2;
 
                 attacks.push_back(hit);
                 break;
@@ -83,17 +89,36 @@ namespace state {
     }
 
     void Player::init (){
-        
+        name = "player";
+        playerClass = HERO;
+        position.setX(0);
+        position.setY(0);
+        level = 1;
+        orientation = WEST;
+        isAI = false;
+        playing = false;
+        status = WAITING;
+        stats = Stats(playerClass,level);
+        struct Attack punch;
+        punch.name=STRIKE;
+        punch.type=CONTACT;
+        punch.damage = 10;
+        punch.range = 1;
+        punch.cost = 2;
 
-
+        attacks.push_back(punch);
     };
     
-    void Player::attack(std::string chosenAttack, Position aim){
-        
+    void Player::attack(Attack chosenAttack){
+        if(stats.getAp()>=chosenAttack.cost)
+        {
+            stats.setAp(stats.getAp()-chosenAttack.cost);
+        }
     };
 
     void Player::pass (){
-
+        playing = false;
+        status = WAITING;
     };
 
     void Player::move (Position destination){
