@@ -5,12 +5,12 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 # License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>
 # This is free software: you are free to change and redistribute it.
 # There is NO WARRANTY, to the extent permitted by law.
+ 
 
-# Make data base, printed on Tue Dec  7 23:29:40 2021
+# Make data base, printed on Thu Dec  9 09:54:02 2021
 
 # Variables
 
- 
 # environment
 GDK_BACKEND = x11
 # environment
@@ -18,7 +18,7 @@ LC_ALL = C
 # environment
 GJS_DEBUG_OUTPUT = stderr
 # environment
-VSCODE_IPC_HOOK_EXTHOST = /run/user/1000/vscode-ipc-fa9ed58f-b0ea-43ea-9464-2cde26fea3ef.sock
+VSCODE_IPC_HOOK_EXTHOST = /run/user/1000/vscode-ipc-263cd49a-95af-45b9-9174-6db1a8c99b6d.sock
 # environment
 VSCODE_CWD = /home/mkas
 # environment
@@ -86,13 +86,13 @@ MAKEFILE_LIST := Makefile
 # environment
 VSCODE_VERBOSE_LOGGING = true
 # environment
-VSCODE_PID = 4075
+VSCODE_PID = 6236
 # environment
 XDG_SESSION_TYPE = x11
 # automatic
 ?D = $(patsubst %/,%,$(dir $?))
 # environment
-SESSION_MANAGER = local/kalikane:@/tmp/.ICE-unix/1903,unix/kalikane:/tmp/.ICE-unix/1903
+SESSION_MANAGER = local/kalikane:@/tmp/.ICE-unix/1901,unix/kalikane:/tmp/.ICE-unix/1901
 # automatic
 *F = $(notdir $*)
 # environment
@@ -118,7 +118,7 @@ MAKECMDGOALS := all
 # environment
 XMODIFIERS = @im=ibus
 # makefile (from 'Makefile', line 15)
-HEADERS := src/shared/engine/ThreadListener.h src/shared/engine/Command.h src/shared/engine/Chrono.h src/shared/engine/CommandExecutor.h src/shared/engine/ActionManager.h src/shared/engine/ThreadJail.h src/shared/engine/CommandType.h src/shared/engine/Engine.h src/shared/engine/Actions.h src/shared/state/playerOrientation.h src/shared/state/playerStatus.h src/shared/state/attackName.h src/shared/state/State.h src/shared/state/IObserver.h src/shared/state/StateEventID.h src/shared/state/playerClass.h src/shared/state/Exemple.h src/shared/state/Attack.h src/shared/state/Stats.h src/shared/state/Player.h src/shared/state/tileType.h src/shared/state/tileState.h src/shared/state/Observable.h src/shared/state/MapTile.h src/shared/state/Position.h src/shared/state/attackType.h src/shared/state/StateEvent.h src/shared/state.h src/shared/engine.h src/client/client.h src/client/render.h src/client/client/Exemple.h src/client/render/TextOrTexture.h src/client/render/Animation.h src/client/render/TextureSprite.h src/client/render/buttonState.h src/client/render/Button.h src/client/render/FightScene.h src/client/render/Box.h src/client/render/GameFocus.h src/client/render/AnimatedObject.h src/client/render/Scene.h src/client/render/BoxFactory.h src/client/render/GameWindow.h src/client/render/Info.h src/client/render/Background.h
+HEADERS := src/shared/engine/ThreadListener.h src/shared/engine/Command.h src/shared/engine/Chrono.h src/shared/engine/CommandExecutor.h src/shared/engine/ActionManager.h src/shared/engine/ThreadJail.h src/shared/engine/CommandType.h src/shared/engine/Engine.h src/shared/engine/Actions.h src/shared/state/playerOrientation.h src/shared/state/playerStatus.h src/shared/state/attackName.h src/shared/state/State.h src/shared/state/IObserver.h src/shared/state/StateEventID.h src/shared/state/playerClass.h src/shared/state/Exemple.h src/shared/state/Attack.h src/shared/state/Stats.h src/shared/state/Player.h src/shared/state/tileType.h src/shared/state/tileState.h src/shared/state/Observable.h src/shared/state/MapTile.h src/shared/state/Position.h src/shared/state/attackType.h src/shared/state/StateEvent.h src/shared/state.h src/shared/engine.h src/client/client.h src/client/render.h src/client/client/Exemple.h src/client/render/TextOrTexture.h src/client/render/TextureSprite.h src/client/render/buttonState.h src/client/render/Button.h src/client/render/FightScene.h src/client/render/Box.h src/client/render/AnimatedObject.h src/client/render/Scene.h src/client/render/BoxFactory.h src/client/render/GameWindow.h src/client/render/Info.h
 # environment
 GJS_DEBUG_TOPICS = JS ERROR;JS LOG
 # environment
@@ -136,7 +136,7 @@ MAKEFILES :=
 # environment
 COMMAND_NOT_FOUND_INSTALL_PROMPT = 1
 # environment
-INVOCATION_ID = 786261a396bc4115a1a775999f853715
+INVOCATION_ID = a86ed3d95c684243b881ca62e7e74f9d
 # environment
 QSYS_ROOTDIR = /home/mkas/intelFPGA_lite/20.1/quartus/sopc_builder/bin
 # environment
@@ -172,11 +172,11 @@ MAKE_VERSION := 4.3
 # 'override' directive
 .SHELLSTATUS := 0
 # environment
-MANAGERPID = 1671
+MANAGERPID = 1673
 # environment
-GIO_LAUNCHED_DESKTOP_FILE_PID = 4075
+GIO_LAUNCHED_DESKTOP_FILE_PID = 6236
 # environment
-SSH_AGENT_PID = 1862
+SSH_AGENT_PID = 1857
 # environment
 _ = /usr/share/code/code
 # environment
@@ -186,7 +186,7 @@ GPG_AGENT_INFO = /run/user/1000/gnupg/S.gpg-agent:0:1
 # environment
 POWERSHELL_TELEMETRY_OPTOUT = 1
 # environment
-JOURNAL_STREAM = 8:23294
+JOURNAL_STREAM = 8:28695
 # environment
 XDG_SESSION_CLASS = user
 # environment
@@ -254,6 +254,7 @@ distclean: clean
 	@echo [DEBUG] Root Makefile : distclean
 	@$(MAKE) -s -C extern clean
 
+ 
 bin/server:
 #  Implicit rule search has not been done.
 #  Modification time never checked.
@@ -261,7 +262,6 @@ bin/server:
 #  recipe to execute (from 'Makefile', line 78):
 	@$(MAKE) -s -C build server
 
- 
 rapport/ai.pdf: src/ai.dia
 #  Implicit rule search has not been done.
 #  Modification time never checked.
@@ -511,6 +511,6 @@ install_submodules:
 # strcache performance: lookups = 115 / hit rate = 52%
 # hash-table stats:
 # Load=55/8192=1%, Rehash=0, Collisions=0/115=0%
-# Finished Make data base on Tue Dec  7 23:29:40 2021
+# Finished Make data base on Thu Dec  9 09:54:02 2021
 
  

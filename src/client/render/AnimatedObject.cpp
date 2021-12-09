@@ -15,5 +15,6 @@ namespace render{
     AnimatedObject::AnimatedObject(sf::Texture & frames){
         this->mSprite.setTexture(frames);
         this->mCurrentFrame = 0;
+        
     }
 };
