@@ -12,7 +12,11 @@
 #include <fstream>
 #include <math.h>
 
+<<<<<<< HEAD
 #include "tmx/MapLoader.hpp"
+=======
+#include "tmx/MapLoader.h"
+>>>>>>> kane
 //#include <SFML/Graphics/RenderTexture.hpp>
 
 #include <render.h>

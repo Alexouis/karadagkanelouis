@@ -1,5 +1,6 @@
 #include "Stats.h"
 #include <map>
+#include <string>
 
 
 namespace state
