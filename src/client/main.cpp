@@ -11,7 +11,10 @@
 #include <fstream>
 #include <math.h>
 
-#include <tmx/MapLoader.h>
+#include "tmx/MapLoader.h"
+//#include <SFML/Graphics/RenderTexture.hpp>
+
+#include <render.h>
 #include <sstream>
 #include <string>
 
@@ -27,7 +30,6 @@
 
 using namespace std;
 using namespace state;
-
 
 
 void clientTest(void){
@@ -284,3 +286,31 @@ void randomMap(void){
 
 }
 
+
+
+
+
+int main(int argc,char* argv[])
+{
+    if(argc < 2){
+        std::cout << "It works ! " << std::endl;
+        return 0;
+    }
+
+    if(strcmp(argv[1], "client") == 0){
+        testSFML();
+    }else if(strcmp(argv[1], "render") == 0){
+      //  Background hahaha;
+      //  Background::setGameMap(Background::getGameMap());
+
+        renderRealMap();
+    }else if(strcmp(argv[1], "randomMap") == 0){
+        randomMap();
+    }
+    else{
+        std::cout << "Expected one argument like 'client' or 'render'" << std::endl;
+    }
+
+    return 0;
+
+}
