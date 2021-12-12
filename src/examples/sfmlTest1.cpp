@@ -22,7 +22,7 @@
 #include <dirent.h>
 #include <iostream>         
 
-#include <tmx/MapLoader.hpp>
+#include <tmx/MapLoader.h>
 #include <sstream>
 
 

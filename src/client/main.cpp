@@ -11,7 +11,7 @@
 #include <fstream>
 #include <math.h>
 
-#include <tmx/MapLoader.hpp>
+#include <tmx/MapLoader.h>
 #include <sstream>
 #include <string>
 
