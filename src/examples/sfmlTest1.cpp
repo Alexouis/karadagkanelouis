@@ -32,6 +32,8 @@
 
 #include <fstream>
 
+#include <map>
+
 
 // Fin test SFML
 
@@ -108,7 +110,7 @@ void test1(){
 
 void testSFML() {
     sf::Texture texture;
-    if (!texture.loadFromFile("/home/ensea/karadagkanelouis/res/map/map_1.png"))
+    if (!texture.loadFromFile("/home/mkas/ENSEA/karadagkanelouis/res/map/map_1.png"))
     {
         // error...
 		std::cout << texture.getMaximumSize() << endl;
@@ -175,8 +177,23 @@ void testSFML() {
 
 void renderRenderRealMap(void){
     //create map loader and load map
-	tmx::MapLoader ml("/res/map/");
+	tmx::MapLoader ml("res/map/");
 	ml.load("map_1.tmx");
+	bool collision;
+	bool visible = false;
+	auto& layers = ml.getLayers();
+	for(auto& layer : layers)
+	{
+		std::cout<< layer.name << std::endl;
+		if(layer.name == "ground" || layer.name == "Trees_front")
+		{
+			std::cout << "ok" << std::endl;
+			for(auto& object : layer.objects)
+			{
+				object.setVisible(visible);
+			}
+		}
+	}
 	
 	sf::RenderWindow renderWindow(sf::VideoMode(2000u, 600u), "TMX Loader");
 	renderWindow.setVerticalSyncEnabled(true);
@@ -298,27 +315,30 @@ int main(int argc,char* argv[])
 
 
 int main(){
-    // bool alive = true;
-    // while (alive){
-	// 	Json::Value root;   // will contains the root value after parsing.
-	// 	Json::Reader reader;
-	// 	std::ifstream test("test.json", std::ifstream::binary);
-	// 	bool parsingSuccessful = reader.parse( test, root, false );
-	// 	if ( !parsingSuccessful )
-	// 	{
-	// 		// report to the user the failure and their locations in the document.
-	// 		std::cout  << reader.getFormatedErrorMessages()
-	// 			<< "\n";
-	// 	}
+    bool alive = true;
+    while (alive){
+		Json::Value root;   // will contains the root value after parsing.
+		Json::Reader reader;
+		std::ifstream test("data/frames_info.json", std::ifstream::binary);
+		bool parsingSuccessful = reader.parse( test, root, false );
+		if ( !parsingSuccessful )
+		{
+			// report to the user the failure and their locations in the document.
+			std::cout  << reader.getFormatedErrorMessages()
+				<< "\n";
+		}
 
-	// 	std::string encoding = root.get("encoding", "UTF-8" ).asString();
-	// 	std::cout << encoding << "\n";
-	// 	const Json::Value mynames = root["b"];
-	// 	cout << mynames << "\n";
-	// 	alive = false;
-    // }
+		std::string encoding = root.get("encoding", "UTF-8" ).asString();
+		std::cout << encoding << "\n";
+		const Json::Value mynames = root["b"];
+		cout << mynames << "\n";
+		alive = false;
+		std::map<std::string, Json::Value > m;
+		m["root"] = root;
+		std::cout << m["root"] << "\n";
+    }
 
-	testSFML();
-
+	//testSFML();
+	//renderRenderRealMap();
     return 0;
 }
