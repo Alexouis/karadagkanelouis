@@ -1,4 +1,4 @@
-#include "GameWindow.h"
+/* #include "GameWindow.h"
 
 namespace render {
     GameWindow::GameWindow()
@@ -87,4 +87,4 @@ namespace render {
     {
 
     };
-}
+} */

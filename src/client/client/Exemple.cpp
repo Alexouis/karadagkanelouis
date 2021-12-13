@@ -20,5 +20,10 @@ namespace client {
         cout<< p.getName();
     }
 
+    void Exemple::exempleRender(void){
+
+        
+    }
+
 }
 
