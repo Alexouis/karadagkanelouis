@@ -1,5 +1,3 @@
-<<<<<<< HEAD
-=======
 /*
  * File             testDrawable.cpp
  * Directory        examples
@@ -11,7 +9,6 @@
  * __________________________________________________________________________
  */
 
->>>>>>> 346e1a6a110a2139ec22ec5abc14c75ce35a3475
 #include <SFML/Graphics.hpp>
 
 class MyDrawable : public sf::Drawable
@@ -23,30 +20,21 @@ class MyDrawable : public sf::Drawable
                 // drawing a sprite
                 // Load a texture from a file
 
-<<<<<<< HEAD
-                m_texture.loadFromFile("res/Valla/128x128.png");
-                // Assign it to a sprite
-                m_sprite.setTexture(m_texture);
-=======
                 
         }
 
         void init(){
-            if (!m_texture.loadFromFile("/home/mkas/ENSEA/karadagkanelouis/res/Valla/1200x630wm.png")){
+            if (!m_texture.loadFromFile("res/Valla/1200x630wm.png")){
                 // Assign it to a sprite
             }
             m_sprite.setTexture(m_texture);
->>>>>>> 346e1a6a110a2139ec22ec5abc14c75ce35a3475
         }
 
     private :
         virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const
         {
             // You can draw other high-level objects
-<<<<<<< HEAD
-=======
             
->>>>>>> 346e1a6a110a2139ec22ec5abc14c75ce35a3475
             target.draw(m_sprite, states);
             // ... or use the low-level API
             states.texture = &m_texture;
@@ -60,18 +48,13 @@ class MyDrawable : public sf::Drawable
 int main()
 {
     MyDrawable dr;
-<<<<<<< HEAD
-=======
     dr.init();
->>>>>>> 346e1a6a110a2139ec22ec5abc14c75ce35a3475
 
     sf::RenderWindow renderWindow(sf::VideoMode(2000u, 600u), "TMX Loader");
 	renderWindow.setVerticalSyncEnabled(true);
 
     while(renderWindow.isOpen())
 	{
-<<<<<<< HEAD
-=======
         sf::Event event;
 		while(renderWindow.pollEvent(event))
 		{
@@ -79,7 +62,6 @@ int main()
 				renderWindow.close();
         }
 
->>>>>>> 346e1a6a110a2139ec22ec5abc14c75ce35a3475
 		renderWindow.clear();
         renderWindow.draw(dr);
         renderWindow.display();
