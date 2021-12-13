@@ -6,7 +6,7 @@ namespace render {
 
     };
 
-    Button::Button (std::string s, sf::Font& font, sf::Vector2f position, sf::Uint32 style)
+    Button::Button (std::string s, sf::Font& font, sf::Vector2f position,  enum buttonStyle style)
     {
         //set position
     pos = position;
@@ -19,7 +19,7 @@ namespace render {
 
     switch(m_style)
     {
-        case gui::style::none:
+        case NONE:
         {
             m_textNormal = sf::Color(255,255,255);
             m_textHover = sf::Color(255,255,255);
@@ -31,7 +31,7 @@ namespace render {
         }
         break;
 
-        case gui::style::save:
+        case SAVE:
         {
             m_textNormal = sf::Color(255,255,255);
             m_textHover = sf::Color(255,255,255);
@@ -43,7 +43,7 @@ namespace render {
         }
         break;
 
-        case gui::style::cancel:
+        case CANCEL:
         {
             m_textNormal = sf::Color(255,255,255);
             m_textHover = sf::Color(255,255,255);
@@ -55,7 +55,7 @@ namespace render {
         }
         break;
 
-        case gui::style::clean:
+        case CLEAN:
         {
             m_textNormal = sf::Color(255,255,255);
             m_textHover = sf::Color(255,255,255);
@@ -101,7 +101,7 @@ namespace render {
     };
     
     Button::~Button (){
-        
+
     };
     
     void Button::draw (sf::RenderTarget& targer, sf::RenderStates states) const{
@@ -197,19 +197,19 @@ namespace render {
 
     };
     
-    const sf::Vector2<float>& Button::getM_size() const{
+    const sf::Vector2f& Button::getM_size() const{
 
     };
     
-    void Button::setM_size(const sf::Vector2<float>& m_size){
+    void Button::setM_size(const sf::Vector2f& m_size){
 
     };
     
-    const sf::Uint32& Button::getM_style() const{
+    const  enum buttonStyle& Button::getM_style() const{
 
     };
     
-    void Button::setM_style(const sf::Uint32& m_style){
+    void Button::setM_style(const enum buttonStyle& m_style){
 
     };
     
