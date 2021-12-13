@@ -1,3 +1,14 @@
+/*
+ * File             render2.1.c
+ * Directory        examples
+ * Created Date     Monday, December 13th 2021, 8:24:52 am
+ * Author           Nouhou KANE
+ * Email            nouhou.kane@ensea.fr
+ * 
+ * Copyright (c) 2021  ENSEA(FR)
+ * __________________________________________________________________________
+ */
+
 
 #include <iostream>
 
@@ -28,39 +39,6 @@
 #include  <state.h>
 #include <json/json.h>
 
-using namespace std;
-using namespace state;
-
-
-
-void testSFML() {
-    sf::Texture texture;
-    if (!texture.loadFromFile("../../res/synthetic grass/ground_grass_gen_07.png"))
-    {
-        // error...
-    }
-
-    sf::Sprite sprite;
-    sprite.setTexture(texture);
-    sf::RenderWindow window(sf::VideoMode(200, 200), "SFML works!");
-    window.draw(sprite);
-}
-/*
-sf::Sprite setHeroPosition(){
-    sf::Texture heroTexture;
-    if (!heroTexture.loadFromFile("src/client/1.png"))
-    {
-        // error...
-    }
-
-    sf::Sprite heroSprite;
-    heroSprite.setTexture(heroTexture);
-    //heroSprite.setPosition(sf::Vector2f(20.f, 20.f));
-    //heroSprite.scale(sf::Vector2f(1.f,1.f));
-   // renderWindow.draw(heroSprite);
-   return heroSprite;
-}
-*/
 
 void renderRealMap(void){
     //create map loader and load map
@@ -242,67 +220,3 @@ void renderRealMap(void){
         }
 };
 
-
-
-
-
-void randomMap(void){
-    vector<string> mapLoc; 
-    srand (time(NULL));
-    int randomNb = rand() % 6;
-    switch (randomNb)
-    {
-    case 0:
-       // renderRealMap();
-        break; 
-    case 1:
-        system("./bin/Isometric ");
-        break;
-    case 2:
-        system("./bin/ShaderEffects");
-        break;
-    case 3:
-        system("./bin/MapWithQuadTree");
-        break;
-    case 4:
-        system("./bin/BenchMark");
-        break;
-    case 5:
-        system("./bin/AddRemoveObjects");
-        break;
-    
-    default:
-      //  renderRealMap();
-        break;
-    }
-
-}
-
-
-
-
-
-int main(int argc,char* argv[])
-{
-    if(argc < 2){
-        std::cout << "It works ! " << std::endl;
-        return 0;
-    }
-
-    if(strcmp(argv[1], "client") == 0){
-        testSFML();
-    }else if(strcmp(argv[1], "render") == 0){
-      //  Background hahaha;
-      //  Background::setGameMap(Background::getGameMap());
-
-        renderRealMap();
-    }else if(strcmp(argv[1], "randomMap") == 0){
-        randomMap();
-    }
-    else{
-        std::cout << "Expected one argument like 'client' or 'render'" << std::endl;
-    }
-
-    return 0;
-
-}

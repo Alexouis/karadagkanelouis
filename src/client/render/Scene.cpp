@@ -1,13 +1,18 @@
 #include "Scene.h"
 
 namespace render {
-    Scene::Scene (){
-
+    Scene::Scene ()
+    {
+        
     };
+    
+    // void Scene::draw (){
 
-    Scene::~Scene (){
+    // };
 
-    };
+    // void Scene::clear (){
+
+    // };
 
     void Scene::loadImages (){
 
@@ -31,10 +36,9 @@ namespace render {
 
     };
 
-    void Scene::setBoxes(const std::vector<Box*>& boxes)
-    {
-
-    };
+    void Scene::setBoxes(const std::vector<Box*>& boxes){
+        this->boxes = boxes;
+    }
 
     int Scene::getId() const{
 

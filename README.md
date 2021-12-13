@@ -11,6 +11,8 @@
 
 #### Logiciels requis :
     make install-requirements
+#### install submodules
+    make install_submodules
 #### clean extern configure build :
     make
 #### Création et compilation du projet :
@@ -27,8 +29,6 @@
     make clean-headers
 #### configuration et compilation des dependences externes:
     make extern
-#### install submodules
-    make install_submodules
 
 
 #
