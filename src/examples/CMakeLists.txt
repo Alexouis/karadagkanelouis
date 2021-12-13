@@ -21,6 +21,7 @@ foreach(example ${examples})
     add_executable(${EXECNAME} ${example})
     target_include_directories(${EXECNAME} PUBLIC 
         ${CMAKE_SOURCE_DIR}/src/client/client
+        ${CMAKE_SOURCE_DIR}/src/client/render
         ${jsoncpp_include_dir}
     )
     target_link_libraries(${EXECNAME} 
