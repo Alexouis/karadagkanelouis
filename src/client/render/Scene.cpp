@@ -1,30 +1,32 @@
-/* #include "Scene.h"
+#include "Scene.h"
 
 
 namespace render {
     Scene::Scene ()
     {
-        
+        init();
+        setId(1);
+        loadTextures();
+
     };
     
-    // void Scene::draw (){
+    void Scene::draw (sf::RenderTarget& target, sf::RenderStates& states) const{
 
-    // };
+    };
 
-    // void Scene::clear (){
-
-    // };
+    
 
     void Scene::loadImages (){
 
     };
 
     void Scene::loadTextures (){
-
+        if (this->id = 1)this->t.loadFromFile("res/frames.png"); // load texture de personnage si scene de combat
     };
 
     void Scene::init (){
-
+        this->id=0;
+        
     };
 
     void Scene::update (){
@@ -36,7 +38,8 @@ namespace render {
         return this->boxes;
     };
 
-    void Scene::setBoxes(const std::vector<Box*>& boxes){
+    void Scene::setBoxes(const std::vector<Box*>& boxes)
+    {
         this->boxes = boxes;
     }
 
@@ -60,4 +63,4 @@ namespace render {
 
     };
 
-}; */
+};

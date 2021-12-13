@@ -86,10 +86,5 @@
 //     GameWindow::~GameWindow ()
 //     {
 
-<<<<<<< HEAD
-    };
-} */
-=======
 //     };
 // }
->>>>>>> a2ff8ecbe1ee3c4a53b4d73a9532b1de5fa4a3ae
