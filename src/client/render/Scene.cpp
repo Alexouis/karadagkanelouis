@@ -7,13 +7,13 @@ namespace render {
         
     };
     
-    void Scene::draw (){
+    // void Scene::draw (){
 
-    };
+    // };
 
-    void Scene::clear (){
+    // void Scene::clear (){
 
-    };
+    // };
 
     void Scene::loadImages (){
 
@@ -36,8 +36,7 @@ namespace render {
         return this->boxes;
     };
 
-    void Scene::setBoxes(const std::vector<Box*>& boxes);
-    {
+    void Scene::setBoxes(const std::vector<Box*>& boxes){
         this->boxes = boxes;
     }
 

@@ -5,9 +5,8 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 # License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>
 # This is free software: you are free to change and redistribute it.
 # There is NO WARRANTY, to the extent permitted by law.
- 
 
-# Make data base, printed on Thu Dec  9 09:54:02 2021
+# Make data base, printed on Mon Dec 13 08:12:26 2021
 
 # Variables
 
@@ -18,7 +17,7 @@ LC_ALL = C
 # environment
 GJS_DEBUG_OUTPUT = stderr
 # environment
-VSCODE_IPC_HOOK_EXTHOST = /run/user/1000/vscode-ipc-263cd49a-95af-45b9-9174-6db1a8c99b6d.sock
+VSCODE_IPC_HOOK_EXTHOST = /run/user/1000/vscode-ipc-0fbdc668-f9bf-4045-8a5d-22aa450ddf9e.sock
 # environment
 VSCODE_CWD = /home/mkas
 # environment
@@ -51,6 +50,8 @@ VSCODE_LOG_STACK = false
 VSCODE_CODE_CACHE_PATH = /home/mkas/.config/Code/CachedData/ee8c7def80afc00dd6e593ef12f37756d8f504ea
 # environment
 LANG = C
+# environment
+LATEXWORKSHOP_DOCKER_LATEX = 
 # environment
 XAUTHORITY = /run/user/1000/gdm/Xauthority
 # default
@@ -86,13 +87,13 @@ MAKEFILE_LIST := Makefile
 # environment
 VSCODE_VERBOSE_LOGGING = true
 # environment
-VSCODE_PID = 6236
+VSCODE_PID = 2423
 # environment
 XDG_SESSION_TYPE = x11
 # automatic
 ?D = $(patsubst %/,%,$(dir $?))
 # environment
-SESSION_MANAGER = local/kalikane:@/tmp/.ICE-unix/1901,unix/kalikane:/tmp/.ICE-unix/1901
+SESSION_MANAGER = local/kalikane:@/tmp/.ICE-unix/1882,unix/kalikane:/tmp/.ICE-unix/1882
 # automatic
 *F = $(notdir $*)
 # environment
@@ -136,7 +137,7 @@ MAKEFILES :=
 # environment
 COMMAND_NOT_FOUND_INSTALL_PROMPT = 1
 # environment
-INVOCATION_ID = a86ed3d95c684243b881ca62e7e74f9d
+INVOCATION_ID = b4a213ef4ad64960abb37a9d68ef2583
 # environment
 QSYS_ROOTDIR = /home/mkas/intelFPGA_lite/20.1/quartus/sopc_builder/bin
 # environment
@@ -172,11 +173,11 @@ MAKE_VERSION := 4.3
 # 'override' directive
 .SHELLSTATUS := 0
 # environment
-MANAGERPID = 1673
+MANAGERPID = 1657
 # environment
-GIO_LAUNCHED_DESKTOP_FILE_PID = 6236
+GIO_LAUNCHED_DESKTOP_FILE_PID = 2423
 # environment
-SSH_AGENT_PID = 1857
+SSH_AGENT_PID = 1805
 # environment
 _ = /usr/share/code/code
 # environment
@@ -186,7 +187,7 @@ GPG_AGENT_INFO = /run/user/1000/gnupg/S.gpg-agent:0:1
 # environment
 POWERSHELL_TELEMETRY_OPTOUT = 1
 # environment
-JOURNAL_STREAM = 8:28695
+JOURNAL_STREAM = 8:21442
 # environment
 XDG_SESSION_CLASS = user
 # environment
@@ -220,7 +221,7 @@ XDG_MENU_PREFIX = gnome-
 # environment
 GDMSESSION = gnome
 # variable set hash-table stats:
-# Load=104/1024=10%, Rehash=0, Collisions=7/144=5%
+# Load=105/1024=10%, Rehash=0, Collisions=7/145=5%
 
 # Pattern-specific Variable Values
 
@@ -254,7 +255,6 @@ distclean: clean
 	@echo [DEBUG] Root Makefile : distclean
 	@$(MAKE) -s -C extern clean
 
- 
 bin/server:
 #  Implicit rule search has not been done.
 #  Modification time never checked.
@@ -288,6 +288,7 @@ testdocker:
 #  File does not exist.
 #  File has not been updated.
 #  recipe to execute (from 'Makefile', line 92):
+ 
 	docker build -t plt-initial -f docker/plt-initial .
 	./docker/validate.sh plt-test
 	./docker/run_docker_bash.sh plt-test
@@ -511,6 +512,6 @@ install_submodules:
 # strcache performance: lookups = 115 / hit rate = 52%
 # hash-table stats:
 # Load=55/8192=1%, Rehash=0, Collisions=0/115=0%
-# Finished Make data base on Thu Dec  9 09:54:02 2021
+# Finished Make data base on Mon Dec 13 08:12:26 2021
 
  
