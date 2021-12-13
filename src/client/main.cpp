@@ -11,7 +11,7 @@
 #include <fstream>
 #include <math.h>
 
-#include "tmx/MapLoader.h"
+#include "./tmx/MapLoader.h"
 //#include <SFML/Graphics/RenderTexture.hpp>
 
 #include <render.h>
