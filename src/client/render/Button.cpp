@@ -105,7 +105,43 @@ namespace render {
     };
     
     void Button::draw (sf::RenderTarget& targer, sf::RenderStates states) const{
+        switch(m_style)
+    {
+        case NONE:
+        {
+            target.draw(m_button, states);
+            target.draw(m_shadow, states);
+            target.draw(m_text, states);
+        }
+        break;
 
+        case gui::style::save:
+        {
+            target.draw(m_button, states);
+            target.draw(m_shadow, states);
+            target.draw(m_text, states);
+        }
+        break;
+
+        case gui::style::cancel:
+        {
+            target.draw(m_button, states);
+            target.draw(m_shadow, states);
+            target.draw(m_text, states);
+        }
+        break;
+
+        case gui::style::clean:
+        {
+            target.draw(m_button, states);
+            target.draw(m_shadow, states);
+            target.draw(m_text, states);
+        }
+        break;
+
+        default:
+            break;
+    }
     };
     
     // Setters and Getters
@@ -202,7 +238,7 @@ namespace render {
     };
     
     void Button::setM_size(const sf::Vector2f& m_size){
-
+        
     };
     
     const  enum buttonStyle& Button::getM_style() const{
@@ -210,7 +246,62 @@ namespace render {
     };
     
     void Button::setM_style(const enum buttonStyle& m_style){
+        //set button style
+    this->m_style = m_style;
 
+    switch(m_style)
+    {
+        case NONE:
+        {
+            m_textNormal = sf::Color(255,255,255);
+            m_textHover = sf::Color(255,255,255);
+            m_textClicked = sf::Color(255,255,255);
+            m_bgNormal = sf::Color(255,255,255,100);
+            m_bgHover = sf::Color(200,200,200,100);
+            m_bgClicked = sf::Color(150,150,150);
+            m_border = sf::Color(255,255,255,100);
+        }
+        break;
+
+        case SAVE:
+        {
+            m_textNormal = sf::Color(255,255,255);
+            m_textHover = sf::Color(255,255,255);
+            m_textClicked = sf::Color(255,255,255);
+            m_bgNormal = sf::Color(0,255,0,100);
+            m_bgHover = sf::Color(0,200,0,100);
+            m_bgClicked = sf::Color(0,150,0);
+            m_border = sf::Color(0,0,0,100);
+        }
+        break;
+
+        case CANCEL:
+        {
+            m_textNormal = sf::Color(255,255,255);
+            m_textHover = sf::Color(255,255,255);
+            m_textClicked = sf::Color(255,255,255);
+            m_bgNormal = sf::Color(255,0,0,100);
+            m_bgHover = sf::Color(200,0,0,100);
+            m_bgClicked = sf::Color(150,0,0);
+            m_border = sf::Color(255,255,255,100);
+        }
+        break;
+
+        case CLEAN:
+        {
+            m_textNormal = sf::Color(255,255,255);
+            m_textHover = sf::Color(255,255,255);
+            m_textClicked = sf::Color(255,255,255);
+            m_bgNormal = sf::Color(0,255,255,100);
+            m_bgHover = sf::Color(0,200,200,100);
+            m_bgClicked = sf::Color(0,150,150);
+            m_border = sf::Color(255,255,255,100);
+        }
+        break;
+
+        default:
+            break;
+    }
     };
     
     const sf::ConvexShape& Button::getM_button() const{
@@ -226,7 +317,19 @@ namespace render {
     };
     
     void Button::setM_fontSize(unsigned int m_fontSize){
-
+        m_fontSize = m_fontSize;
+        m_text.setCharacterSize(m_fontSize);
+        m_text.setOrigin(m_text.getGlobalBounds().width/2, m_text.getGlobalBounds().height/2);
+        m_shadow.setCharacterSize(m_fontSize);
+        m_shadow.setOrigin(m_shadow.getGlobalBounds().width/2, m_shadow.getGlobalBounds().height/2);
+        m_size = sf::Vector2f(m_text.getGlobalBounds().width * 1.5f, (m_text.getGlobalBounds().height + m_text.getGlobalBounds().height) * 1.5f);
+        m_button.setPointCount(4);
+        m_button.setPoint(0, sf::Vector2f(0, 0));
+        m_button.setPoint(1, sf::Vector2f(150, 0));
+        m_button.setPoint(2, sf::Vector2f(150, 30));
+        m_button.setPoint(3, sf::Vector2f(0, 30));
+        m_button.setOrigin(m_button.getGlobalBounds().width/2, m_button.getGlobalBounds().height/2);
+        m_button.setPosition(pos);
     };
     
     const sf::Font& Button::getM_font() const{
@@ -235,7 +338,8 @@ namespace render {
     
     void Button::setM_font(const sf::Font& m_font)
     {
-
+        m_text.setFont(m_font);
+        m_shadow.setFont(m_font);
     };
 
     const sf::Text& Button::getM_shadow() const{
