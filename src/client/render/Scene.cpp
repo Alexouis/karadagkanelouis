@@ -1,6 +1,5 @@
 #include "Scene.h"
 
-
 namespace render {
     Scene::Scene ()
     {
@@ -34,32 +33,28 @@ namespace render {
     };
 
     // Setters and Getters
-    const std::vector<Box*>& Scene::getBoxes() const{
-        return this->boxes;
+    const std::unique_ptr<Box>& Scene::getBoxes() const
+    {
+
     };
 
-    void Scene::setBoxes(const std::vector<Box*>& boxes)
-    {
-        this->boxes = boxes;
-    }
+    void Scene::setBoxes(const std::unique_ptr<Box>& boxes){
+
+    };
 
     int Scene::getId() const{
-        return this->id;
+
     };
 
     void Scene::setId(int id){
-        this->id = id;
+
     };
 
-    const sf::Texture& Scene::getT() const{
-        return this->t;
+    const sf::Texture& Scene::getTexture() const{
+
     };
 
-    void Scene::setT(const sf::Texture& t){
-        this->t = t;
-    };
-
-    Scene::~Scene (){
+    void Scene::setTexture(const sf::Texture& texture){
 
     };
 

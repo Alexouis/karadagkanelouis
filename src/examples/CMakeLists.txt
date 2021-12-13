@@ -11,7 +11,7 @@
 
 
 file(GLOB_RECURSE examples ${CMAKE_CURRENT_SOURCE_DIR}/*.cpp)
-
+include_directories(${CMAKE_SOURCE_DIR}/src/client ${CMAKE_SOURCE_DIR}/src/render)
 
 foreach(example ${examples})
     message(${example})
@@ -20,12 +20,13 @@ foreach(example ${examples})
     # Compile "client" executable
     add_executable(${EXECNAME} ${example})
     target_include_directories(${EXECNAME} PUBLIC 
-        ${CMAKE_SOURCE_DIR}/src/client/client
-        ${CMAKE_SOURCE_DIR}/src/client/render
+        ${CMAKE_SOURCE_DIR}/src/client
+        ${CMAKE_SOURCE_DIR}/src/render
         ${jsoncpp_include_dir}
     )
     target_link_libraries(${EXECNAME} 
-        ${lib_client_target} 
+        ${lib_client_target}
+        $<TARGET_NAME:client_static>
         tmx-loader 
         jsonCppLibrary
     )
