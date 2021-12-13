@@ -24,7 +24,7 @@ class MyDrawable : public sf::Drawable
         }
 
         void init(){
-            if (!m_texture.loadFromFile("/home/mkas/ENSEA/karadagkanelouis/res/Valla/1200x630wm.png")){
+            if (!m_texture.loadFromFile("res/Valla/1200x630wm.png")){
                 // Assign it to a sprite
             }
             m_sprite.setTexture(m_texture);
