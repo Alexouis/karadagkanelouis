@@ -115,7 +115,7 @@ namespace render {
         }
         break;
 
-        case gui::style::save:
+        case SAVE:
         {
             target.draw(m_button, states);
             target.draw(m_shadow, states);
@@ -123,7 +123,7 @@ namespace render {
         }
         break;
 
-        case gui::style::cancel:
+        case CANCEL:
         {
             target.draw(m_button, states);
             target.draw(m_shadow, states);
@@ -131,7 +131,7 @@ namespace render {
         }
         break;
 
-        case gui::style::clean:
+        case CLEAN:
         {
             target.draw(m_button, states);
             target.draw(m_shadow, states);
