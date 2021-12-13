@@ -104,7 +104,7 @@ namespace render {
 
     };
     
-    void Button::draw (sf::RenderTarget& targer, sf::RenderStates states) const{
+    void Button::draw (sf::RenderTarget& target, sf::RenderStates states) const{
         switch(m_style)
     {
         case NONE:

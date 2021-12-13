@@ -286,7 +286,7 @@ void gui::button::setFont(sf::Font& font)
     m_shadow.setFont(font);
 }
 
-void gui::button::update(sf::Event& e, sf::RenderWindow& window)
+void gui::button::update(sf::Event& e, sf::Vector2i m_mousePosition)
 {
     //perform updates for settings from user
     switch(m_style)
