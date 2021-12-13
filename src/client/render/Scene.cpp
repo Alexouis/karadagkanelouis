@@ -31,14 +31,14 @@ namespace render {
     };
 
     // Setters and Getters
-    const std::vector<Box*>& Scene::getBoxes() const
+    const std::unique_ptr<Box>& Scene::getBoxes() const
     {
 
     };
 
-    void Scene::setBoxes(const std::vector<Box*>& boxes){
-        this->boxes = boxes;
-    }
+    void Scene::setBoxes(const std::unique_ptr<Box>& boxes){
+
+    };
 
     int Scene::getId() const{
 
@@ -48,11 +48,11 @@ namespace render {
 
     };
 
-    const sf::Texture& Scene::getT() const{
+    const sf::Texture& Scene::getTexture() const{
 
     };
 
-    void Scene::setT(const sf::Texture& t){
+    void Scene::setTexture(const sf::Texture& texture){
 
     };
 
