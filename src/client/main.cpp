@@ -32,14 +32,6 @@ using namespace std;
 using namespace state;
 
 
-void clientTest(void){
-    Exemple exemple;
-    exemple.setX(53);
-    //MapLoader::MapLoader("res/map");
-    cout << "It works !" << endl;
-}
-
-
 
 void testSFML() {
     sf::Texture texture;
