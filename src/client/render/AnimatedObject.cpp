@@ -20,14 +20,14 @@ namespace render{
         
     };
 
-    void AnimatedObject::draw (sf::RenderTarget& target, sf::RenderStates& states) const{
+    void AnimatedObject::draw (sf::RenderTarget& target, sf::RenderStates states) const{
         target.draw(this->mSprite, states);
         
     };
 
-    void AnimatedObject::update (sf::Time dt, Json::Value framesInfos, std::string frameKey, sf::Vector2f position){
+    void AnimatedObject::update (sf::Time dt, Json::Value framesInfos, std::string frameKey, sf::Vector2f positions){
         this->mSprite.setTextureRect(sf::IntRect(435, 520, 50, 60));
-        this->mSprite.setPosition(position);
+        this->mSprite.setPosition(positions);
         this->mSprite.scale(sf::Vector2f(SPRITE_SCALE,SPRITE_SCALE));        
     };
 

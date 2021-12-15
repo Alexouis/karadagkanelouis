@@ -10,18 +10,13 @@ namespace render {
     };
 
     
-    void Scene::draw (sf::RenderTarget& target, sf::RenderStates& states) const{
-
-    };
-
-    
 
     void Scene::loadImages (){
 
     };
 
     void Scene::loadTextures (){
-        if (this->id = 1)this->t.loadFromFile("res/frames.png"); // load texture de personnage si scene de combat
+        if (this->id = 1)this->texture.loadFromFile("res/frames.png"); // load texture de personnage si scene de combat
     };
 
     void Scene::init (){
