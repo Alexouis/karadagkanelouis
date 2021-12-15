@@ -109,7 +109,7 @@ namespace state {
         attacks.push_back(punch);
     };
     
-    void Player::attack(std::unique_ptr<Player> player){
+    void Player::attack(std::unique_ptr<Player>& player){
         bool can_attack = stats.getAp() >= this->attacks[this->currentAttackIndex].cost;
         if(can_attack) 
         {

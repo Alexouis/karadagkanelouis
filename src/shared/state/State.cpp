@@ -80,14 +80,14 @@ namespace state {
     };
     void State::setCurrentPlayerPosition(int x, int y){
         std::string id = this->players_id[this->actualPlayerIndex];
-        (*players[id.back()][id]).move(x,y);
+        (this->players[id.back()][id])->move(x,y);
     }
     void State::attack (int targetX, int targetY){
-        int size = this->gameMap.size();
         char st = this->gameMap[targetY][targetX].state;
         if(st == OCCUPIED){
-            std::string id = this->gameMap[targetY][targetX].player_id;
-            
+            std::string attackerId = this->players_id[this->actualPlayerIndex];
+            std::string taregtId = this->gameMap[targetY][targetX].player_id;
+            (this->players[attackerId.back()][attackerId])->attack(this->players[taregtId.back()][taregtId]);
         }
 
 
