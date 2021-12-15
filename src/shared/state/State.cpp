@@ -82,5 +82,15 @@ namespace state {
         std::string id = this->players_id[this->actualPlayerIndex];
         (*players[id.back()][id]).move(x,y);
     }
+    void State::attack (int targetX, int targetY){
+        int size = this->gameMap.size();
+        char st = this->gameMap[targetY][targetX].state;
+        if(st == OCCUPIED){
+            std::string id = this->gameMap[targetY][targetX].player_id;
+            
+        }
+
+
+    }
 
 };
