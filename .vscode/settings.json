@@ -58,7 +58,9 @@
         "cinttypes": "cpp",
         "typeindex": "cpp",
         "typeinfo": "cpp",
-        "state.h": "c"
+        "state.h": "c",
+        "condition_variable": "cpp",
+        "mutex": "cpp"
     },
     "C_Cpp.errorSquiggles": "Enabled",
     "jupyter.jupyterServerType": "local"

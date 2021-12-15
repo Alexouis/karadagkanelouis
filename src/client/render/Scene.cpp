@@ -3,23 +3,25 @@
 namespace render {
     Scene::Scene ()
     {
-        
+        init();
+        setId(1);
+        loadTextures();
+
     };
 
-    // void Scene::clear (){
-
-    // };
+    
 
     void Scene::loadImages (){
 
     };
 
     void Scene::loadTextures (){
-
+        if (this->id = 1)this->texture.loadFromFile("res/frames.png"); // load texture de personnage si scene de combat
     };
 
     void Scene::init (){
-
+        this->id=0;
+        
     };
 
     void Scene::update (){
