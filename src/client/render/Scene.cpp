@@ -8,6 +8,7 @@ namespace render {
         loadTextures();
 
     };
+
     
     void Scene::draw (sf::RenderTarget& target, sf::RenderStates& states) const{
 
@@ -33,12 +34,11 @@ namespace render {
     };
 
     // Setters and Getters
-    const std::unique_ptr<Box>& Scene::getBoxes() const
-    {
-
+    const std::vector<std::unique_ptr<Box>>& Scene::getBoxes() const{
+        return this->boxes;
     };
 
-    void Scene::setBoxes(const std::unique_ptr<Box>& boxes){
+    void Scene::setBoxes(const std::vector<std::unique_ptr<Box>>& boxes){
 
     };
 
@@ -50,12 +50,8 @@ namespace render {
 
     };
 
-    const sf::Texture& Scene::getTexture() const{
-
-    };
-
-    void Scene::setTexture(const sf::Texture& texture){
-
-    };
+    void Scene::draw (sf::RenderTarget& target, sf::RenderStates states) const{
+        target.draw(this->sprite);
+    }
 
 };
