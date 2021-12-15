@@ -45,8 +45,8 @@ namespace state
                 break;
         }
 
-        attack = coeffStats["attack"]+level*0.8;
-        shield = coeffStats["shield"]+level*0.8;
+        attack = coeffStats["attack"]*level*0.8;
+        shield = coeffStats["shield"]*level*0.8;
         hp = coeffStats["hp"]*level;
         mp = coeffStats["mp"]+level/20;
         ap = coeffStats["ap"]+level/30;

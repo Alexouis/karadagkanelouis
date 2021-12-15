@@ -13,7 +13,7 @@
 
 namespace engine{
 
-    void action (){
-        
+    void Attack::action (){
+        this->currentState->setCurrentPlayerPosition((int)this->targetX, (int)this->targetY);
     }
 }
