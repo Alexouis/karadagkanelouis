@@ -80,7 +80,7 @@ namespace state {
     };
     void State::setCurrentPlayerPosition(int x, int y){
         std::string id = this->players_id[this->actualPlayerIndex];
-        (*players[id.back()][id.substr(0,id.length())]).setPosXY(x,y);
+        (*players[id.back()][id]).move(x,y);
     }
 
 };
