@@ -14,7 +14,7 @@
 namespace engine{
 
     void Move::action (void) {
-        
+        this->currentState->setCurrentPlayerPosition(this->targetX, this->targetY);
     }
 
 };
