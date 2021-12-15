@@ -19,12 +19,12 @@ namespace render {
 
     void GameWindow::initScenes ()
     {   
-        Scene *menu = new Scene();
-        Scene *endGame = new Scene();
-        FightScene *fs = new FightScene();
-        sceneStack.push_back(menu);
-        sceneStack.push_back(fs);
-        sceneStack.push_back(endGame);
+        // Scene::Scene menu();
+        // Scene endGame();
+        // FightScene fs();
+        // sceneStack.push_back(menu);
+        // sceneStack.push_back(fs);
+        // sceneStack.push_back(endGame);
         
     };
 
