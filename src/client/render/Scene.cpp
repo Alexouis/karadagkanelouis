@@ -6,9 +6,10 @@ namespace render {
         
     };
     
-    // void Scene::draw (){
+    void Scene::draw (sf::RenderTarget& target, sf::RenderStates& states) const
+    {
 
-    // };
+    };
 
     // void Scene::clear (){
 
