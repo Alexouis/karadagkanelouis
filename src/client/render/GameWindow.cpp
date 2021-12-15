@@ -19,12 +19,14 @@ namespace render {
 
     void GameWindow::initScenes ()
     {   
-        // Scene *menu = new Scene();
+        Scene menu;
         // Scene *endGame = new Scene();
         // FightScene *fs = new FightScene();
         // sceneStack.push_back(menu);
         // sceneStack.push_back(fs);
         // sceneStack.push_back(endGame);
+        // Scene c();
+        //unique_ptr u : make_unique(c);
         
     };
 
@@ -53,9 +55,9 @@ namespace render {
 
     // Setters and Getters
 
-    const std::unique_ptr<Scene>& GameWindow::getSceneStack() const
+    const std::queue<std::unique_ptr<Scene>>& GameWindow::getSceneQueue() const
     {
-        return sceneStack;
+        return this->sceneQueue;
     };
 
     float GameWindow::getZoom() const
