@@ -109,14 +109,12 @@ namespace state {
         attacks.push_back(punch);
     };
     
-    void Player::attack(Player* player){
-        if (player){
-            bool can_attack = stats.getAp() >= this->attacks[this->currentAttackIndex].cost;
-            if(can_attack) 
-            {
-                this->stats.setAp(stats.getAp()-this->attacks[this->currentAttackIndex].cost);
-                player->stats.setHp(player->stats.getShield()+player->stats.getHp()-this->attacks[this->currentAttackIndex].damage-this->stats.getAttack());
-            }
+    void Player::attack(std::unique_ptr<Player> player){
+        bool can_attack = stats.getAp() >= this->attacks[this->currentAttackIndex].cost;
+        if(can_attack) 
+        {
+            this->stats.setAp(stats.getAp()-this->attacks[this->currentAttackIndex].cost);
+            player->stats.setHp(player->stats.getShield()+player->stats.getHp()-this->attacks[this->currentAttackIndex].damage-this->stats.getAttack());
         }
     };
 
