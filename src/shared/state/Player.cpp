@@ -155,6 +155,11 @@ namespace state {
         Player::position = position;
     };
 
+    void Player::setPosXY(int x, int y){
+        Player::position.setX(x);
+        Player::position.setY(y);
+    };
+
     char Player::getOrientation() const{
         return Player::orientation;
     };
