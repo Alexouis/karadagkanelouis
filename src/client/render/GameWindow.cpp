@@ -42,13 +42,13 @@ namespace render {
 
     void GameWindow::update()
     {
-
+        this->sceneQueue.front()->update();
     };
 
     
     void GameWindow::clearBackground()
     {
-
+        this->backGround.clear();
     };
 
     // Setters and Getters
