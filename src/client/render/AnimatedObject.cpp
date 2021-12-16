@@ -33,7 +33,7 @@ namespace render{
 
 
     const sf::Sprite& AnimatedObject::getMSprite() const{
-
+        return this->mSprite;
     };
 
     void AnimatedObject::setMSprite(const sf::Sprite& mSprite){

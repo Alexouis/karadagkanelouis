@@ -1,4 +1,5 @@
 #include "GameWindow.h"
+#include "FightScene.h"
 
 namespace render {
     GameWindow::GameWindow()
@@ -19,15 +20,12 @@ namespace render {
 
     void GameWindow::initScenes ()
     {   
-        Scene menu;
-        // Scene *endGame = new Scene();
-        // FightScene *fs = new FightScene();
-        // sceneStack.push_back(menu);
-        // sceneStack.push_back(fs);
-        // sceneStack.push_back(endGame);
-        // Scene c();
-        //unique_ptr u : make_unique(c);
-        
+        std::unique_ptr<Scene> holder = std::unique_ptr<Scene>(new Scene()); 
+        sceneQueue.push(std::move(holder));
+        holder = std::unique_ptr<Scene>(new FightScene());
+        sceneQueue.push(std::move(holder));
+        holder = std::unique_ptr<Scene>(new Scene());
+        sceneQueue.push(std::move(holder));
     };
 
     void GameWindow::draw()
