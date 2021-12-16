@@ -60,7 +60,13 @@
         "typeinfo": "cpp",
         "state.h": "c",
         "condition_variable": "cpp",
-        "mutex": "cpp"
+        "mutex": "cpp",
+        "bit": "cpp",
+        "compare": "cpp",
+        "concepts": "cpp",
+        "ranges": "cpp",
+        "stop_token": "cpp",
+        "variant": "cpp"
     },
     "C_Cpp.errorSquiggles": "Enabled",
     "jupyter.jupyterServerType": "local"

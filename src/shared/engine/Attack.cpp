@@ -14,6 +14,6 @@
 namespace engine{
 
     void Attack::action (){
-        this->currentState->attack((int)this->targetX, (int)this->targetY);
+        this->currentState->makeAttackOn((int)this->targetX, (int)this->targetY);
     }
 }

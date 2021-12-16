@@ -5,9 +5,9 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 # License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>
 # This is free software: you are free to change and redistribute it.
 # There is NO WARRANTY, to the extent permitted by law.
- 
 
-# Make data base, printed on Tue Dec 14 19:40:01 2021
+# Make data base, printed on Thu Dec 16 00:09:29 2021
+ 
 
 # Variables
 
@@ -18,7 +18,7 @@ LC_ALL = C
 # environment
 GJS_DEBUG_OUTPUT = stderr
 # environment
-VSCODE_IPC_HOOK_EXTHOST = /run/user/1000/vscode-ipc-f79f2da9-0a29-453a-9162-fe4628721176.sock
+VSCODE_IPC_HOOK_EXTHOST = /run/user/1000/vscode-ipc-d33ea76e-29b3-4560-9e6a-2654eb56992c.sock
 # environment
 VSCODE_CWD = /home/mkas
 # environment
@@ -86,13 +86,13 @@ MAKEFILE_LIST := Makefile
 # environment
 VSCODE_VERBOSE_LOGGING = true
 # environment
-VSCODE_PID = 22425
+VSCODE_PID = 2341
 # environment
 XDG_SESSION_TYPE = x11
 # automatic
 ?D = $(patsubst %/,%,$(dir $?))
 # environment
-SESSION_MANAGER = local/kalikane:@/tmp/.ICE-unix/1926,unix/kalikane:/tmp/.ICE-unix/1926
+SESSION_MANAGER = local/kalikane:@/tmp/.ICE-unix/1886,unix/kalikane:/tmp/.ICE-unix/1886
 # automatic
 *F = $(notdir $*)
 # environment
@@ -118,7 +118,7 @@ MAKECMDGOALS := all
 # environment
 XMODIFIERS = @im=ibus
 # makefile (from 'Makefile', line 15)
-HEADERS := src/shared/engine/passTurn.h src/shared/engine/ThreadListener.h src/shared/engine/Command.h src/shared/engine/Chrono.h src/shared/engine/CommandExecutor.h src/shared/engine/Attack.h src/shared/engine/ActionManager.h src/shared/engine/Move.h src/shared/engine/ThreadJail.h src/shared/engine/Engine.h src/shared/state/playerOrientation.h src/shared/state/playerStatus.h src/shared/state/attackName.h src/shared/state/State.h src/shared/state/playerClass.h src/shared/state/Exemple.h src/shared/state/Attack.h src/shared/state/Stats.h src/shared/state/Player.h src/shared/state/tileType.h src/shared/state/tileState.h src/shared/state/MapTile.h src/shared/state/Position.h src/shared/state/attackType.h src/shared/state.h src/shared/engine.h src/client/render.h src/client/render/TextOrTexture.h src/client/render/TextureSprite.h src/client/render/buttonState.h src/client/render/buttonStyle.h src/client/render/Button.h src/client/render/FightScene.h src/client/render/Box.h src/client/render/AnimatedObject.h src/client/render/Scene.h src/client/render/BoxFactory.h src/client/render/GameWindow.h src/client/render/Info.h
+HEADERS := src/shared/engine/passTurn.h src/shared/engine/ThreadListener.h src/shared/engine/Command.h src/shared/engine/Chrono.h src/shared/engine/CommandExecutor.h src/shared/engine/Attack.h src/shared/engine/ActionManager.h src/shared/engine/Move.h src/shared/engine/ThreadJail.h src/shared/engine/Engine.h src/shared/state/playerOrientation.h src/shared/state/playerStatus.h src/shared/state/attackName.h src/shared/state/State.h src/shared/state/playerClass.h src/shared/state/Attack.h src/shared/state/Stats.h src/shared/state/Player.h src/shared/state/tileType.h src/shared/state/tileState.h src/shared/state/MapTile.h src/shared/state/Position.h src/shared/state/attackType.h src/shared/state.h src/shared/engine.h src/client/render.h src/client/render/TextOrTexture.h src/client/render/TextureSprite.h src/client/render/buttonState.h src/client/render/buttonStyle.h src/client/render/Button.h src/client/render/FightScene.h src/client/render/Box.h src/client/render/AnimatedObject.h src/client/render/Scene.h src/client/render/BoxFactory.h src/client/render/GameWindow.h src/client/render/Info.h
 # environment
 GJS_DEBUG_TOPICS = JS ERROR;JS LOG
 # environment
@@ -136,7 +136,7 @@ MAKEFILES :=
 # environment
 COMMAND_NOT_FOUND_INSTALL_PROMPT = 1
 # environment
-INVOCATION_ID = 428dfa0bac064ea8b1465cc18c432f77
+INVOCATION_ID = 97c98f469caf41af8b703a72688be290
 # environment
 QSYS_ROOTDIR = /home/mkas/intelFPGA_lite/20.1/quartus/sopc_builder/bin
 # environment
@@ -169,14 +169,15 @@ USER = mkas
 GTK_MODULES = gail:atk-bridge
 # default
 MAKE_VERSION := 4.3
+ 
 # 'override' directive
 .SHELLSTATUS := 0
 # environment
-MANAGERPID = 1691
+MANAGERPID = 1654
 # environment
-GIO_LAUNCHED_DESKTOP_FILE_PID = 22425
+GIO_LAUNCHED_DESKTOP_FILE_PID = 2341
 # environment
-SSH_AGENT_PID = 1882
+SSH_AGENT_PID = 1845
 # environment
 _ = /usr/share/code/code
 # environment
@@ -186,7 +187,7 @@ GPG_AGENT_INFO = /run/user/1000/gnupg/S.gpg-agent:0:1
 # environment
 POWERSHELL_TELEMETRY_OPTOUT = 1
 # environment
-JOURNAL_STREAM = 8:26085
+JOURNAL_STREAM = 8:26012
 # environment
 XDG_SESSION_CLASS = user
 # environment
@@ -317,7 +318,6 @@ src/engine.dia:
 # Not a target:
 Makefile:
 #  Implicit rule search has been done.
- 
 #  Last modified 2021-12-01 14:13:54.185493609
 #  File has been updated.
 #  Successfully updated.
@@ -465,6 +465,7 @@ list:
 #  File does not exist.
 #  File has not been updated.
 #  recipe to execute (from 'Makefile', line 132):
+ 
 	@$(MAKE) -pRrq -f $(lastword $(MAKEFILE_LIST)) : 2>/dev/null | awk -v RS= -F: '/^# File/,/^# Finished Make data base/ {if ($$1 !~ "^[#.]") {print $$1}}' | sort | egrep -v -e '^[^[:alnum:]]' -e '^$@$$'
 
 rapport/engine.pdf: src/engine.dia
@@ -511,6 +512,6 @@ install_submodules:
 # strcache performance: lookups = 115 / hit rate = 52%
 # hash-table stats:
 # Load=55/8192=1%, Rehash=0, Collisions=0/115=0%
-# Finished Make data base on Tue Dec 14 19:40:01 2021
+# Finished Make data base on Thu Dec 16 00:09:29 2021
 
  

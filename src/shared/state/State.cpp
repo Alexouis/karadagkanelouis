@@ -78,19 +78,22 @@ namespace state {
     void State::setGameOver(bool gameOver){
         this->gameOver = gameOver;
     };
-    void State::setCurrentPlayerPosition(int x, int y){
-        std::string id = this->players_id[this->actualPlayerIndex];
-        (this->players[id.back()][id])->move(x,y);
-    }
-    void State::attack (int targetX, int targetY){
+    void State::makeAttackOn (int targetX, int targetY){
         char st = this->gameMap[targetY][targetX].state;
         if(st == OCCUPIED){
             std::string attackerId = this->players_id[this->actualPlayerIndex];
             std::string taregtId = this->gameMap[targetY][targetX].player_id;
             (this->players[attackerId.back()][attackerId])->attack(this->players[taregtId.back()][taregtId]);
         }
-
-
-    }
+    };
+    void State::moveCurrentPlayer (int dstX, int dstY){
+        std::string id = this->players_id[this->actualPlayerIndex];
+        Position prevPos = (this->players[id.back()][id])->getPosition();
+        this->gameMap[prevPos.getY()][prevPos.getX()].state = FREE;
+        this->gameMap[dstY][dstX].player_id = id;
+        this->players[id.back()][id]->move(dstX,dstY);
+        this->gameMap[dstY][dstX].state = OCCUPIED;
+        this->gameMap[dstY][dstX].player_id = id;
+    };
 
 };

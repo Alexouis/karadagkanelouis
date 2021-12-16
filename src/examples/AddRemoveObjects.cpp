@@ -78,6 +78,12 @@ int main()
 					{
 					sf::Vector2f mousePos = renderWindow.mapPixelToCoords(sf::Mouse::getPosition(renderWindow));
 					AddObject(objectLayer, mousePos);
+					for(auto object : objectLayer.objects){
+						if(object.contains(mousePos)){
+							std::cout << object.getName() << std::endl;
+							object.drawDebugShape(renderWindow);
+						}
+					}
 					}
 					break;
 				default: break;
