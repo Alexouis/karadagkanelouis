@@ -25,7 +25,7 @@
 
 // Fin test SFML
 #include <thread>
-#include  <state.h>
+#include <state.h>
 #include <json/json.h>
 
 using namespace std;
@@ -192,7 +192,7 @@ void renderRealMap(void){
                 else move_pos.x= move_pos.x -30;
             }
             else if (move_pos.y != destination.y){
-                if (abs(move_pos.y-destination.y)<30) move_pos.y=destination.y;
+                 if (abs(move_pos.y-destination.y)<30) move_pos.y=destination.y;
                 else if(move_pos.y < destination.y) move_pos.y=move_pos.y+30;
                 else move_pos.y= move_pos.y -30;
             }

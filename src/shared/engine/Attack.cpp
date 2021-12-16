@@ -13,7 +13,7 @@
 
 namespace engine{
 
-    void Attack::action (){
-        this->currentState->makeAttackOn((int)this->targetX, (int)this->targetY);
+    void Attack::action (state::State * gstate){
+        gstate->makeAttackOn((int)this->targetX, (int)this->targetY);
     }
 }

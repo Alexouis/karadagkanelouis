@@ -12,7 +12,6 @@
 #include "Command.h"
 
 namespace engine{
-   Command::Command (state::State & st){
-       this->currentState = &st;
+   Command::Command (){
    }
 };

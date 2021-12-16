@@ -13,8 +13,8 @@
 
 namespace engine{
 
-    void Move::action (void) {
-        this->currentState->moveCurrentPlayer((int)this->dstX, (int)this->dstY);
+    void Move::action (state::State * gstate) {
+        gstate->moveCurrentPlayer((int)this->dstX, (int)this->dstY);
     }
 
 };
