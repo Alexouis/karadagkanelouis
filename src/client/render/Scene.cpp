@@ -24,8 +24,8 @@ namespace render {
     };
 
     void Scene::update (){
-        for(int i = 0; i < this->boxes.size(); i++){
-            this->boxes[i]->update();
+        for(auto &boxe : this->boxes){
+            (*boxe).update();
         }
     };
 
@@ -46,7 +46,7 @@ namespace render {
     };
 
     void Scene::draw (sf::RenderTarget& target, sf::RenderStates states) const{
-        target.draw(this->sprite);
+        target.draw(this->sprite, states);
     }
 
 };
