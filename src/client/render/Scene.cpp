@@ -21,11 +21,12 @@ namespace render {
 
     void Scene::init (){
         this->id=0;
-        
     };
 
     void Scene::update (){
-
+        for(int i = 0; i < this->boxes.size(); i++){
+            this->boxes[i]->update();
+        }
     };
 
     // Setters and Getters
@@ -34,15 +35,14 @@ namespace render {
     };
 
     void Scene::setBoxes(const std::vector<std::unique_ptr<Box>>& boxes){
-
     };
 
     int Scene::getId() const{
-
+        return this->id;
     };
 
     void Scene::setId(int id){
-
+        this->id = id;
     };
 
     void Scene::draw (sf::RenderTarget& target, sf::RenderStates states) const{

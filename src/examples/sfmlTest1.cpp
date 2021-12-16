@@ -296,7 +296,6 @@ void renderRenderRealMap(void){
 		for(auto& layer : layers)
 		{
 			if(layer.name == "Trees"){
-				layer
 				renderWindow.draw(layer);
 			}
 		}
