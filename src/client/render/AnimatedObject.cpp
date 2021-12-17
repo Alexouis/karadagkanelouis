@@ -26,7 +26,12 @@ namespace render{
     };
 
     void AnimatedObject::update (sf::Time dt, Json::Value framesInfos, std::string frameKey, sf::Vector2f positions){
-        this->mSprite.setTextureRect(sf::IntRect(435, 520, 50, 60));
+        int i_x=framesInfos["demon"]["demon_idle_nw"]["w"].asInt()*mCurrentFrame;
+        int i_y=framesInfos["demon"]["demon_idle_nw"]["y_offset"].asInt();
+        int scale_x=framesInfos["demon"]["demon_idle_nw"]["w"].asInt();
+        int scale_y=framesInfos["demon"]["demon_idle_nw"]["h"].asInt();
+
+        this->mSprite.setTextureRect(sf::IntRect(i_x, i_y, scale_x, scale_y));
         this->mSprite.setPosition(positions.x,positions.y);
         this->mSprite.scale(sf::Vector2f(SPRITE_SCALE,SPRITE_SCALE)); 
          

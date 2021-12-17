@@ -64,13 +64,19 @@ BOOST_AUTO_TEST_CASE(TestSFML)
     
     //Test Player
     Player erza{};
+    Player valla{};
+    Player demon{};
 
     erza.setName("Erza");
     BOOST_CHECK_EQUAL(erza.getName(),"Erza");
 
     erza.setPlayerClass(HERO);
-    BOOST_CHECK_EQUAL(erza.getPlayerClass(),HERO);
+    erza.setStats(Stats(DEMON,1));
+    erza.setStats(Stats(5,1));
 
+
+    BOOST_CHECK_EQUAL(erza.getPlayerClass(),HERO);
+    
     erza.setLevel(10);
     BOOST_CHECK_EQUAL(erza.getLevel(),10);
 
@@ -101,6 +107,7 @@ BOOST_AUTO_TEST_CASE(TestSFML)
     BOOST_CHECK_EQUAL(erza.getStats().getAttack(),30);
 
     erza.setPosition(pos);
+    erza.setPosition(Position(1,9));
     BOOST_CHECK_EQUAL(erza.getPosition().getX(),1);
     BOOST_CHECK_EQUAL(erza.getPosition().getY(),9);
 

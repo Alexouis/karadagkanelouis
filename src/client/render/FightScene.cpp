@@ -7,10 +7,11 @@ namespace render{
     };
 
     void FightScene::update(){
-        sf::Vector2f pos(500,400);
-        for (const auto& animObj : animatedObjects){
+        for (int i=0;i<animatedObjects.size();i++){
             sf::Time t;
-            animObj->update(t,frameInfos,0,pos);
+  //          int posx=state::State::players[0][players_id[i]]::Position.getX();
+ //           int posy=state::State::players[0][players_id[i]]::Position.getY();
+            animatedObjects[i]->update(t,frameInfos,0,sf::Vector2f(0,0));
         }
     };
 
