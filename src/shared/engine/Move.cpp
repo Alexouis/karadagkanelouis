@@ -12,6 +12,11 @@
 #include "Move.h"
 
 namespace engine{
+    Move::Move (float targetX, float targetY) : 
+        dstX(targetX),
+        dstY(targetY){
+
+    }
 
     void Move::action (state::State * gstate) {
         gstate->moveCurrentPlayer((int)this->dstX, (int)this->dstY);
