@@ -69,5 +69,6 @@
         "variant": "cpp"
     },
     "C_Cpp.errorSquiggles": "Enabled",
-    "jupyter.jupyterServerType": "local"
+    "jupyter.jupyterServerType": "local",
+    "cmake.configureOnOpen": true
 }

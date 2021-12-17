@@ -27,8 +27,9 @@ namespace render{
 
     void AnimatedObject::update (sf::Time dt, Json::Value framesInfos, std::string frameKey, sf::Vector2f positions){
         this->mSprite.setTextureRect(sf::IntRect(435, 520, 50, 60));
-        this->mSprite.setPosition(positions);
-        this->mSprite.scale(sf::Vector2f(SPRITE_SCALE,SPRITE_SCALE));        
+        this->mSprite.setPosition(positions.x,positions.y);
+        this->mSprite.scale(sf::Vector2f(SPRITE_SCALE,SPRITE_SCALE)); 
+         
     };
 
 
@@ -40,11 +41,23 @@ namespace render{
 
     };
 
-    const std::size_t& AnimatedObject::getMCurrentFrame() const{};
-    void AnimatedObject::setMCurrentFrame(const std::size_t& mCurrentFrame){};
-    const sf::Time& AnimatedObject::getMElapasedTime() const{};
-    void AnimatedObject::setMElapasedTime(const sf::Time& mElapasedTime){};
-    bool AnimatedObject::getMRepeat() const{};
-    void AnimatedObject::setMRepeat(bool mRepeat){};
+    const std::size_t& AnimatedObject::getMCurrentFrame() const{
+        return this->mCurrentFrame;
+    };
+    void AnimatedObject::setMCurrentFrame(const std::size_t& mCurrentFrame){
+        this->mCurrentFrame=mCurrentFrame;
+    };
+    const sf::Time& AnimatedObject::getMElapasedTime() const{
+        return this->mElapasedTime;
+    };
+    void AnimatedObject::setMElapasedTime(const sf::Time& mElapasedTime){
+        this->mElapasedTime=mElapasedTime;
+    };
+    bool AnimatedObject::getMRepeat() const{
+        return this->mRepeat;
+    };
+    void AnimatedObject::setMRepeat(bool mRepeat){
+        this->mRepeat=mRepeat;
+    };
 
 };
