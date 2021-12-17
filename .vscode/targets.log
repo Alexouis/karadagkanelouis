@@ -6,8 +6,7 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 # This is free software: you are free to change and redistribute it.
 # There is NO WARRANTY, to the extent permitted by law.
 
-# Make data base, printed on Thu Dec 16 00:09:29 2021
- 
+# Make data base, printed on Fri Dec 17 08:02:49 2021
 
 # Variables
 
@@ -18,7 +17,7 @@ LC_ALL = C
 # environment
 GJS_DEBUG_OUTPUT = stderr
 # environment
-VSCODE_IPC_HOOK_EXTHOST = /run/user/1000/vscode-ipc-d33ea76e-29b3-4560-9e6a-2654eb56992c.sock
+VSCODE_IPC_HOOK_EXTHOST = /run/user/1000/vscode-ipc-b16a8386-71c1-4b67-9b62-ebe0603fe4b7.sock
 # environment
 VSCODE_CWD = /home/mkas
 # environment
@@ -86,13 +85,13 @@ MAKEFILE_LIST := Makefile
 # environment
 VSCODE_VERBOSE_LOGGING = true
 # environment
-VSCODE_PID = 2341
+VSCODE_PID = 2512
 # environment
 XDG_SESSION_TYPE = x11
 # automatic
 ?D = $(patsubst %/,%,$(dir $?))
 # environment
-SESSION_MANAGER = local/kalikane:@/tmp/.ICE-unix/1886,unix/kalikane:/tmp/.ICE-unix/1886
+SESSION_MANAGER = local/kalikane:@/tmp/.ICE-unix/1932,unix/kalikane:/tmp/.ICE-unix/1932
 # automatic
 *F = $(notdir $*)
 # environment
@@ -136,7 +135,7 @@ MAKEFILES :=
 # environment
 COMMAND_NOT_FOUND_INSTALL_PROMPT = 1
 # environment
-INVOCATION_ID = 97c98f469caf41af8b703a72688be290
+INVOCATION_ID = 7834e9063d9041508247fdcff0681a8d
 # environment
 QSYS_ROOTDIR = /home/mkas/intelFPGA_lite/20.1/quartus/sopc_builder/bin
 # environment
@@ -169,15 +168,14 @@ USER = mkas
 GTK_MODULES = gail:atk-bridge
 # default
 MAKE_VERSION := 4.3
- 
 # 'override' directive
 .SHELLSTATUS := 0
 # environment
-MANAGERPID = 1654
+MANAGERPID = 1704
 # environment
-GIO_LAUNCHED_DESKTOP_FILE_PID = 2341
+GIO_LAUNCHED_DESKTOP_FILE_PID = 2512
 # environment
-SSH_AGENT_PID = 1845
+SSH_AGENT_PID = 1891
 # environment
 _ = /usr/share/code/code
 # environment
@@ -187,7 +185,7 @@ GPG_AGENT_INFO = /run/user/1000/gnupg/S.gpg-agent:0:1
 # environment
 POWERSHELL_TELEMETRY_OPTOUT = 1
 # environment
-JOURNAL_STREAM = 8:26012
+JOURNAL_STREAM = 8:26142
 # environment
 XDG_SESSION_CLASS = user
 # environment
@@ -278,6 +276,7 @@ src/render.dia:
 #  File has not been updated.
 
 diapdf: rapport/state.pdf rapport/render.pdf rapport/engine.pdf rapport/ai.pdf rapport/module.pdf
+ 
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
@@ -465,7 +464,6 @@ list:
 #  File does not exist.
 #  File has not been updated.
 #  recipe to execute (from 'Makefile', line 132):
- 
 	@$(MAKE) -pRrq -f $(lastword $(MAKEFILE_LIST)) : 2>/dev/null | awk -v RS= -F: '/^# File/,/^# Finished Make data base/ {if ($$1 !~ "^[#.]") {print $$1}}' | sort | egrep -v -e '^[^[:alnum:]]' -e '^$@$$'
 
 rapport/engine.pdf: src/engine.dia
@@ -512,6 +510,6 @@ install_submodules:
 # strcache performance: lookups = 115 / hit rate = 52%
 # hash-table stats:
 # Load=55/8192=1%, Rehash=0, Collisions=0/115=0%
-# Finished Make data base on Thu Dec 16 00:09:29 2021
+# Finished Make data base on Fri Dec 17 08:02:49 2021
 
  
