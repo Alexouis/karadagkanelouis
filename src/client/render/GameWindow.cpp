@@ -30,14 +30,14 @@ namespace render {
 
     void GameWindow::draw()
     {   
-        sf::RenderWindow renderWindow(sf::VideoMode(2000u, 600u), "TMX Loader");
-        renderWindow.setVerticalSyncEnabled(true);
+        setWindow(sf::RenderWindow(sf::VideoMode(2000u, 600u), "TMX Loader"));
+        window.setVerticalSyncEnabled(true);
 
         //adjust the view to centre on map
-        sf::View view = renderWindow.getView();
+        sf::View view = window.getView();
         view.zoom(zoom);
         view.setCenter(center.x, center.y);
-        renderWindow.setView(view);
+        window.setView(view);
     };
 
     void GameWindow::update()
