@@ -11,7 +11,7 @@ namespace render{
             sf::Time t;
   //          int posx=state::State::players[0][players_id[i]]::Position.getX();
  //           int posy=state::State::players[0][players_id[i]]::Position.getY();
-            animatedObjects[i]->update(t,frameInfos,0,sf::Vector2f(0,0));
+            animatedObjects[i]->update(t,frameInfos,0,sf::Vector2f(500,500));
         }
     };
 
