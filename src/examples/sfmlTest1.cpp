@@ -188,7 +188,7 @@ void renderRenderRealMap(void){
 	uint m_height = 22;
 	float m_tileRatio = static_cast<float>(m_tileWidth) / static_cast<float>(m_tileHeight);
 	
-	sf::Color debugColour(120u, 120u, 120u, 120u);
+	sf::Color debugColour(255u, 0u, 20u, 120u);
 	float mapHeight = static_cast<float>(m_tileHeight * m_height);
 	for(int x = 0; x <= m_width; x += 2)
 	{
@@ -202,16 +202,16 @@ void renderRenderRealMap(void){
 		m_gridVertices.append(sf::Vertex(ml.isometricToOrthogonal(sf::Vector2f(posX, 0.f)), debugColour));
 	}
 	float mapWidth = static_cast<float>(m_tileWidth * (m_width / m_tileRatio));
-	// for(int y = 0; y <= m_height; y += 2)
-	// {
-	// 	float posY = static_cast<float>(y *m_tileHeight);
-	// 	m_gridVertices.append(sf::Vertex(ml.isometricToOrthogonal(sf::Vector2f(0.f, posY)), debugColour));
-	// 	posY += static_cast<float>(m_tileHeight);
-	// 	m_gridVertices.append(sf::Vertex(ml.isometricToOrthogonal(sf::Vector2f(0.f, posY)), debugColour));
-	// 	m_gridVertices.append(sf::Vertex(ml.isometricToOrthogonal(sf::Vector2f(mapWidth, posY)), debugColour));
-	// 	posY += static_cast<float>(m_tileHeight);
-	// 	m_gridVertices.append(sf::Vertex(ml.isometricToOrthogonal(sf::Vector2f(mapWidth, posY)), debugColour));
-	// }
+	for(int y = 0; y <= m_height; y += 2)
+	{
+		float posY = static_cast<float>(y *m_tileHeight);
+		m_gridVertices.append(sf::Vertex(ml.isometricToOrthogonal(sf::Vector2f(0.f, posY)), debugColour));
+		posY += static_cast<float>(m_tileHeight);
+		m_gridVertices.append(sf::Vertex(ml.isometricToOrthogonal(sf::Vector2f(0.f, posY)), debugColour));
+		m_gridVertices.append(sf::Vertex(ml.isometricToOrthogonal(sf::Vector2f(mapWidth, posY)), debugColour));
+		posY += static_cast<float>(m_tileHeight);
+		m_gridVertices.append(sf::Vertex(ml.isometricToOrthogonal(sf::Vector2f(mapWidth, posY)), debugColour));
+	}
 
 	m_gridVertices.setPrimitiveType(sf::LinesStrip);
 	// auto& layers = ml.getLayers();
@@ -227,16 +227,17 @@ void renderRenderRealMap(void){
 	// 	}
 	// }
 
-	auto& layers = ml.getLayers();
-	for(auto& layer : layers)
-	{
-		if(layer.name == "Trees"| layer.name == "Trees_front"){
-			for(const auto& object : layer.objects)
-			{
-				std::cout << "ok\n";
-			}
-		}
-	}
+	// auto& layers = ml.getLayers();
+	// for(auto& layer : layers)
+	// {
+	// 	if(layer.name == "Trees"| layer.name == "Trees_front"){
+	// 		for(const auto& object : layer.objects)
+	// 		{
+	// 			std::cout << "ok\n";
+	// 		}
+	// 	}
+	// }
+
 	
 	sf::RenderWindow renderWindow(sf::VideoMode(2000u, 600u), "TMX Loader");
 	renderWindow.setVerticalSyncEnabled(true);
@@ -265,43 +266,43 @@ void renderRenderRealMap(void){
 			if(event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::D)
 				show = !show;
 			
-			// if(event.type == sf::Event::MouseButtonReleased)
-			// {
-			// 	switch(event.mouseButton.button)
-			// 	{
-			// 	case sf::Mouse::Left:
-			// 	{
-			// 		sf::Vector2f mousePos = renderWindow.mapPixelToCoords(sf::Mouse::getPosition(renderWindow));
-			// 		auto& layers = ml.getLayers();
-			// 		for(auto& layer : layers)
-			// 		{
-			// 			if(layer.name == "Trees"){
-			// 				renderWindow.draw(layer);
-			// 			}
-			// 		}
-			// 	}
-			// 		break;
-			// 	default: break;
-			// 	}
-			// }
+			if(event.type == sf::Event::MouseButtonReleased)
+			{
+				switch(event.mouseButton.button)
+				{
+				case sf::Mouse::Left:
+				{
+					sf::Vector2f mousePos = renderWindow.mapPixelToCoords(sf::Mouse::getPosition(renderWindow));
+					auto& layers = ml.getLayers();
+					for(auto& layer : layers)
+					{
+						if(layer.name == "Trees"){
+							renderWindow.draw(layer);
+						}
+					}
+				}
+					break;
+				default: break;
+				}
+			}
         }
 
 
 		//draw map
 		renderWindow.clear();
-		//renderWindow.draw(ml);
-		auto& layers = ml.getLayers();
-		for(auto& layer : layers)
-		{
-			std::cout<<layer.name << " type = " << layer.type << std::endl;
-			if(layer.name == "ground"){
+		renderWindow.draw(ml);
+		// auto& layers = ml.getLayers();
+		// for(auto& layer : layers)
+		// {
+		// 	std::cout<<layer.name << " type = " << layer.type << std::endl;
+		// 	if(layer.name == "ground"){
 				
-				for(auto tile = layer.tiles.begin(); tile != layer.tiles.end(); ++tile){
-					renderWindow.draw(tile->sprite);
-					std::cout << "ok\n";
-				}
-			}
-		}
+		// 		for(auto tile = layer.tiles.begin(); tile != layer.tiles.end(); ++tile){
+		// 			renderWindow.draw(tile->sprite);
+		// 			std::cout << "ok\n";
+		// 		}
+		// 	}
+		// }
 		renderWindow.draw(m_gridVertices);
 		
 		if(show)ml.drawLayer(renderWindow, 0,tmx::MapLayer::Debug);
