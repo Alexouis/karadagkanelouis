@@ -5,17 +5,12 @@ namespace render {
     GameWindow::GameWindow()
     {
         initScenes();
-        zoom = 5.0;
-        center.x = 0;
-        center.y = 0; 
+        
     };
 
     void GameWindow::init ()
     {
         initScenes();
-        zoom = 5.0;
-        center.x = 0;
-        center.y = 0; 
     };
 
     void GameWindow::initScenes ()
@@ -30,7 +25,8 @@ namespace render {
 
     void GameWindow::draw()
     {   
-        setWindow(sf::RenderWindow(sf::VideoMode(2000u, 600u), "TMX Loader"));
+        window.create(sf::VideoMode(2000u, 600u), "TMX Loader");
+        // = sf::RenderWindow(sf::VideoMode(2000u, 600u), "TMX Loader");
         window.setVerticalSyncEnabled(true);
 
         //adjust the view to centre on map
@@ -58,6 +54,10 @@ namespace render {
         return this->sceneQueue;
     };
 
+    void setSceneQueue(const std::queue<std::unique_ptr<Scene>>& sceneQueue){
+
+    };
+
     float GameWindow::getZoom() const
     {
         return zoom;
@@ -77,6 +77,10 @@ namespace render {
     {
         this->center = center;
     };
+
+    
+    
+    
 
     GameWindow::~GameWindow ()
     {

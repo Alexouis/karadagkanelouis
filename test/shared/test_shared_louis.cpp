@@ -64,8 +64,6 @@ BOOST_AUTO_TEST_CASE(TestSFML)
     
     //Test Player
     Player erza{};
-    Player valla{};
-    Player demon{};
 
     erza.setName("Erza");
     BOOST_CHECK_EQUAL(erza.getName(),"Erza");

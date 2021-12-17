@@ -49,4 +49,8 @@ namespace render {
         target.draw(this->sprite, states);
     }
 
+    Scene::~Scene(){
+        
+    }
+
 };

@@ -30,6 +30,7 @@
 
 using namespace std;
 using namespace state;
+using namespace render;
 
 
 
@@ -114,7 +115,7 @@ void renderRealMap(void){
         text.setCharacterSize(250);
 
        // renderWindow.draw(gameMap);
-
+        
         while(renderWindow.isOpen())
         {
             //poll input
@@ -279,7 +280,17 @@ void randomMap(void){
 }
 
 
+ void renderMap(void){
+    GameWindow gamewindow;
+    gamewindow.draw();
 
+    while(gamewindow.window.isOpen()){
+      //  gamewindow.sceneQueue[1]
+
+    }
+
+    
+} 
 
 
 int main(int argc,char* argv[])

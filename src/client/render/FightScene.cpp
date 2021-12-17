@@ -3,7 +3,7 @@
 
 namespace render{
     FightScene::FightScene(){
-
+        
     };
 
     void FightScene::update(){
@@ -23,5 +23,15 @@ namespace render{
         }
 
     };
+
+    
+  // const std::vector<std::unique_ptr<AnimatedObject>>& getAnimatedObjects() const{};
+    //void setAnimatedObjects(const std::vector<std::unique_ptr<AnimatedObject>>& animatedObjects){};
+    
+
+
+    FightScene::~FightScene(){
+
+    }
 };
 
