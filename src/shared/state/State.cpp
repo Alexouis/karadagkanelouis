@@ -1,4 +1,5 @@
 #include "State.h"
+#include <functional>
 
 namespace state {
     /*
@@ -94,6 +95,10 @@ namespace state {
         this->players[id.back()][id]->move(dstX,dstY);
         this->gameMap[dstY][dstX].state = OCCUPIED;
         this->gameMap[dstY][dstX].player_id = id;
+    };
+    Position State::playerPosition (char playerIndex) {
+        std::string id = this->players_id[playerIndex];
+        return (this->players[id.back()][id])->getPosition();
     };
 
 };
