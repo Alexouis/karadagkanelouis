@@ -7,29 +7,26 @@ namespace render{
     };
 
     void FightScene::update(){
-//        for(int i=0;i<animatedObjects.size();i++){
-//            animatedObjects[i]->update(0,frameInfos,0,state::Player::getPosition());
-//        }
-//        for (const auto& animObj : animatedObjects){
-//            animObj->update(0,frameInfos,0,state::Player::getPosition());
-//        }
+        sf::Vector2f pos(500,400);
+        for (const auto& animObj : animatedObjects){
+            sf::Time t;
+            animObj->update(t,frameInfos,0,pos);
+        }
     };
 
-    const state::State*& FightScene::getState() const{
-
+    const state::State*& FightScene::getGState() const{
+       // return gState;
     };
 
-    void FightScene::setState(const state::State*& state){
-
+    void FightScene::setGState(const state::State*& gState){
+       // this->gState=&gState;
     };
 
     void FightScene::draw (sf::RenderTarget& target, sf::RenderStates states) const{
-//        for(int i=0;i<animatedObjects.size();i++){
-//            animatedObjects[i]->draw(target,states);
-//        }
-//        for (const auto& animObj : animatedObjects){
-//            animObj->draw(target,states);
-//        }
+
+        for (const auto& animObj : animatedObjects){
+            target.draw(*animObj,states);
+        }
 
     };
 };

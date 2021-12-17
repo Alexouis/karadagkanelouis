@@ -173,9 +173,6 @@ void testSFML() {
 }
 
 
-int contains(sf::Vertex v, int x, int y){
-
-}
 
 
 void renderRenderRealMap(void){
@@ -234,8 +231,9 @@ void renderRenderRealMap(void){
 	for(auto& layer : layers)
 	{
 		if(layer.name == "Trees"| layer.name == "Trees_front"){
-			for(auto& tile : layer.tiles){
-				std::cout << "ok tile" << std::endl;
+			for(const auto& object : layer.objects)
+			{
+				std::cout << "ok\n";
 			}
 		}
 	}
@@ -295,13 +293,18 @@ void renderRenderRealMap(void){
 		auto& layers = ml.getLayers();
 		for(auto& layer : layers)
 		{
-			if(layer.name == "Trees"){
-				renderWindow.draw(layer);
+			std::cout<<layer.name << " type = " << layer.type << std::endl;
+			if(layer.name == "ground"){
+				
+				for(auto tile = layer.tiles.begin(); tile != layer.tiles.end(); ++tile){
+					renderWindow.draw(tile->sprite);
+					std::cout << "ok\n";
+				}
 			}
 		}
 		renderWindow.draw(m_gridVertices);
 		
-		if(show)ml.drawLayer(renderWindow, tmx::MapLayer::Debug);
+		if(show)ml.drawLayer(renderWindow, 0,tmx::MapLayer::Debug);
 		renderWindow.display();
 
 
