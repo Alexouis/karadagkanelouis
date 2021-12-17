@@ -113,6 +113,8 @@ find_library(
   DOC "microhttpd library"
 )
 
+include_directories(${CMAKE_COURCE_DIR}/extern/tmx-loader/include ${CMAKE_COURCE_DIR}/extern/tmx-loader/include/tmx)
+
 # Add source subdirectories
 add_subdirectory(${jsoncpp_include_dir})
 add_subdirectory(extern/tmx-loader)

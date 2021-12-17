@@ -1,12 +1,20 @@
 #include "State.h"
+#include <functional>
 
 namespace state {
     /*
     The State class corresponds to the state of the entire game
     
     */
-    State::State (){
-
+    State::State (int mapWidth, int mapHeight){
+        MapTile tile;
+        tile.state = FREE;
+        tile.type  = GRASS;
+        for(unsigned int i = 0; i < mapWidth; i++){
+            for(unsigned int j = 0; j < mapHeight; j++){
+                this->gameMap[j][i] = tile;
+            }
+        }
     };
     void State::init (){
         this->turn = 0;
@@ -15,8 +23,7 @@ namespace state {
         this->gameOver = false;
     };
     void State::initPlayer (){
-        
-        
+
     };
     void State::initMap (){
 
@@ -94,6 +101,10 @@ namespace state {
         this->players[id.back()][id]->move(dstX,dstY);
         this->gameMap[dstY][dstX].state = OCCUPIED;
         this->gameMap[dstY][dstX].player_id = id;
+    };
+    Position State::playerPosition (char playerIndex) {
+        std::string id = this->players_id[playerIndex];
+        return (this->players[id.back()][id])->getPosition();
     };
 
 };

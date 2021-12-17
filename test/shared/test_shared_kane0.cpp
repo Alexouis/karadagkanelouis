@@ -56,7 +56,7 @@ BOOST_AUTO_TEST_CASE(TestSFML)
     Player erza{};
     
     //State test
-    State s{};
+    State s(22,22);
 
     std::vector<std::string> player_id;
     player_id.push_back("erza");
