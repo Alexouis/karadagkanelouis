@@ -26,11 +26,13 @@
 // Fin test SFML
 #include <thread>
 #include <state.h>
+#include <engine.h>
 #include <json/json.h>
 
 using namespace std;
 using namespace state;
-
+using namespace engine;
+using namespace render;
 
 
 void testSFML() {
@@ -284,6 +286,10 @@ void randomMap(void){
 
 int main(int argc,char* argv[])
 {
+
+    GameWindow gw;
+
+
     if(argc < 2){
         std::cout << "It works ! " << std::endl;
         return 0;
