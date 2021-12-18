@@ -281,20 +281,19 @@ void randomMap(void){
 
 //ON ARRIVE PAS A CHARGER LA MAP, MAPLOADER,/// VERIFIER LOADDTEXTURE /// FAIRE MARCHER LE TOUT
  void renderMap(void){
-    //std::unique_ptr<tmx::MapLoader> gMap = std::unique_ptr<tmx::MapLoader>(new MapLoader("res/map/"));
-  //  gMap->load("map_1.tmx");
-   // GameWindow gamewindow(std::move(gMap));
+    std::unique_ptr<tmx::MapLoader> gMap = std::unique_ptr<tmx::MapLoader>(new tmx::MapLoader("res/map/"));
+    gMap->load("map_1.tmx");
+    GameWindow gamewindow(gMap);
     
 
-  //  while(gamewindow.window.isOpen()){
-   //     gamewindow.update();
-   //     gamewindow.window.clear();
-   //     gamewindow.draw();
-   //     gamewindow.window.display();
-     //   gamewindow.sceneQueue[1].draw();
-    //  
+    while(gamewindow.window.isOpen()){
+        gamewindow.update();
+        gamewindow.window.clear();
+        gamewindow.draw();
+        gamewindow.window.display();
+      
 
- //   }
+    }
 
     
 } 

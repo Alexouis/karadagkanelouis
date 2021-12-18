@@ -2,11 +2,11 @@
 #include "FightScene.h"
 
 namespace render {
-    GameWindow::GameWindow(std::unique_ptr<tmx::MapLoader> gameMap)
+    GameWindow::GameWindow(std::unique_ptr<tmx::MapLoader>& gameMap)
     {
        // tmx::MapLoader ml("res/map/");
-       // gameMap=ml;
-       // gameMap.load("map_1.tmx");
+        gameMap= std::move(gameMap);
+        //gameMap.load("map_1.tmx");
         window.create(sf::VideoMode(2000u, 600u), "TMX Loader");
         // = sf::RenderWindow(sf::VideoMode(2000u, 600u), "TMX Loader");
         window.setVerticalSyncEnabled(true);

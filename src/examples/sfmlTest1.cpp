@@ -178,6 +178,8 @@ void testSFML() {
 void renderRenderRealMap(void){
     //create map loader and load map
 	tmx::MapLoader ml("res/map/");
+	std::unique_ptr<tmx::MapLoader> ml1 = std::unique_ptr<tmx::MapLoader>(new tmx::MapLoader("res/map/"));
+	ml1->load("map_1.tmx");
 	ml.load("map_1.tmx");
 	bool collision;
 	bool visible = false;
