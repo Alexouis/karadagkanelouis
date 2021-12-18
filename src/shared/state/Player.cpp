@@ -50,7 +50,7 @@ namespace state {
                 powerfulShoot.type=DISTANCE;
                 powerfulShoot.damage = 45;
                 powerfulShoot.range = 2;
-                powerfulShoot.range = 5;
+                powerfulShoot.cost = 5;
 
                 attacks.push_back(shoot);
                 attacks.push_back(powerfulShoot);
