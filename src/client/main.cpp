@@ -31,8 +31,8 @@
 
 using namespace std;
 using namespace state;
-using namespace engine;
 using namespace render;
+
 
 
 void testSFML() {
@@ -116,7 +116,7 @@ void renderRealMap(void){
         text.setCharacterSize(250);
 
        // renderWindow.draw(gameMap);
-
+        
         while(renderWindow.isOpen())
         {
             //poll input
@@ -280,8 +280,25 @@ void randomMap(void){
 
 }
 
+//ON ARRIVE PAS A CHARGER LA MAP, MAPLOADER,/// VERIFIER LOADDTEXTURE /// FAIRE MARCHER LE TOUT
+ void renderMap(void){
+    //std::unique_ptr<tmx::MapLoader> gMap = std::unique_ptr<tmx::MapLoader>(new MapLoader("res/map/"));
+  //  gMap->load("map_1.tmx");
+   // GameWindow gamewindow(std::move(gMap));
+    
 
+  //  while(gamewindow.window.isOpen()){
+   //     gamewindow.update();
+   //     gamewindow.window.clear();
+   //     gamewindow.draw();
+   //     gamewindow.window.display();
+     //   gamewindow.sceneQueue[1].draw();
+    //  
 
+ //   }
+
+    
+} 
 
 
 int main(int argc,char* argv[])
@@ -302,6 +319,8 @@ int main(int argc,char* argv[])
       //  Background::setGameMap(Background::getGameMap());
 
         renderRealMap();
+    }else if(strcmp(argv[1], "renderMap") == 0){
+        renderMap();
     }else if(strcmp(argv[1], "randomMap") == 0){
         randomMap();
     }

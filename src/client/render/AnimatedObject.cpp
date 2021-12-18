@@ -64,5 +64,7 @@ namespace render{
     void AnimatedObject::setMRepeat(bool mRepeat){
         this->mRepeat=mRepeat;
     };
+    AnimatedObject::~AnimatedObject(){
 
+    };
 };

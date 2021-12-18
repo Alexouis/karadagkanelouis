@@ -5,7 +5,7 @@ namespace render {
     {
         init();
         setId(1);
-        loadTextures();
+        loadTextures("res/frames.png");
 
     };
 
@@ -15,12 +15,12 @@ namespace render {
 
     };
 
-    void Scene::loadTextures (){
-        if (this->id = 1)this->texture.loadFromFile("res/frames.png"); // load texture de personnage si scene de combat
+    void Scene::loadTextures (std::string textures_paths){
+        this->texture.loadFromFile(textures_paths); // load texture de personnage si scene de combat
     };
 
     void Scene::init (){
-        this->id=0;
+        
     };
 
     void Scene::update (){
@@ -37,16 +37,20 @@ namespace render {
     void Scene::setBoxes(const std::vector<std::unique_ptr<Box>>& boxes){
     };
 
-    int Scene::getId() const{
+    char Scene::getId() const{
         return this->id;
     };
 
-    void Scene::setId(int id){
+    void Scene::setId(char id){
         this->id = id;
     };
 
     void Scene::draw (sf::RenderTarget& target, sf::RenderStates states) const{
         target.draw(this->sprite, states);
+    }
+
+    Scene::~Scene(){
+
     }
 
 };
