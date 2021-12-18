@@ -6,16 +6,14 @@ namespace render{
     FightScene::FightScene(){
        // std::ifstream img("frames_info.json", );
        loadFrameInfos("data/frames_info_json");
+       //for()
        
     };
 
     void FightScene::update(){
-        for (int i=0;i<animatedObjects.size();i++){
-            sf::Time t;
-  //          int posx=state::State::players[0][players_id[i]]::Position.getX();
- //           int posy=state::State::players[0][players_id[i]]::Position.getY();
-            animatedObjects[i]->update(t,frameInfos,0,sf::Vector2f(500,500));
-        }
+        sf::Time t;
+        char objIndex = this->gState->getActualPlayerIndex();
+        animatedObjects[objIndex]->update(t,this->frameInfos,0,sf::Vector2f(500,500));
     };
 
 

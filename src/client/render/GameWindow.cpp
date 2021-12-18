@@ -2,20 +2,34 @@
 #include "FightScene.h"
 
 namespace render {
-    GameWindow::GameWindow(std::unique_ptr<tmx::MapLoader>& gameMap)
+    GameWindow::GameWindow()
     {
        // tmx::MapLoader ml("res/map/");
-        gameMap= std::move(gameMap);
+        this->gameMap->load("map_1.tmx");
+        //uint bgw = this->gameMap->getMapSize().x;
+        //uint bgh = this->gameMap->getMapSize().y;
+        //this->bgTex.create(bgw, bgh);
+        
+        
+        //this->bgTex.draw(*(this->gameMap));
+        
+        //this->bgTex.setView(view);
+        //this->bgTex.display();
+        //this->background.setTexture(this->bgTex.getTexture());
         //gameMap.load("map_1.tmx");
-        window.create(sf::VideoMode(2000u, 600u), "TMX Loader");
+        this->window.create(sf::VideoMode(this->width, this->height), "TMX Loader");
         // = sf::RenderWindow(sf::VideoMode(2000u, 600u), "TMX Loader");
-        window.setVerticalSyncEnabled(true);
+        this->window.setVerticalSyncEnabled(true);
+        sf::View view = this->window.getView();
+        view.zoom(5.709);
+        view.setCenter(this->center.x, this->center.y);
+        this->window.setView(view);
+        //this->window.clear();
+        //this->window.draw(this->background);
+        //this->window.display();
 
         //adjust the view to centre on map
-        sf::View view = window.getView();
-        view.zoom(zoom);
-        view.setCenter(center.x, center.y);
-        window.setView(view);
+        
 
         initScenes();
         
@@ -39,7 +53,8 @@ namespace render {
     void GameWindow::draw()
     {   
         this->window.draw(*(this->gameMap));
-        this->window.draw(*(this->sceneQueue.front()));   
+        this->window.draw(*(this->sceneQueue.front()));  
+
     };
 
     void GameWindow::update()
@@ -50,7 +65,7 @@ namespace render {
     
     void GameWindow::clearBackground()
     {
-        this->backGround.clear();
+        this->bgTex.clear();
     };
 
     // Setters and Getters
