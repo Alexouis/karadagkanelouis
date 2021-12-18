@@ -14,6 +14,7 @@ namespace state {
             for(unsigned int j = 0; j < mapHeight; j++){
                 this->gameMap[j][i] = tile;
             }
+            
         }
     };
     void State::init (){
