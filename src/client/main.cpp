@@ -287,7 +287,7 @@ void randomMap(void){
 int main(int argc,char* argv[])
 {
 
-    GameWindow gw;
+    //GameWindow gw;
 
 
     if(argc < 2){
