@@ -6,8 +6,12 @@ namespace render {
 
     };
 
-    Button::Button (std::string s, sf::Font& font, sf::Vector2f position,  enum buttonStyle style)
+    Button::Button (std::string s, sf::Font& font, sf::Vector2f position,  enum buttonStyle style, int width, int height)
     {
+
+        dimensions.x = width;
+        dimensions.y = height;
+
         //set position
     pos = position;
 
@@ -84,9 +88,9 @@ namespace render {
 
     m_button.setPointCount(4);
     m_button.setPoint(0, sf::Vector2f(0, 0));
-    m_button.setPoint(1, sf::Vector2f(150, 0));
-    m_button.setPoint(2, sf::Vector2f(150, 30));
-    m_button.setPoint(3, sf::Vector2f(0, 30));
+    m_button.setPoint(1, sf::Vector2f(dimensions.x, 0));
+    m_button.setPoint(2, sf::Vector2f(dimensions.x, dimensions.y));
+    m_button.setPoint(3, sf::Vector2f(0, dimensions.y));
     m_button.setOrigin(m_button.getGlobalBounds().width/2, m_button.getGlobalBounds().height/2);
     m_button.setPosition(pos);
 
@@ -154,9 +158,9 @@ namespace render {
             m_size = sf::Vector2f(m_text.getGlobalBounds().width * 1.5f, m_text.getGlobalBounds().height * 1.75f);
             m_button.setPointCount(4);
             m_button.setPoint(0, sf::Vector2f(0, 0));
-            m_button.setPoint(1, sf::Vector2f(150, 0));
-            m_button.setPoint(2, sf::Vector2f(150, 30));
-            m_button.setPoint(3, sf::Vector2f(0, 30));
+            m_button.setPoint(1, sf::Vector2f(dimensions.x, 0));
+            m_button.setPoint(2, sf::Vector2f(dimensions.x, dimensions.y));
+            m_button.setPoint(3, sf::Vector2f(0, dimensions.y));
             m_button.setOrigin(m_button.getGlobalBounds().width/2, m_button.getGlobalBounds().height/2);
             m_button.setPosition(pos);
             m_text.setOrigin(m_text.getGlobalBounds().width/2, m_text.getGlobalBounds().height/2);
@@ -174,9 +178,9 @@ namespace render {
             m_size = sf::Vector2f(m_text.getGlobalBounds().width * 1.5f, m_text.getGlobalBounds().height * 1.75f);
             m_button.setPointCount(4);
             m_button.setPoint(0, sf::Vector2f(0, 0));
-            m_button.setPoint(1, sf::Vector2f(150, 0));
-            m_button.setPoint(2, sf::Vector2f(150, 30));
-            m_button.setPoint(3, sf::Vector2f(0, 30));
+            m_button.setPoint(1, sf::Vector2f(dimensions.x, 0));
+            m_button.setPoint(2, sf::Vector2f(dimensions.x, dimensions.y));
+            m_button.setPoint(3, sf::Vector2f(0, dimensions.y));
             m_button.setOrigin(m_button.getGlobalBounds().width/2, m_button.getGlobalBounds().height/2);
             m_button.setPosition(pos);
             m_text.setOrigin(m_text.getGlobalBounds().width/2, m_text.getGlobalBounds().height/2);
@@ -194,9 +198,9 @@ namespace render {
            m_size = sf::Vector2f(m_text.getGlobalBounds().width * 1.5f, m_text.getGlobalBounds().height * 1.75f);
             m_button.setPointCount(4);
             m_button.setPoint(0, sf::Vector2f(0, 0));
-            m_button.setPoint(1, sf::Vector2f(150, 0));
-            m_button.setPoint(2, sf::Vector2f(150, 30));
-            m_button.setPoint(3, sf::Vector2f(0, 30));
+            m_button.setPoint(1, sf::Vector2f(dimensions.x, 0));
+            m_button.setPoint(2, sf::Vector2f(dimensions.x, dimensions.y));
+            m_button.setPoint(3, sf::Vector2f(0, dimensions.y));
             m_button.setOrigin(m_button.getGlobalBounds().width/2, m_button.getGlobalBounds().height/2);
             m_button.setPosition(pos);
             m_text.setOrigin(m_text.getGlobalBounds().width/2, m_text.getGlobalBounds().height/2);
@@ -214,9 +218,9 @@ namespace render {
             m_size = sf::Vector2f(m_text.getGlobalBounds().width * 1.5f, m_text.getGlobalBounds().height * 1.75f);
             m_button.setPointCount(4);
             m_button.setPoint(0, sf::Vector2f(0, 0));
-            m_button.setPoint(1, sf::Vector2f(150, 0));
-            m_button.setPoint(2, sf::Vector2f(150, 30));
-            m_button.setPoint(3, sf::Vector2f(0, 30));
+            m_button.setPoint(1, sf::Vector2f(dimensions.x, 0));
+            m_button.setPoint(2, sf::Vector2f(dimensions.x, dimensions.y));
+            m_button.setPoint(3, sf::Vector2f(0, dimensions.y));
             m_button.setOrigin(m_button.getGlobalBounds().width/2, m_button.getGlobalBounds().height/2);
             m_button.setPosition(pos);
             m_text.setOrigin(m_text.getGlobalBounds().width/2, m_text.getGlobalBounds().height/2);
