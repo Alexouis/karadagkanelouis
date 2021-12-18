@@ -2,8 +2,21 @@
 #include "FightScene.h"
 
 namespace render {
-    GameWindow::GameWindow()
+    GameWindow::GameWindow(std::unique_ptr<tmx::MapLoader> gameMap)
     {
+       // tmx::MapLoader ml("res/map/");
+       // gameMap=ml;
+       // gameMap.load("map_1.tmx");
+        window.create(sf::VideoMode(2000u, 600u), "TMX Loader");
+        // = sf::RenderWindow(sf::VideoMode(2000u, 600u), "TMX Loader");
+        window.setVerticalSyncEnabled(true);
+
+        //adjust the view to centre on map
+        sf::View view = window.getView();
+        view.zoom(zoom);
+        view.setCenter(center.x, center.y);
+        window.setView(view);
+
         initScenes();
         
     };
@@ -25,15 +38,8 @@ namespace render {
 
     void GameWindow::draw()
     {   
-        window.create(sf::VideoMode(2000u, 600u), "TMX Loader");
-        // = sf::RenderWindow(sf::VideoMode(2000u, 600u), "TMX Loader");
-        window.setVerticalSyncEnabled(true);
-
-        //adjust the view to centre on map
-        sf::View view = window.getView();
-        view.zoom(zoom);
-        view.setCenter(center.x, center.y);
-        window.setView(view);
+        this->window.draw(*(this->gameMap));
+        this->window.draw(*(this->sceneQueue.front()));   
     };
 
     void GameWindow::update()
