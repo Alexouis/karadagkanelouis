@@ -6,40 +6,13 @@ namespace render {
     {
         this->currentScene = SceneId::FIGHTSCENE;        
         this->initScenes();
-
         this->gameMap->load("map_1.tmx");
-        //uint bgw = this->gameMap->getMapSize().x;
-        //uint bgh = this->gameMap->getMapSize().y;
-        //this->bgTex.create(bgw, bgh);
-        
-        
-        //this->bgTex.draw(*(this->gameMap));
-        
-        //this->bgTex.setView(view);
-        //this->bgTex.display();
-        //this->background.setTexture(this->bgTex.getTexture());
-        //gameMap.load("map_1.tmx");
         this->window.create(sf::VideoMode(this->width, this->height), "TMX Loader");
-        // = sf::RenderWindow(sf::VideoMode(2000u, 600u), "TMX Loader");
         this->window.setVerticalSyncEnabled(true);
         sf::View view = this->window.getView();
         view.zoom(10);
         view.setCenter(this->center.x, this->center.y);
-        this->window.setView(view);
-        std::cout << "out\n";
-
-        
-
-        //this->window.clear();
-        //this->window.draw(this->background);
-        //this->window.display();
-
-        //adjust the view to centre on map
-        
-
-
-
-        
+        this->window.setView(view); 
     };
 
     void GameWindow::init ()
@@ -49,35 +22,23 @@ namespace render {
 
     void GameWindow::initScenes ()
     {   
-
         std::unique_ptr<Scene> holder = std::unique_ptr<Scene>(new Scene); 
         this->scenes.push_back(std::move(holder));//first is menu
         auto fc = std::unique_ptr<FightScene>(new FightScene);//2nd is Fight scenne
-        std::cout << "draw\n";
-
         this->scenes.push_back(std::move(fc));
-        
-        //holder.reset(new Scene);//last is ending scene 
-        //this->scenes.push_back(std::move(holder));
-        //std::cout << "draw\n";
-
+        holder.reset(new Scene);//last is ending scene 
+        this->scenes.push_back(std::move(holder));
     };
 
     void GameWindow::draw()
     {   
         this->window.draw(*(this->gameMap));
         this->window.draw(*(this->scenes[this->currentScene]));  
-        std::cout << "draw\n";
-
     };
 
     void GameWindow::update()
-    {
-        std::cout <<currentScene <<"upd\n";
-        
+    {        
         this->scenes[this->currentScene]->update();
-        std::cout << "upd000000\n";
-
     };
 
     

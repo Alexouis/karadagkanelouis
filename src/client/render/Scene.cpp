@@ -24,11 +24,8 @@ namespace render {
         
     };
 
-    void Scene::update (){
-            std::cout << "boxe";
-        
+    void Scene::update (){        
         for(auto &boxe : this->boxes){
-            std::cout << "boxe";
             (*boxe).update();
         }
     };

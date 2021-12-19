@@ -12,23 +12,18 @@ namespace state {
         tile.state = FREE;
         tile.type  = GRASS;
         this->gameMap.resize(mapHeight);
-        
-
 
         for(unsigned int i = 0; i < mapWidth; i++){
             for(unsigned int j = 0; j < mapHeight; j++){
                 this->gameMap[j].push_back(tile);
-                //std::cout << "GRASS  FREE\n";
             }
         }
-        
 
         this->players.resize(2);
         auto player = std::unique_ptr<Player>(new Player("goku",DEMON, Position(10,10), 1, true));
         std::string playerId = player->getName();
         playerId.push_back('0');
         this->players_id.push_back(playerId);
-
 
         this->players[0] = new std::map<std::string, std::unique_ptr<Player>>;
         this->players[1] = new std::map<std::string, std::unique_ptr<Player>>;

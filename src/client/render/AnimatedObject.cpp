@@ -19,17 +19,11 @@ namespace render{
     AnimatedObject::AnimatedObject(sf::Texture & frames){
         this->mSprite.setTexture(frames);
         sf::IntRect rect =  this->mSprite.getTextureRect();
-	    std::cout << "left = " << rect.left << ", top = " << rect.top << ", width = " << rect.width << ", height = " << rect.height << std::endl;
-        this->mCurrentFrame = 0;
-      //  abort();
-        
+        this->mCurrentFrame = 0;        
     };
 
     void AnimatedObject::draw (sf::RenderTarget& target, sf::RenderStates states) const{
-        sf::IntRect rect =  this->mSprite.getTextureRect();
-	    std::cout << "left = " << rect.left << ", top = " << rect.top << ", width = " << rect.width << ", height = " << rect.height << std::endl;
-        target.draw(this->mSprite, states);
-        
+        target.draw(this->mSprite, states);        
     };
 
     void AnimatedObject::update (sf::Time dt, Json::Value framesInfos, std::string frameKey, sf::Vector2f positions){
@@ -39,13 +33,8 @@ namespace render{
         int scale_x=framesInfos[frameKey]["w"].asInt();
         int scale_y=framesInfos[frameKey]["h"].asInt();
 
-        //this->mSprite.setTextureRect(sf::IntRect(435, 520, 50, 60));
         this->mSprite.setTextureRect(sf::IntRect(i_x, i_y, scale_x, scale_y));
-        //this->mSprite.setPosition(1000,500);
         this->mSprite.scale(sf::Vector2f(SPRITE_SCALE,SPRITE_SCALE));
-        
-        std::cout<< "FightScene upd idx = " << i_x << " " << i_y << " " << scale_x << " " << scale_y << " " << std::endl;
-
     };
 
 
