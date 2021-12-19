@@ -163,7 +163,6 @@ install_submodules :
 
 install_extern_deps :
 	@echo 'submodules intallation'
-	@cd extern
-	@rm -rf tmx-loader
-	@git clone git@github.com:nskley/tmx-loader.git
+	@rm -rf extern/tmx-loader
+	@git clone git@github.com:nskley/tmx-loader.git extern/tmx-loader
 .PHONY : install_extern_deps
