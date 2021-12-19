@@ -49,6 +49,40 @@ void testSFML() {
 }
 
 
+
+void randomMap(void){
+    vector<string> mapLoc; 
+    srand (time(NULL));
+    int randomNb = rand() % 6;
+    switch (randomNb)
+    {
+    case 0:
+       // renderRealMap();
+        break; 
+    case 1:
+        system("./bin/Isometric ");
+        break;
+    case 2:
+        system("./bin/ShaderEffects");
+        break;
+    case 3:
+        system("./bin/MapWithQuadTree");
+        break;
+    case 4:
+        system("./bin/BenchMark");
+        break;
+    case 5:
+        system("./bin/AddRemoveObjects");
+        break;
+    
+    default:
+      //  renderRealMap();
+        break;
+    }
+
+}
+
+
  void renderMap(void){
 
     GameWindow gamewindow;
@@ -131,10 +165,9 @@ int main(int argc,char* argv[])
     else if(strcmp(argv[1], "render") == 0){
         renderMap();
     }
-    }else if(strcmp(argv[1], "randomMap") == 0){
+    else if(strcmp(argv[1], "randomMap") == 0){
         randomMap();
-    }
-    else{
+    }else{
         std::cout << "Expected one argument like 'client' or 'render'" << std::endl;
     }
 
