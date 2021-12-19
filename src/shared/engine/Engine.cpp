@@ -12,9 +12,7 @@
 #include "engine.h"
 
 namespace engine{
-    Engine::Engine(state::State& gstate){
-        this->currentState = &gstate;
-    }
+    Engine::Engine(){}
 
 
     void Engine::start(){
@@ -44,4 +42,10 @@ namespace engine{
     void Engine::addCommand(std::unique_ptr<Command>& cmd){
         this->qcmd.push(std::move(cmd));
     }
+
+    void Engine::setState(std::shared_ptr<state::State>& gState){
+        this->currentState = gState;
+    }
+
+    Engine::~Engine (){}
 }

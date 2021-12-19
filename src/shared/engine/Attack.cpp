@@ -13,7 +13,16 @@
 
 namespace engine{
 
-    void Attack::action (state::State * gstate){
+    Attack::Attack (float targetX, float targetY) : 
+        targetX(targetX),
+        targetY(targetY){
+
+    }
+
+    void Attack::action (std::shared_ptr<state::State>& gstate){
         gstate->makeAttackOn((int)this->targetX, (int)this->targetY);
+    }
+
+    Attack::~Attack (){
     }
 }

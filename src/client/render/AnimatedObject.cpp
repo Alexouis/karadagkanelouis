@@ -18,6 +18,7 @@
 namespace render{
     AnimatedObject::AnimatedObject(sf::Texture & frames){
         this->mSprite.setTexture(frames);
+        this->mSprite.scale(sf::Vector2f(SPRITE_SCALE,SPRITE_SCALE));
         sf::IntRect rect =  this->mSprite.getTextureRect();
         this->mCurrentFrame = 0;        
     };
@@ -34,7 +35,8 @@ namespace render{
         int scale_y=framesInfos[frameKey]["h"].asInt();
 
         this->mSprite.setTextureRect(sf::IntRect(i_x, i_y, scale_x, scale_y));
-        this->mSprite.scale(sf::Vector2f(SPRITE_SCALE,SPRITE_SCALE));
+        this->mSprite.setPosition(positions);
+        
     };
 
 

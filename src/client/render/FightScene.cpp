@@ -5,36 +5,39 @@
 namespace render{
     FightScene::FightScene(){
 
-        this->gState = new state::State(22,22);
+        this->gState = std::shared_ptr<state::State>(new state::State(22,22));
+        this->gameMap->load("map_1.tmx");
         this->loadFrameInfos("data/frames_info.json");
         this->texture.loadFromFile("res/frames.png");
+
 
         sf::Time t;
         std::unique_ptr<AnimatedObject> aniObjects;
         state::Position p;
-        for(char i=0; i<2; i++){
+        for(char i=0; i<this->gState->getPlayersCount(); i++){
             p = this->gState->playerPosition(i);
             std::string playerClass = (this->gState->getPlayerClass(i) == state::playerClass::HERO) ? "valla" : "demon";
             aniObjects = std::unique_ptr<AnimatedObject>(new AnimatedObject(this->texture));
             this->animatedObjects.push_back(std::move(aniObjects));
-            this->animatedObjects[i]->update(t,this->frameInfos[playerClass],playerClass+"_idle_se",sf::Vector2f(p.getX(),p.getY()));
+            this->animatedObjects[i]->update(t,this->frameInfos[playerClass],playerClass+"_idle_se",this->worldToScreen(p));
         }  
 
     };
 
     void FightScene::update(){
-        std::cout<< "FightScene upd\n";
         sf::Time t;
         char objIndex = this->gState->getActualPlayerIndex();
-        state::Position p = this->gState->playerPosition(objIndex);
-        std::string playerClass = (this->gState->getPlayerClass(objIndex) == state::playerClass::HERO) ? "valla" : "demon";
-        std::cout << playerClass << std::endl;
-        this->animatedObjects[objIndex]->update(t,this->frameInfos[playerClass],playerClass+"_idle_se",sf::Vector2f(p.getX(),p.getY()));
+        state::Position p;
+        for(char i=0; i<this->gState->getPlayersCount(); i++){
+            p = this->gState->playerPosition(i);
+            std::string playerClass = (this->gState->getPlayerClass(i) == state::playerClass::HERO) ? "valla" : "demon";
+            this->animatedObjects[i]->update(t,this->frameInfos[playerClass],playerClass+"_idle_se",this->worldToScreen(p));
+        }  
     };
 
 
     void FightScene::draw (sf::RenderTarget& target, sf::RenderStates states) const{
-
+        target.draw(*(this->gameMap), states);
         for (const auto& animObj : animatedObjects){
             target.draw(*animObj,states);
         }
@@ -56,6 +59,19 @@ namespace render{
     Json::Value& FightScene::getFrameInfos(){
         return this->frameInfos;
     } 
+
+
+    void FightScene::bindState(engine::Engine& ngine){
+        ngine.setState(this->gState);
+    }
+
+    sf::Vector2f FightScene::worldToScreen (state::Position& position){
+        sf::Vector2f screenPos = sf::Vector2f((float)position.getX(), (float)position.getY());
+        screenPos.x=screenPos.x*270+270/2;
+        screenPos.y=screenPos.y*270+270/2;
+        screenPos = this->gameMap->isometricToOrthogonal(screenPos);
+        return screenPos;
+    }
 
     FightScene::~FightScene(){
 

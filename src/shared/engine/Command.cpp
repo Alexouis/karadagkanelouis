@@ -14,4 +14,11 @@
 namespace engine{
    Command::Command (){
    }
+
+   void Command::action (std::shared_ptr<state::State>& gstate){
+
+   }
+
+   Command::~Command (){
+   }
 };

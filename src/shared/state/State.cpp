@@ -11,6 +11,7 @@ namespace state {
         MapTile tile;
         tile.state = FREE;
         tile.type  = GRASS;
+        this->playersCount = 2;
         this->gameMap.resize(mapHeight);
 
         for(unsigned int i = 0; i < mapWidth; i++){
@@ -130,9 +131,10 @@ namespace state {
     };
     state::playerClass State::getPlayerClass (char playerIndex) {
         const std::string id = this->players_id[playerIndex];
-        auto pClass = this->players[id.back()-'0']->find(id)->second->getPClass();
-        std::cout << "ste\n";
+        return this->players[id.back()-'0']->find(id)->second->getPClass();
+    }
 
-        return pClass;
+    char  State::getPlayersCount () const{
+        return this->playersCount;
     }
 };

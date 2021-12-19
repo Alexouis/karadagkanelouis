@@ -6,18 +6,19 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 # This is free software: you are free to change and redistribute it.
 # There is NO WARRANTY, to the extent permitted by law.
 
-# Make data base, printed on Fri Dec 17 08:02:49 2021
+# Make data base, printed on Sun Dec 19 09:23:33 2021
 
 # Variables
 
 # environment
+ 
 GDK_BACKEND = x11
 # environment
 LC_ALL = C
 # environment
 GJS_DEBUG_OUTPUT = stderr
 # environment
-VSCODE_IPC_HOOK_EXTHOST = /run/user/1000/vscode-ipc-b16a8386-71c1-4b67-9b62-ebe0603fe4b7.sock
+VSCODE_IPC_HOOK_EXTHOST = /run/user/1000/vscode-ipc-0b3d85fc-86cd-4412-9c53-8678828ab163.sock
 # environment
 VSCODE_CWD = /home/mkas
 # environment
@@ -85,13 +86,13 @@ MAKEFILE_LIST := Makefile
 # environment
 VSCODE_VERBOSE_LOGGING = true
 # environment
-VSCODE_PID = 2512
+VSCODE_PID = 2566
 # environment
 XDG_SESSION_TYPE = x11
 # automatic
 ?D = $(patsubst %/,%,$(dir $?))
 # environment
-SESSION_MANAGER = local/kalikane:@/tmp/.ICE-unix/1932,unix/kalikane:/tmp/.ICE-unix/1932
+SESSION_MANAGER = local/kalikane:@/tmp/.ICE-unix/1993,unix/kalikane:/tmp/.ICE-unix/1993
 # automatic
 *F = $(notdir $*)
 # environment
@@ -117,7 +118,7 @@ MAKECMDGOALS := all
 # environment
 XMODIFIERS = @im=ibus
 # makefile (from 'Makefile', line 15)
-HEADERS := src/shared/engine/passTurn.h src/shared/engine/ThreadListener.h src/shared/engine/Command.h src/shared/engine/Chrono.h src/shared/engine/CommandExecutor.h src/shared/engine/Attack.h src/shared/engine/ActionManager.h src/shared/engine/Move.h src/shared/engine/ThreadJail.h src/shared/engine/Engine.h src/shared/state/playerOrientation.h src/shared/state/playerStatus.h src/shared/state/attackName.h src/shared/state/State.h src/shared/state/playerClass.h src/shared/state/Attack.h src/shared/state/Stats.h src/shared/state/Player.h src/shared/state/tileType.h src/shared/state/tileState.h src/shared/state/MapTile.h src/shared/state/Position.h src/shared/state/attackType.h src/shared/state.h src/shared/engine.h src/client/render.h src/client/render/TextOrTexture.h src/client/render/TextureSprite.h src/client/render/buttonState.h src/client/render/buttonStyle.h src/client/render/Button.h src/client/render/FightScene.h src/client/render/Box.h src/client/render/AnimatedObject.h src/client/render/Scene.h src/client/render/BoxFactory.h src/client/render/GameWindow.h src/client/render/Info.h
+HEADERS := src/shared/engine/passTurn.h src/shared/engine/Command.h src/shared/engine/Chrono.h src/shared/engine/Attack.h src/shared/engine/Move.h src/shared/engine/Engine.h src/shared/state/playerOrientation.h src/shared/state/playerStatus.h src/shared/state/attackName.h src/shared/state/State.h src/shared/state/playerClass.h src/shared/state/Attack.h src/shared/state/Stats.h src/shared/state/Player.h src/shared/state/tileType.h src/shared/state/tileState.h src/shared/state/MapTile.h src/shared/state/Position.h src/shared/state/attackType.h src/shared/state.h src/shared/engine.h src/client/render.h src/client/render/TextOrTexture.h src/client/render/TextureSprite.h src/client/render/buttonState.h src/client/render/SceneId.h src/client/render/buttonStyle.h src/client/render/Button.h src/client/render/FightScene.h src/client/render/Box.h src/client/render/AnimatedObject.h src/client/render/Scene.h src/client/render/BoxFactory.h src/client/render/GameWindow.h src/client/render/Info.h
 # environment
 GJS_DEBUG_TOPICS = JS ERROR;JS LOG
 # environment
@@ -135,7 +136,7 @@ MAKEFILES :=
 # environment
 COMMAND_NOT_FOUND_INSTALL_PROMPT = 1
 # environment
-INVOCATION_ID = 7834e9063d9041508247fdcff0681a8d
+INVOCATION_ID = 512ea0d436b64f83a0ce0793e3a807fe
 # environment
 QSYS_ROOTDIR = /home/mkas/intelFPGA_lite/20.1/quartus/sopc_builder/bin
 # environment
@@ -171,11 +172,11 @@ MAKE_VERSION := 4.3
 # 'override' directive
 .SHELLSTATUS := 0
 # environment
-MANAGERPID = 1704
+MANAGERPID = 1764
 # environment
-GIO_LAUNCHED_DESKTOP_FILE_PID = 2512
+GIO_LAUNCHED_DESKTOP_FILE_PID = 2566
 # environment
-SSH_AGENT_PID = 1891
+SSH_AGENT_PID = 1951
 # environment
 _ = /usr/share/code/code
 # environment
@@ -185,7 +186,7 @@ GPG_AGENT_INFO = /run/user/1000/gnupg/S.gpg-agent:0:1
 # environment
 POWERSHELL_TELEMETRY_OPTOUT = 1
 # environment
-JOURNAL_STREAM = 8:26142
+JOURNAL_STREAM = 8:28691
 # environment
 XDG_SESSION_CLASS = user
 # environment
@@ -196,6 +197,7 @@ HOME = /home/mkas
 QT_IM_MODULE = ibus
 # environment
 _JAVA_OPTIONS = -Dawt.useSystemAAFontSettings=on -Dswing.aatext=true
+ 
 # environment
 ELECTRON_RUN_AS_NODE = 1
 # environment
@@ -276,7 +278,6 @@ src/render.dia:
 #  File has not been updated.
 
 diapdf: rapport/state.pdf rapport/render.pdf rapport/engine.pdf rapport/ai.pdf rapport/module.pdf
- 
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
@@ -510,6 +511,6 @@ install_submodules:
 # strcache performance: lookups = 115 / hit rate = 52%
 # hash-table stats:
 # Load=55/8192=1%, Rehash=0, Collisions=0/115=0%
-# Finished Make data base on Fri Dec 17 08:02:49 2021
+# Finished Make data base on Sun Dec 19 09:23:33 2021
 
  

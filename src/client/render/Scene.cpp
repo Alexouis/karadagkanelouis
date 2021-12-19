@@ -50,6 +50,10 @@ namespace render {
         target.draw(this->sprite, states);
     }
 
+    void Scene::bindState (engine::Engine& ngine){
+        
+    }
+
     Scene::~Scene(){
 
     }

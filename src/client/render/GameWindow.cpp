@@ -6,7 +6,6 @@ namespace render {
     {
         this->currentScene = SceneId::FIGHTSCENE;        
         this->initScenes();
-        this->gameMap->load("map_1.tmx");
         this->window.create(sf::VideoMode(this->width, this->height), "TMX Loader");
         this->window.setVerticalSyncEnabled(true);
         sf::View view = this->window.getView();
@@ -23,16 +22,15 @@ namespace render {
     void GameWindow::initScenes ()
     {   
         std::unique_ptr<Scene> holder = std::unique_ptr<Scene>(new Scene); 
-        this->scenes.push_back(std::move(holder));//first is menu
-        auto fc = std::unique_ptr<FightScene>(new FightScene);//2nd is Fight scenne
-        this->scenes.push_back(std::move(fc));
-        holder.reset(new Scene);//last is ending scene 
+        this->scenes.push_back(std::move(holder));
+        holder = std::unique_ptr<FightScene>(new FightScene);
+        this->scenes.push_back(std::move(holder));
+        holder.reset(new Scene);
         this->scenes.push_back(std::move(holder));
     };
 
     void GameWindow::draw()
     {   
-        this->window.draw(*(this->gameMap));
         this->window.draw(*(this->scenes[this->currentScene]));  
     };
 
@@ -77,6 +75,11 @@ namespace render {
     {
         this->center = center;
     };
+
+
+    void GameWindow::shareStateWith(engine::Engine& ngine){
+        (this->scenes[SceneId::FIGHTSCENE])->bindState(ngine);
+    }
 
     
     

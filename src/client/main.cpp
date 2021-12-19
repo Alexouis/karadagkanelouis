@@ -47,22 +47,6 @@ void testSFML() {
     sf::RenderWindow window(sf::VideoMode(200, 200), "SFML works!");
     window.draw(sprite);
 }
-/*
-sf::Sprite setHeroPosition(){
-    sf::Texture heroTexture;
-    if (!heroTexture.loadFromFile("src/client/1.png"))
-    {
-        // error...
-    }
-
-    sf::Sprite heroSprite;
-    heroSprite.setTexture(heroTexture);
-    //heroSprite.setPosition(sf::Vector2f(20.f, 20.f));
-    //heroSprite.scale(sf::Vector2f(1.f,1.f));
-   // renderWindow.draw(heroSprite);
-   return heroSprite;
-}
-*/
 
 void renderRealMap(void){
     //create map loader and load map
@@ -95,9 +79,6 @@ void renderRealMap(void){
         sf::Vector2f move_pos(500,1500);
         sf::Vector2f move_pos_ortho;
 
-  //      static float move_posx = 500;
-  //      static float move_posy = 1500;
-
         Player Mustafa ;
         Mustafa.setPosition(Position());
                     
@@ -121,43 +102,17 @@ void renderRealMap(void){
         {
             //poll input
             sf::Event event;
-            playerTexture.clear();
-        //	Json::Value root;
-        //    Json::Reader reader;
-        //    std::ifstream img("frames_info.json", );
-            
-            //draw map
-           // renderWindow.clear();
-           //playerTexture.clear(sf::Color::Red);
-            
-        // root["demon"]["demon_idle_w"]["n"]        
+            playerTexture.clear();      
             sf::Texture heroTexture;
             if (!heroTexture.loadFromFile("res/frames.png"))
             {
                 // error...
             }
-   /*       sf::Sprite heroSprite;
-            heroSprite.setTexture(heroTexture);
-            heroSprite.setTextureRect(sf::IntRect(300,300,100,70));
-            heroSprite.setPosition(sf::Vector2f(500.f, 200.f));
-            heroSprite.scale(sf::Vector2f(20.f,20.f));
-            sf::Sprite heroSprite2;
-            heroSprite2.setTexture(heroTexture);
-            heroSprite2.setTextureRect(sf::IntRect(0, 0, 100, 80));
-            heroSprite2.setPosition(sf::Vector2f(-500.f, 200.f));
-            heroSprite2.scale(sf::Vector2f(20.f,20.f)); */
             sf::Sprite heroSprite3;
             heroSprite3.setTexture(heroTexture);
             heroSprite3.setTextureRect(sf::IntRect(435, 520, 50, 60));
-        //    heroSprite3.setPosition(sf::Vector2f(posx, posy));
             heroSprite3.setPosition(sf::Vector2f(move_pos_ortho.x-40*sens*5/2, move_pos_ortho.y-60*5)); //TESTER ANIMATION ICI
             heroSprite3.scale(sf::Vector2f(sens*5.f,5.f));
-  //          backgroundTexture.draw(gameMap);
-  //          playerTexture.draw(heroSprite);
-  //          playerTexture.draw(heroSprite2);
-  //          playerTexture.draw(heroSprite3);
-  //          playerTexture.draw(text);
-  //          playerTexture.display();
             renderWindow.clear();
            
 
@@ -172,20 +127,7 @@ void renderRealMap(void){
             if(debug)gameMap.drawLayer(renderWindow, tmx::MapLayer::Debug);
             renderWindow.draw(heroSprite3);
 //            renderWindow.draw(plTexture);
-            renderWindow.display();
-            //TEST POUR ANIMATION
-/*            if (move_posx != posx){
-                if (abs(move_posx-posx)<30) move_posx=posx;
-                else if (move_posx < posx) move_posx=move_posx+30;
-                else move_posx= move_posx -30;
-            }
-            //METTRE TOUT CA EN ORTHOGONAL
-            else if (move_posy != posy){
-                if (abs(move_posy-posy)<30) move_posy=posy;
-                else if(move_posy < posy) move_posy=move_posy+30;
-                else move_posy= move_posy -30;
-            }
-*/          
+            renderWindow.display();        
             sf::Vector2f destination(Mustafa.getPosition().getX()*270+270/2,Mustafa.getPosition().getY()*270+270/2);
    //       destination = gameMap.orthogonalToIsometric(posHero);
             if (move_pos.x != destination.x){
@@ -282,22 +224,30 @@ void randomMap(void){
 
 //ON ARRIVE PAS A CHARGER LA MAP, MAPLOADER,/// VERIFIER LOADDTEXTURE /// FAIRE MARCHER LE TOUT
  void renderMap(void){
-    //tmx::MapLoader *gMap = new tmx::MapLoader("res/map/");
-    //gMap->load("map_1.tmx");
+
     GameWindow gamewindow;
-    
+    engine::Engine ngine;
+    gamewindow.shareStateWith(ngine);
+    bool debug = false;
 
     while(gamewindow.window.isOpen()){
-        std::cout << "11111111111\n";
+
+        sf::Event event;
+
+
+        while(gamewindow.window.pollEvent(event)) {
+            if (event.type == sf::Event::Closed)
+                gamewindow.window.close();
+            if(event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::D)
+                debug = !debug;
+            if(event.type == sf::Event::MouseButtonPressed){
+            }
+        }
 
         gamewindow.update();
-        std::cout << "11111111111\n";
-
         gamewindow.window.clear();
-        //gamewindow.window.draw(*gMap);
         gamewindow.draw();
         gamewindow.window.display();
-      
 
     }
 

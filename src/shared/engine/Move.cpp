@@ -18,8 +18,11 @@ namespace engine{
 
     }
 
-    void Move::action (state::State * gstate) {
+    void Move::action (std::shared_ptr<state::State>& gstate) {
         gstate->moveCurrentPlayer((int)this->dstX, (int)this->dstY);
+    }
+
+    Move::~Move (){
     }
 
 };
