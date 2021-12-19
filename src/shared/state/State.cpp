@@ -1,5 +1,6 @@
 #include "State.h"
 #include <functional>
+#include <iostream>
 
 namespace state {
     /*
@@ -10,12 +11,44 @@ namespace state {
         MapTile tile;
         tile.state = FREE;
         tile.type  = GRASS;
+        this->gameMap.resize(mapHeight);
+        
+
+
         for(unsigned int i = 0; i < mapWidth; i++){
             for(unsigned int j = 0; j < mapHeight; j++){
-                this->gameMap[j][i] = tile;
+                this->gameMap[j].push_back(tile);
+                //std::cout << "GRASS  FREE\n";
             }
-            
         }
+        
+
+        this->players.resize(2);
+        auto player = std::unique_ptr<Player>(new Player("goku",DEMON, Position(10,10), 1, true));
+        std::string playerId = player->getName();
+        playerId.push_back('0');
+        this->players_id.push_back(playerId);
+
+
+        this->players[0] = new std::map<std::string, std::unique_ptr<Player>>;
+        this->players[1] = new std::map<std::string, std::unique_ptr<Player>>;
+        this->players[playerId.back()-'0'][0][playerId] = std::move(player);
+
+        this->gameMap[10][10].state = OCCUPIED;
+        this->gameMap[10][10].player_id = playerId;
+
+        player = std::unique_ptr<Player>(new Player("buu",HERO, Position(11,11), 1, true));
+        playerId = player->getName();
+        playerId.push_back('1');
+        this->players_id.push_back(playerId);
+        this->players[playerId.back()-'0'][0][playerId] = std::move(player);
+
+        
+        this->gameMap[11][11].state = OCCUPIED;
+        this->gameMap[11][11].player_id = playerId;
+
+        this->init();
+        
     };
     void State::init (){
         this->turn = 0;
@@ -73,13 +106,6 @@ namespace state {
     void State::setChronoCount(char chronoCount){
         this->chronoCount= chronoCount;
     };
-    //get the player 
-    const std::vector<std::string>& State::getPlayers_id() const{
-        return this->players_id;
-    };
-    void State::setPlayers_id(const std::vector<std::string>& player_id){
-        this->players_id = player_id;
-    };
     bool State::getGameOver() const{
         return this->gameOver;
     };
@@ -91,21 +117,27 @@ namespace state {
         if(st == OCCUPIED){
             std::string attackerId = this->players_id[this->actualPlayerIndex];
             std::string taregtId = this->gameMap[targetY][targetX].player_id;
-            (this->players[attackerId.back()][attackerId])->attack(this->players[taregtId.back()][taregtId]);
+            this->players[attackerId.back()-'0']->find(attackerId)->second->attack(this->players[taregtId.back()-'0']->find(taregtId)->second);
         }
     };
     void State::moveCurrentPlayer (int dstX, int dstY){
         std::string id = this->players_id[this->actualPlayerIndex];
-        Position prevPos = (this->players[id.back()][id])->getPosition();
+        Position prevPos = this->players[id.back()-'0']->find(id)->second->getPosition();
         this->gameMap[prevPos.getY()][prevPos.getX()].state = FREE;
         this->gameMap[dstY][dstX].player_id = id;
-        this->players[id.back()][id]->move(dstX,dstY);
+        this->players[id.back()-'0']->find(id)->second->move(dstX,dstY);
         this->gameMap[dstY][dstX].state = OCCUPIED;
         this->gameMap[dstY][dstX].player_id = id;
     };
     Position State::playerPosition (char playerIndex) {
         std::string id = this->players_id[playerIndex];
-        return (this->players[id.back()][id])->getPosition();
+        return this->players[id.back()-'0']->find(id)->second->getPosition();
     };
+    state::playerClass State::getPlayerClass (char playerIndex) {
+        const std::string id = this->players_id[playerIndex];
+        auto pClass = this->players[id.back()-'0']->find(id)->second->getPClass();
+        std::cout << "ste\n";
 
+        return pClass;
+    }
 };

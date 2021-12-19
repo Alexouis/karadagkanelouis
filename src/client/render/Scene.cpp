@@ -1,4 +1,5 @@
 #include "Scene.h"
+#include <iostream>
 
 namespace render {
     Scene::Scene ()
@@ -24,7 +25,10 @@ namespace render {
     };
 
     void Scene::update (){
+            std::cout << "boxe";
+        
         for(auto &boxe : this->boxes){
+            std::cout << "boxe";
             (*boxe).update();
         }
     };

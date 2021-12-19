@@ -4,7 +4,7 @@
 namespace state {
     Player::Player(){
         name = "player";
-        playerClass = HERO;
+        pClass = HERO;
         position.setX(0);
         position.setY(0);
         level = 1;
@@ -12,7 +12,7 @@ namespace state {
         isAI = false;
         playing = false;
         status = WAITING;
-        stats = Stats(playerClass,level);
+        stats = Stats(pClass,level);
         struct Attack punch;
         punch.name=STRIKE;
         punch.type=CONTACT;
@@ -23,9 +23,9 @@ namespace state {
         attacks.push_back(punch);
     };
 
-    Player::Player(std::string name, char playerClass, Position position, char level, bool isAI){
+    Player::Player(std::string name, playerClass pClass, Position position, char level, bool isAI){
         Player::name = name;
-        Player::playerClass = playerClass;
+        Player::pClass = pClass;
         Player::position = position;
         Player::level = level;
         Player::orientation = orientation;
@@ -33,9 +33,9 @@ namespace state {
 
         playing = false;
         status = WAITING;
-        stats = Stats(playerClass,level);
+        stats = Stats(pClass,level);
 
-        switch(playerClass)
+        switch(pClass)
         {
             case HERO:
                 struct Attack shoot;
@@ -90,7 +90,7 @@ namespace state {
 
     void Player::init (){
         name = "player";
-        playerClass = HERO;
+        pClass = HERO;
         position.setX(0);
         position.setY(0);
         level = 1;
@@ -98,7 +98,7 @@ namespace state {
         isAI = false;
         playing = false;
         status = WAITING;
-        stats = Stats(playerClass,level);
+        stats = Stats(pClass,level);
         struct Attack punch;
         punch.name=STRIKE;
         punch.type=CONTACT;
@@ -141,12 +141,12 @@ namespace state {
         Player::name = name;
     };
 
-    char Player::getPlayerClass() const{
-        return Player::playerClass;
+    playerClass Player::getPClass() const{
+        return Player::pClass;
     };
 
-    void Player::setPlayerClass(char playerClass){
-        Player::playerClass = playerClass;
+    void Player::setPClass(playerClass pClass){
+        Player::pClass = pClass;
     };
 
     const Position& Player::getPosition() const{

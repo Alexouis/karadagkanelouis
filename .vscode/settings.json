@@ -68,7 +68,7 @@
         "stop_token": "cpp",
         "variant": "cpp"
     },
-    "C_Cpp.errorSquiggles": "Enabled",
+    "C_Cpp.errorSquiggles": "Disabled",
     "jupyter.jupyterServerType": "local",
     "cmake.configureOnOpen": true
 }

@@ -4,7 +4,9 @@
 namespace render {
     GameWindow::GameWindow()
     {
-       // tmx::MapLoader ml("res/map/");
+        this->currentScene = SceneId::FIGHTSCENE;        
+        this->initScenes();
+
         this->gameMap->load("map_1.tmx");
         //uint bgw = this->gameMap->getMapSize().x;
         //uint bgh = this->gameMap->getMapSize().y;
@@ -21,9 +23,13 @@ namespace render {
         // = sf::RenderWindow(sf::VideoMode(2000u, 600u), "TMX Loader");
         this->window.setVerticalSyncEnabled(true);
         sf::View view = this->window.getView();
-        view.zoom(5.709);
+        view.zoom(10);
         view.setCenter(this->center.x, this->center.y);
         this->window.setView(view);
+        std::cout << "out\n";
+
+        
+
         //this->window.clear();
         //this->window.draw(this->background);
         //this->window.display();
@@ -31,7 +37,8 @@ namespace render {
         //adjust the view to centre on map
         
 
-        initScenes();
+
+
         
     };
 
@@ -42,24 +49,35 @@ namespace render {
 
     void GameWindow::initScenes ()
     {   
-        std::unique_ptr<Scene> holder = std::unique_ptr<Scene>(new Scene()); 
-        sceneQueue.push(std::move(holder));//first is menu
-        holder = std::unique_ptr<Scene>(new FightScene());//2nd is Fight scenne
-        sceneQueue.push(std::move(holder));
-        holder = std::unique_ptr<Scene>(new Scene());//last is ending scene 
-        sceneQueue.push(std::move(holder));
+
+        std::unique_ptr<Scene> holder = std::unique_ptr<Scene>(new Scene); 
+        this->scenes.push_back(std::move(holder));//first is menu
+        auto fc = std::unique_ptr<FightScene>(new FightScene);//2nd is Fight scenne
+        std::cout << "draw\n";
+
+        this->scenes.push_back(std::move(fc));
+        
+        //holder.reset(new Scene);//last is ending scene 
+        //this->scenes.push_back(std::move(holder));
+        //std::cout << "draw\n";
+
     };
 
     void GameWindow::draw()
     {   
         this->window.draw(*(this->gameMap));
-        this->window.draw(*(this->sceneQueue.front()));  
+        this->window.draw(*(this->scenes[this->currentScene]));  
+        std::cout << "draw\n";
 
     };
 
     void GameWindow::update()
     {
-        this->sceneQueue.front()->update();
+        std::cout <<currentScene <<"upd\n";
+        
+        this->scenes[this->currentScene]->update();
+        std::cout << "upd000000\n";
+
     };
 
     
@@ -70,12 +88,12 @@ namespace render {
 
     // Setters and Getters
 
-    const std::queue<std::unique_ptr<Scene>>& GameWindow::getSceneQueue() const
+    const std::vector<std::unique_ptr<Scene>>& GameWindow::getScenes() const
     {
-        return this->sceneQueue;
+        return this->scenes;
     };
 
-    void setSceneQueue(const std::queue<std::unique_ptr<Scene>>& sceneQueue){
+    void setScenes(const std::vector<std::unique_ptr<Scene>>& scenes){
 
     };
 

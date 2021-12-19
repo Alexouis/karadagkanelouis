@@ -38,11 +38,11 @@ class MyDrawable : public sf::Drawable
             target.draw(m_sprite, states);
             // ... or use the low-level API
             states.texture = &m_texture;
-            target.draw(m_vertices, states);
+            //target.draw(m_vertices, states);
         }
         sf::Sprite m_sprite;
         sf::Texture m_texture;
-        sf::VertexArray m_vertices;
+        //sf::VertexArray m_vertices;
 };
 
 int main()

@@ -6,11 +6,11 @@ namespace render {
 
     };
 
-    Button::Button (std::string s, sf::Font& font, sf::Vector2f position,  enum buttonStyle style, int width, int height)
+    Button::Button (std::string s, sf::Font& font, sf::Vector2f position, enum buttonStyle style)
     {
 
-        dimensions.x = width;
-        dimensions.y = height;
+       // dimensions.x = width;
+        //dimensions.y = height;
 
         //set position
     pos = position;

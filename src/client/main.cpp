@@ -288,7 +288,11 @@ void randomMap(void){
     
 
     while(gamewindow.window.isOpen()){
+        std::cout << "11111111111\n";
+
         gamewindow.update();
+        std::cout << "11111111111\n";
+
         gamewindow.window.clear();
         //gamewindow.window.draw(*gMap);
         gamewindow.draw();

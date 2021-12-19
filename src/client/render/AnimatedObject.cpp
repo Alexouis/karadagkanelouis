@@ -10,29 +10,42 @@
  */
 
 #include "AnimatedObject.h"
+#include <iostream>
+#include "tmx/MapLoader.h"
 
 #define SPRITE_SCALE 5.f
 
 namespace render{
     AnimatedObject::AnimatedObject(sf::Texture & frames){
         this->mSprite.setTexture(frames);
+        sf::IntRect rect =  this->mSprite.getTextureRect();
+	    std::cout << "left = " << rect.left << ", top = " << rect.top << ", width = " << rect.width << ", height = " << rect.height << std::endl;
         this->mCurrentFrame = 0;
+      //  abort();
+        
     };
 
     void AnimatedObject::draw (sf::RenderTarget& target, sf::RenderStates states) const{
+        sf::IntRect rect =  this->mSprite.getTextureRect();
+	    std::cout << "left = " << rect.left << ", top = " << rect.top << ", width = " << rect.width << ", height = " << rect.height << std::endl;
         target.draw(this->mSprite, states);
         
     };
 
     void AnimatedObject::update (sf::Time dt, Json::Value framesInfos, std::string frameKey, sf::Vector2f positions){
-        int i_x=framesInfos["demon_idle_nw"]["w"].asInt()*mCurrentFrame;
-        int i_y=framesInfos["demon_idle_nw"]["y_offset"].asInt();
-        int scale_x=framesInfos["demon_idle_nw"]["w"].asInt();
-        int scale_y=framesInfos["demon_idle_nw"]["h"].asInt();
+        
+        int i_x=framesInfos[frameKey]["w"].asInt()*mCurrentFrame;
+        int i_y=framesInfos[frameKey]["y_offset"].asInt();
+        int scale_x=framesInfos[frameKey]["w"].asInt();
+        int scale_y=framesInfos[frameKey]["h"].asInt();
 
+        //this->mSprite.setTextureRect(sf::IntRect(435, 520, 50, 60));
         this->mSprite.setTextureRect(sf::IntRect(i_x, i_y, scale_x, scale_y));
-        this->mSprite.setPosition(positions.x,positions.y);
+        //this->mSprite.setPosition(1000,500);
         this->mSprite.scale(sf::Vector2f(SPRITE_SCALE,SPRITE_SCALE));
+        
+        std::cout<< "FightScene upd idx = " << i_x << " " << i_y << " " << scale_x << " " << scale_y << " " << std::endl;
+
     };
 
 
