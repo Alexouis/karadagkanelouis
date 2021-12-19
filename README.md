@@ -45,6 +45,7 @@
 ---
 #### [Jalon 2] :
 
-    ./bin/client render //(affiche de la map de jeu utilisée)
-    ./bin/client randomMap //(affichache aléatoire de map).
+    ./bin/client render //2.1->(affiche de la map de jeu utilisée)
+    ./bin/client randomMap //2.1->(affichache aléatoire de map).
+    ./bin/client engine //2.2->(affichache aléatoire de map).
 ---
