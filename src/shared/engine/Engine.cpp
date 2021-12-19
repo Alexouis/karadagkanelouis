@@ -43,6 +43,10 @@ namespace engine{
         this->qcmd.push(std::move(cmd));
     }
 
+    void Engine::execute(std::unique_ptr<Command>& cmd){
+        cmd->action(this->currentState);
+    }
+
     void Engine::setState(std::shared_ptr<state::State>& gState){
         this->currentState = gState;
     }

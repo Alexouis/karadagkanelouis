@@ -51,7 +51,11 @@ namespace render {
     }
 
     void Scene::bindState (engine::Engine& ngine){
-        
+
+    }
+
+    sf::Vector2f Scene::screenToWorld (sf::Vector2f position){
+
     }
 
     Scene::~Scene(){

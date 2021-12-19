@@ -222,24 +222,18 @@ void randomMap(void){
 
 }
 
-//ON ARRIVE PAS A CHARGER LA MAP, MAPLOADER,/// VERIFIER LOADDTEXTURE /// FAIRE MARCHER LE TOUT
  void renderMap(void){
 
     GameWindow gamewindow;
-    engine::Engine ngine;
-    gamewindow.shareStateWith(ngine);
-    bool debug = false;
 
     while(gamewindow.window.isOpen()){
 
         sf::Event event;
 
-
         while(gamewindow.window.pollEvent(event)) {
             if (event.type == sf::Event::Closed)
                 gamewindow.window.close();
             if(event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::D)
-                debug = !debug;
             if(event.type == sf::Event::MouseButtonPressed){
             }
         }
@@ -255,6 +249,44 @@ void randomMap(void){
 } 
 
 
+ void engineExplo(void){
+
+    GameWindow gamewindow;
+    engine::Engine ngine;
+    std::unique_ptr<engine::Command> cmdHolder;
+    gamewindow.shareStateWith(ngine);
+    //ngine.start();
+
+    bool debug = false;
+
+    while(gamewindow.window.isOpen()){
+
+        sf::Event event;
+
+        sf::Vector2f mousePosScreen = gamewindow.window.mapPixelToCoords(sf::Mouse::getPosition(gamewindow.window));
+        sf::Vector2f mousePosWorld = gamewindow.screenToWorld(mousePosScreen);
+        while(gamewindow.window.pollEvent(event)) {
+            if (event.type == sf::Event::Closed)
+                gamewindow.window.close();
+            if(event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::D)
+                debug = !debug;
+            if(event.type == sf::Event::MouseButtonPressed){
+                
+                cmdHolder = std::unique_ptr<engine::Command>(new engine::Move((int)mousePosWorld.x, (int)mousePosWorld.y));
+                ngine.execute(cmdHolder);
+            }
+        }
+
+        gamewindow.update();
+        gamewindow.window.clear();
+        gamewindow.draw();
+        gamewindow.window.display();
+
+    }
+
+    
+} 
+
 int main(int argc,char* argv[])
 {
 
@@ -268,13 +300,12 @@ int main(int argc,char* argv[])
 
     if(strcmp(argv[1], "client") == 0){
         testSFML();
-    }else if(strcmp(argv[1], "render") == 0){
-      //  Background hahaha;
-      //  Background::setGameMap(Background::getGameMap());
-
-        renderRealMap();
-    }else if(strcmp(argv[1], "renderMap") == 0){
+    }
+    else if(strcmp(argv[1], "render") == 0){
         renderMap();
+    }
+    else if(strcmp(argv[1], "engine") == 0){
+        engineExplo();
     }else if(strcmp(argv[1], "randomMap") == 0){
         randomMap();
     }

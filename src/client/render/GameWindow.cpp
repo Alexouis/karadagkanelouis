@@ -82,6 +82,9 @@ namespace render {
     }
 
     
+    sf::Vector2f GameWindow::screenToWorld (sf::Vector2f position){
+        return (this->scenes[SceneId::FIGHTSCENE])->screenToWorld(position);
+    }
     
     
 
