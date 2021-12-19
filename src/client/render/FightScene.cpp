@@ -76,7 +76,7 @@ namespace render{
     sf::Vector2f FightScene::screenToWorld (sf::Vector2f position){
         sf::Vector2f worldPos = this->gameMap->orthogonalToIsometric(position);
         worldPos.x = floor(worldPos.x/278);
-        worldPos.y = floor(worldPos.y/27/);
+        worldPos.y = floor(worldPos.y/278);
         return worldPos;
     }
 

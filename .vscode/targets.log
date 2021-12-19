@@ -6,12 +6,11 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 # This is free software: you are free to change and redistribute it.
 # There is NO WARRANTY, to the extent permitted by law.
 
-# Make data base, printed on Sun Dec 19 09:23:33 2021
+# Make data base, printed on Sun Dec 19 14:29:24 2021
 
 # Variables
 
 # environment
- 
 GDK_BACKEND = x11
 # environment
 LC_ALL = C
@@ -22,6 +21,7 @@ VSCODE_IPC_HOOK_EXTHOST = /run/user/1000/vscode-ipc-0b3d85fc-86cd-4412-9c53-8678
 # environment
 VSCODE_CWD = /home/mkas
 # environment
+ 
 WINDOWPATH = 2
 # environment
 GDM_LANG = en_US.UTF-8
@@ -197,7 +197,6 @@ HOME = /home/mkas
 QT_IM_MODULE = ibus
 # environment
 _JAVA_OPTIONS = -Dawt.useSystemAAFontSettings=on -Dswing.aatext=true
- 
 # environment
 ELECTRON_RUN_AS_NODE = 1
 # environment
@@ -263,6 +262,7 @@ bin/server:
 	@$(MAKE) -s -C build server
 
 rapport/ai.pdf: src/ai.dia
+ 
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
@@ -318,7 +318,7 @@ src/engine.dia:
 # Not a target:
 Makefile:
 #  Implicit rule search has been done.
-#  Last modified 2021-12-01 14:13:54.185493609
+#  Last modified 2021-12-19 14:23:49.804172302
 #  File has been updated.
 #  Successfully updated.
 
@@ -383,6 +383,16 @@ src/state.dia:
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
+
+install_extern_deps:
+#  Phony target (prerequisite of .PHONY).
+#  Implicit rule search has not been done.
+#  File does not exist.
+#  File has not been updated.
+#  recipe to execute (from 'Makefile', line 165):
+	@echo 'submodules intallation'
+	@rm -rf extern/tmx-loader
+	@git clone git@github.com:nskley/tmx-loader.git extern/tmx-loader
 
 rapport/module.pdf: src/module.dia
 #  Implicit rule search has not been done.
@@ -492,25 +502,25 @@ install_submodules:
 #  Modification time never checked.
 #  File has not been updated.
 
-.PHONY: configure build clean extern test testdocker list install-requirements push_git code-coverage install_submodules
+.PHONY: configure build clean extern test testdocker list install-requirements push_git code-coverage install_submodules install_extern_deps
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
 
 # files hash-table stats:
-# Load=30/1024=3%, Rehash=0, Collisions=0/81=0%
+# Load=31/1024=3%, Rehash=0, Collisions=0/84=0%
 # VPATH Search Paths
 
 # No 'vpath' search paths.
 
 # No general ('VPATH' variable) search path.
 
-# strcache buffers: 1 (0) / strings = 55 / storage = 561 B / avg = 10 B
-# current buf: size = 8162 B / used = 561 B / count = 55 / avg = 10 B
+# strcache buffers: 1 (0) / strings = 56 / storage = 581 B / avg = 10 B
+# current buf: size = 8162 B / used = 581 B / count = 56 / avg = 10 B
 
-# strcache performance: lookups = 115 / hit rate = 52%
+# strcache performance: lookups = 120 / hit rate = 53%
 # hash-table stats:
-# Load=55/8192=1%, Rehash=0, Collisions=0/115=0%
-# Finished Make data base on Sun Dec 19 09:23:33 2021
+# Load=56/8192=1%, Rehash=0, Collisions=0/120=0%
+# Finished Make data base on Sun Dec 19 14:29:24 2021
 
  

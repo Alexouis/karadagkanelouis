@@ -11,7 +11,9 @@
 
 #### Logiciels requis :
     make install-requirements
-#### install submodules
+#### If specific tag version (otherwise : error !)
+    make install_extern_deps
+#### install submodules (only if not tag but hole project)
     make install_submodules
 #### clean extern configure build :
     make
