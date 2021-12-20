@@ -48,4 +48,5 @@
     ./bin/client render //2.1->(affiche de la map de jeu utilisée)
     ./bin/client randomMap //2.1->(affichache aléatoire de map).
     ./bin/client engine //2.2->(engine simple : clique sur map --> effet).
+    ./bin/client engine //2.final->(simple IA = essai d'attaquer betement un joueur immobile).
 ---
