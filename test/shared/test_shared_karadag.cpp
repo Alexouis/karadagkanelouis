@@ -89,11 +89,23 @@ BOOST_AUTO_TEST_CASE(TestSFML)
     
     //Test Player
     Player erza{};
-
+    Player valla("hahaha",DEMON,Position(3,5),1,0);
+    valla.move(Position(2,5));
+    valla.move(2,5);
+    valla.setPosXY(5,8);
+    BOOST_CHECK_EQUAL(valla.getPosition().getX(),5);
+    BOOST_CHECK_EQUAL(valla.getPosition().getY(),8);
+    erza.init();
+    int x=erza.getLevel();
+    
     erza.setName("Erza");
     BOOST_CHECK_EQUAL(erza.getName(),"Erza");
 
+    
     erza.setPClass(HERO);
+    
+    erza.setStats(Stats(5,1));
+
     BOOST_CHECK_EQUAL(erza.getPClass(),HERO);
 
     erza.setLevel(10);
@@ -112,6 +124,10 @@ BOOST_AUTO_TEST_CASE(TestSFML)
 
     erza.setStatus(PLAYING);
     BOOST_CHECK_EQUAL(erza.getStatus(),PLAYING);
+    erza.pass();
+    BOOST_CHECK_EQUAL(erza.getStatus(),WAITING);
+    erza.setStatus(PLAYING);
+    BOOST_CHECK_EQUAL(erza.getStatus(),PLAYING);
     erza.setStatus(WAITING);
     BOOST_CHECK_EQUAL(erza.getStatus(),WAITING);
     erza.setStatus(DEAD);
@@ -128,10 +144,39 @@ BOOST_AUTO_TEST_CASE(TestSFML)
     BOOST_CHECK_EQUAL(erza.getPosition().getX(),1);
     BOOST_CHECK_EQUAL(erza.getPosition().getY(),9);
 
+    std::vector<Attack> attack_list;
+    Attack hit;
+    hit.damage=10;
+    hit.cost = 5;
+    Attack fire;
+    Attack shot;
+    attacks.push_back(hit);
+    attacks.push_back(fire);
+    attacks.push_back(shot);
+
+    erza.setAttacks(attack_list);
+    valla.setAttacks(erza.getAttacks());
     
+    stat.setHp(100);
+    stat.setAp(10);
+    erza.setStats(stat);
+    valla.setStats(stat);
 
+    std::unique_ptr<Player> target{};
+    target->setStats(stat);
+    
+    //  faire attaquer
+    BOOST_CHECK_EQUAL(target->getStats().getHp(),100);
+    char mmm = 0;
+    valla.setCurrentAttackIndex(mmm);
+    BOOST_CHECK_EQUAL(valla.getCurrentAttackIndex(),mmm);
+    valla.attack(target);
+    BOOST_CHECK_EQUAL(target->getStats().getHp(),90);
 
-    //
+    //State test
+
+    //State gameState();
+    //gameState.init();
 
 
 

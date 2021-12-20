@@ -210,7 +210,13 @@ namespace state {
         return Player::level;
     };
 
-
+    char Player::getCurrentAttackIndex() const{
+        return this->currentAttackIndex;
+    };
+    void Player::setCurrentAttackIndex(char currentAttackIndex){
+        this->currentAttackIndex = currentAttackIndex;
+    };
+    
 
     Player::~Player(){};
 };
