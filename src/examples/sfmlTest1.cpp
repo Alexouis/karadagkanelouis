@@ -178,8 +178,6 @@ void testSFML() {
 void renderRenderRealMap(void){
     //create map loader and load map
 	tmx::MapLoader ml("res/map/");
-	std::unique_ptr<tmx::MapLoader> ml1 = std::unique_ptr<tmx::MapLoader>(new tmx::MapLoader("res/map/"));
-	ml1->load("map_1.tmx");
 	ml.load("map_1.tmx");
 	bool collision;
 	bool visible = false;
@@ -293,21 +291,21 @@ void renderRenderRealMap(void){
 		//draw map
 		renderWindow.clear();
 		renderWindow.draw(ml);
-		// auto& layers = ml.getLayers();
-		// for(auto& layer : layers)
-		// {
-		// 	std::cout<<layer.name << " type = " << layer.type << std::endl;
-		// 	if(layer.name == "ground"){
+		auto& layers = ml.getLayers();
+		for(auto& layer : layers)
+		{
+			std::cout<<layer.name << " type = " << layer.type << std::endl;
+			if(layer.name == "Trees"){
 				
-		// 		for(auto tile = layer.tiles.begin(); tile != layer.tiles.end(); ++tile){
-		// 			renderWindow.draw(tile->sprite);
-		// 			std::cout << "ok\n";
-		// 		}
-		// 	}
-		// }
+				for(auto tile = layer.tiles.begin(); tile != layer.tiles.end(); ++tile){
+					renderWindow.draw(tile->sprite);
+					std::cout << "ok\n";
+				}
+			}
+		}
 		renderWindow.draw(m_gridVertices);
 		
-		if(show)ml.drawLayer(renderWindow, 0,tmx::MapLayer::Debug);
+		if(show)ml.drawLayer(renderWindow, 1,tmx::MapLayer::Debug);
 		renderWindow.display();
 
 
