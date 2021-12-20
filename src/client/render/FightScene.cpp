@@ -65,7 +65,7 @@ namespace render{
         ngine.setState(this->gState);
     }
 
-    sf::Vector2f FightScene::worldToScreen (state::Position& position){
+    sf::Vector2f FightScene::worldToScreen (state::Position position){
         sf::Vector2f screenPos = sf::Vector2f((float)position.getX(), (float)position.getY());
         screenPos.x=screenPos.x*270+270/2;
         screenPos.y=screenPos.y*270+270/2;

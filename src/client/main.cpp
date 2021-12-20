@@ -32,6 +32,8 @@
 #include <unistd.h>
 #include <csignal>
 
+#define MAP_SIZE_XY 22
+
 using namespace std;
 using namespace state;
 using namespace render;
@@ -56,10 +58,10 @@ sf::Vector2f randomPosition(sf::Vector2f currPos){
     int x = rand() % 2;
     if(x){
         float dx = (rand() % 3) -1;
-        dst.x += (currPos.x + dx >=0) * dx;
+        dst.x += ((currPos.x + dx >=0) && (currPos.x + dx < MAP_SIZE_XY)) * dx;
     }else{
         float dy = (rand() % 3) -1;
-        dst.y += (currPos.y + dy >=0) * dy;
+        dst.y += ((currPos.y + dy >=0) && (currPos.y + dy < MAP_SIZE_XY)) * dy;
     }
 
     return dst;
@@ -125,8 +127,8 @@ void randomMap(void){
         while(gamewindow.window.pollEvent(event)) {
             if (event.type == sf::Event::Closed)
                 gamewindow.window.close();
-            if(event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::D)
-            if(event.type == sf::Event::MouseButtonPressed){
+            if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::D)
+            if (event.type == sf::Event::MouseButtonPressed){
             }
         }
 
@@ -194,6 +196,9 @@ void randomMap(void){
 
     sf::Vector2f destination = randomPosition(sf::Vector2f(11,10));
     sf::Vector2f prevPos     = destination;
+    sf::Vector2f center      = destination;
+    gamewindow.setCenter(gamewindow.worldToScreen(center));
+    
 
     while(gamewindow.window.isOpen()){
         sf::Event event;
@@ -206,15 +211,21 @@ void randomMap(void){
         if(readyToMove){
             readyToMove = false;
             destination = randomPosition(prevPos);
-            cmdHolder = std::unique_ptr<engine::Command>(new engine::Move((int)destination.x, (int)destination.y));
+            if(abs(destination.x-center.x) > 5 || abs(destination.y-center.y) > 5){
+                center = destination;
+                gamewindow.setCenter(gamewindow.worldToScreen(center));
+            }
+            cmdHolder   = std::unique_ptr<engine::Command>(new engine::Move((int)destination.x, (int)destination.y));
             ngine.execute(cmdHolder);
-            prevPos = destination;
-        }
+            prevPos     = destination;
 
+            
+        }
         gamewindow.update();
         gamewindow.window.clear();
         gamewindow.draw();
         gamewindow.window.display();
+
     }
 
     

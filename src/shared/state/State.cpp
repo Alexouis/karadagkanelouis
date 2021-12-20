@@ -8,10 +8,11 @@ namespace state {
     
     */
     State::State (int mapWidth, int mapHeight){
+        this->init();
+
         MapTile tile;
         tile.state = FREE;
         tile.type  = GRASS;
-        this->playersCount = 2;
         this->gameMap.resize(mapHeight);
 
         for(unsigned int i = 0; i < mapWidth; i++){
@@ -20,7 +21,7 @@ namespace state {
             }
         }
 
-        this->players.resize(2);
+        this->players.resize(this->playersCount);
         auto player = std::unique_ptr<Player>(new Player("goku",DEMON, Position(10,10), 1, true));
         std::string playerId = player->getName();
         playerId.push_back('0');
@@ -43,11 +44,11 @@ namespace state {
         this->gameMap[11][11].state = OCCUPIED;
         this->gameMap[11][11].player_id = playerId;
 
-        this->init();
         
     };
     void State::init (){
         this->turn = 0;
+        this->playersCount = 2;
         this->actualPlayerIndex = 0;
         this->chronoCount = 60; //60 seconds
         this->gameOver = false;

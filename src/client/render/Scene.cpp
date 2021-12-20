@@ -58,6 +58,10 @@ namespace render {
 
     }
 
+    sf::Vector2f Scene::worldToScreen (state::Position position){
+
+    }
+
     Scene::~Scene(){
 
     }

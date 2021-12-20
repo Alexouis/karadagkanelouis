@@ -4,12 +4,13 @@
 namespace render {
     GameWindow::GameWindow()
     {
+        this->zoom = 4;
         this->currentScene = SceneId::FIGHTSCENE;        
         this->initScenes();
         this->window.create(sf::VideoMode(this->width, this->height), "TMX Loader");
         this->window.setVerticalSyncEnabled(true);
         sf::View view = this->window.getView();
-        view.zoom(10);
+        view.zoom(this->zoom);
         view.setCenter(this->center.x, this->center.y);
         this->window.setView(view); 
     };
@@ -35,7 +36,7 @@ namespace render {
     };
 
     void GameWindow::update()
-    {        
+    {
         this->scenes[this->currentScene]->update();
     };
 
@@ -64,6 +65,9 @@ namespace render {
     void GameWindow::setZoom(float zoom)
     {
         this->zoom = zoom;
+        sf::View view = this->window.getView();
+        view.zoom(this->zoom);
+        this->window.setView(view); 
     };
 
     const sf::Vector2<float>& GameWindow::getCenter() const
@@ -74,6 +78,9 @@ namespace render {
     void GameWindow::setCenter(const sf::Vector2<float>& center)
     {
         this->center = center;
+        sf::View view = this->window.getView();
+        view.setCenter(this->center.x, this->center.y);
+        this->window.setView(view); 
     };
 
 
@@ -86,6 +93,10 @@ namespace render {
         return (this->scenes[SceneId::FIGHTSCENE])->screenToWorld(position);
     }
     
+
+    sf::Vector2f GameWindow::worldToScreen (sf::Vector2f position){
+        return (this->scenes[SceneId::FIGHTSCENE])->worldToScreen(state::Position((int)(position.x), (int)(position.y)));
+    }
     
 
     GameWindow::~GameWindow ()
