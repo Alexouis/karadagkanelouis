@@ -166,7 +166,7 @@ void randomMap(void){
                 debug = !debug;
             if(event.type == sf::Event::MouseButtonPressed){
                 
-                cmdHolder = std::unique_ptr<engine::Command>(new engine::Move((int)mousePosWorld.x, (int)mousePosWorld.y));
+                cmdHolder = std::unique_ptr<engine::Command>(new engine::Command(&engine::Action::move, (int)mousePosWorld.x, (int)mousePosWorld.y));
                 ngine.execute(cmdHolder);
             }
         }
@@ -215,7 +215,7 @@ void randomMap(void){
                 center = destination;
                 gamewindow.setCenter(gamewindow.worldToScreen(center));
             }
-            cmdHolder   = std::unique_ptr<engine::Command>(new engine::Move((int)destination.x, (int)destination.y));
+            cmdHolder = std::unique_ptr<engine::Command>(new engine::Command(&engine::Action::move, (int)(destination.x), (int)(destination.y)));
             ngine.execute(cmdHolder);
             prevPos     = destination;
 

@@ -12,12 +12,12 @@
 #include "Command.h"
 
 namespace engine{
-   Command::Command (){
+   Command::Command (void(*action)(std::shared_ptr<state::State>&, int, int) , int x, int y){
+      this->x = x;
+      this->y = y;
+      this->action = action;
    }
 
-   void Command::action (std::shared_ptr<state::State>& gstate){
-
-   }
 
    Command::~Command (){
    }
