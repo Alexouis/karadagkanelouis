@@ -182,11 +182,6 @@ void randomMap(void){
 } 
 
 
-void mover(std::shared_ptr<state::State>& gstate, int dstX, int dstY){
-        //gstate->moveCurrentPlayer(dstX, dstY);
-        std::cout << "move\n";
-    }
-
 
  void random_ai(void){
     signal(SIGALRM, &sigalrm_handler); // set a signal handler 
@@ -201,7 +196,7 @@ void mover(std::shared_ptr<state::State>& gstate, int dstX, int dstY){
     sf::Vector2f prevPos     = destination;
     sf::Vector2f center      = destination;
     gamewindow.setCenter(gamewindow.worldToScreen(center));
-    
+
 
     while(gamewindow.window.isOpen()){
         sf::Event event;
@@ -218,9 +213,8 @@ void mover(std::shared_ptr<state::State>& gstate, int dstX, int dstY){
                 center = destination;
                 gamewindow.setCenter(gamewindow.worldToScreen(center));
             }
-            cmdHolder = std::unique_ptr<engine::Command>(new engine::Command(&mover, (int)(destination.x), (int)(destination.y)));
+            cmdHolder = std::unique_ptr<engine::Command>(new engine::Command(&engine::Action::move, (int)(destination.x), (int)(destination.y)));
             ngine.execute(cmdHolder);
-            std::cout << "ok\n" << std::flush;
             prevPos     = destination;
 
             

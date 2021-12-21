@@ -45,7 +45,7 @@ namespace engine{
 
     void Engine::execute(std::unique_ptr<Command>& cmd){
         //std::cout << "eni" <<std::endl;
-        cmd->action(this->currentState, cmdHolder->x, cmdHolder->y);
+        cmd->action(this->currentState, cmd->x, cmd->y);
     }
 
     void Engine::setState(std::shared_ptr<state::State>& gState){

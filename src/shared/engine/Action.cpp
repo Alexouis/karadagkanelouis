@@ -17,8 +17,7 @@ namespace engine{
     }
 
     void Action::move(std::shared_ptr<state::State>& gstate, int dstX, int dstY){
-        //gstate->moveCurrentPlayer(dstX, dstY);
-        std::cout << "move\n";
+        gstate->moveCurrentPlayer(dstX, dstY);
     }
 
     void Action::attack(std::shared_ptr<state::State>& gstate, int targetX, int targetY){
