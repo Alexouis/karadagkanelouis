@@ -8,7 +8,7 @@
  * Copyright (c) 2021  ENSEA(FR)
  * __________________________________________________________________________
  */
-
+#include <iostream>
 #include "engine.h"
 
 namespace engine{
@@ -33,7 +33,7 @@ namespace engine{
             if(!this->qcmd.empty()){
                 this->cmdHolder = std::move(this->qcmd.front());
                 this->qcmd.pop();
-                this->cmdHolder->action(this->currentState);
+                this->cmdHolder->action(this->currentState, cmdHolder->x, cmdHolder->y);
             }
         }
         this->cmdHolder.release();
@@ -44,7 +44,8 @@ namespace engine{
     }
 
     void Engine::execute(std::unique_ptr<Command>& cmd){
-        cmd->action(this->currentState);
+        //std::cout << "eni" <<std::endl;
+        cmd->action(this->currentState, cmd->x, cmd->y);
     }
 
     void Engine::setState(std::shared_ptr<state::State>& gState){

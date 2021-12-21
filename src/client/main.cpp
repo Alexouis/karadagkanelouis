@@ -58,10 +58,10 @@ sf::Vector2f randomPosition(sf::Vector2f currPos){
     int x = rand() % 2;
     if(x){
         float dx = (rand() % 3) -1;
-        dst.x += ((currPos.x + dx >=0) && (currPos.x + dx < MAP_SIZE_XY)) * dx;
+        dst.x   += ((currPos.x + dx >=0) && (currPos.x + dx < MAP_SIZE_XY)) * dx;
     }else{
         float dy = (rand() % 3) -1;
-        dst.y += ((currPos.y + dy >=0) && (currPos.y + dy < MAP_SIZE_XY)) * dy;
+        dst.y   += ((currPos.y + dy >=0) && (currPos.y + dy < MAP_SIZE_XY)) * dy;
     }
 
     return dst;
@@ -166,7 +166,7 @@ void randomMap(void){
                 debug = !debug;
             if(event.type == sf::Event::MouseButtonPressed){
                 
-                cmdHolder = std::unique_ptr<engine::Command>(new engine::Move((int)mousePosWorld.x, (int)mousePosWorld.y));
+                cmdHolder = std::unique_ptr<engine::Command>(new engine::Command(&engine::Action::move, (int)mousePosWorld.x, (int)mousePosWorld.y));
                 ngine.execute(cmdHolder);
             }
         }
@@ -183,8 +183,6 @@ void randomMap(void){
 
 
 
-
-
  void random_ai(void){
     signal(SIGALRM, &sigalrm_handler); // set a signal handler 
     alarm(1);
@@ -198,7 +196,7 @@ void randomMap(void){
     sf::Vector2f prevPos     = destination;
     sf::Vector2f center      = destination;
     gamewindow.setCenter(gamewindow.worldToScreen(center));
-    
+
 
     while(gamewindow.window.isOpen()){
         sf::Event event;
@@ -215,7 +213,7 @@ void randomMap(void){
                 center = destination;
                 gamewindow.setCenter(gamewindow.worldToScreen(center));
             }
-            cmdHolder   = std::unique_ptr<engine::Command>(new engine::Move((int)destination.x, (int)destination.y));
+            cmdHolder = std::unique_ptr<engine::Command>(new engine::Command(&engine::Action::move, (int)(destination.x), (int)(destination.y)));
             ngine.execute(cmdHolder);
             prevPos     = destination;
 

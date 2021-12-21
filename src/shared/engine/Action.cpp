@@ -1,7 +1,7 @@
 /*
  * File             Action.cpp
  * Directory        engine
- * Created Date     Tuesday, December 21st 2021, 2:41:21 pm
+ * Created Date     Tuesday, December 21st 2021, 3:18:20 pm
  * Author           Nouhou KANE
  * Email            nouhou.kane@ensea.fr
  * 
@@ -10,7 +10,7 @@
  */
 
 #include "Action.h"
-
+#include <iostream>
 namespace engine{
     Action::Action(){
 
