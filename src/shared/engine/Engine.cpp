@@ -8,7 +8,7 @@
  * Copyright (c) 2021  ENSEA(FR)
  * __________________________________________________________________________
  */
-
+#include <iostream>
 #include "engine.h"
 
 namespace engine{
@@ -44,6 +44,7 @@ namespace engine{
     }
 
     void Engine::execute(std::unique_ptr<Command>& cmd){
+        //std::cout << "eni" <<std::endl;
         cmd->action(this->currentState, cmdHolder->x, cmdHolder->y);
     }
 
