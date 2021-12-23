@@ -66,7 +66,8 @@
         "concepts": "cpp",
         "ranges": "cpp",
         "stop_token": "cpp",
-        "variant": "cpp"
+        "variant": "cpp",
+        "csignal": "cpp"
     },
     "C_Cpp.errorSquiggles": "Disabled",
     "jupyter.jupyterServerType": "local",

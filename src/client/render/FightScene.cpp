@@ -10,6 +10,8 @@ namespace render{
         this->loadFrameInfos("data/frames_info.json");
         this->texture.loadFromFile("res/frames.png");
 
+        // std::unique_ptr<Box> holder = std::unique_ptr<Box>(new Box); 
+        // this->boxes.push_back(std::move(holder));
 
         sf::Time t;
         std::unique_ptr<AnimatedObject> aniObjects;

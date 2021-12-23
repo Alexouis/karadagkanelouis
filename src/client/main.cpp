@@ -124,6 +124,16 @@ void randomMap(void){
 
         sf::Event event;
 
+        sf::Font myfont;
+        if(!myfont.loadFromFile("./extern/tmx-loader/fonts/Ubuntu-M.ttf"))
+        {
+            std::cerr<<"Could not find contb.ttf font."<<std::endl;
+        }
+
+        Button yeah("Yeah!", myfont, sf::Vector2f(500.f,500.f), sf::Vector2f(500.f,2000.f), SAVE);
+        Button nope("Nope", myfont,sf::Vector2f(500.f,500.f), sf::Vector2f(100.f, 2000.f), CANCEL);
+        Button nice("Nice...", myfont,sf::Vector2f(500.f,500.f), sf::Vector2f(300.f, 2000.f), CLEAN);
+
         while(gamewindow.window.pollEvent(event)) {
             if (event.type == sf::Event::Closed)
                 gamewindow.window.close();
@@ -132,9 +142,16 @@ void randomMap(void){
             }
         }
 
+        yeah.update(event,sf::Vector2i(500,2000));
+        nope.update(event,sf::Vector2i(100,2000));
+        nice.update(event,sf::Vector2i(300,2000));
         gamewindow.update();
+
         gamewindow.window.clear();
         gamewindow.draw();
+        gamewindow.window.draw(yeah);
+        // gamewindow.window.draw(nope);
+        // gamewindow.window.draw(nice);
         gamewindow.window.display();
 
     }
@@ -146,6 +163,7 @@ void randomMap(void){
  void engineExplo(void){
 
     GameWindow gamewindow;
+    gamewindow.initScenes();
     engine::Engine ngine;
     std::unique_ptr<engine::Command> cmdHolder;
     gamewindow.shareStateWith(ngine);

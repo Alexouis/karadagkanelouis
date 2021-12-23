@@ -6,11 +6,10 @@ namespace render {
 
     };
 
-    Button::Button (std::string s, sf::Font& font, sf::Vector2f position, enum buttonStyle style)
+    Button::Button (std::string s, sf::Font& font,sf::Vector2f size, sf::Vector2f position, enum buttonStyle style)
     {
-
-       // dimensions.x = width;
-        //dimensions.y = height;
+  
+    dimensions = size; 
 
         //set position
     pos = position;
@@ -72,6 +71,13 @@ namespace render {
         break;
 
         default:
+            m_textNormal = sf::Color(255,255,255);
+            m_textHover = sf::Color(255,255,255);
+            m_textClicked = sf::Color(255,255,255);
+            m_bgNormal = sf::Color(255,255,255,100);
+            m_bgHover = sf::Color(200,200,200,100);
+            m_bgClicked = sf::Color(150,150,150);
+            m_border = sf::Color(255,255,255,100);
             break;
     }
 
@@ -234,6 +240,21 @@ namespace render {
         break;
 
         default:
+        m_size = sf::Vector2f(m_text.getGlobalBounds().width * 1.5f, m_text.getGlobalBounds().height * 1.75f);
+            m_button.setPointCount(4);
+            m_button.setPoint(0, sf::Vector2f(0, 0));
+            m_button.setPoint(1, sf::Vector2f(dimensions.x, 0));
+            m_button.setPoint(2, sf::Vector2f(dimensions.x, dimensions.y));
+            m_button.setPoint(3, sf::Vector2f(0, dimensions.y));
+            m_button.setOrigin(m_button.getGlobalBounds().width/2, m_button.getGlobalBounds().height/2);
+            m_button.setPosition(pos);
+            m_text.setOrigin(m_text.getGlobalBounds().width/2, m_text.getGlobalBounds().height/2);
+            sf::Vector2f textPosition = sf::Vector2f(m_button.getPosition().x, m_button.getPosition().y - m_button.getGlobalBounds().height/4);
+            m_text.setPosition(textPosition);
+            m_text.setColor(m_textNormal);
+            m_shadow.setOrigin(m_shadow.getGlobalBounds().width/2, m_shadow.getGlobalBounds().height/2);
+            m_shadow.setPosition(m_text.getPosition().x + 3.f, m_text.getPosition().y + 3.f);
+            m_shadow.setColor(sf::Color(0,0,0));
             break;
     }
 

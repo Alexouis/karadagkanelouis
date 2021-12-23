@@ -507,7 +507,7 @@ int main()
     sf::RenderWindow window(sf::VideoMode(800,600,32), "Starfield Example", sf::Style::Default);
 
     sf::Font myfont;
-    if(!myfont.loadFromFile("/home/mkas/ENSEA/karadagkanelouis/extern/tmx-loader/fonts/Ubuntu-M.ttf"))
+    if(!myfont.loadFromFile("./extern/tmx-loader/fonts/Ubuntu-M.ttf"))
     {
         std::cerr<<"Could not find contb.ttf font."<<std::endl;
     }
