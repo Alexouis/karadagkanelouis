@@ -48,6 +48,11 @@ namespace render {
 
     // Setters and Getters
 
+    const uint& GameWindow::getHeight() const
+    {
+        return this->height;
+    };
+
     const std::vector<std::unique_ptr<Scene>>& GameWindow::getScenes() const
     {
         return this->scenes;
