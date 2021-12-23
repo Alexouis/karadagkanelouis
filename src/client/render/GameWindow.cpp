@@ -53,6 +53,11 @@ namespace render {
         return this->height;
     };
 
+    const uint& GameWindow::getWidth() const
+    {
+        return this->width;
+    };
+
     const std::vector<std::unique_ptr<Scene>>& GameWindow::getScenes() const
     {
         return this->scenes;

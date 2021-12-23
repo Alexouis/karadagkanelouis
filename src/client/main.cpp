@@ -129,9 +129,17 @@ void randomMap(void){
     }
 
     //gamewindow.getZoom()*gamewindow.getHeight()
-    Button yeah("Yeah!", myfont, sf::Vector2f(500.f,500.f), sf::Vector2f(500.f,2000.f), SAVE);
-    Button nope("Nope", myfont,sf::Vector2f(500.f,500.f), sf::Vector2f(1000.f, 2000.f), CANCEL);
-    Button nice("Nice...", myfont,sf::Vector2f(500.f,500.f), sf::Vector2f(1500.f, 2000.f), CLEAN);
+    
+    Button menu("MENU", myfont,sf::Vector2f(250.f,100.f), sf::Vector2f(-2650,(gamewindow.getZoom()+0.5)*200), CANCEL);
+
+
+    Button passe("\n\nPASSER \n\nSON TOUR!", myfont,sf::Vector2f(450.f,300.f), sf::Vector2f(gamewindow.getWidth()/2,(gamewindow.getZoom()+1)*gamewindow.getHeight()), CANCEL);
+
+    Button sort1("Sort 1", myfont, sf::Vector2f(250.f,200.f), sf::Vector2f(gamewindow.getWidth()*1.5,(gamewindow.getZoom()+1)*gamewindow.getHeight()), SAVE);
+    Button sort2("Sort 2", myfont, sf::Vector2f(250.f,200.f), sf::Vector2f(gamewindow.getWidth()*1.5+250,(gamewindow.getZoom()+1)*gamewindow.getHeight()), SAVE);
+    Button slot3("", myfont, sf::Vector2f(250.f,200.f), sf::Vector2f(gamewindow.getWidth()*1.5+500,(gamewindow.getZoom()+1)*gamewindow.getHeight()), SAVE);
+    Button slot4("", myfont, sf::Vector2f(250.f,200.f), sf::Vector2f(gamewindow.getWidth()*1.5+750,(gamewindow.getZoom()+1)*gamewindow.getHeight()), SAVE);
+    Button slot5("", myfont, sf::Vector2f(250.f,200.f), sf::Vector2f(gamewindow.getWidth()*1.5+1000,(gamewindow.getZoom()+1)*gamewindow.getHeight()), SAVE);
 
     while(gamewindow.window.isOpen()){
 
@@ -145,16 +153,24 @@ void randomMap(void){
             }
         }
 
-        yeah.update(event,mousePosScreen);
-        nope.update(event,mousePosScreen);
-        nice.update(event,mousePosScreen);
+        menu.update(event,mousePosScreen);
+        passe.update(event,mousePosScreen);
+        sort1.update(event,mousePosScreen);
+        sort2.update(event,mousePosScreen);
+        slot3.update(event,mousePosScreen);
+        slot4.update(event,mousePosScreen);
+        slot5.update(event,mousePosScreen);
         gamewindow.update();
 
         gamewindow.window.clear();
         gamewindow.draw();
-        gamewindow.window.draw(yeah);
-        gamewindow.window.draw(nope);
-        gamewindow.window.draw(nice);
+        gamewindow.window.draw(menu);
+        gamewindow.window.draw(passe);
+        gamewindow.window.draw(sort1);
+        gamewindow.window.draw(sort2);
+        gamewindow.window.draw(slot3);
+        gamewindow.window.draw(slot4);
+        gamewindow.window.draw(slot5);
         gamewindow.window.display();
 
     }
