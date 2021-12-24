@@ -1,4 +1,5 @@
 #include "Button.h"
+#include "iostream"
 
 namespace render {
     Button::Button()
@@ -19,6 +20,7 @@ namespace render {
 
     //set button style
     m_style = style;
+    m_font = font;
 
     switch(m_style)
     {
@@ -83,7 +85,7 @@ namespace render {
 
     //set up text
     m_text.setString(s);
-    m_text.setFont(font);
+    m_text.setFont(m_font);
     m_text.setOrigin(m_text.getGlobalBounds().width/2, m_text.getGlobalBounds().height/2);
     m_text.setColor(m_textNormal);
 
@@ -104,7 +106,7 @@ namespace render {
 
     m_text.setPosition(textPosition);
 
-    m_shadow.setFont(font);
+    m_shadow.setFont(m_font);
     m_shadow = m_text;
     m_shadow.setOrigin(m_shadow.getGlobalBounds().width/2, m_shadow.getGlobalBounds().height/2);
     m_shadow.setPosition(m_text.getPosition().x + 3.f, m_text.getPosition().y + 3.f);
@@ -115,6 +117,7 @@ namespace render {
     };
     
     void Button::draw (sf::RenderTarget& target, sf::RenderStates states) const{
+        
         switch(m_style)
     {
         case NONE:

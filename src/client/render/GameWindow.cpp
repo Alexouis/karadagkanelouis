@@ -32,12 +32,16 @@ namespace render {
 
     void GameWindow::draw()
     {   
-        this->window.draw(*(this->scenes[this->currentScene]));  
+        this->window.draw(*(this->scenes[this->currentScene]));
     };
 
-    void GameWindow::update()
+    //void GameWindow::update()
+    void GameWindow::update(sf::Event& e, sf::Vector2i m_mousePosition)
     {
-        this->scenes[this->currentScene]->update();
+
+        //this->scenes[this->currentScene]->update();
+        this->scenes[this->currentScene]->update(e, m_mousePosition);
+        
     };
 
     
@@ -57,6 +61,16 @@ namespace render {
     {
         return this->width;
     };
+
+    SceneId GameWindow::getCurrentScene() const
+    {
+        return this->currentScene;
+    };
+
+    void GameWindow::setCurrentScene(SceneId currentScene){
+
+    };
+
 
     const std::vector<std::unique_ptr<Scene>>& GameWindow::getScenes() const
     {

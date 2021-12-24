@@ -1,6 +1,11 @@
 #include "FightScene.h"
+#include "Button.h"
 #include <fstream>
 #include <iostream> 
+
+#define GAMEWINDOWHEIGHT 600
+#define GAMEWINDOWWIDTH 2000
+#define GAMEWINDOWZOOM 4
 
 namespace render{
     FightScene::FightScene(){
@@ -10,8 +15,7 @@ namespace render{
         this->loadFrameInfos("data/frames_info.json");
         this->texture.loadFromFile("res/frames.png");
 
-        // std::unique_ptr<Box> holder = std::unique_ptr<Box>(new Box); 
-        // this->boxes.push_back(std::move(holder));
+        this->initButtons();
 
         sf::Time t;
         std::unique_ptr<AnimatedObject> aniObjects;
@@ -26,7 +30,31 @@ namespace render{
 
     };
 
-    void FightScene::update(){
+    void FightScene::initButtons()
+    {   
+        sf::Font myfont;
+        if(!myfont.loadFromFile("./extern/tmx-loader/fonts/Ubuntu-M.ttf"))
+        {
+            std::cerr<<"Could not find contb.ttf font."<<std::endl;
+        }
+        std::unique_ptr<Box> holder = std::unique_ptr<Button>(new Button("MENU", myfont,sf::Vector2f(250.f,100.f), sf::Vector2f(-2650,(GAMEWINDOWZOOM+0.5)*200), CANCEL)); 
+        this->boxes.push_back(std::move(holder));
+        holder = std::unique_ptr<Button>(new Button("\n\nPASSER \n\nSON TOUR!", myfont,sf::Vector2f(450.f,300.f), sf::Vector2f(GAMEWINDOWWIDTH/2,(GAMEWINDOWZOOM+1)*GAMEWINDOWHEIGHT), CANCEL));
+        this->boxes.push_back(std::move(holder));
+        holder = std::unique_ptr<Button>(new Button("Sort 1", myfont, sf::Vector2f(250.f,200.f), sf::Vector2f(GAMEWINDOWWIDTH*1.5,(GAMEWINDOWZOOM+1)*GAMEWINDOWHEIGHT), SAVE));
+        this->boxes.push_back(std::move(holder));
+        holder = std::unique_ptr<Button>(new Button("Sort 2", myfont, sf::Vector2f(250.f,200.f), sf::Vector2f(GAMEWINDOWWIDTH*1.5+250,(GAMEWINDOWZOOM+1)*GAMEWINDOWHEIGHT), SAVE));
+        this->boxes.push_back(std::move(holder));
+        holder = std::unique_ptr<Button>(new Button("", myfont, sf::Vector2f(250.f,200.f), sf::Vector2f(GAMEWINDOWWIDTH*1.5+500,(GAMEWINDOWZOOM+1)*GAMEWINDOWHEIGHT), SAVE));
+        this->boxes.push_back(std::move(holder));
+        holder = std::unique_ptr<Button>(new Button("", myfont, sf::Vector2f(250.f,200.f), sf::Vector2f(GAMEWINDOWWIDTH*1.5+750,(GAMEWINDOWZOOM+1)*GAMEWINDOWHEIGHT), SAVE));
+        this->boxes.push_back(std::move(holder));
+        holder.reset(new Button("", myfont, sf::Vector2f(250.f,200.f), sf::Vector2f(GAMEWINDOWWIDTH*1.5+1000,(GAMEWINDOWZOOM+1)*GAMEWINDOWHEIGHT), SAVE));
+        this->boxes.push_back(std::move(holder));
+
+    };
+
+    void FightScene::update(sf::Event& e, sf::Vector2i m_mousePosition){
         sf::Time t;
         char objIndex = this->gState->getActualPlayerIndex();
         state::Position p;
@@ -35,11 +63,17 @@ namespace render{
             std::string playerClass = (this->gState->getPlayerClass(i) == state::playerClass::HERO) ? "valla" : "demon";
             this->animatedObjects[i]->update(t,this->frameInfos[playerClass],playerClass+"_idle_se",this->worldToScreen(p));
         }  
+        for(auto &boxe : this->boxes){
+            (*boxe).update(e,m_mousePosition);
+        }
     };
 
 
     void FightScene::draw (sf::RenderTarget& target, sf::RenderStates states) const{
         target.draw(*(this->gameMap), states);
+        for (const auto& button : boxes){
+            target.draw(*button,states);
+        }
         for (const auto& animObj : animatedObjects){
             target.draw(*animObj,states);
         }

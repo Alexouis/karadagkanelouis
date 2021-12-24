@@ -1,4 +1,5 @@
 #include "Box.h"
+#include "iostream"
 
 namespace render {
     Box::Box()
@@ -11,12 +12,14 @@ namespace render {
 
     };
 
-    void Box::update ()
+    void Box::update(sf::Event& event, sf::Vector2i m_mousePosition)
     {
         
     };
 
-    void Box::draw (sf::RenderTarget& target, sf::RenderStates states) const{};
+    void Box::draw (sf::RenderTarget& target, sf::RenderStates states) const{
+        std::cout << "Draw Box" << std::endl;
+    };
 
     // Setters and Getters
     const sf::Vector2f& Box::getPos() const{};
