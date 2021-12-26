@@ -132,10 +132,14 @@ void randomMap(void){
             if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::D)
             if (event.type == sf::Event::MouseButtonPressed){
             }
+            if(event.type == sf::Event::MouseWheelMoved)
+            {
+                gamewindow.setZoom(gamewindow.zoom + event.mouseWheel.delta);  
+                std::cout << "zoom =" << gamewindow.zoom << std::endl;              
+            }
         }
 
         gamewindow.update(event,mousePosScreen,gamewindow.selected);
-        std::cout << "button type :" << (int)(gamewindow.selected) << std::endl; 
 
         gamewindow.window.clear();
         gamewindow.draw();

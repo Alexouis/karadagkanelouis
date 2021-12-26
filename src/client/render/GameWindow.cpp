@@ -1,18 +1,22 @@
 #include "GameWindow.h"
 #include "FightScene.h"
 
+#define DEFAULTZOOM 4
+#define DEFAULTXCENTER 1024
+#define DEFAULTYCENTER 2000
+
 namespace render {
     GameWindow::GameWindow()
     {
-        this->zoom = 4;
+        this->zoom = DEFAULTZOOM;
         this->currentScene = SceneId::FIGHTSCENE;        
         this->initScenes();
         this->window.create(sf::VideoMode(this->width, this->height), "TMX Loader");
         this->window.setVerticalSyncEnabled(true);
-        sf::View view = this->window.getView();
-        view.zoom(this->zoom);
-        view.setCenter(this->center.x, this->center.y);
-        this->window.setView(view); 
+        this->view = this->window.getView();
+        this->view.zoom(this->zoom);
+        this->view.setCenter(DEFAULTXCENTER, DEFAULTYCENTER);
+        this->window.setView(this->view); 
     };
 
     void GameWindow::init ()
@@ -52,15 +56,6 @@ namespace render {
 
     // Setters and Getters
 
-    const uint& GameWindow::getHeight() const
-    {
-        return this->height;
-    };
-
-    const uint& GameWindow::getWidth() const
-    {
-        return this->width;
-    };
 
     SceneId GameWindow::getCurrentScene() const
     {
@@ -81,30 +76,20 @@ namespace render {
 
     };
 
-    float GameWindow::getZoom() const
-    {
-        return zoom;
-    };
-
     void GameWindow::setZoom(float zoom)
     {
-        this->zoom = zoom;
-        sf::View view = this->window.getView();
-        view.zoom(this->zoom);
-        this->window.setView(view); 
+        if(zoom >= 1 && zoom <= 10)
+        {
+            this->zoom = zoom;
+            this->view.zoom(this->zoom);
+            this->window.setView(this->view); 
+        }
     };
 
-    const sf::Vector2<float>& GameWindow::getCenter() const
+    void GameWindow::setCenter(sf::Vector2f center)
     {
-        return center;
-    };
-
-    void GameWindow::setCenter(const sf::Vector2<float>& center)
-    {
-        this->center = center;
-        sf::View view = this->window.getView();
-        view.setCenter(this->center.x, this->center.y);
-        this->window.setView(view); 
+        this->view.setCenter(center.x,center.y);
+        this->window.setView(this->view); 
     };
 
 
