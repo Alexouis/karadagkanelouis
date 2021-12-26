@@ -37,19 +37,19 @@ namespace render{
         {
             std::cerr<<"Could not find contb.ttf font."<<std::endl;
         }
-        std::unique_ptr<Box> holder = std::unique_ptr<Button>(new Button("MENU", myfont,sf::Vector2f(250.f,100.f), sf::Vector2f(-2650,(GAMEWINDOWZOOM+0.5)*200), CANCEL)); 
+        std::unique_ptr<Box> holder = std::unique_ptr<Button>(new Button("MENU", myfont,sf::Vector2f(250.f,100.f), sf::Vector2f(-2650,(GAMEWINDOWZOOM+0.5)*200), CANCEL, false)); 
         this->boxes.push_back(std::move(holder));
-        holder = std::unique_ptr<Button>(new Button("\n\nPASSER \n\nSON TOUR!", myfont,sf::Vector2f(450.f,300.f), sf::Vector2f(GAMEWINDOWWIDTH/2,(GAMEWINDOWZOOM+1)*GAMEWINDOWHEIGHT), CANCEL));
+        holder = std::unique_ptr<Button>(new Button("\n\nPASSER \n\nSON TOUR!", myfont,sf::Vector2f(450.f,300.f), sf::Vector2f(GAMEWINDOWWIDTH/2,(GAMEWINDOWZOOM+1)*GAMEWINDOWHEIGHT), CANCEL, false));
         this->boxes.push_back(std::move(holder));
-        holder = std::unique_ptr<Button>(new Button("Sort 1", myfont, sf::Vector2f(250.f,200.f), sf::Vector2f(GAMEWINDOWWIDTH*1.5,(GAMEWINDOWZOOM+1)*GAMEWINDOWHEIGHT), SAVE));
+        holder = std::unique_ptr<Button>(new Button("Sort 1", myfont, sf::Vector2f(250.f,200.f), sf::Vector2f(GAMEWINDOWWIDTH*1.5,(GAMEWINDOWZOOM+1)*GAMEWINDOWHEIGHT), SAVE, true));
         this->boxes.push_back(std::move(holder));
-        holder = std::unique_ptr<Button>(new Button("Sort 2", myfont, sf::Vector2f(250.f,200.f), sf::Vector2f(GAMEWINDOWWIDTH*1.5+250,(GAMEWINDOWZOOM+1)*GAMEWINDOWHEIGHT), SAVE));
+        holder = std::unique_ptr<Button>(new Button("Sort 2", myfont, sf::Vector2f(250.f,200.f), sf::Vector2f(GAMEWINDOWWIDTH*1.5+250,(GAMEWINDOWZOOM+1)*GAMEWINDOWHEIGHT), SAVE, true));
         this->boxes.push_back(std::move(holder));
-        holder = std::unique_ptr<Button>(new Button("", myfont, sf::Vector2f(250.f,200.f), sf::Vector2f(GAMEWINDOWWIDTH*1.5+500,(GAMEWINDOWZOOM+1)*GAMEWINDOWHEIGHT), SAVE));
+        holder = std::unique_ptr<Button>(new Button("", myfont, sf::Vector2f(250.f,200.f), sf::Vector2f(GAMEWINDOWWIDTH*1.5+500,(GAMEWINDOWZOOM+1)*GAMEWINDOWHEIGHT), SAVE, true));
         this->boxes.push_back(std::move(holder));
-        holder = std::unique_ptr<Button>(new Button("", myfont, sf::Vector2f(250.f,200.f), sf::Vector2f(GAMEWINDOWWIDTH*1.5+750,(GAMEWINDOWZOOM+1)*GAMEWINDOWHEIGHT), SAVE));
+        holder = std::unique_ptr<Button>(new Button("", myfont, sf::Vector2f(250.f,200.f), sf::Vector2f(GAMEWINDOWWIDTH*1.5+750,(GAMEWINDOWZOOM+1)*GAMEWINDOWHEIGHT), SAVE, true));
         this->boxes.push_back(std::move(holder));
-        holder.reset(new Button("", myfont, sf::Vector2f(250.f,200.f), sf::Vector2f(GAMEWINDOWWIDTH*1.5+1000,(GAMEWINDOWZOOM+1)*GAMEWINDOWHEIGHT), SAVE));
+        holder.reset(new Button("", myfont, sf::Vector2f(250.f,200.f), sf::Vector2f(GAMEWINDOWWIDTH*1.5+1000,(GAMEWINDOWZOOM+1)*GAMEWINDOWHEIGHT), SAVE, true));
         this->boxes.push_back(std::move(holder));
 
     };
