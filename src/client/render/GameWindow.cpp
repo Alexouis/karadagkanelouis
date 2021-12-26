@@ -78,7 +78,7 @@ namespace render {
 
     void GameWindow::setZoom(float zoom)
     {
-        if(zoom >= 1 && zoom <= 10)
+        if(this->zoom*zoom > 0)
         {
             this->zoom = zoom;
             this->view.zoom(this->zoom);

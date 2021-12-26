@@ -134,7 +134,16 @@ void randomMap(void){
             }
             if(event.type == sf::Event::MouseWheelMoved)
             {
-                gamewindow.setZoom(gamewindow.zoom + event.mouseWheel.delta);  
+                if(event.mouseWheel.delta == 1)
+                {
+                    gamewindow.setZoom(0.5);  
+                }
+                else
+                {
+                   gamewindow.setZoom(2);  
+                }
+
+                
                 std::cout << "zoom =" << gamewindow.zoom << std::endl;              
             }
         }
