@@ -12,7 +12,7 @@ namespace render {
 
     };
 
-    void Box::update(sf::Event& event, sf::Vector2i m_mousePosition)
+    void Box::update(sf::Event& event, sf::Vector2i m_mousePosition, char& selected)
     {
         
     };

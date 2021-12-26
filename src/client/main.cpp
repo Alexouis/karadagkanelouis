@@ -134,7 +134,8 @@ void randomMap(void){
             }
         }
 
-        gamewindow.update(event,mousePosScreen);
+        gamewindow.update(event,mousePosScreen,gamewindow.selected);
+        std::cout << "button type :" << (int)(gamewindow.selected) << std::endl; 
 
         gamewindow.window.clear();
         gamewindow.draw();
@@ -176,7 +177,7 @@ void randomMap(void){
             }
         }
 
-        gamewindow.update(event,(sf::Vector2i)mousePosScreen);
+        gamewindow.update(event,(sf::Vector2i)mousePosScreen,gamewindow.selected);
         gamewindow.window.clear();
         gamewindow.draw();
         gamewindow.window.display();
@@ -224,7 +225,7 @@ void randomMap(void){
 
             
         }
-        gamewindow.update(event,(sf::Vector2i)destination);
+        gamewindow.update(event,(sf::Vector2i)destination,gamewindow.selected);
         gamewindow.window.clear();
         gamewindow.draw();
         gamewindow.window.display();

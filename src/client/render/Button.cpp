@@ -7,7 +7,7 @@ namespace render {
 
     };
 
-    Button::Button (std::string s, sf::Font& font,sf::Vector2f size, sf::Vector2f position, enum buttonStyle style, bool isSpell)
+    Button::Button (std::string s, sf::Font& font,sf::Vector2f size, sf::Vector2f position, enum buttonStyle style, char m_type)
     {
   
     dimensions = size; 
@@ -22,7 +22,7 @@ namespace render {
     m_style = style;
     m_font = font;
 
-    this->isSpell = isSpell;
+    this->m_type = m_type;
 
     switch(m_style)
     {
@@ -159,7 +159,7 @@ namespace render {
     }
     };
 
-    void Button::update(sf::Event& e, sf::Vector2i  m_mousePosition)
+    void Button::update(sf::Event& e, sf::Vector2i  m_mousePosition, char& selected)
     {
             //perform updates for settings from user
     switch(m_style)
@@ -292,7 +292,9 @@ namespace render {
         {
             if(mouseInButton)
             {
-                m_btnState = CLICKED; 
+                m_btnState = CLICKED;
+                selected = m_type;
+
             }
 
             else
@@ -312,11 +314,11 @@ namespace render {
         {
             if(mouseInButton)
             {
-                if(!isSpell)
+                if(m_type >=5)
                 {
                     m_btnState = HOVERED;
                 }
-                else if(isSpell && m_btnState==CLICKED)
+                else if(m_type < 5 && m_btnState==CLICKED)
                 {
                     m_btnState = CLICKED;    
                 }

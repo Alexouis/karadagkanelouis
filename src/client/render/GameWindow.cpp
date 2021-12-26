@@ -36,11 +36,11 @@ namespace render {
     };
 
     //void GameWindow::update()
-    void GameWindow::update(sf::Event& e, sf::Vector2i m_mousePosition)
+    void GameWindow::update(sf::Event& e, sf::Vector2i m_mousePosition, char& selected)
     {
 
         //this->scenes[this->currentScene]->update();
-        this->scenes[this->currentScene]->update(e, m_mousePosition);
+        this->scenes[this->currentScene]->update(e, m_mousePosition, selected);
         
     };
 
