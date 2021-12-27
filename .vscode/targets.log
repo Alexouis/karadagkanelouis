@@ -6,8 +6,7 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 # This is free software: you are free to change and redistribute it.
 # There is NO WARRANTY, to the extent permitted by law.
 
-# Make data base, printed on Sun Dec 26 21:02:23 2021
- 
+# Make data base, printed on Mon Dec 27 10:47:13 2021
 
 # Variables
 
@@ -18,7 +17,7 @@ LC_ALL = C
 # environment
 GJS_DEBUG_OUTPUT = stderr
 # environment
-VSCODE_IPC_HOOK_EXTHOST = /run/user/1000/vscode-ipc-1e8958eb-2f1c-4090-ab50-cda36579edbf.sock
+VSCODE_IPC_HOOK_EXTHOST = /run/user/1000/vscode-ipc-5e0da2dd-6b75-47d7-a718-a599266b3d72.sock
 # environment
 VSCODE_CWD = /home/mkas
 # environment
@@ -86,13 +85,13 @@ MAKEFILE_LIST := Makefile
 # environment
 VSCODE_VERBOSE_LOGGING = true
 # environment
-VSCODE_PID = 18057
+VSCODE_PID = 2422
 # environment
 XDG_SESSION_TYPE = x11
 # automatic
 ?D = $(patsubst %/,%,$(dir $?))
 # environment
-SESSION_MANAGER = local/kalikane:@/tmp/.ICE-unix/1948,unix/kalikane:/tmp/.ICE-unix/1948
+SESSION_MANAGER = local/kalikane:@/tmp/.ICE-unix/1922,unix/kalikane:/tmp/.ICE-unix/1922
 # automatic
 *F = $(notdir $*)
 # environment
@@ -136,7 +135,7 @@ MAKEFILES :=
 # environment
 COMMAND_NOT_FOUND_INSTALL_PROMPT = 1
 # environment
-INVOCATION_ID = 89d034c02bb44b2bad86311c6ee51781
+INVOCATION_ID = e8d9a353aa3040afb7f4fe0943d3b813
 # environment
 QSYS_ROOTDIR = /home/mkas/intelFPGA_lite/20.1/quartus/sopc_builder/bin
 # environment
@@ -172,11 +171,11 @@ MAKE_VERSION := 4.3
 # 'override' directive
 .SHELLSTATUS := 0
 # environment
-MANAGERPID = 1704
+MANAGERPID = 1687
 # environment
-GIO_LAUNCHED_DESKTOP_FILE_PID = 18057
+GIO_LAUNCHED_DESKTOP_FILE_PID = 2422
 # environment
-SSH_AGENT_PID = 1907
+SSH_AGENT_PID = 1881
 # environment
 _ = /usr/share/code/code
 # environment
@@ -186,7 +185,7 @@ GPG_AGENT_INFO = /run/user/1000/gnupg/S.gpg-agent:0:1
 # environment
 POWERSHELL_TELEMETRY_OPTOUT = 1
 # environment
-JOURNAL_STREAM = 8:25941
+JOURNAL_STREAM = 8:21490
 # environment
 XDG_SESSION_CLASS = user
 # environment
@@ -277,6 +276,7 @@ src/render.dia:
 #  File has not been updated.
 
 diapdf: rapport/state.pdf rapport/render.pdf rapport/engine.pdf rapport/ai.pdf rapport/module.pdf
+ 
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
@@ -287,7 +287,6 @@ testdocker:
 #  File does not exist.
 #  File has not been updated.
 #  recipe to execute (from 'Makefile', line 92):
- 
 	docker build -t plt-initial -f docker/plt-initial .
 	./docker/validate.sh plt-test
 	./docker/run_docker_bash.sh plt-test
@@ -521,6 +520,6 @@ install_submodules:
 # strcache performance: lookups = 120 / hit rate = 53%
 # hash-table stats:
 # Load=56/8192=1%, Rehash=0, Collisions=0/120=0%
-# Finished Make data base on Sun Dec 26 21:02:23 2021
+# Finished Make data base on Mon Dec 27 10:47:13 2021
 
  
