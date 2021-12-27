@@ -136,15 +136,12 @@ void randomMap(void){
             {
                 if(event.mouseWheel.delta == 1)
                 {
-                    gamewindow.setZoom(0.5);  
+                    gamewindow.setZoom(0.8);  
                 }
                 else
                 {
-                   gamewindow.setZoom(2);  
-                }
-
-                
-                std::cout << "zoom =" << gamewindow.zoom << std::endl;              
+                   gamewindow.setZoom(1.25);  
+                }           
             }
         }
 
@@ -183,6 +180,17 @@ void randomMap(void){
                 gamewindow.window.close();
             if(event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::D)
                 debug = !debug;
+            if(event.type == sf::Event::MouseWheelMoved)
+            {
+                if(event.mouseWheel.delta == 1)
+                {
+                    gamewindow.setZoom(0.8);  
+                }
+                else
+                {
+                   gamewindow.setZoom(1.25);  
+                }           
+            }
             if(event.type == sf::Event::MouseButtonPressed){
                 
                 cmdHolder = std::unique_ptr<engine::Command>(new engine::Command(&engine::Action::move, (int)mousePosWorld.x, (int)mousePosWorld.y));
@@ -223,6 +231,18 @@ void randomMap(void){
         while(gamewindow.window.pollEvent(event)) {
             if (event.type == sf::Event::Closed)
                 gamewindow.window.close();
+                
+            if(event.type == sf::Event::MouseWheelMoved)
+            {
+                if(event.mouseWheel.delta == 1)
+                {
+                    gamewindow.setZoom(0.8);  
+                }
+                else
+                {
+                   gamewindow.setZoom(1.25);  
+                }           
+            }
         }
         
         if(readyToMove){
