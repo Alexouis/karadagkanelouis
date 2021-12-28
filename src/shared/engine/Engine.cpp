@@ -11,17 +11,17 @@
 #include <iostream>
 #include "engine.h"
 
-#define CODE_MASk(X)  ((X & 0xF0) >> 4)
+#define CODE_MASk(X)  ((X & 0x70) >> 4)
 #define VALUE_MASK(X) ( X & 0xF )
-#define IS_MOVE(X)    ((X & 0xF0) >> 7)
+#define ACTION(X)    ((X & 0xF0) >> 7)
 
-#define SPELL1 0x0 //[code value] =  [0000 0000]
-#define SPELL2 0x1 //[code value] =  [0000 0001]
-#define SPELL3 0x2 //[code value] =  [0000 0010]
-#define SPELL4 0x3 //[code value] =  [0000 0011]
-#define SPELL5 0x4 //[code value] =  [0000 0100]
-#define MENU 0x10  //[code value] =  [0001 0000]
-#define PASS 0x20  //[code value] =  [0010 0000]
+#define SPELL1 0x0 //[targetCode code value] =  [0 000 0000]
+#define SPELL2 0x1 //[targetCode code value] =  [0 000 0001]
+#define SPELL3 0x2 //[targetCode code value] =  [0 000 0010]
+#define SPELL4 0x3 //[targetCode code value] =  [0 000 0011]
+#define SPELL5 0x4 //[targetCode code value] =  [0 000 0100]
+#define MENU 0x10  //[targetCode code value] =  [0 001 0000]
+#define PASS 0x20  //[targetCode code value] =  [0 010 0000]
 
 namespace engine{
     Engine::Engine(){
@@ -73,10 +73,13 @@ namespace engine{
     }
 
     void Engine::registerTarget (int x, int y, char selected){
-        if(IS_MOVE(selected)){
+        if(ACTION(selected)){
             this->cmdHolder = std::unique_ptr<Command>(new Command(this->action[CODE_MASk(this->selected)], x, y));
             this->qcmd.push(std::move(cmdHolder));
             this->selected = selected;
+        }
+        else{
+            this->registerTarget(selected);
         }
         
     }
