@@ -7,18 +7,22 @@
 #define GAMEWINDOWWIDTH 2000
 #define GAMEWINDOWZOOM 4
 
-#define SPELL1 0 
-#define SPELL2 1 
-#define SPELL3 2 
-#define SPELL4 3 
-#define SPELL5 4 
-#define MENU 5
-#define PASS 6
+#define map_sizeX 22
+#define map_sizeY 22
+
+
+#define SPELL1 0x0 //[code value] =  [0000 0000]
+#define SPELL2 0x1 //[code value] =  [0000 0001]
+#define SPELL3 0x2 //[code value] =  [0000 0010]
+#define SPELL4 0x3 //[code value] =  [0000 0011]
+#define SPELL5 0x4 //[code value] =  [0000 0100]
+#define MENU 0x10  //[code value] =  [0001 0000]
+#define PASS 0x20  //[code value] =  [0010 0000]
 
 namespace render{
     FightScene::FightScene(){
 
-        this->gState = std::shared_ptr<state::State>(new state::State(22,22));
+        this->gState = std::shared_ptr<state::State>(new state::State(map_sizeX,map_sizeY));
         this->gameMap->load("map_1.tmx");
         this->loadFrameInfos("data/frames_info.json");
         this->texture.loadFromFile("res/frames.png");
@@ -95,8 +99,7 @@ namespace render{
 		bool parsingSuccessful = reader.parse( test, this->frameInfos, false );
 		if ( !parsingSuccessful ){
 			// report to the user the failure and their locations in the document.
-			std::cout  << reader.getFormatedErrorMessages()
-				<< "\n";
+			std::cout  << reader.getFormatedErrorMessages() << "\n";
 		}
     }
 
