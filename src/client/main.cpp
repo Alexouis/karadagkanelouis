@@ -191,7 +191,6 @@ void randomMap(void){
         sf::Vector2f mousePosScreen = gamewindow.window.mapPixelToCoords(sf::Mouse::getPosition(gamewindow.window));
         sf::Vector2f mousePosWorld = gamewindow.screenToWorld(mousePosScreen);
         while(gamewindow.window.pollEvent(event)) {
-            gamewindow.isZoomed = 0;
             if (event.type == sf::Event::Closed)
                 gamewindow.window.close();
             if(event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::D)
