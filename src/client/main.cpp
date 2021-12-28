@@ -140,8 +140,14 @@ void randomMap(void){
 
             }
             if (event.type == sf::Event::MouseButtonPressed){
-                std::cout << "OK" << std::endl;
-                gamewindow.selected = SELECTED;
+                switch(event.mouseButton.button)
+                {
+                    case sf::Mouse::Right:
+                    {
+                        gamewindow.setCenter((sf::Vector2f)mousePosScreen);
+                        break;
+                    }
+                }
             }
             if(event.type == sf::Event::MouseWheelMoved)
             {
@@ -160,8 +166,6 @@ void randomMap(void){
         }
 
         //gamewindow.update(event,mousePosScreen);
-        m_type = gamewindow.selected;
-        std::cout << "m_type: " << m_type << std::endl ;
         gamewindow.window.clear();
         gamewindow.draw();
 
@@ -221,14 +225,12 @@ void randomMap(void){
 
                     case sf::Mouse::Left:
                     {
+                        gamewindow.selected = SELECTED;
                         cmdHolder = std::unique_ptr<engine::Command>(new engine::Command(&engine::Action::move, (int)mousePosWorld.x, (int)mousePosWorld.y));
                         ngine.execute(cmdHolder);
                         break;
                     }
                 }
-                
-                cmdHolder = std::unique_ptr<engine::Command>(new engine::Command(engine::Action::move, (int)mousePosWorld.x, (int)mousePosWorld.y));
-                ngine.execute(cmdHolder);
             }
             gamewindow.update(event,(sf::Vector2i)mousePosScreen);
 
