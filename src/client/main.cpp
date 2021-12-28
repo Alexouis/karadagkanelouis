@@ -33,6 +33,8 @@
 #include <csignal>
 
 #define MAP_SIZE_XY 22
+#define SELECTED 0xF //[code value] =  [1111 1111]
+
 
 using namespace std;
 using namespace state;
@@ -122,6 +124,7 @@ void randomMap(void){
 
     sf::Event event;
     float zoom = 0.8;
+    int m_type = 0;
 
     while(gamewindow.window.isOpen()){
 
@@ -129,9 +132,16 @@ void randomMap(void){
 
         while(gamewindow.window.pollEvent(event)) {
             if (event.type == sf::Event::Closed)
+            {
                 gamewindow.window.close();
+            }      
             if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::D)
+            {
+
+            }
             if (event.type == sf::Event::MouseButtonPressed){
+                std::cout << "OK" << std::endl;
+                gamewindow.selected = SELECTED;
             }
             if(event.type == sf::Event::MouseWheelMoved)
             {
@@ -149,8 +159,9 @@ void randomMap(void){
             gamewindow.update(event,mousePosScreen);
         }
 
-        gamewindow.update(event,mousePosScreen);
-
+        //gamewindow.update(event,mousePosScreen);
+        m_type = gamewindow.selected;
+        std::cout << "m_type: " << m_type << std::endl ;
         gamewindow.window.clear();
         gamewindow.draw();
 
