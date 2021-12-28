@@ -10,7 +10,6 @@
  */
 #include <iostream>
 #include "engine.h"
-#include "Action.h"
 
 #define CODE_MASk(X)  ((X & 0xF0) >> 4)
 #define VALUE_MASK(X) ( X & 0xF )
