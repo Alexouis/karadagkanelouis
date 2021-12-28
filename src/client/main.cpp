@@ -201,20 +201,32 @@ void randomMap(void){
                 {
                     gamewindow.setZoom(0.8); 
                     gamewindow.isZoomed = 1;  
-                    std::cout << "zooming +\n";
                 }
                 else
                 {
                     gamewindow.setZoom(1.25); 
                     gamewindow.isZoomed = 1;    
-                    std::cout << "zooming -\n";
                 }   
+                
                    
             }
             if(event.type == sf::Event::MouseButtonPressed){
+                switch(event.mouseButton.button)
+                {
+                    case sf::Mouse::Right:
+                    {
+                        gamewindow.setCenter(mousePosScreen);
+                        break;
+                    }
+
+                    case sf::Mouse::Left:
+                    {
+                        cmdHolder = std::unique_ptr<engine::Command>(new engine::Command(&engine::Action::move, (int)mousePosWorld.x, (int)mousePosWorld.y));
+                        ngine.execute(cmdHolder);
+                        break;
+                    }
+                }
                 
-                cmdHolder = std::unique_ptr<engine::Command>(new engine::Command(&engine::Action::move, (int)mousePosWorld.x, (int)mousePosWorld.y));
-                ngine.execute(cmdHolder);
             }
             gamewindow.update(event,(sf::Vector2i)mousePosScreen);
 
