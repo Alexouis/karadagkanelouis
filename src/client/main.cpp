@@ -138,14 +138,15 @@ void randomMap(void){
                 if(event.mouseWheel.delta == 1)
                 {
                     gamewindow.setZoom(0.8);
-                    zoom = 0.8;  
+                    gamewindow.isZoomed = 1;
                 }
                 else
                 {
-                   gamewindow.setZoom(1.25);  
-                   zoom = 1.25;
+                    gamewindow.setZoom(1.25);  
+                    gamewindow.isZoomed = 1;
                 }           
             }
+            gamewindow.update(event,mousePosScreen);
         }
 
         gamewindow.update(event,mousePosScreen);
@@ -188,22 +189,27 @@ void randomMap(void){
             {
                 if(event.mouseWheel.delta == 1)
                 {
-                    gamewindow.setZoom(0.8);  
+                    gamewindow.setZoom(0.8); 
+                    gamewindow.isZoomed = 1;  
+                    std::cout << "zooming +\n";
                 }
                 else
                 {
-                   gamewindow.setZoom(1.25);  
+                    gamewindow.setZoom(1.25); 
+                    gamewindow.isZoomed = 1;    
+                    std::cout << "zooming -\n";
                 }   
-                gamewindow.isZoomed = 1;      
+                   
             }
             if(event.type == sf::Event::MouseButtonPressed){
                 
                 cmdHolder = std::unique_ptr<engine::Command>(new engine::Command(&engine::Action::move, (int)mousePosWorld.x, (int)mousePosWorld.y));
                 ngine.execute(cmdHolder);
             }
+            gamewindow.update(event,(sf::Vector2i)mousePosScreen);
+
 
         }
-
         gamewindow.update(event,(sf::Vector2i)mousePosScreen);
         gamewindow.window.clear();
         gamewindow.draw();

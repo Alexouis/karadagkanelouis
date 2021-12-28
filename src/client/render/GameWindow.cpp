@@ -10,14 +10,16 @@ namespace render {
     {
         this->zoom = DEFAULTZOOM;
         this->isZoomed = (this->zoom != 1);
+        std::cout << "isZoomed: " << this->isZoomed << std::endl;
         this->currentScene = SceneId::FIGHTSCENE;        
-        this->initScenes();
         this->window.create(sf::VideoMode(this->width, this->height), "TMX Loader");
         this->window.setVerticalSyncEnabled(true);
         this->view = this->window.getView();
         this->view.zoom(this->zoom);
         this->view.setCenter(DEFAULTXCENTER, DEFAULTYCENTER);
         this->window.setView(this->view); 
+        this->initScenes();
+
     };
 
     void GameWindow::init ()

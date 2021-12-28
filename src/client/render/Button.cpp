@@ -8,13 +8,13 @@ namespace render {
 
     };
 
-    Button::Button (std::string s, sf::Font& font,sf::Vector2f size, sf::Vector2f position, enum buttonStyle style, char m_type, GameWindow* gameWindow)
+    Button::Button (std::string s, sf::Font& font,sf::Vector2f size, sf::Vector2i position, enum buttonStyle style, char m_type, GameWindow* gameWindow)
     {
   
     dimensions = size; 
 
         //set position
-    pos = position;
+    m_position = position;
 
     //set initial state
     m_btnState = NORMAL;
@@ -103,7 +103,7 @@ namespace render {
     m_button.setPoint(2, sf::Vector2f(dimensions.x, dimensions.y));
     m_button.setPoint(3, sf::Vector2f(0, dimensions.y));
     m_button.setOrigin(m_button.getGlobalBounds().width/2, m_button.getGlobalBounds().height/2);
-    m_button.setPosition(pos);
+    m_button.setPosition(gameWindow->window.mapPixelToCoords(m_position));
 
     sf::Vector2f textPosition = sf::Vector2f(m_button.getPosition().x, m_button.getPosition().y - m_button.getGlobalBounds().height/4);
 
@@ -168,17 +168,11 @@ namespace render {
     {
         case NONE:
         {
-            m_size = sf::Vector2f(m_text.getGlobalBounds().width * 1.5f, m_text.getGlobalBounds().height * 1.75f);
-            m_button.setPointCount(4);
-            m_button.setPoint(0, sf::Vector2f(0, 0));
-            m_button.setPoint(1, sf::Vector2f(dimensions.x, 0));
-            m_button.setPoint(2, sf::Vector2f(dimensions.x, dimensions.y));
-            m_button.setPoint(3, sf::Vector2f(0, dimensions.y));
             m_button.setOrigin(m_button.getGlobalBounds().width/2, m_button.getGlobalBounds().height/2);
             if(gameWindow->isZoomed)
             {
                 m_button.setScale(m_button.getScale()*(gameWindow->zoom));
-                m_button.setPosition(gameWindow->window.mapPixelToCoords((sf::Vector2i)pos));
+                m_button.setPosition(gameWindow->window.mapPixelToCoords(m_position));
             }
             m_text.setOrigin(m_text.getGlobalBounds().width/2, m_text.getGlobalBounds().height/2);
             sf::Vector2f textPosition = sf::Vector2f(m_button.getPosition().x, m_button.getPosition().y - m_button.getGlobalBounds().height/4);
@@ -192,18 +186,11 @@ namespace render {
 
         case SAVE:
         {
-            m_size = sf::Vector2f(m_text.getGlobalBounds().width * 1.5f, m_text.getGlobalBounds().height * 1.75f);
-            m_button.setPointCount(4);
-            m_button.setPoint(0, sf::Vector2f(0, 0));
-            m_button.setPoint(1, sf::Vector2f(dimensions.x, 0));
-            m_button.setPoint(2, sf::Vector2f(dimensions.x, dimensions.y));
-            m_button.setPoint(3, sf::Vector2f(0, dimensions.y));
-            m_button.setOrigin(m_button.getGlobalBounds().width/2, m_button.getGlobalBounds().height/2);
-            if(gameWindow->isZoomed)
-            {
+            if(gameWindow->isZoomed){
                 m_button.setScale(m_button.getScale()*(gameWindow->zoom));
-                m_button.setPosition(gameWindow->window.mapPixelToCoords((sf::Vector2i)pos));
+                m_button.setPosition(gameWindow->window.mapPixelToCoords(m_position));
             }
+
             m_text.setOrigin(m_text.getGlobalBounds().width/2, m_text.getGlobalBounds().height/2);
             sf::Vector2f textPosition = sf::Vector2f(m_button.getPosition().x, m_button.getPosition().y - m_button.getGlobalBounds().height/4);
             m_text.setPosition(textPosition);
@@ -216,18 +203,14 @@ namespace render {
 
         case CANCEL:
         {
-           m_size = sf::Vector2f(m_text.getGlobalBounds().width * 1.5f, m_text.getGlobalBounds().height * 1.75f);
-            m_button.setPointCount(4);
-            m_button.setPoint(0, sf::Vector2f(0, 0));
-            m_button.setPoint(1, sf::Vector2f(dimensions.x, 0));
-            m_button.setPoint(2, sf::Vector2f(dimensions.x, dimensions.y));
-            m_button.setPoint(3, sf::Vector2f(0, dimensions.y));
             m_button.setOrigin(m_button.getGlobalBounds().width/2, m_button.getGlobalBounds().height/2);
             if(gameWindow->isZoomed)
             {
                 m_button.setScale(m_button.getScale()*(gameWindow->zoom));
-                m_button.setPosition(gameWindow->window.mapPixelToCoords((sf::Vector2i)pos));
+                m_button.setPosition(gameWindow->window.mapPixelToCoords(m_position));
+
             }
+
             m_text.setOrigin(m_text.getGlobalBounds().width/2, m_text.getGlobalBounds().height/2);
             sf::Vector2f textPosition = sf::Vector2f(m_button.getPosition().x, m_button.getPosition().y - m_button.getGlobalBounds().height/4);
             m_text.setPosition(textPosition);
@@ -240,17 +223,11 @@ namespace render {
 
         case CLEAN:
         {
-            m_size = sf::Vector2f(m_text.getGlobalBounds().width * 1.5f, m_text.getGlobalBounds().height * 1.75f);
-            m_button.setPointCount(4);
-            m_button.setPoint(0, sf::Vector2f(0, 0));
-            m_button.setPoint(1, sf::Vector2f(dimensions.x, 0));
-            m_button.setPoint(2, sf::Vector2f(dimensions.x, dimensions.y));
-            m_button.setPoint(3, sf::Vector2f(0, dimensions.y));
             m_button.setOrigin(m_button.getGlobalBounds().width/2, m_button.getGlobalBounds().height/2);
             if(gameWindow->isZoomed)
             {
                 m_button.setScale(m_button.getScale()*(gameWindow->zoom));
-                m_button.setPosition(gameWindow->window.mapPixelToCoords((sf::Vector2i)pos));
+                m_button.setPosition(gameWindow->window.mapPixelToCoords(m_position));
             }
             m_text.setOrigin(m_text.getGlobalBounds().width/2, m_text.getGlobalBounds().height/2);
             sf::Vector2f textPosition = sf::Vector2f(m_button.getPosition().x, m_button.getPosition().y - m_button.getGlobalBounds().height/4);
@@ -263,12 +240,6 @@ namespace render {
         break;
 
         default:
-        m_size = sf::Vector2f(m_text.getGlobalBounds().width * 1.5f, m_text.getGlobalBounds().height * 1.75f);
-            m_button.setPointCount(4);
-            m_button.setPoint(0, sf::Vector2f(0, 0));
-            m_button.setPoint(1, sf::Vector2f(dimensions.x, 0));
-            m_button.setPoint(2, sf::Vector2f(dimensions.x, dimensions.y));
-            m_button.setPoint(3, sf::Vector2f(0, dimensions.y));
             m_button.setOrigin(m_button.getGlobalBounds().width/2, m_button.getGlobalBounds().height/2);
             if(gameWindow->isZoomed)
             {
