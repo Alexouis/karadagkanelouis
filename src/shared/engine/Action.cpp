@@ -25,7 +25,15 @@ namespace engine{
     }
 
     void Action::select(std::shared_ptr<state::State>& gstate, int boxX, int boxY){
-        //gstate->moveCurrentPlayer(dstX, dstY);
+        gstate->setCurrPlayerAttack(boxX);
+    }
+
+    void Action::passTurn (std::shared_ptr<state::State>& gstate, int targetX, int targetY){
+        gstate->passTurn();
+    }
+
+    void Action::doNothing (std::shared_ptr<state::State>& gstate, int targetX, int targetY){
+        return;
     }
 
 
