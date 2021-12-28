@@ -9,6 +9,7 @@ namespace render {
     GameWindow::GameWindow()
     {
         this->zoom = DEFAULTZOOM;
+        this->isZoomed = (this->zoom != 1);
         this->currentScene = SceneId::FIGHTSCENE;        
         this->initScenes();
         this->window.create(sf::VideoMode(this->width, this->height), "TMX Loader");
@@ -26,11 +27,11 @@ namespace render {
 
     void GameWindow::initScenes ()
     {   
-        std::unique_ptr<Scene> holder = std::unique_ptr<Scene>(new Scene); 
+        std::unique_ptr<Scene> holder = std::unique_ptr<Scene>(new Scene(this)); 
         this->scenes.push_back(std::move(holder));
-        holder = std::unique_ptr<FightScene>(new FightScene);
+        holder = std::unique_ptr<FightScene>(new FightScene(this));
         this->scenes.push_back(std::move(holder));
-        holder.reset(new Scene);
+        holder.reset(new Scene(this));
         this->scenes.push_back(std::move(holder));
     };
 
@@ -40,11 +41,12 @@ namespace render {
     };
 
     //void GameWindow::update()
-    void GameWindow::update (sf::Event& e, sf::Vector2i m_mousePosition, char& selected)
+    void GameWindow::update (sf::Event& e, sf::Vector2i m_mousePosition)
     {
 
         //this->scenes[this->currentScene]->update();
-        this->scenes[this->currentScene]->update(e, m_mousePosition, selected);
+        this->scenes[this->currentScene]->update(e, m_mousePosition,this);
+        this->isZoomed = 0;
         
     };
 

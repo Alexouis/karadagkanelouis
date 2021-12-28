@@ -1,8 +1,9 @@
 #include "Scene.h"
+#include "GameWindow.h"
 #include <iostream>
 
 namespace render {
-    Scene::Scene ()
+    Scene::Scene (GameWindow* gameWindow)
     {
         init();
         setId(1);
@@ -24,9 +25,9 @@ namespace render {
         
     };
 
-    void Scene::update(sf::Event& e, sf::Vector2i m_mousePosition, char& selected){        
+    void Scene::update(sf::Event& e, sf::Vector2i m_mousePosition, GameWindow* gameWindow){        
         for(auto &boxe : this->boxes){
-            (*boxe).update(e,m_mousePosition, selected);
+            (*boxe).update(e,m_mousePosition, gameWindow);
         }
     };
 

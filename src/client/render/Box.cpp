@@ -1,4 +1,5 @@
 #include "Box.h"
+#include "GameWindow.h"
 #include "iostream"
 
 namespace render {
@@ -12,7 +13,7 @@ namespace render {
 
     };
 
-    void Box::update(sf::Event& event, sf::Vector2i m_mousePosition, char& selected)
+    void Box::update(sf::Event& event, sf::Vector2i m_mousePosition, GameWindow* gameWindow)
     {
         
     };

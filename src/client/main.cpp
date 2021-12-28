@@ -121,6 +121,7 @@ void randomMap(void){
     GameWindow gamewindow;
 
     sf::Event event;
+    float zoom = 0.8;
 
     while(gamewindow.window.isOpen()){
 
@@ -136,16 +137,18 @@ void randomMap(void){
             {
                 if(event.mouseWheel.delta == 1)
                 {
-                    gamewindow.setZoom(0.8);  
+                    gamewindow.setZoom(0.8);
+                    zoom = 0.8;  
                 }
                 else
                 {
                    gamewindow.setZoom(1.25);  
+                   zoom = 1.25;
                 }           
             }
         }
 
-        gamewindow.update(event,mousePosScreen,gamewindow.selected);
+        gamewindow.update(event,mousePosScreen);
 
         gamewindow.window.clear();
         gamewindow.draw();
@@ -176,6 +179,7 @@ void randomMap(void){
         sf::Vector2f mousePosScreen = gamewindow.window.mapPixelToCoords(sf::Mouse::getPosition(gamewindow.window));
         sf::Vector2f mousePosWorld = gamewindow.screenToWorld(mousePosScreen);
         while(gamewindow.window.pollEvent(event)) {
+            gamewindow.isZoomed = 0;
             if (event.type == sf::Event::Closed)
                 gamewindow.window.close();
             if(event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::D)
@@ -189,16 +193,18 @@ void randomMap(void){
                 else
                 {
                    gamewindow.setZoom(1.25);  
-                }           
+                }   
+                gamewindow.isZoomed = 1        
             }
             if(event.type == sf::Event::MouseButtonPressed){
                 
                 cmdHolder = std::unique_ptr<engine::Command>(new engine::Command(&engine::Action::move, (int)mousePosWorld.x, (int)mousePosWorld.y));
                 ngine.execute(cmdHolder);
             }
+
         }
 
-        gamewindow.update(event,(sf::Vector2i)mousePosScreen,gamewindow.selected);
+        gamewindow.update(event,(sf::Vector2i)mousePosScreen);
         gamewindow.window.clear();
         gamewindow.draw();
         gamewindow.window.display();
@@ -258,7 +264,7 @@ void randomMap(void){
 
             
         }
-        gamewindow.update(event,(sf::Vector2i)destination,gamewindow.selected);
+        gamewindow.update(event,(sf::Vector2i)destination);
         gamewindow.window.clear();
         gamewindow.draw();
         gamewindow.window.display();
