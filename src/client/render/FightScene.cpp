@@ -47,44 +47,52 @@ namespace render{
     {   
         sf::Vector2f size;
         sf::Vector2i pos;
+        unsigned int fontSize;
         sf::Font myfont;
         if(!myfont.loadFromFile("./extern/tmx-loader/fonts/Ubuntu-M.ttf"))
         {
             std::cerr<<"Could not find contb.ttf font."<<std::endl;
         }
-        size = sf::Vector2f(50.f,50.f);
-        pos = sf::Vector2i(10,10);
-        std::unique_ptr<Box> holder = std::unique_ptr<Button>(new Button("MENU", myfont, size, pos , CANCEL, MENU, gameWindow)); 
+        size = sf::Vector2f(80.f,30.f);
+        pos = sf::Vector2i(60,30);
+        fontSize = 15;
+        std::unique_ptr<Box> holder = std::unique_ptr<Button>(new Button("MENU", fontSize,myfont, size, pos , CANCEL, MENU, gameWindow)); 
         this->boxes.push_back(std::move(holder));
 
-        size = sf::Vector2f(450.f,300.f);
-        pos = sf::Vector2i(10,10);
-        holder = std::unique_ptr<Button>(new Button("\n\nPASSER \n\nSON TOUR!", myfont,size, pos, CANCEL, PASS, gameWindow));
+        size = sf::Vector2f(100.f,100.f);
+        pos = sf::Vector2i(980,540);
+        fontSize = 15;
+        holder = std::unique_ptr<Button>(new Button("\n\n   PASSER \n\nSON TOUR!",fontSize, myfont,size, pos, CLEAN, PASS, gameWindow));
         this->boxes.push_back(std::move(holder));
 
-        size = sf::Vector2f(250.f,200.f);
-        pos = sf::Vector2i(50,10);
-        holder = std::unique_ptr<Button>(new Button("Sort 1", myfont, size, pos, SAVE, SPELL1, gameWindow));
+        size = sf::Vector2f(100.f,50.f);
+        pos = sf::Vector2i(1410,550);
+        fontSize = 25;
+        holder = std::unique_ptr<Button>(new Button("Sort 1",fontSize, myfont, size, pos, SAVE, SPELL1, gameWindow));
         this->boxes.push_back(std::move(holder));
 
-        size = sf::Vector2f(50.f,50.f);
-        pos = sf::Vector2i(800,500);
-        holder = std::unique_ptr<Button>(new Button("Sort 2", myfont, size, pos, SAVE, SPELL2, gameWindow));
+        size = sf::Vector2f(100.f,50.f);
+        pos = sf::Vector2i(1520,550);
+        fontSize = 25;
+        holder = std::unique_ptr<Button>(new Button("Sort 2",fontSize, myfont, size, pos, SAVE, SPELL2, gameWindow));
         this->boxes.push_back(std::move(holder));
 
-        size = sf::Vector2f(250.f,200.f);
-        pos = sf::Vector2i(1520,530);
-        holder = std::unique_ptr<Button>(new Button("", myfont, size, pos, SAVE, SPELL3, gameWindow));
+        size = sf::Vector2f(100.f,50.f);
+        pos = sf::Vector2i(1630,550);
+        fontSize = 25;
+        holder = std::unique_ptr<Button>(new Button("",fontSize, myfont, size, pos, SAVE, SPELL3, gameWindow));
         this->boxes.push_back(std::move(holder));
 
-        size = sf::Vector2f(250.f,200.f);
-        pos = sf::Vector2i(1530,530);
-        holder = std::unique_ptr<Button>(new Button("", myfont, size, pos, SAVE, SPELL4, gameWindow));
+        size = sf::Vector2f(100.f,50.f);
+        pos = sf::Vector2i(1740,550);
+        fontSize = 25;
+        holder = std::unique_ptr<Button>(new Button("",fontSize, myfont, size, pos, SAVE, SPELL4, gameWindow));
         this->boxes.push_back(std::move(holder));
 
-        size = sf::Vector2f(250.f,200.f);
-        pos = sf::Vector2i(1540,530);
-        holder.reset(new Button("", myfont, size, pos, SAVE, SPELL5, gameWindow));
+        size = sf::Vector2f(100.f,50.f);
+        pos = sf::Vector2i(1850,550);
+        fontSize = 25;
+        holder.reset(new Button("",fontSize, myfont, size, pos, SAVE, SPELL5, gameWindow));
         this->boxes.push_back(std::move(holder));
 
     };

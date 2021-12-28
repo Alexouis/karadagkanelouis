@@ -8,7 +8,7 @@ namespace render {
 
     };
 
-    Button::Button (std::string s, sf::Font& font,sf::Vector2f size, sf::Vector2i position, enum buttonStyle style, char m_type, GameWindow* gameWindow)
+    Button::Button (std::string s,unsigned int m_fontSize, sf::Font& font,sf::Vector2f size, sf::Vector2i position, enum buttonStyle style, char m_type, GameWindow* gameWindow)
     {
   
     dimensions = size; 
@@ -68,9 +68,9 @@ namespace render {
             m_textNormal = sf::Color(255,255,255);
             m_textHover = sf::Color(255,255,255);
             m_textClicked = sf::Color(255,255,255);
-            m_bgNormal = sf::Color(0,255,255,100);
-            m_bgHover = sf::Color(0,200,200,100);
-            m_bgClicked = sf::Color(0,150,150);
+            m_bgNormal = sf::Color(243,142,54,150);
+            m_bgHover = sf::Color(243,128,27,200);
+            m_bgClicked = sf::Color(243,113,0);
             m_border = sf::Color(255,255,255,100);
         }
         break;
@@ -89,6 +89,7 @@ namespace render {
     //set up text
     m_text.setString(s);
     m_text.setFont(m_font);
+    setM_fontSize(m_fontSize);
     m_text.setOrigin(m_text.getGlobalBounds().width/2, m_text.getGlobalBounds().height/2);
     m_text.setColor(m_textNormal);
 
@@ -168,17 +169,16 @@ namespace render {
     {
         case NONE:
         {
-            m_button.setOrigin(m_button.getGlobalBounds().width/2, m_button.getGlobalBounds().height/2);
             if(gameWindow->isZoomed)
             {
                 m_button.setScale(m_button.getScale()*(gameWindow->zoom));
                 m_button.setPosition(gameWindow->window.mapPixelToCoords(m_position));
             }
-            m_text.setOrigin(m_text.getGlobalBounds().width/2, m_text.getGlobalBounds().height/2);
+            m_text.setScale(m_button.getScale());
             sf::Vector2f textPosition = sf::Vector2f(m_button.getPosition().x, m_button.getPosition().y - m_button.getGlobalBounds().height/4);
             m_text.setPosition(textPosition);
             m_text.setColor(m_textNormal);
-            m_shadow.setOrigin(m_shadow.getGlobalBounds().width/2, m_shadow.getGlobalBounds().height/2);
+            m_shadow.setScale(m_button.getScale());
             m_shadow.setPosition(m_text.getPosition().x + 3.f, m_text.getPosition().y + 3.f);
             m_shadow.setColor(sf::Color(0,0,0));
         }
@@ -190,12 +190,11 @@ namespace render {
                 m_button.setScale(m_button.getScale()*(gameWindow->zoom));
                 m_button.setPosition(gameWindow->window.mapPixelToCoords(m_position));
             }
-
-            m_text.setOrigin(m_text.getGlobalBounds().width/2, m_text.getGlobalBounds().height/2);
+            m_text.setScale(m_button.getScale());
             sf::Vector2f textPosition = sf::Vector2f(m_button.getPosition().x, m_button.getPosition().y - m_button.getGlobalBounds().height/4);
             m_text.setPosition(textPosition);
             m_text.setColor(m_textNormal);
-            m_shadow.setOrigin(m_shadow.getGlobalBounds().width/2, m_shadow.getGlobalBounds().height/2);
+            m_shadow.setScale(m_button.getScale());
             m_shadow.setPosition(m_text.getPosition().x + 3.f, m_text.getPosition().y + 3.f);
             m_shadow.setColor(sf::Color(0,0,0));
         }
@@ -203,19 +202,17 @@ namespace render {
 
         case CANCEL:
         {
-            m_button.setOrigin(m_button.getGlobalBounds().width/2, m_button.getGlobalBounds().height/2);
             if(gameWindow->isZoomed)
             {
                 m_button.setScale(m_button.getScale()*(gameWindow->zoom));
                 m_button.setPosition(gameWindow->window.mapPixelToCoords(m_position));
 
             }
-
-            m_text.setOrigin(m_text.getGlobalBounds().width/2, m_text.getGlobalBounds().height/2);
+            m_text.setScale(m_button.getScale());
             sf::Vector2f textPosition = sf::Vector2f(m_button.getPosition().x, m_button.getPosition().y - m_button.getGlobalBounds().height/4);
             m_text.setPosition(textPosition);
             m_text.setColor(m_textNormal);
-            m_shadow.setOrigin(m_shadow.getGlobalBounds().width/2, m_shadow.getGlobalBounds().height/2);
+            m_shadow.setScale(m_button.getScale());
             m_shadow.setPosition(m_text.getPosition().x + 3.f, m_text.getPosition().y + 3.f);
             m_shadow.setColor(sf::Color(0,0,0));
         }
@@ -223,34 +220,32 @@ namespace render {
 
         case CLEAN:
         {
-            m_button.setOrigin(m_button.getGlobalBounds().width/2, m_button.getGlobalBounds().height/2);
             if(gameWindow->isZoomed)
             {
                 m_button.setScale(m_button.getScale()*(gameWindow->zoom));
                 m_button.setPosition(gameWindow->window.mapPixelToCoords(m_position));
             }
-            m_text.setOrigin(m_text.getGlobalBounds().width/2, m_text.getGlobalBounds().height/2);
+            m_text.setScale(m_button.getScale());
             sf::Vector2f textPosition = sf::Vector2f(m_button.getPosition().x, m_button.getPosition().y - m_button.getGlobalBounds().height/4);
             m_text.setPosition(textPosition);
             m_text.setColor(m_textNormal);
-            m_shadow.setOrigin(m_shadow.getGlobalBounds().width/2, m_shadow.getGlobalBounds().height/2);
+            m_shadow.setScale(m_button.getScale());
             m_shadow.setPosition(m_text.getPosition().x + 3.f, m_text.getPosition().y + 3.f);
             m_shadow.setColor(sf::Color(0,0,0));
         }
         break;
 
         default:
-            m_button.setOrigin(m_button.getGlobalBounds().width/2, m_button.getGlobalBounds().height/2);
             if(gameWindow->isZoomed)
             {
                 m_button.setScale(m_button.getScale()*(gameWindow->zoom));
                 m_button.setPosition(gameWindow->window.mapPixelToCoords((sf::Vector2i)pos));
             }
-            m_text.setOrigin(m_text.getGlobalBounds().width/2, m_text.getGlobalBounds().height/2);
+            m_text.setScale(m_button.getScale());
             sf::Vector2f textPosition = sf::Vector2f(m_button.getPosition().x, m_button.getPosition().y - m_button.getGlobalBounds().height/4);
             m_text.setPosition(textPosition);
             m_text.setColor(m_textNormal);
-            m_shadow.setOrigin(m_shadow.getGlobalBounds().width/2, m_shadow.getGlobalBounds().height/2);
+            m_shadow.setScale(m_button.getScale());
             m_shadow.setPosition(m_text.getPosition().x + 3.f, m_text.getPosition().y + 3.f);
             m_shadow.setColor(sf::Color(0,0,0));
             break;
@@ -501,9 +496,9 @@ namespace render {
             m_textNormal = sf::Color(255,255,255);
             m_textHover = sf::Color(255,255,255);
             m_textClicked = sf::Color(255,255,255);
-            m_bgNormal = sf::Color(0,255,255,100);
-            m_bgHover = sf::Color(0,200,200,100);
-            m_bgClicked = sf::Color(0,150,150);
+            m_bgNormal = sf::Color(243,142,54,150);
+            m_bgHover = sf::Color(243,128,27,200);
+            m_bgClicked = sf::Color(243,113,0);
             m_border = sf::Color(255,255,255,100);
         }
         break;
