@@ -268,8 +268,9 @@ void randomMap(void){
 
         while(gamewindow.window.pollEvent(event)) {
             if (event.type == sf::Event::Closed)
+            {
                 gamewindow.window.close();
-                
+            }
             if(event.type == sf::Event::MouseWheelMoved)
             {
                 if(event.mouseWheel.delta == 1)
