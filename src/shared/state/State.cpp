@@ -32,7 +32,7 @@ namespace state {
         this->players[playerId.back()-'0'][0][playerId] = std::move(player);
 
         this->gameMap[10][10].state = OCCUPIED;
-        this->gameMap[10][10].player_id = playerId;
+        this->gameMap[10][10].player_index = 0;
 
         player = std::unique_ptr<Player>(new Player("buu",HERO, Position(11,11), 1, true));
         playerId = player->getName();
@@ -42,7 +42,7 @@ namespace state {
 
         
         this->gameMap[11][11].state = OCCUPIED;
-        this->gameMap[11][11].player_id = playerId;
+        this->gameMap[11][11].player_index = 1;
 
         
     };
@@ -59,11 +59,12 @@ namespace state {
     void State::initMap (){
 
     };
-    bool State::isDead (Player p){
-        return (p.getStatus() == DEAD);
+    bool State::isDead (char p_index){
+        std::string id = this->players_id[p_index];
+        return (this->players[id.back()-'0']->find(id)->second->getStatus() == DEAD);
     };
     void State::passTurn (){
-        this->actualPlayerIndex++;
+        this->actualPlayerIndex = (this->actualPlayerIndex + 1) % this->playersCount;
     };
     void State::incrementTurn (){
         this->turn++;
@@ -113,7 +114,7 @@ namespace state {
         char st = this->gameMap[targetY][targetX].state;
         if(st == OCCUPIED){
             std::string attackerId = this->players_id[this->actualPlayerIndex];
-            std::string taregtId = this->gameMap[targetY][targetX].player_id;
+            std::string taregtId = this->players_id[this->gameMap[targetY][targetX].player_index];
             this->players[attackerId.back()-'0']->find(attackerId)->second->attack(this->players[taregtId.back()-'0']->find(taregtId)->second);
         }
     };
@@ -121,10 +122,9 @@ namespace state {
         std::string id = this->players_id[this->actualPlayerIndex];
         Position prevPos = this->players[id.back()-'0']->find(id)->second->getPosition();
         this->gameMap[prevPos.getY()][prevPos.getX()].state = FREE;
-        this->gameMap[dstY][dstX].player_id = id;
+        this->gameMap[dstY][dstX].player_index = this->actualPlayerIndex;
         this->players[id.back()-'0']->find(id)->second->move(dstX,dstY);
         this->gameMap[dstY][dstX].state = OCCUPIED;
-        this->gameMap[dstY][dstX].player_id = id;
     };
     Position State::playerPosition (char playerIndex) {
         std::string id = this->players_id[playerIndex];
@@ -137,5 +137,18 @@ namespace state {
 
     char  State::getPlayersCount () const{
         return this->playersCount;
+    }
+
+    void State::setCurrPlayerAttack (char attackIndex){
+        const std::string id = this->players_id[this->actualPlayerIndex];
+        this->players[id.back()-'0']->find(id)->second->setCurrentAttackIndex(attackIndex);
+    }
+
+    void State::lock(){
+        this->padlock = true;
+    }
+
+    void State::unlock(){
+        this->padlock = false;
     }
 };

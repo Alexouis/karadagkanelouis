@@ -284,7 +284,6 @@ namespace render {
             {
                 m_btnState = CLICKED;
                 gameWindow->selected = m_type;
-
             }
 
             else

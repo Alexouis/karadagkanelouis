@@ -227,6 +227,8 @@ void randomMap(void){
                     }
                 }
                 
+                cmdHolder = std::unique_ptr<engine::Command>(new engine::Command(engine::Action::move, (int)mousePosWorld.x, (int)mousePosWorld.y));
+                ngine.execute(cmdHolder);
             }
             gamewindow.update(event,(sf::Vector2i)mousePosScreen);
 
