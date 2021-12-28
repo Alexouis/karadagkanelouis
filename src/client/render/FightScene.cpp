@@ -1,4 +1,5 @@
 #include "FightScene.h"
+#include "GameWindow.h"
 #include "Button.h"
 #include <fstream>
 #include <iostream> 
@@ -20,14 +21,14 @@
 #define PASS 0x20  //[code value] =  [0010 0000]
 
 namespace render{
-    FightScene::FightScene(){
+    FightScene::FightScene(GameWindow* gameWindow){
 
         this->gState = std::shared_ptr<state::State>(new state::State(map_sizeX,map_sizeY));
         this->gameMap->load("map_1.tmx");
         this->loadFrameInfos("data/frames_info.json");
         this->texture.loadFromFile("res/frames.png");
 
-        this->initButtons();
+        this->initButtons(gameWindow);
 
         sf::Time t;
         std::unique_ptr<AnimatedObject> aniObjects;
@@ -42,31 +43,53 @@ namespace render{
 
     };
 
-    void FightScene::initButtons()
+    void FightScene::initButtons(GameWindow* gameWindow)
     {   
+        sf::Vector2f size;
+        sf::Vector2i pos;
         sf::Font myfont;
         if(!myfont.loadFromFile("./extern/tmx-loader/fonts/Ubuntu-M.ttf"))
         {
             std::cerr<<"Could not find contb.ttf font."<<std::endl;
         }
-        std::unique_ptr<Box> holder = std::unique_ptr<Button>(new Button("MENU", myfont,sf::Vector2f(250.f,100.f), sf::Vector2f(-2650,(GAMEWINDOWZOOM+0.5)*200), CANCEL, MENU)); 
+        size = sf::Vector2f(50.f,50.f);
+        pos = sf::Vector2i(10,10);
+        std::unique_ptr<Box> holder = std::unique_ptr<Button>(new Button("MENU", myfont, size, pos , CANCEL, MENU, gameWindow)); 
         this->boxes.push_back(std::move(holder));
-        holder = std::unique_ptr<Button>(new Button("\n\nPASSER \n\nSON TOUR!", myfont,sf::Vector2f(450.f,300.f), sf::Vector2f(GAMEWINDOWWIDTH/2,(GAMEWINDOWZOOM+1)*GAMEWINDOWHEIGHT), CANCEL, PASS));
+
+        size = sf::Vector2f(450.f,300.f);
+        pos = sf::Vector2i(10,10);
+        holder = std::unique_ptr<Button>(new Button("\n\nPASSER \n\nSON TOUR!", myfont,size, pos, CANCEL, PASS, gameWindow));
         this->boxes.push_back(std::move(holder));
-        holder = std::unique_ptr<Button>(new Button("Sort 1", myfont, sf::Vector2f(250.f,200.f), sf::Vector2f(GAMEWINDOWWIDTH*1.5,(GAMEWINDOWZOOM+1)*GAMEWINDOWHEIGHT), SAVE, SPELL1));
+
+        size = sf::Vector2f(250.f,200.f);
+        pos = sf::Vector2i(50,10);
+        holder = std::unique_ptr<Button>(new Button("Sort 1", myfont, size, pos, SAVE, SPELL1, gameWindow));
         this->boxes.push_back(std::move(holder));
-        holder = std::unique_ptr<Button>(new Button("Sort 2", myfont, sf::Vector2f(250.f,200.f), sf::Vector2f(GAMEWINDOWWIDTH*1.5+250,(GAMEWINDOWZOOM+1)*GAMEWINDOWHEIGHT), SAVE, SPELL2));
+
+        size = sf::Vector2f(50.f,50.f);
+        pos = sf::Vector2i(800,500);
+        holder = std::unique_ptr<Button>(new Button("Sort 2", myfont, size, pos, SAVE, SPELL2, gameWindow));
         this->boxes.push_back(std::move(holder));
-        holder = std::unique_ptr<Button>(new Button("", myfont, sf::Vector2f(250.f,200.f), sf::Vector2f(GAMEWINDOWWIDTH*1.5+500,(GAMEWINDOWZOOM+1)*GAMEWINDOWHEIGHT), SAVE, SPELL3));
+
+        size = sf::Vector2f(250.f,200.f);
+        pos = sf::Vector2i(1520,530);
+        holder = std::unique_ptr<Button>(new Button("", myfont, size, pos, SAVE, SPELL3, gameWindow));
         this->boxes.push_back(std::move(holder));
-        holder = std::unique_ptr<Button>(new Button("", myfont, sf::Vector2f(250.f,200.f), sf::Vector2f(GAMEWINDOWWIDTH*1.5+750,(GAMEWINDOWZOOM+1)*GAMEWINDOWHEIGHT), SAVE, SPELL4));
+
+        size = sf::Vector2f(250.f,200.f);
+        pos = sf::Vector2i(1530,530);
+        holder = std::unique_ptr<Button>(new Button("", myfont, size, pos, SAVE, SPELL4, gameWindow));
         this->boxes.push_back(std::move(holder));
-        holder.reset(new Button("", myfont, sf::Vector2f(250.f,200.f), sf::Vector2f(GAMEWINDOWWIDTH*1.5+1000,(GAMEWINDOWZOOM+1)*GAMEWINDOWHEIGHT), SAVE, SPELL5));
+
+        size = sf::Vector2f(250.f,200.f);
+        pos = sf::Vector2i(1540,530);
+        holder.reset(new Button("", myfont, size, pos, SAVE, SPELL5, gameWindow));
         this->boxes.push_back(std::move(holder));
 
     };
 
-    void FightScene::update(sf::Event& e, sf::Vector2i m_mousePosition, char& selected){
+    void FightScene::update(sf::Event& e, sf::Vector2i m_mousePosition, GameWindow* gameWindow){
         sf::Time t;
         char objIndex = this->gState->getActualPlayerIndex();
         state::Position p;
@@ -76,7 +99,7 @@ namespace render{
             this->animatedObjects[i]->update(t,this->frameInfos[playerClass],playerClass+"_idle_se",this->worldToScreen(p));
         }  
         for(auto &boxe : this->boxes){
-            (*boxe).update(e,m_mousePosition, selected);
+            (*boxe).update(e,m_mousePosition, gameWindow);
         }
     };
 
