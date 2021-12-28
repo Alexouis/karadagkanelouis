@@ -194,7 +194,7 @@ void randomMap(void){
                 {
                    gamewindow.setZoom(1.25);  
                 }   
-                gamewindow.isZoomed = 1        
+                gamewindow.isZoomed = 1;      
             }
             if(event.type == sf::Event::MouseButtonPressed){
                 

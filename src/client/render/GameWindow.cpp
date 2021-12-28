@@ -27,11 +27,11 @@ namespace render {
 
     void GameWindow::initScenes ()
     {   
-        std::unique_ptr<Scene> holder = std::unique_ptr<Scene>(new Scene(this)); 
+        std::unique_ptr<Scene> holder = std::unique_ptr<Scene>(new Scene()); 
         this->scenes.push_back(std::move(holder));
         holder = std::unique_ptr<FightScene>(new FightScene(this));
         this->scenes.push_back(std::move(holder));
-        holder.reset(new Scene(this));
+        holder.reset(new Scene());
         this->scenes.push_back(std::move(holder));
     };
 

@@ -3,7 +3,7 @@
 #include <iostream>
 
 namespace render {
-    Scene::Scene (GameWindow* gameWindow)
+    Scene::Scene ()
     {
         init();
         setId(1);

@@ -44,38 +44,38 @@ namespace render{
             std::cerr<<"Could not find contb.ttf font."<<std::endl;
         }
         size = sf::Vector2f(250.f,100.f);
-        pos = gameWindow->window.mapPixelToCoords(sf::Vector2f(10,10));
-        std::unique_ptr<Box> holder = std::unique_ptr<Button>(new Button("MENU", myfont, size, pos , CANCEL, MENU)); 
+        pos = gameWindow->window.mapPixelToCoords(sf::Vector2i(0,0));
+        std::unique_ptr<Box> holder = std::unique_ptr<Button>(new Button("MENU", myfont, size, pos , CANCEL, MENU, gameWindow)); 
         this->boxes.push_back(std::move(holder));
 
-        size = sf::Vector2f(450.f,300.f)
-        pos = gameWindow->window.mapPixelToCoords(sf::Vector2f(1000,550));
-        holder = std::unique_ptr<Button>(new Button("\n\nPASSER \n\nSON TOUR!", myfont,size, pos, CANCEL, PASS));
-        this->boxes.push_back(std::move(holder));
-
-        size = sf::Vector2f(250.f,200.f);
-        pos = gameWindow->window.mapPixelToCoords(sf::Vector2f(1500,530));
-        holder = std::unique_ptr<Button>(new Button("Sort 1", myfont, size, pos, SAVE, SPELL1));
+        size = sf::Vector2f(450.f,300.f);
+        pos = gameWindow->window.mapPixelToCoords(sf::Vector2i(1000,550));
+        holder = std::unique_ptr<Button>(new Button("\n\nPASSER \n\nSON TOUR!", myfont,size, pos, CANCEL, PASS, gameWindow));
         this->boxes.push_back(std::move(holder));
 
         size = sf::Vector2f(250.f,200.f);
-        pos = gameWindow->window.mapPixelToCoords(sf::Vector2f(1510,530));
-        holder = std::unique_ptr<Button>(new Button("Sort 2", myfont, size, pos, SAVE, SPELL2));
+        pos = gameWindow->window.mapPixelToCoords(sf::Vector2i(1500,530));
+        holder = std::unique_ptr<Button>(new Button("Sort 1", myfont, size, pos, SAVE, SPELL1, gameWindow));
         this->boxes.push_back(std::move(holder));
 
         size = sf::Vector2f(250.f,200.f);
-        pos = gameWindow->window.mapPixelToCoords(sf::Vector2f(1520,530));
-        holder = std::unique_ptr<Button>(new Button("", myfont, size, pos, SAVE, SPELL3));
+        pos = gameWindow->window.mapPixelToCoords(sf::Vector2i(1510,530));
+        holder = std::unique_ptr<Button>(new Button("Sort 2", myfont, size, pos, SAVE, SPELL2, gameWindow));
         this->boxes.push_back(std::move(holder));
 
         size = sf::Vector2f(250.f,200.f);
-        pos = gameWindow->window.mapPixelToCoords(sf::Vector2f(1530,530));
-        holder = std::unique_ptr<Button>(new Button("", myfont, size, pos, SAVE, SPELL4));
+        pos = gameWindow->window.mapPixelToCoords(sf::Vector2i(1520,530));
+        holder = std::unique_ptr<Button>(new Button("", myfont, size, pos, SAVE, SPELL3, gameWindow));
         this->boxes.push_back(std::move(holder));
 
         size = sf::Vector2f(250.f,200.f);
-        pos = gameWindow->window.mapPixelToCoords(sf::Vector2f(1540,530));
-        holder.reset(new Button("", myfont, size, pos), SAVE, SPELL5));
+        pos = gameWindow->window.mapPixelToCoords(sf::Vector2i(1530,530));
+        holder = std::unique_ptr<Button>(new Button("", myfont, size, pos, SAVE, SPELL4, gameWindow));
+        this->boxes.push_back(std::move(holder));
+
+        size = sf::Vector2f(250.f,200.f);
+        pos = gameWindow->window.mapPixelToCoords(sf::Vector2i(1540,530));
+        holder.reset(new Button("", myfont, size, pos, SAVE, SPELL5, gameWindow));
         this->boxes.push_back(std::move(holder));
 
     };
