@@ -33,7 +33,7 @@
 #include <csignal>
 
 #define MAP_SIZE_XY 22
-#define SELECTED 0xF //[code value] =  [1111 1111]
+#define SELECTED 0x90 //[code value] =  [1001 0000]
 
 
 using namespace std;
@@ -120,7 +120,7 @@ void randomMap(void){
 
  void renderMap(void){
 
-    GameWindow gamewindow;
+    render::GameWindow gamewindow;
 
     sf::Event event;
     float zoom = 0.8;
@@ -179,8 +179,7 @@ void randomMap(void){
 
  void engineExplo(void){
 
-    GameWindow gamewindow;
-    gamewindow.initScenes();
+    render::GameWindow gamewindow;
     engine::Engine ngine;
     std::unique_ptr<engine::Command> cmdHolder;
     gamewindow.shareStateWith(ngine);
@@ -226,13 +225,16 @@ void randomMap(void){
                     case sf::Mouse::Left:
                     {
                         gamewindow.selected = SELECTED;
-                        cmdHolder = std::unique_ptr<engine::Command>(new engine::Command(&engine::Action::move, (int)mousePosWorld.x, (int)mousePosWorld.y));
-                        ngine.execute(cmdHolder);
+                        gamewindow.update(event,(sf::Vector2i)mousePosScreen);
+
+                        //cmdHolder = std::unique_ptr<engine::Command>(new engine::Command(&engine::Action::move, (int)mousePosWorld.x, (int)mousePosWorld.y));
+                        //ngine.execute(cmdHolder);
                         break;
                     }
                 }
             }
-            gamewindow.update(event,(sf::Vector2i)mousePosScreen);
+            ngine.registerTarget((int)(mousePosWorld.x), (int)(mousePosWorld.y), gamewindow.selected );
+            ngine.execute();
 
 
         }
@@ -251,7 +253,7 @@ void randomMap(void){
  void random_ai(void){
     signal(SIGALRM, &sigalrm_handler); // set a signal handler 
     alarm(1);
-    GameWindow gamewindow;
+    render::GameWindow gamewindow;
     engine::Engine ngine;
     std::unique_ptr<engine::Command> cmdHolder;
     gamewindow.shareStateWith(ngine);

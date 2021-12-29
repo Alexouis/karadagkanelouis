@@ -119,12 +119,14 @@ namespace state {
         }
     };
     void State::moveCurrentPlayer (int dstX, int dstY){
-        std::string id = this->players_id[this->actualPlayerIndex];
-        Position prevPos = this->players[id.back()-'0']->find(id)->second->getPosition();
-        this->gameMap[prevPos.getY()][prevPos.getX()].state = FREE;
-        this->gameMap[dstY][dstX].player_index = this->actualPlayerIndex;
-        this->players[id.back()-'0']->find(id)->second->move(dstX,dstY);
-        this->gameMap[dstY][dstX].state = OCCUPIED;
+        if((dstX >= 0 && dstY >= 0) && (dstX < this->gameMap.size() && dstY < this->gameMap.size())){
+            std::string id = this->players_id[this->actualPlayerIndex];
+            Position prevPos = this->players[id.back()-'0']->find(id)->second->getPosition();
+            this->gameMap[prevPos.getY()][prevPos.getX()].state = FREE;
+            this->gameMap[dstY][dstX].player_index = this->actualPlayerIndex;
+            this->players[id.back()-'0']->find(id)->second->move(dstX,dstY);
+            this->gameMap[dstY][dstX].state = OCCUPIED;
+        }
     };
     Position State::playerPosition (char playerIndex) {
         std::string id = this->players_id[playerIndex];
