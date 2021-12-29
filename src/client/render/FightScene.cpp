@@ -154,6 +154,7 @@ namespace render{
         worldPos.y = floor(worldPos.y/278);
         return worldPos;
     }
+    
 
     FightScene::~FightScene(){
 
