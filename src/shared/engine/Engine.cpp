@@ -11,9 +11,10 @@
 #include <iostream>
 #include "engine.h"
 
-#define CODE_MASk(X)  ((X & 0x70) >> 4)
-#define VALUE_MASK(X) ( X & 0xF )
-#define ACTION(X)    ((X & 0xF0) >> 7)
+#define CODE_MASK(X)   ((   X & 0x70 ) >> 4 )
+#define CODE_ACTION(X) (((  X & 0x10 ) >> 4 ) | ((  X & 0x20 ) >> 5 ))
+#define VALUE_MASK(X)  (    X & 0xF  )
+#define ACTION(X)      ((   X & 0xF0 ) >> 7 )
 
 #define SPELL1 0x0 //[targetCode code value] =  [0 000 0000]
 #define SPELL2 0x1 //[targetCode code value] =  [0 000 0001]
@@ -64,6 +65,14 @@ namespace engine{
         this->qcmd.push(std::move(cmd));
     }
 
+    void Engine::execute(){
+        if(!this->qcmd.empty()){
+            std::unique_ptr<Command> cmd = std::unique_ptr<Command>(std::move(this->qcmd.front()));
+            cmd->action(this->currentState, cmd->x, cmd->y);
+            this->qcmd.pop();
+        }
+    }
+
     void Engine::execute(std::unique_ptr<Command>& cmd){
         cmd->action(this->currentState, cmd->x, cmd->y);
     }
@@ -74,7 +83,8 @@ namespace engine{
 
     void Engine::registerTarget (int x, int y, char selected){
         if(ACTION(selected)){
-            this->cmdHolder = std::unique_ptr<Command>(new Command(this->action[CODE_MASk(this->selected)], x, y));
+            //std::cout << CODE_ACTION(selected) << std::endl;
+            this->cmdHolder = std::unique_ptr<Command>(new Command(this->action[CODE_ACTION(this->selected)], x, y));
             this->qcmd.push(std::move(cmdHolder));
             this->selected = selected;
         }
@@ -86,7 +96,7 @@ namespace engine{
 
     void Engine::registerTarget (char selected){
         this->selected = selected;
-        this->cmdHolder = std::unique_ptr<Command>(new Command(this->selection[CODE_MASk(selected)], VALUE_MASK(selected), 0));
+        this->cmdHolder = std::unique_ptr<Command>(new Command(this->selection[CODE_MASK(selected)], VALUE_MASK(selected), 0));
         this->qcmd.push(std::move(cmdHolder));
     }
 

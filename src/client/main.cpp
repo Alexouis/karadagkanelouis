@@ -33,7 +33,7 @@
 #include <csignal>
 
 #define MAP_SIZE_XY 22
-#define SELECTED 0xF //[code value] =  [1111 1111]
+#define SELECTED 0x90 //[code value] =  [1001 0000]
 
 
 using namespace std;
@@ -120,15 +120,18 @@ void randomMap(void){
 
  void renderMap(void){
 
-    GameWindow gamewindow;
+    render::GameWindow gamewindow;
+    gamewindow.update();
 
     sf::Event event;
+    sf::Vector2i mousePosScreen = (sf::Vector2i)gamewindow.window.mapPixelToCoords(sf::Vector2i(0,0));
+    gamewindow.update(event,mousePosScreen);
     float zoom = 0.8;
     int m_type = 0;
 
     while(gamewindow.window.isOpen()){
 
-        sf::Vector2i mousePosScreen = (sf::Vector2i)gamewindow.window.mapPixelToCoords(sf::Mouse::getPosition(gamewindow.window));
+        mousePosScreen = (sf::Vector2i)gamewindow.window.mapPixelToCoords(sf::Mouse::getPosition(gamewindow.window));
 
         while(gamewindow.window.pollEvent(event)) {
             if (event.type == sf::Event::Closed)
@@ -148,6 +151,7 @@ void randomMap(void){
                         break;
                     }
                 }
+                gamewindow.update(event,mousePosScreen);
             }
             if(event.type == sf::Event::MouseWheelMoved)
             {
@@ -160,9 +164,10 @@ void randomMap(void){
                 {
                     gamewindow.setZoom(1.25);  
                     gamewindow.isZoomed = 1;
-                }           
+                } 
+                gamewindow.update(event,mousePosScreen);          
             }
-            gamewindow.update(event,mousePosScreen);
+            gamewindow.update();
         }
 
         //gamewindow.update(event,mousePosScreen);
@@ -179,21 +184,23 @@ void randomMap(void){
 
  void engineExplo(void){
 
-    GameWindow gamewindow;
-    gamewindow.initScenes();
+    render::GameWindow gamewindow;
     engine::Engine ngine;
     std::unique_ptr<engine::Command> cmdHolder;
     gamewindow.shareStateWith(ngine);
+    gamewindow.update();
     //ngine.start();
 
     bool debug = false;
+    sf::Event event;
+    sf::Vector2f mousePosScreen = gamewindow.window.mapPixelToCoords(sf::Vector2i(0,0));
+    sf::Vector2f mousePosWorld  = gamewindow.screenToWorld(mousePosScreen);
+    gamewindow.update(event,(sf::Vector2i)mousePosScreen);
 
     while(gamewindow.window.isOpen()){
 
-        sf::Event event;
-
-        sf::Vector2f mousePosScreen = gamewindow.window.mapPixelToCoords(sf::Mouse::getPosition(gamewindow.window));
-        sf::Vector2f mousePosWorld = gamewindow.screenToWorld(mousePosScreen);
+        mousePosScreen = gamewindow.window.mapPixelToCoords(sf::Mouse::getPosition(gamewindow.window));
+        mousePosWorld = gamewindow.screenToWorld(mousePosScreen);
         while(gamewindow.window.pollEvent(event)) {
             if (event.type == sf::Event::Closed)
                 gamewindow.window.close();
@@ -201,18 +208,15 @@ void randomMap(void){
                 debug = !debug;
             if(event.type == sf::Event::MouseWheelMoved)
             {
-                if(event.mouseWheel.delta == 1)
-                {
+                if(event.mouseWheel.delta == 1){
                     gamewindow.setZoom(0.8); 
                     gamewindow.isZoomed = 1;  
                 }
-                else
-                {
+                else{
                     gamewindow.setZoom(1.25); 
                     gamewindow.isZoomed = 1;    
                 }   
-                
-                   
+                gamewindow.update(event,(sf::Vector2i)mousePosScreen);
             }
             if(event.type == sf::Event::MouseButtonPressed){
                 switch(event.mouseButton.button)
@@ -226,17 +230,17 @@ void randomMap(void){
                     case sf::Mouse::Left:
                     {
                         gamewindow.selected = SELECTED;
-                        cmdHolder = std::unique_ptr<engine::Command>(new engine::Command(&engine::Action::move, (int)mousePosWorld.x, (int)mousePosWorld.y));
-                        ngine.execute(cmdHolder);
                         break;
                     }
                 }
+                gamewindow.update(event,(sf::Vector2i)mousePosScreen);
+                ngine.registerTarget((int)(mousePosWorld.x), (int)(mousePosWorld.y), gamewindow.selected );
+                ngine.execute();
             }
-            gamewindow.update(event,(sf::Vector2i)mousePosScreen);
-
-
+            
+            gamewindow.update();
         }
-        gamewindow.update(event,(sf::Vector2i)mousePosScreen);
+        
         gamewindow.window.clear();
         gamewindow.draw();
         gamewindow.window.display();
@@ -251,7 +255,7 @@ void randomMap(void){
  void random_ai(void){
     signal(SIGALRM, &sigalrm_handler); // set a signal handler 
     alarm(1);
-    GameWindow gamewindow;
+    render::GameWindow gamewindow;
     engine::Engine ngine;
     std::unique_ptr<engine::Command> cmdHolder;
     gamewindow.shareStateWith(ngine);

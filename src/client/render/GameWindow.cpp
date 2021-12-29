@@ -10,7 +10,6 @@ namespace render {
     {
         this->zoom = DEFAULTZOOM;
         this->isZoomed = (this->zoom != 1);
-        std::cout << "isZoomed: " << this->isZoomed << std::endl;
         this->currentScene = SceneId::FIGHTSCENE;        
         this->window.create(sf::VideoMode(this->width, this->height), "TMX Loader");
         this->window.setVerticalSyncEnabled(true);
@@ -18,7 +17,7 @@ namespace render {
         this->view.zoom(this->zoom);
         this->view.setCenter(DEFAULTXCENTER, DEFAULTYCENTER);
         this->window.setView(this->view); 
-        this->initScenes();
+        this->initScenes();        
 
     };
 
@@ -43,13 +42,14 @@ namespace render {
     };
 
     //void GameWindow::update()
+    void GameWindow::update (){
+        this->scenes[this->currentScene]->update();
+    };
+    
     void GameWindow::update (sf::Event& e, sf::Vector2i m_mousePosition)
     {
-
-        //this->scenes[this->currentScene]->update();
         this->scenes[this->currentScene]->update(e, m_mousePosition,this);
         this->isZoomed = 0;
-        
     };
 
     
