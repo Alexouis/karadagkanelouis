@@ -60,39 +60,39 @@ namespace render{
         this->boxes.push_back(std::move(holder));
 
         size = sf::Vector2f(100.f,100.f);
-        pos = sf::Vector2i(980,540);
+        pos = sf::Vector2i(980,530);
         fontSize = 15;
         holder = std::unique_ptr<Button>(new Button("\n\n   PASSER \n\nSON TOUR!",fontSize, myfont,size, pos, CLEAN, PASS, gameWindow));
         this->boxes.push_back(std::move(holder));
 
         size = sf::Vector2f(100.f,50.f);
-        pos = sf::Vector2i(1410,550);
+        pos = sf::Vector2i(1080,500);
         fontSize = 25;
         holder = std::unique_ptr<Button>(new Button("Sort 1",fontSize, myfont, size, pos, SAVE, SPELL1, gameWindow));
         this->boxes.push_back(std::move(holder));
 
         size = sf::Vector2f(100.f,50.f);
-        pos = sf::Vector2i(1520,550);
+        pos = sf::Vector2i(1180,500);
         fontSize = 25;
         holder = std::unique_ptr<Button>(new Button("Sort 2",fontSize, myfont, size, pos, SAVE, SPELL2, gameWindow));
         this->boxes.push_back(std::move(holder));
 
         size = sf::Vector2f(100.f,50.f);
-        pos = sf::Vector2i(1630,550);
+        pos = sf::Vector2i(1080,550);
         fontSize = 25;
-        holder = std::unique_ptr<Button>(new Button("",fontSize, myfont, size, pos, SAVE, SPELL3, gameWindow));
+        holder = std::unique_ptr<Button>(new Button("Sort 3",fontSize, myfont, size, pos, SAVE, SPELL3, gameWindow));
         this->boxes.push_back(std::move(holder));
 
         size = sf::Vector2f(100.f,50.f);
-        pos = sf::Vector2i(1740,550);
+        pos = sf::Vector2i(1180,550);
         fontSize = 25;
-        holder = std::unique_ptr<Button>(new Button("",fontSize, myfont, size, pos, SAVE, SPELL4, gameWindow));
+        holder = std::unique_ptr<Button>(new Button("Sort 4",fontSize, myfont, size, pos, SAVE, SPELL4, gameWindow));
         this->boxes.push_back(std::move(holder));
 
         size = sf::Vector2f(100.f,50.f);
-        pos = sf::Vector2i(1850,550);
+        pos = sf::Vector2i(1080,600);
         fontSize = 25;
-        holder.reset(new Button("",fontSize, myfont, size, pos, SAVE, SPELL5, gameWindow));
+        holder.reset(new Button("Sort 5",fontSize, myfont, size, pos, SAVE, SPELL5, gameWindow));
         this->boxes.push_back(std::move(holder));
 
     };

@@ -121,14 +121,17 @@ void randomMap(void){
  void renderMap(void){
 
     render::GameWindow gamewindow;
+    gamewindow.update();
 
     sf::Event event;
+    sf::Vector2i mousePosScreen = (sf::Vector2i)gamewindow.window.mapPixelToCoords(sf::Vector2i(0,0));
+    gamewindow.update(event,mousePosScreen);
     float zoom = 0.8;
     int m_type = 0;
 
     while(gamewindow.window.isOpen()){
 
-        sf::Vector2i mousePosScreen = (sf::Vector2i)gamewindow.window.mapPixelToCoords(sf::Mouse::getPosition(gamewindow.window));
+        mousePosScreen = (sf::Vector2i)gamewindow.window.mapPixelToCoords(sf::Mouse::getPosition(gamewindow.window));
 
         while(gamewindow.window.pollEvent(event)) {
             if (event.type == sf::Event::Closed)
@@ -192,7 +195,7 @@ void randomMap(void){
     sf::Event event;
     sf::Vector2f mousePosScreen = gamewindow.window.mapPixelToCoords(sf::Vector2i(0,0));
     sf::Vector2f mousePosWorld  = gamewindow.screenToWorld(mousePosScreen);
-    //gamewindow.update(event,(sf::Vector2i)mousePosScreen);
+    gamewindow.update(event,(sf::Vector2i)mousePosScreen);
 
     while(gamewindow.window.isOpen()){
 
