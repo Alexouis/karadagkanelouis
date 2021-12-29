@@ -6,7 +6,7 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 # This is free software: you are free to change and redistribute it.
 # There is NO WARRANTY, to the extent permitted by law.
 
-# Make data base, printed on Wed Dec 29 02:38:02 2021
+# Make data base, printed on Wed Dec 29 12:35:43 2021
 
 # Variables
 
@@ -14,10 +14,11 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 GDK_BACKEND = x11
 # environment
 LC_ALL = C
+ 
 # environment
 GJS_DEBUG_OUTPUT = stderr
 # environment
-VSCODE_IPC_HOOK_EXTHOST = /run/user/1000/vscode-ipc-feac1806-dc87-40d0-8e63-4cee947d2e3a.sock
+VSCODE_IPC_HOOK_EXTHOST = /run/user/1000/vscode-ipc-bb6455b4-2cda-4e32-9aa8-49d9cba01e45.sock
 # environment
 VSCODE_CWD = /home/mkas
 # environment
@@ -85,13 +86,13 @@ MAKEFILE_LIST := Makefile
 # environment
 VSCODE_VERBOSE_LOGGING = true
 # environment
-VSCODE_PID = 2491
+VSCODE_PID = 3302
 # environment
 XDG_SESSION_TYPE = x11
 # automatic
 ?D = $(patsubst %/,%,$(dir $?))
 # environment
-SESSION_MANAGER = local/kalikane:@/tmp/.ICE-unix/1909,unix/kalikane:/tmp/.ICE-unix/1909
+SESSION_MANAGER = local/kalikane:@/tmp/.ICE-unix/1916,unix/kalikane:/tmp/.ICE-unix/1916
 # automatic
 *F = $(notdir $*)
 # environment
@@ -135,7 +136,7 @@ MAKEFILES :=
 # environment
 COMMAND_NOT_FOUND_INSTALL_PROMPT = 1
 # environment
-INVOCATION_ID = 8b585e6e9847474ea550ae85c8f0a5a8
+INVOCATION_ID = 72d978ce89614b7b8350a56e7bdc8958
 # environment
 QSYS_ROOTDIR = /home/mkas/intelFPGA_lite/20.1/quartus/sopc_builder/bin
 # environment
@@ -171,11 +172,11 @@ MAKE_VERSION := 4.3
 # 'override' directive
 .SHELLSTATUS := 0
 # environment
-MANAGERPID = 1673
+MANAGERPID = 1683
 # environment
-GIO_LAUNCHED_DESKTOP_FILE_PID = 2491
+GIO_LAUNCHED_DESKTOP_FILE_PID = 3302
 # environment
-SSH_AGENT_PID = 1864
+SSH_AGENT_PID = 1872
 # environment
 _ = /usr/share/code/code
 # environment
@@ -185,7 +186,7 @@ GPG_AGENT_INFO = /run/user/1000/gnupg/S.gpg-agent:0:1
 # environment
 POWERSHELL_TELEMETRY_OPTOUT = 1
 # environment
-JOURNAL_STREAM = 8:26145
+JOURNAL_STREAM = 8:25909
 # environment
 XDG_SESSION_CLASS = user
 # environment
@@ -235,6 +236,7 @@ GDMSESSION = gnome
 
 # No implicit rules.
 
+ 
 # Files
 
 code-coverage:
@@ -292,7 +294,6 @@ testdocker:
 
 configure:
 #  Phony target (prerequisite of .PHONY).
- 
 #  Implicit rule search has not been done.
 #  File does not exist.
 #  File has not been updated.
@@ -520,6 +521,6 @@ install_submodules:
 # strcache performance: lookups = 120 / hit rate = 53%
 # hash-table stats:
 # Load=56/8192=1%, Rehash=0, Collisions=0/120=0%
-# Finished Make data base on Wed Dec 29 02:38:02 2021
+# Finished Make data base on Wed Dec 29 12:35:43 2021
 
  
