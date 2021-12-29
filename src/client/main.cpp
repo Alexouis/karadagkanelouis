@@ -183,16 +183,19 @@ void randomMap(void){
     engine::Engine ngine;
     std::unique_ptr<engine::Command> cmdHolder;
     gamewindow.shareStateWith(ngine);
+    gamewindow.update();
     //ngine.start();
 
     bool debug = false;
+    sf::Event event;
+    sf::Vector2f mousePosScreen = gamewindow.window.mapPixelToCoords(sf::Vector2i(0,0));
+    sf::Vector2f mousePosWorld  = gamewindow.screenToWorld(mousePosScreen);
+    //gamewindow.update(event,(sf::Vector2i)mousePosScreen);
 
     while(gamewindow.window.isOpen()){
 
-        sf::Event event;
-
-        sf::Vector2f mousePosScreen = gamewindow.window.mapPixelToCoords(sf::Mouse::getPosition(gamewindow.window));
-        sf::Vector2f mousePosWorld = gamewindow.screenToWorld(mousePosScreen);
+        mousePosScreen = gamewindow.window.mapPixelToCoords(sf::Mouse::getPosition(gamewindow.window));
+        mousePosWorld = gamewindow.screenToWorld(mousePosScreen);
         while(gamewindow.window.pollEvent(event)) {
             if (event.type == sf::Event::Closed)
                 gamewindow.window.close();
@@ -200,18 +203,15 @@ void randomMap(void){
                 debug = !debug;
             if(event.type == sf::Event::MouseWheelMoved)
             {
-                if(event.mouseWheel.delta == 1)
-                {
+                if(event.mouseWheel.delta == 1){
                     gamewindow.setZoom(0.8); 
                     gamewindow.isZoomed = 1;  
                 }
-                else
-                {
+                else{
                     gamewindow.setZoom(1.25); 
                     gamewindow.isZoomed = 1;    
                 }   
-                
-                   
+                gamewindow.update(event,(sf::Vector2i)mousePosScreen);
             }
             if(event.type == sf::Event::MouseButtonPressed){
                 switch(event.mouseButton.button)
@@ -225,20 +225,18 @@ void randomMap(void){
                     case sf::Mouse::Left:
                     {
                         gamewindow.selected = SELECTED;
-                        gamewindow.update(event,(sf::Vector2i)mousePosScreen);
-
-                        //cmdHolder = std::unique_ptr<engine::Command>(new engine::Command(&engine::Action::move, (int)mousePosWorld.x, (int)mousePosWorld.y));
-                        //ngine.execute(cmdHolder);
                         break;
                     }
                 }
+                gamewindow.update(event,(sf::Vector2i)mousePosScreen);
             }
             ngine.registerTarget((int)(mousePosWorld.x), (int)(mousePosWorld.y), gamewindow.selected );
             ngine.execute();
+            gamewindow.update();
 
 
         }
-        gamewindow.update(event,(sf::Vector2i)mousePosScreen);
+        
         gamewindow.window.clear();
         gamewindow.draw();
         gamewindow.window.display();

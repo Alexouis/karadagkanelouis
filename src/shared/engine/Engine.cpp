@@ -66,7 +66,7 @@ namespace engine{
     }
 
     void Engine::execute(){
-        std::unique_ptr<Command> cmd = std::move(this->qcmd.front());
+        std::unique_ptr<Command> cmd = std::unique_ptr<Command>(std::move(this->qcmd.front()));
         cmd->action(this->currentState, cmd->x, cmd->y);
         this->qcmd.pop();
     }

@@ -25,6 +25,9 @@ namespace render {
         
     };
 
+    void Scene::update(){
+    };
+    
     void Scene::update(sf::Event& e, sf::Vector2i m_mousePosition, GameWindow* gameWindow){        
         for(auto &boxe : this->boxes){
             (*boxe).update(e,m_mousePosition, gameWindow);

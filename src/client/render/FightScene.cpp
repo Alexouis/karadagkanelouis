@@ -97,17 +97,14 @@ namespace render{
 
     };
 
-    void FightScene::update(sf::Event& e, sf::Vector2i m_mousePosition, GameWindow* gameWindow){
+    void FightScene::update(){
         sf::Time t;
-        char objIndex = this->gState->getActualPlayerIndex();
         state::Position p;
+        char objIndex = this->gState->getActualPlayerIndex();
         for(char i=0; i<this->gState->getPlayersCount(); i++){
             p = this->gState->playerPosition(i);
             std::string playerClass = (this->gState->getPlayerClass(i) == state::playerClass::HERO) ? "valla" : "demon";
             this->animatedObjects[i]->update(t,this->frameInfos[playerClass],playerClass+"_idle_se",this->worldToScreen(p));
-        }  
-        for(auto &boxe : this->boxes){
-            (*boxe).update(e,m_mousePosition, gameWindow);
         }
     };
 
