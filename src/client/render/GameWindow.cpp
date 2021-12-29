@@ -8,7 +8,10 @@
 namespace render {
     GameWindow::GameWindow()
     {
+        this->isZoomed = 0;
+        this->initScenes();        
         this->zoom = DEFAULTZOOM;
+        std::cout << "view: " << this->view.getSize ().x << " " << this->view.getSize().y << std::endl;
         this->isZoomed = (this->zoom != 1);
         std::cout << "isZoomed: " << this->isZoomed << std::endl;
         this->currentScene = SceneId::FIGHTSCENE;        
@@ -18,7 +21,7 @@ namespace render {
         this->view.zoom(this->zoom);
         this->view.setCenter(DEFAULTXCENTER, DEFAULTYCENTER);
         this->window.setView(this->view); 
-        this->initScenes();
+        std::cout << "view: " << this->view.getSize ().x << " " << this->view.getSize().y << std::endl;
 
     };
 

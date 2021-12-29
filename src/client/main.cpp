@@ -148,6 +148,7 @@ void randomMap(void){
                         break;
                     }
                 }
+                gamewindow.update(event,mousePosScreen);
             }
             if(event.type == sf::Event::MouseWheelMoved)
             {
@@ -160,9 +161,10 @@ void randomMap(void){
                 {
                     gamewindow.setZoom(1.25);  
                     gamewindow.isZoomed = 1;
-                }           
+                } 
+                gamewindow.update(event,mousePosScreen);          
             }
-            gamewindow.update(event,mousePosScreen);
+            gamewindow.update();
         }
 
         //gamewindow.update(event,mousePosScreen);
@@ -229,12 +231,11 @@ void randomMap(void){
                     }
                 }
                 gamewindow.update(event,(sf::Vector2i)mousePosScreen);
+                ngine.registerTarget((int)(mousePosWorld.x), (int)(mousePosWorld.y), gamewindow.selected );
+                ngine.execute();
             }
-            ngine.registerTarget((int)(mousePosWorld.x), (int)(mousePosWorld.y), gamewindow.selected );
-            ngine.execute();
+            
             gamewindow.update();
-
-
         }
         
         gamewindow.window.clear();
