@@ -1,6 +1,7 @@
 #include "State.h"
 #include <functional>
 #include <iostream>
+#include <cstdlib>
 
 namespace state {
     /*
@@ -165,11 +166,37 @@ namespace state {
     }
 
     char State::closestEnemyIndexTo (char p_index){
-        std::string id = this->players_id[p_index].id;
-        Position p = this->players[id.back()-'0']->find(id)->second->getPosition();
-        p_index = (p_index + 1) % this->playersCount;
+        ID *id = &this->players_id[p_index];
+        char enemies = !(id->id.back()-'0');
+        Position source = this->players[id->id.back()-'0']->find(id->id)->second->getPosition();
+        Position target;
+        char found;
+        int d = 0, min = 2*this->gameMap.size();
+
+        for(auto const& enemy : *(this->players[enemies])){
+            target = enemy.second->getPosition();
+            d = abs(target.getX() - source.getX()) + abs(target.getY() - source.getY());
+            if(d < min){
+                min = d;
+                found = this->gameMap[target.getX()][target.getY()].player_index;
+            }
+        }
+        return found;
     }
     char State::weakestEnemyIndexTo (char p_index){
+        Player p;
+        p.getLevel();
+        ID *id = &this->players_id[p_index];
+        char enemies = !(id->id.back()-'0');
+        char found, level, weakest = 100;
 
+        for(auto const& enemy : *(this->players[enemies])){
+            level = enemy.second->getLevel();
+            if(level < weakest){
+                weakest = level;
+                found = this->gameMap[enemy.second->getPosition().getX()][enemy.second->getPosition().getY()].player_index;
+            }
+        }
+        return found;
     }
 };

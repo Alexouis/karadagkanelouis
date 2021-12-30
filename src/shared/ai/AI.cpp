@@ -66,11 +66,10 @@ namespace ai{
     void AI::bindState (std::shared_ptr<state::State>& gstate){
         this->gstate = gstate;
     }
-
     char AI::closestEnemyIndexTo (char p_index){
-        
+        return this->gstate->closestEnemyIndexTo(p_index);
     }
     char AI::weakestEnemyIndexTo (char p_index){
-
+        return this->gstate->weakestEnemyIndexTo(p_index);
     }
 }
