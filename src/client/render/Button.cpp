@@ -291,7 +291,7 @@ namespace render {
                 m_btnState = CLICKED;
                 if(m_type == START)
                 {
-                    gameWindow->setCurrentScene(FIGHTSCENE);
+                    gameWindow->nextScene();
                 }
                 else
                 {

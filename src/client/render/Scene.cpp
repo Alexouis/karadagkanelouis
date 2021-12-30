@@ -16,7 +16,6 @@ namespace render {
     Scene::Scene (char id, std::string type, GameWindow* gameWindow)
     {
         setId(id);
-        loadTextures("res/frames.png");
         init(type, gameWindow);
 
     };
@@ -43,17 +42,17 @@ namespace render {
         
         if(type == "start")
         {
-            if (!texture.loadFromFile("res/utiles/bgMenu.png"))
+            if (!(this->texture).loadFromFile("res/utiles/bgMenu.png"))
             {
                 std::cerr<<"Could not find the image for the background"<<std::endl;
             }
             else
             {
-                sprite.setTexture(texture);
+                this->sprite.setTexture(this->texture);
             }
 
             size = sf::Vector2f(100.f,50.f);
-            pos = sf::Vector2i(960,450);
+            pos = sf::Vector2i(1000,450);
             fontSize = 15;
             std::unique_ptr<Box> holder = std::unique_ptr<Button>(new Button("JOUER", fontSize, myfont, size, pos , SAVE, START, gameWindow)); 
             this->boxes.push_back(std::move(holder));

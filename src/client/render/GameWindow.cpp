@@ -1,7 +1,8 @@
 #include "GameWindow.h"
 #include "FightScene.h"
 
-#define DEFAULTZOOM 4
+#define MENU_DEFAULTZOOM 1
+#define FIGHTSCENE_DEFAULTZOOM 4
 #define DEFAULTXCENTER 1024
 #define DEFAULTYCENTER 2000
 
@@ -11,16 +12,14 @@
 namespace render {
     GameWindow::GameWindow()
     {
-        this->zoom = DEFAULTZOOM;
+        this->zoom = MENU_DEFAULTZOOM;
         this->isZoomed = (this->zoom != 1);
         this->currentScene = SceneId::MENU;        
         this->window.create(sf::VideoMode(this->width, this->height), "TMX Loader");
         this->window.setVerticalSyncEnabled(true);
         this->view = this->window.getView();
-        this->view.zoom(this->zoom);
-        this->view.setCenter(DEFAULTXCENTER, DEFAULTYCENTER);
-        this->window.setView(this->view); 
-        this->initScenes();        
+        this->initScenes(); 
+               
 
     };
 
@@ -71,9 +70,30 @@ namespace render {
 
     void GameWindow::setCurrentScene(SceneId currentScene){
         this->currentScene = currentScene;
-        sf::Event event;
-        sf::Vector2i mousePosScreen = (sf::Vector2i)(this->window).mapPixelToCoords(sf::Vector2i(0,0));
-        this->update(event,mousePosScreen);
+    };
+
+    void GameWindow::nextScene()
+    {
+        
+        switch (this->currentScene)
+        {
+            case SceneId::MENU:
+            {
+            this->setCurrentScene(FIGHTSCENE);
+                this->zoom = FIGHTSCENE_DEFAULTZOOM;
+                this->view.zoom(this->zoom);
+                this->view.setCenter(DEFAULTXCENTER, DEFAULTYCENTER);
+                this->window.setView(this->view); 
+                sf::Event event;
+                sf::Vector2i mousePosScreen = (sf::Vector2i)(this->window).mapPixelToCoords(sf::Vector2i(0,0));
+                this->update(event,mousePosScreen);
+                break; 
+            }
+                
+            default:
+                break;
+        }
+        
     };
 
 

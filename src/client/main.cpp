@@ -154,7 +154,7 @@ void randomMap(void){
                 }
                 gamewindow.update(event,mousePosScreen);
             }
-            if(event.type == sf::Event::MouseWheelMoved)
+            if(event.type == sf::Event::MouseWheelMoved && gamewindow.getCurrentScene() == SceneId::FIGHTSCENE)
             {
                 if(event.mouseWheel.delta == 1)
                 {
