@@ -37,9 +37,7 @@ namespace ai{
     AI::~AI (){
 
     }
-    void AI::act (){
 
-    }
     void AI::chooseAction (){
         this->selected = (char)this->getRandValBetween(0,6);
         if(this->selections[this->selected] == (char)MOVE){
@@ -67,5 +65,12 @@ namespace ai{
     }
     void AI::bindState (std::shared_ptr<state::State>& gstate){
         this->gstate = gstate;
+    }
+
+    char AI::closestEnemyIndex (){
+        
+    }
+    char AI::weakestEnemyIndex (){
+
     }
 }
