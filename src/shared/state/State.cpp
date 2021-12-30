@@ -25,22 +25,27 @@ namespace state {
 
         this->players.resize(this->playersCount);
         auto player = std::unique_ptr<Player>(new Player("goku",DEMON, Position(10,10), 1, false));
-        std::string playerId = player->getName();
-        playerId.push_back('0');
-        this->players_id.push_back(playerId);
+        ID p_id;
+        p_id.id = player->getName();
+        p_id.id.push_back('0');
+        p_id.next = 1;
+        p_id.prev = 1;
+        this->players_id.push_back(p_id);
 
         this->players[0] = new std::map<std::string, std::unique_ptr<Player>>;
         this->players[1] = new std::map<std::string, std::unique_ptr<Player>>;
-        this->players[playerId.back()-'0'][0][playerId] = std::move(player);
+        this->players[p_id.id.back()-'0'][0][p_id.id] = std::move(player);
 
         this->gameMap[10][10].state = OCCUPIED;
         this->gameMap[10][10].player_index = 0;
 
         player = std::unique_ptr<Player>(new Player("buu",HERO, Position(11,11), 1, true));
-        playerId = player->getName();
-        playerId.push_back('1');
-        this->players_id.push_back(playerId);
-        this->players[playerId.back()-'0'][0][playerId] = std::move(player);
+        p_id.id = player->getName();
+        p_id.id.push_back('1');
+        p_id.next = 0;
+        p_id.prev = 0;
+        this->players_id.push_back(p_id);
+        this->players[p_id.id.back()-'0'][0][p_id.id] = std::move(player);
 
         
         this->gameMap[11][11].state = OCCUPIED;
@@ -61,11 +66,11 @@ namespace state {
 
     };
     bool State::isDead (char p_index){
-        std::string id = this->players_id[p_index];
+        std::string id = this->players_id[p_index].id;
         return (this->players[id.back()-'0']->find(id)->second->getStatus() == DEAD);
     };
     void State::passTurn (){
-        this->actualPlayerIndex = (this->actualPlayerIndex + 1) % this->playersCount;
+        this->actualPlayerIndex = this->players_id[this->actualPlayerIndex].next;
         this->ngine->chrono->start(1,10);
     };
     void State::incrementTurn (){
@@ -109,14 +114,14 @@ namespace state {
     void State::makeAttackOn (int targetX, int targetY){
         char st = this->gameMap[targetY][targetX].state;
         if(st == OCCUPIED){
-            std::string attackerId = this->players_id[this->actualPlayerIndex];
-            std::string taregtId = this->players_id[this->gameMap[targetY][targetX].player_index];
+            std::string attackerId = this->players_id[this->actualPlayerIndex].id;
+            std::string taregtId = this->players_id[this->gameMap[targetY][targetX].player_index].id;
             this->players[attackerId.back()-'0']->find(attackerId)->second->attack(this->players[taregtId.back()-'0']->find(taregtId)->second);
         }
     };
     void State::moveCurrentPlayer (int dstX, int dstY){
         if((dstX >= 0 && dstY >= 0) && (dstX < this->gameMap.size() && dstY < this->gameMap.size())){
-            std::string id = this->players_id[this->actualPlayerIndex];
+            std::string id = this->players_id[this->actualPlayerIndex].id;
             Position prevPos = this->players[id.back()-'0']->find(id)->second->getPosition();
             this->gameMap[prevPos.getY()][prevPos.getX()].state = FREE;
             this->gameMap[dstY][dstX].player_index = this->actualPlayerIndex;
@@ -125,11 +130,11 @@ namespace state {
         }
     };
     Position State::playerPosition (char playerIndex) {
-        std::string id = this->players_id[playerIndex];
+        std::string id = this->players_id[playerIndex].id;
         return this->players[id.back()-'0']->find(id)->second->getPosition();
     };
     state::playerClass State::getPlayerClass (char playerIndex) {
-        const std::string id = this->players_id[playerIndex];
+        const std::string id = this->players_id[playerIndex].id;
         return this->players[id.back()-'0']->find(id)->second->getPClass();
     }
 
@@ -138,7 +143,7 @@ namespace state {
     }
 
     void State::setCurrPlayerAttack (char attackIndex){
-        const std::string id = this->players_id[this->actualPlayerIndex];
+        const std::string id = this->players_id[this->actualPlayerIndex].id;
         this->players[id.back()-'0']->find(id)->second->setCurrentAttackIndex(attackIndex);
     }
 
@@ -151,11 +156,20 @@ namespace state {
     }
 
     bool State::isAI_Now(){
-        const std::string id = this->players_id[this->actualPlayerIndex];
+        const std::string id = this->players_id[this->actualPlayerIndex].id;
         return this->players[id.back()-'0']->find(id)->second->getIsAI();
     }
 
     void State::connect (engine::Engine* ngine){
         this->ngine = ngine;
+    }
+
+    char State::closestEnemyIndexTo (char p_index){
+        std::string id = this->players_id[p_index].id;
+        Position p = this->players[id.back()-'0']->find(id)->second->getPosition();
+        p_index = (p_index + 1) % this->playersCount;
+    }
+    char State::weakestEnemyIndexTo (char p_index){
+
     }
 };

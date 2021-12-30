@@ -67,10 +67,10 @@ namespace ai{
         this->gstate = gstate;
     }
 
-    char AI::closestEnemyIndex (){
+    char AI::closestEnemyIndexTo (char p_index){
         
     }
-    char AI::weakestEnemyIndex (){
+    char AI::weakestEnemyIndexTo (char p_index){
 
     }
 }
