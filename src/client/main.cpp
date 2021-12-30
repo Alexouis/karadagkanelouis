@@ -239,61 +239,53 @@ void randomMap(void){
 
 
  void random_ai(void){
-    signal(SIGALRM, &sigalrm_handler); // set a signal handler 
-    alarm(1);
     render::GameWindow gamewindow;
     engine::Engine ngine;
+    ai::AI g_ai;
     std::unique_ptr<engine::Command> cmdHolder;
+    
+
     gamewindow.shareStateWith(ngine);
+    ngine.shareStateWith(&g_ai);
+    gamewindow.update();
     //ngine.start();
 
-    sf::Vector2f destination = randomPosition(sf::Vector2f(11,10));
-    sf::Vector2f prevPos     = destination;
-    sf::Vector2f center      = destination;
-    gamewindow.setCenter(gamewindow.worldToScreen(center));
-
+    bool debug = false;
+    sf::Event event;
+    sf::Vector2f mousePosScreen = gamewindow.window.mapPixelToCoords(sf::Vector2i(0,0));
+    sf::Vector2f mousePosWorld  = gamewindow.screenToWorld(mousePosScreen);
+    gamewindow.update(event,(sf::Vector2i)mousePosScreen);
+    ngine.chrono->bind(SIGALRM);
+    ngine.chrono->start(1,10);
 
     while(gamewindow.window.isOpen()){
-        sf::Event event;
 
+        mousePosScreen = gamewindow.window.mapPixelToCoords(sf::Mouse::getPosition(gamewindow.window));
+        mousePosWorld = gamewindow.screenToWorld(mousePosScreen);
         while(gamewindow.window.pollEvent(event)) {
             if (event.type == sf::Event::Closed)
-            {
                 gamewindow.window.close();
+            if(!ngine.isActionFromAI() && !ngine.timeOut()){
+                gamewindow.handleEvents (event, mousePosScreen, mousePosWorld, ngine);
             }
-            if(event.type == sf::Event::MouseWheelMoved)
-            {
-                if(event.mouseWheel.delta == 1)
-                {
-                    gamewindow.setZoom(0.8);  
-                }
-                else
-                {
-                   gamewindow.setZoom(1.25);  
-                }           
+            else if(ngine.isActionFromAI() && !ngine.timeOut()){
+                g_ai.chooseAction();
+                g_ai.registerActionTo(&ngine);
+                ngine.execute();
             }
+            else{
+                ngine.execute();
+            }
+            
+            
+            gamewindow.update();
         }
         
-        if(readyToMove){
-            readyToMove = false;
-            destination = randomPosition(prevPos);
-            if(abs(destination.x-center.x) > 5 || abs(destination.y-center.y) > 5){
-                center = destination;
-                gamewindow.setCenter(gamewindow.worldToScreen(center));
-            }
-            cmdHolder = std::unique_ptr<engine::Command>(new engine::Command(&engine::Action::move, (int)(destination.x), (int)(destination.y)));
-            ngine.execute(cmdHolder);
-            prevPos     = destination;
-
-            
-        }
-        gamewindow.update(event,(sf::Vector2i)destination);
         gamewindow.window.clear();
         gamewindow.draw();
         gamewindow.window.display();
 
     }
-
     
 } 
 
