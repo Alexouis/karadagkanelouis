@@ -2,6 +2,8 @@
 #include "GameWindow.h"
 #include "iostream"
 
+#define START 0x40  //[code value] =  [0100 0000]
+
 namespace render {
     Button::Button()
     {
@@ -283,7 +285,15 @@ namespace render {
             if(mouseInButton)
             {
                 m_btnState = CLICKED;
-                gameWindow->selected = m_type;
+                if(m_type == START)
+                {
+                    std::cout << "OK" <<std::endl;
+                    gameWindow->setCurrentScene(FIGHTSCENE);
+                }
+                else
+                {
+                    gameWindow->selected = m_type;
+                }
             }
 
             else
