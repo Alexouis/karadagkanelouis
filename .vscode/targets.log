@@ -6,7 +6,7 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 # This is free software: you are free to change and redistribute it.
 # There is NO WARRANTY, to the extent permitted by law.
 
-# Make data base, printed on Thu Dec 30 13:34:41 2021
+# Make data base, printed on Thu Dec 30 17:17:42 2021
 
 # Variables
 
@@ -17,7 +17,7 @@ LC_ALL = C
 # environment
 GJS_DEBUG_OUTPUT = stderr
 # environment
-VSCODE_IPC_HOOK_EXTHOST = /run/user/1000/vscode-ipc-d5cd30d4-efdb-4163-b558-49bd67abc4b7.sock
+VSCODE_IPC_HOOK_EXTHOST = /run/user/1000/vscode-ipc-3902085f-5b9c-479b-b83f-3042f62c7a40.sock
 # environment
 VSCODE_CWD = /home/mkas
 # environment
@@ -45,6 +45,7 @@ XDG_DATA_DIRS = /usr/share/gnome:/usr/local/share:/usr/share:/var/lib/snapd/desk
 # environment
 VSCODE_LOG_STACK = false
 # automatic
+ 
 %F = $(notdir $%)
 # environment
 VSCODE_CODE_CACHE_PATH = /home/mkas/.config/Code/CachedData/ee8c7def80afc00dd6e593ef12f37756d8f504ea
@@ -85,13 +86,13 @@ MAKEFILE_LIST := Makefile
 # environment
 VSCODE_VERBOSE_LOGGING = true
 # environment
-VSCODE_PID = 38468
+VSCODE_PID = 2440
 # environment
 XDG_SESSION_TYPE = x11
 # automatic
 ?D = $(patsubst %/,%,$(dir $?))
 # environment
-SESSION_MANAGER = local/kalikane:@/tmp/.ICE-unix/1906,unix/kalikane:/tmp/.ICE-unix/1906
+SESSION_MANAGER = local/kalikane:@/tmp/.ICE-unix/1922,unix/kalikane:/tmp/.ICE-unix/1922
 # automatic
 *F = $(notdir $*)
 # environment
@@ -135,7 +136,7 @@ MAKEFILES :=
 # environment
 COMMAND_NOT_FOUND_INSTALL_PROMPT = 1
 # environment
-INVOCATION_ID = 6f71eda75cbf4c52b232c03b2bb5865e
+INVOCATION_ID = 509f4703395d4d40bd82b5a70ce188a5
 # environment
 QSYS_ROOTDIR = /home/mkas/intelFPGA_lite/20.1/quartus/sopc_builder/bin
 # environment
@@ -171,11 +172,11 @@ MAKE_VERSION := 4.3
 # 'override' directive
 .SHELLSTATUS := 0
 # environment
-MANAGERPID = 1667
+MANAGERPID = 1688
 # environment
-GIO_LAUNCHED_DESKTOP_FILE_PID = 38468
+GIO_LAUNCHED_DESKTOP_FILE_PID = 2440
 # environment
-SSH_AGENT_PID = 1863
+SSH_AGENT_PID = 1880
 # environment
 _ = /usr/share/code/code
 # environment
@@ -185,7 +186,7 @@ GPG_AGENT_INFO = /run/user/1000/gnupg/S.gpg-agent:0:1
 # environment
 POWERSHELL_TELEMETRY_OPTOUT = 1
 # environment
-JOURNAL_STREAM = 8:23400
+JOURNAL_STREAM = 8:25927
 # environment
 XDG_SESSION_CLASS = user
 # environment
@@ -229,6 +230,7 @@ GDMSESSION = gnome
 
 # . (device 2051, inode 25036745): 27 files, no impossibilities.
 
+ 
 # 27 files, no impossibilities in 1 directories.
 
 # Implicit Rules
@@ -289,7 +291,6 @@ testdocker:
 	docker build -t plt-initial -f docker/plt-initial .
 	./docker/validate.sh plt-test
 	./docker/run_docker_bash.sh plt-test
- 
 
 configure:
 #  Phony target (prerequisite of .PHONY).
@@ -510,6 +511,7 @@ install_submodules:
 # Load=31/1024=3%, Rehash=0, Collisions=0/84=0%
 # VPATH Search Paths
 
+ 
 # No 'vpath' search paths.
 
 # No general ('VPATH' variable) search path.
@@ -517,10 +519,9 @@ install_submodules:
 # strcache buffers: 1 (0) / strings = 56 / storage = 581 B / avg = 10 B
 # current buf: size = 8162 B / used = 581 B / count = 56 / avg = 10 B
 
- 
 # strcache performance: lookups = 120 / hit rate = 53%
 # hash-table stats:
 # Load=56/8192=1%, Rehash=0, Collisions=0/120=0%
-# Finished Make data base on Thu Dec 30 13:34:41 2021
+# Finished Make data base on Thu Dec 30 17:17:42 2021
 
  

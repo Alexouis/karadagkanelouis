@@ -190,28 +190,33 @@ void renderRenderRealMap(void){
 	
 	sf::Color debugColour(255u, 0u, 20u, 120u);
 	float mapHeight = static_cast<float>(m_tileHeight * m_height);
-	for(int x = 0; x <= m_width; x += 2)
-	{
-		float posX = static_cast<float>(x * (m_tileWidth / m_tileRatio));
-		m_gridVertices.append(sf::Vertex(ml.isometricToOrthogonal(sf::Vector2f(posX, 0.f)), debugColour));
-		m_gridVertices.append(sf::Vertex(ml.isometricToOrthogonal(sf::Vector2f(posX, mapHeight)), debugColour));
-		posX += static_cast<float>(m_tileWidth) / m_tileRatio;
-		m_gridVertices.append(sf::Vertex(ml.isometricToOrthogonal(sf::Vector2f(posX, mapHeight)), debugColour));
-		m_gridVertices.append(sf::Vertex(ml.isometricToOrthogonal(sf::Vector2f(posX, 0.f)), debugColour));
-		posX += static_cast<float>(m_tileWidth) / m_tileRatio;
-		m_gridVertices.append(sf::Vertex(ml.isometricToOrthogonal(sf::Vector2f(posX, 0.f)), debugColour));
-	}
-	float mapWidth = static_cast<float>(m_tileWidth * (m_width / m_tileRatio)); //m_tileWidth * m_tileRation =yl
-																				//m_tileHeight = xl
+	m_gridVertices.append(sf::Vertex(ml.isometricToOrthogonal(sf::Vector2f(0.f, 0.f)), debugColour));
+	m_gridVertices.append(sf::Vertex(ml.isometricToOrthogonal(sf::Vector2f(static_cast<float>(m_tileWidth) / m_tileRatio, 0.f)), debugColour));
+	m_gridVertices.append(sf::Vertex(ml.isometricToOrthogonal(sf::Vector2f(static_cast<float>(m_tileWidth) / m_tileRatio, static_cast<float>(m_tileHeight))), debugColour));
+	m_gridVertices.append(sf::Vertex(ml.isometricToOrthogonal(sf::Vector2f(0.f, static_cast<float>(m_tileHeight))), debugColour));
+	m_gridVertices.append(sf::Vertex(ml.isometricToOrthogonal(sf::Vector2f(0.f, 0.f)), debugColour));
+	
+	// for(int x = 0; x <= m_width; x += 2)
+	// {
+	// 	float posX = static_cast<float>(x * (m_tileWidth / m_tileRatio));
+	// 	m_gridVertices.append(sf::Vertex(ml.isometricToOrthogonal(sf::Vector2f(posX, 0.f)), debugColour));
+	// 	m_gridVertices.append(sf::Vertex(ml.isometricToOrthogonal(sf::Vector2f(posX, mapHeight)), debugColour));
+	// 	posX += static_cast<float>(m_tileWidth) / m_tileRatio;
+	// 	m_gridVertices.append(sf::Vertex(ml.isometricToOrthogonal(sf::Vector2f(posX, mapHeight)), debugColour));
+	// 	m_gridVertices.append(sf::Vertex(ml.isometricToOrthogonal(sf::Vector2f(posX, 0.f)), debugColour));
+	// 	posX += static_cast<float>(m_tileWidth) / m_tileRatio;
+	// 	m_gridVertices.append(sf::Vertex(ml.isometricToOrthogonal(sf::Vector2f(posX, 0.f)), debugColour));
+	// }
+	// float mapWidth = static_cast<float>(m_tileWidth * (m_width / m_tileRatio));
 	// for(int y = 0; y <= m_height; y += 2)
 	// {
-	// 	// float posY = static_cast<float>(y *m_tileHeight);
-	// 	// m_gridVertices.append(sf::Vertex(ml.isometricToOrthogonal(sf::Vector2f(0.f, posY)), debugColour));
-	// 	// posY += static_cast<float>(m_tileHeight);
-	// 	// m_gridVertices.append(sf::Vertex(ml.isometricToOrthogonal(sf::Vector2f(0.f, posY)), debugColour));
-	// 	// m_gridVertices.append(sf::Vertex(ml.isometricToOrthogonal(sf::Vector2f(mapWidth, posY)), debugColour));
-	// 	// posY += static_cast<float>(m_tileHeight);
-	// 	// m_gridVertices.append(sf::Vertex(ml.isometricToOrthogonal(sf::Vector2f(mapWidth, posY)), debugColour));
+	// 	float posY = static_cast<float>(y *m_tileHeight);
+	// 	m_gridVertices.append(sf::Vertex(ml.isometricToOrthogonal(sf::Vector2f(0.f, posY)), debugColour));
+	// 	posY += static_cast<float>(m_tileHeight);
+	// 	m_gridVertices.append(sf::Vertex(ml.isometricToOrthogonal(sf::Vector2f(0.f, posY)), debugColour));
+	// 	m_gridVertices.append(sf::Vertex(ml.isometricToOrthogonal(sf::Vector2f(mapWidth, posY)), debugColour));
+	// 	posY += static_cast<float>(m_tileHeight);
+	// 	m_gridVertices.append(sf::Vertex(ml.isometricToOrthogonal(sf::Vector2f(mapWidth, posY)), debugColour));
 	// }
 
 	m_gridVertices.setPrimitiveType(sf::LinesStrip);
