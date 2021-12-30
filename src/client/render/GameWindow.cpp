@@ -74,19 +74,19 @@ namespace render {
 
     void GameWindow::nextScene()
     {
-        
+        sf::Event event;
+        sf::Vector2i mousePosScreen = (sf::Vector2i)(this->window).mapPixelToCoords(sf::Vector2i(0,0));
+                
         switch (this->currentScene)
         {
             case SceneId::MENU:
             {
-            this->setCurrentScene(FIGHTSCENE);
+                this->setCurrentScene(FIGHTSCENE);
                 this->zoom = FIGHTSCENE_DEFAULTZOOM;
+                this->isZoomed = (this->zoom != 1);
                 this->view.zoom(this->zoom);
                 this->view.setCenter(DEFAULTXCENTER, DEFAULTYCENTER);
                 this->window.setView(this->view); 
-                sf::Event event;
-                sf::Vector2i mousePosScreen = (sf::Vector2i)(this->window).mapPixelToCoords(sf::Vector2i(0,0));
-                this->update(event,mousePosScreen);
                 break; 
             }
                 
@@ -94,6 +94,8 @@ namespace render {
                 break;
         }
         
+        this->update(event,mousePosScreen);
+        this->isZoomed = 0;
     };
 
 
@@ -172,6 +174,10 @@ namespace render {
             this->update(event,(sf::Vector2i)mousePosScreen);
             ngine.registerTarget((int)(mousePosWorld.x), (int)(mousePosWorld.y), this->selected );
             ngine.execute();
+        }
+        if(event.type == sf::Event::MouseMoved || event.type == sf::Event::MouseButtonReleased)
+        {
+            this->update(event,(sf::Vector2i)mousePosScreen);
         }
     }
     
