@@ -21,8 +21,9 @@
 #define PASS 0x20  //[code value] =  [0010 0000]
 
 namespace render{
-    FightScene::FightScene(GameWindow* gameWindow){
+    FightScene::FightScene(char id, GameWindow* gameWindow){
 
+        this->id = id;
         this->gState = std::shared_ptr<state::State>(new state::State(map_sizeX,map_sizeY));
         this->gameMap->load("map_1.tmx");
         this->loadFrameInfos("data/frames_info.json");

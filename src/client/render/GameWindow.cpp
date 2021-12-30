@@ -13,7 +13,7 @@ namespace render {
     {
         this->zoom = DEFAULTZOOM;
         this->isZoomed = (this->zoom != 1);
-        this->currentScene = SceneId::FIGHTSCENE;        
+        this->currentScene = SceneId::MENU;        
         this->window.create(sf::VideoMode(this->width, this->height), "TMX Loader");
         this->window.setVerticalSyncEnabled(true);
         this->view = this->window.getView();
@@ -31,9 +31,9 @@ namespace render {
 
     void GameWindow::initScenes ()
     {   
-        std::unique_ptr<Scene> holder = std::unique_ptr<Scene>(new Scene()); 
+        std::unique_ptr<Scene> holder = std::unique_ptr<Scene>(new Scene(0,"start",this)); 
         this->scenes.push_back(std::move(holder));
-        holder = std::unique_ptr<FightScene>(new FightScene(this));
+        holder = std::unique_ptr<FightScene>(new FightScene(1,this));
         this->scenes.push_back(std::move(holder));
         holder.reset(new Scene());
         this->scenes.push_back(std::move(holder));
@@ -70,7 +70,10 @@ namespace render {
     };
 
     void GameWindow::setCurrentScene(SceneId currentScene){
-
+        this->currentScene = currentScene;
+        sf::Event event;
+        sf::Vector2i mousePosScreen = (sf::Vector2i)(this->window).mapPixelToCoords(sf::Vector2i(0,0));
+        this->update(event,mousePosScreen);
     };
 
 

@@ -31,7 +31,7 @@ namespace ai{
         this->selections[2] = (char)SPELL3; // attack selection
         this->selections[3] = (char)SPELL4; // attack selection
         this->selections[4] = (char)SPELL5; // attack selection
-        this->selections[5] = (char)MOVE;   // move instead of pass turn : AI never pass turn
+        this->selections[5] = (char)MOVE;   // move instead of pass turn : AI never passes turn
         this->selections[6] = (char)MOVE;   // move
     }
     AI::~AI (){

@@ -1,13 +1,23 @@
 #include "Scene.h"
 #include "GameWindow.h"
+#include "Button.h"
 #include <iostream>
 
+#define START 0x30  //[code value] =  [0011 0000]
+
 namespace render {
+
     Scene::Scene ()
     {
-        init();
-        setId(1);
+
+
+    };
+
+    Scene::Scene (char id, std::string type, GameWindow* gameWindow)
+    {
+        setId(id);
         loadTextures("res/frames.png");
+        init(type, gameWindow);
 
     };
 
@@ -21,7 +31,38 @@ namespace render {
         this->texture.loadFromFile(textures_paths); // load texture de personnage si scene de combat
     };
 
-    void Scene::init (){
+    void Scene::init (std::string type, GameWindow* gameWindow){
+        sf::Vector2f size;
+        sf::Vector2i pos;
+        unsigned int fontSize;
+        sf::Font myfont;
+        if(!myfont.loadFromFile("./extern/tmx-loader/fonts/Ubuntu-M.ttf"))
+        {
+            std::cerr<<"Could not find contb.ttf font."<<std::endl;
+        }
+        
+        if(type == "start")
+        {
+            if (!texture.loadFromFile("res/utiles/bgMenu.png"))
+            {
+                std::cerr<<"Could not find the image for the background"<<std::endl;
+            }
+            else
+            {
+                sprite.setTexture(texture);
+            }
+
+            size = sf::Vector2f(100.f,50.f);
+            pos = sf::Vector2i(960,450);
+            fontSize = 15;
+            std::unique_ptr<Box> holder = std::unique_ptr<Button>(new Button("JOUER", fontSize, myfont, size, pos , SAVE, START, gameWindow)); 
+            this->boxes.push_back(std::move(holder));
+        }
+
+        else if(type == "end")
+        {
+
+        }
         
     };
 
@@ -52,6 +93,9 @@ namespace render {
 
     void Scene::draw (sf::RenderTarget& target, sf::RenderStates states) const{
         target.draw(this->sprite, states);
+        for (const auto& button : boxes){
+            target.draw(*button,states);
+        }
     }
 
     void Scene::bindState (engine::Engine& ngine){
