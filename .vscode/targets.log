@@ -6,7 +6,7 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 # This is free software: you are free to change and redistribute it.
 # There is NO WARRANTY, to the extent permitted by law.
 
-# Make data base, printed on Wed Dec 29 12:35:43 2021
+# Make data base, printed on Thu Dec 30 13:34:41 2021
 
 # Variables
 
@@ -14,11 +14,10 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 GDK_BACKEND = x11
 # environment
 LC_ALL = C
- 
 # environment
 GJS_DEBUG_OUTPUT = stderr
 # environment
-VSCODE_IPC_HOOK_EXTHOST = /run/user/1000/vscode-ipc-bb6455b4-2cda-4e32-9aa8-49d9cba01e45.sock
+VSCODE_IPC_HOOK_EXTHOST = /run/user/1000/vscode-ipc-d5cd30d4-efdb-4163-b558-49bd67abc4b7.sock
 # environment
 VSCODE_CWD = /home/mkas
 # environment
@@ -86,13 +85,13 @@ MAKEFILE_LIST := Makefile
 # environment
 VSCODE_VERBOSE_LOGGING = true
 # environment
-VSCODE_PID = 3302
+VSCODE_PID = 38468
 # environment
 XDG_SESSION_TYPE = x11
 # automatic
 ?D = $(patsubst %/,%,$(dir $?))
 # environment
-SESSION_MANAGER = local/kalikane:@/tmp/.ICE-unix/1916,unix/kalikane:/tmp/.ICE-unix/1916
+SESSION_MANAGER = local/kalikane:@/tmp/.ICE-unix/1906,unix/kalikane:/tmp/.ICE-unix/1906
 # automatic
 *F = $(notdir $*)
 # environment
@@ -118,7 +117,7 @@ MAKECMDGOALS := all
 # environment
 XMODIFIERS = @im=ibus
 # makefile (from 'Makefile', line 15)
-HEADERS := src/shared/engine/Command.h src/shared/engine/Chrono.h src/shared/engine/Engine.h src/shared/engine/Action.h src/shared/state/playerOrientation.h src/shared/state/playerStatus.h src/shared/state/attackName.h src/shared/state/State.h src/shared/state/playerClass.h src/shared/state/Attack.h src/shared/state/Stats.h src/shared/state/Player.h src/shared/state/tileType.h src/shared/state/tileState.h src/shared/state/MapTile.h src/shared/state/Position.h src/shared/state/attackType.h src/shared/state.h src/shared/engine.h src/client/render.h src/client/render/TextOrTexture.h src/client/render/TextureSprite.h src/client/render/buttonState.h src/client/render/SceneId.h src/client/render/buttonStyle.h src/client/render/Button.h src/client/render/FightScene.h src/client/render/Box.h src/client/render/AnimatedObject.h src/client/render/Scene.h src/client/render/BoxFactory.h src/client/render/GameWindow.h src/client/render/Info.h
+HEADERS := src/shared/engine/Command.h src/shared/engine/Chrono.h src/shared/engine/Engine.h src/shared/engine/Action.h src/shared/ai/AdvancedAI.h src/shared/ai/HeuristicAI.h src/shared/ai/AI.h src/shared/state/playerOrientation.h src/shared/state/playerStatus.h src/shared/state/attackName.h src/shared/state/State.h src/shared/state/playerClass.h src/shared/state/Attack.h src/shared/state/Stats.h src/shared/state/Player.h src/shared/state/tileType.h src/shared/state/tileState.h src/shared/state/MapTile.h src/shared/state/Position.h src/shared/state/attackType.h src/shared/state.h src/shared/ai.h src/shared/engine.h src/client/render.h src/client/render/TextOrTexture.h src/client/render/TextureSprite.h src/client/render/buttonState.h src/client/render/SceneId.h src/client/render/buttonStyle.h src/client/render/Button.h src/client/render/FightScene.h src/client/render/Box.h src/client/render/AnimatedObject.h src/client/render/Scene.h src/client/render/GameWindow.h src/client/render/Info.h
 # environment
 GJS_DEBUG_TOPICS = JS ERROR;JS LOG
 # environment
@@ -136,7 +135,7 @@ MAKEFILES :=
 # environment
 COMMAND_NOT_FOUND_INSTALL_PROMPT = 1
 # environment
-INVOCATION_ID = 72d978ce89614b7b8350a56e7bdc8958
+INVOCATION_ID = 6f71eda75cbf4c52b232c03b2bb5865e
 # environment
 QSYS_ROOTDIR = /home/mkas/intelFPGA_lite/20.1/quartus/sopc_builder/bin
 # environment
@@ -172,11 +171,11 @@ MAKE_VERSION := 4.3
 # 'override' directive
 .SHELLSTATUS := 0
 # environment
-MANAGERPID = 1683
+MANAGERPID = 1667
 # environment
-GIO_LAUNCHED_DESKTOP_FILE_PID = 3302
+GIO_LAUNCHED_DESKTOP_FILE_PID = 38468
 # environment
-SSH_AGENT_PID = 1872
+SSH_AGENT_PID = 1863
 # environment
 _ = /usr/share/code/code
 # environment
@@ -186,7 +185,7 @@ GPG_AGENT_INFO = /run/user/1000/gnupg/S.gpg-agent:0:1
 # environment
 POWERSHELL_TELEMETRY_OPTOUT = 1
 # environment
-JOURNAL_STREAM = 8:25909
+JOURNAL_STREAM = 8:23400
 # environment
 XDG_SESSION_CLASS = user
 # environment
@@ -236,7 +235,6 @@ GDMSESSION = gnome
 
 # No implicit rules.
 
- 
 # Files
 
 code-coverage:
@@ -291,6 +289,7 @@ testdocker:
 	docker build -t plt-initial -f docker/plt-initial .
 	./docker/validate.sh plt-test
 	./docker/run_docker_bash.sh plt-test
+ 
 
 configure:
 #  Phony target (prerequisite of .PHONY).
@@ -518,9 +517,10 @@ install_submodules:
 # strcache buffers: 1 (0) / strings = 56 / storage = 581 B / avg = 10 B
 # current buf: size = 8162 B / used = 581 B / count = 56 / avg = 10 B
 
+ 
 # strcache performance: lookups = 120 / hit rate = 53%
 # hash-table stats:
 # Load=56/8192=1%, Rehash=0, Collisions=0/120=0%
-# Finished Make data base on Wed Dec 29 12:35:43 2021
+# Finished Make data base on Thu Dec 30 13:34:41 2021
 
  

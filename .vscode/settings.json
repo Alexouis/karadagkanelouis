@@ -68,7 +68,8 @@
         "stop_token": "cpp",
         "variant": "cpp",
         "csignal": "cpp",
-        "numbers": "cpp"
+        "numbers": "cpp",
+        "semaphore": "cpp"
     },
     "C_Cpp.errorSquiggles": "Enabled",
     "jupyter.jupyterServerType": "local",
