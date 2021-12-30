@@ -71,6 +71,9 @@ namespace render {
 
     void GameWindow::setCurrentScene(SceneId currentScene){
         this->currentScene = currentScene;
+        sf::Event event;
+        sf::Vector2i mousePosScreen = (sf::Vector2i)(this->window).mapPixelToCoords(sf::Vector2i(0,0));
+        this->update(event,mousePosScreen);
     };
 
 

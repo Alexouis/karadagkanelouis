@@ -99,7 +99,6 @@ namespace render {
     m_borderRadius = 5.f;
     m_borderThickness = 0.f;
     m_size = sf::Vector2f(m_text.getGlobalBounds().width * 1.5f, m_text.getGlobalBounds().height * 1.5f);
-
     m_button.setPointCount(4);
     m_button.setPoint(0, sf::Vector2f(0, 0));
     m_button.setPoint(1, sf::Vector2f(dimensions.x, 0));
@@ -107,6 +106,11 @@ namespace render {
     m_button.setPoint(3, sf::Vector2f(0, dimensions.y));
     m_button.setOrigin(m_button.getGlobalBounds().width/2, m_button.getGlobalBounds().height/2);
     m_button.setPosition(gameWindow->window.mapPixelToCoords(m_position));
+
+    if(m_type != START)
+    {
+        m_button.setScale(m_button.getScale()*(gameWindow->zoom));
+    }
 
     sf::Vector2f textPosition = sf::Vector2f(m_button.getPosition().x, m_button.getPosition().y - m_button.getGlobalBounds().height/4);
 
@@ -287,7 +291,6 @@ namespace render {
                 m_btnState = CLICKED;
                 if(m_type == START)
                 {
-                    std::cout << "OK" <<std::endl;
                     gameWindow->setCurrentScene(FIGHTSCENE);
                 }
                 else
@@ -313,11 +316,11 @@ namespace render {
         {
             if(mouseInButton)
             {
-                if(m_type >=5)
+                if(m_type == 0x10 || m_type == 0x20)
                 {
                     m_btnState = HOVERED;
                 }
-                else if(m_type < 5 && m_btnState==CLICKED)
+                else if(m_btnState==CLICKED)
                 {
                     m_btnState = CLICKED;    
                 }

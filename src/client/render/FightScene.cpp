@@ -54,7 +54,7 @@ namespace render{
         {
             std::cerr<<"Could not find contb.ttf font."<<std::endl;
         }
-        size = sf::Vector2f(160.f,60.f);
+        size = sf::Vector2f(80.f,30.f);
         pos = sf::Vector2i(60,30);
         fontSize = 15;
         std::unique_ptr<Box> holder = std::unique_ptr<Button>(new Button("MENU", fontSize,myfont, size, pos , CANCEL, MENU, gameWindow)); 
