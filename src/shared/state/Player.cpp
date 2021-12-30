@@ -216,6 +216,14 @@ namespace state {
     void Player::setCurrentAttackIndex(char currentAttackIndex){
         this->currentAttackIndex = currentAttackIndex;
     };
+
+    bool Player::getIsAI() const{
+        return this->isAI;
+    };
+
+    void Player::setIsAI(bool isAI){
+        this->isAI = isAI;
+    };
     
 
     Player::~Player(){};

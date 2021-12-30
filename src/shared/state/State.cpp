@@ -7,6 +7,8 @@ namespace state {
     The State class corresponds to the state of the entire game
     
     */
+    char state::State::chronoCount = 10;
+    char state::State::chronoStep = 1;
     State::State (int mapWidth, int mapHeight){
         this->init();
 
@@ -22,7 +24,7 @@ namespace state {
         }
 
         this->players.resize(this->playersCount);
-        auto player = std::unique_ptr<Player>(new Player("goku",DEMON, Position(10,10), 1, true));
+        auto player = std::unique_ptr<Player>(new Player("goku",DEMON, Position(10,10), 1, false));
         std::string playerId = player->getName();
         playerId.push_back('0');
         this->players_id.push_back(playerId);
@@ -50,7 +52,6 @@ namespace state {
         this->turn = 0;
         this->playersCount = 2;
         this->actualPlayerIndex = 0;
-        this->chronoCount = 60; //60 seconds
         this->gameOver = false;
     };
     void State::initPlayer (){
@@ -65,6 +66,7 @@ namespace state {
     };
     void State::passTurn (){
         this->actualPlayerIndex = (this->actualPlayerIndex + 1) % this->playersCount;
+        this->ngine->chrono->start(1,10);
     };
     void State::incrementTurn (){
         this->turn++;
@@ -97,12 +99,6 @@ namespace state {
     };
     void State::setActualPlayerIndex(char actualPlayerIndex){
         this->actualPlayerIndex = actualPlayerIndex;
-    };
-    char State::getChronoCount() const{
-        return this->chronoCount;
-    };
-    void State::setChronoCount(char chronoCount){
-        this->chronoCount= chronoCount;
     };
     bool State::getGameOver() const{
         return this->gameOver;
@@ -152,5 +148,14 @@ namespace state {
 
     void State::unlock(){
         this->padlock = false;
+    }
+
+    bool State::isAI_Now(){
+        const std::string id = this->players_id[this->actualPlayerIndex];
+        return this->players[id.back()-'0']->find(id)->second->getIsAI();
+    }
+
+    void State::connect (engine::Engine* ngine){
+        this->ngine = ngine;
     }
 };

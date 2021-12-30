@@ -70,6 +70,10 @@ namespace engine{
             std::unique_ptr<Command> cmd = std::unique_ptr<Command>(std::move(this->qcmd.front()));
             cmd->action(this->currentState, cmd->x, cmd->y);
             this->qcmd.pop();
+            return;
+        }
+        if(Engine::timeOut()){
+            this->currentState->passTurn();
         }
     }
 
@@ -79,11 +83,11 @@ namespace engine{
 
     void Engine::setState(std::shared_ptr<state::State>& gState){
         this->currentState = gState;
+        this->currentState->connect(this);
     }
 
     void Engine::registerTarget (int x, int y, char selected){
         if(ACTION(selected)){
-            //std::cout << CODE_ACTION(selected) << std::endl;
             this->cmdHolder = std::unique_ptr<Command>(new Command(this->action[CODE_ACTION(this->selected)], x, y));
             this->qcmd.push(std::move(cmdHolder));
             this->selected = selected;
@@ -91,13 +95,24 @@ namespace engine{
         else{
             this->registerTarget(selected);
         }
-        
     }
 
     void Engine::registerTarget (char selected){
         this->selected = selected;
         this->cmdHolder = std::unique_ptr<Command>(new Command(this->selection[CODE_MASK(selected)], VALUE_MASK(selected), 0));
         this->qcmd.push(std::move(cmdHolder));
+    }
+
+    bool Engine::isActionFromAI (){
+        return this->currentState->isAI_Now();
+    }
+
+    bool Engine::timeOut(){
+        return (!state::State::chronoCount);
+    }
+
+    void Engine::shareStateWith (ai::AI* g_ai){
+        g_ai->bindState(this->currentState);
     }
 
     Engine::~Engine (){}

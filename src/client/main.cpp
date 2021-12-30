@@ -14,7 +14,6 @@
 #include "tmx/MapLoader.h"
 //#include <SFML/Graphics/RenderTexture.hpp>
 
-#include <render.h>
 #include <sstream>
 #include <string>
 
@@ -27,13 +26,15 @@
 #include <thread>
 #include <state.h>
 #include <engine.h>
+#include <render.h>
+
 #include <json/json.h>
 
 #include <unistd.h>
 #include <csignal>
 
 #define MAP_SIZE_XY 22
-#define SELECTED 0x90 //[code value] =  [1001 0000]
+#define SELECTED 0x90 //[targetCode code value] =  [1 001 0000]
 
 
 using namespace std;
@@ -186,8 +187,12 @@ void randomMap(void){
 
     render::GameWindow gamewindow;
     engine::Engine ngine;
+    ai::AI g_ai;
     std::unique_ptr<engine::Command> cmdHolder;
+    
+
     gamewindow.shareStateWith(ngine);
+    ngine.shareStateWith(&g_ai);
     gamewindow.update();
     //ngine.start();
 
@@ -196,6 +201,8 @@ void randomMap(void){
     sf::Vector2f mousePosScreen = gamewindow.window.mapPixelToCoords(sf::Vector2i(0,0));
     sf::Vector2f mousePosWorld  = gamewindow.screenToWorld(mousePosScreen);
     gamewindow.update(event,(sf::Vector2i)mousePosScreen);
+    ngine.chrono->bind(SIGALRM);
+    ngine.chrono->start(1,10);
 
     while(gamewindow.window.isOpen()){
 
@@ -204,39 +211,18 @@ void randomMap(void){
         while(gamewindow.window.pollEvent(event)) {
             if (event.type == sf::Event::Closed)
                 gamewindow.window.close();
-            if(event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::D)
-                debug = !debug;
-            if(event.type == sf::Event::MouseWheelMoved)
-            {
-                if(event.mouseWheel.delta == 1){
-                    gamewindow.setZoom(0.8); 
-                    gamewindow.isZoomed = 1;  
-                }
-                else{
-                    gamewindow.setZoom(1.25); 
-                    gamewindow.isZoomed = 1;    
-                }   
-                gamewindow.update(event,(sf::Vector2i)mousePosScreen);
+            if(!ngine.isActionFromAI() && !ngine.timeOut()){
+                gamewindow.handleEvents (event, mousePosScreen, mousePosWorld, ngine);
             }
-            if(event.type == sf::Event::MouseButtonPressed){
-                switch(event.mouseButton.button)
-                {
-                    case sf::Mouse::Right:
-                    {
-                        gamewindow.setCenter(mousePosScreen);
-                        break;
-                    }
-
-                    case sf::Mouse::Left:
-                    {
-                        gamewindow.selected = SELECTED;
-                        break;
-                    }
-                }
-                gamewindow.update(event,(sf::Vector2i)mousePosScreen);
-                ngine.registerTarget((int)(mousePosWorld.x), (int)(mousePosWorld.y), gamewindow.selected );
+            else if(ngine.isActionFromAI() && !ngine.timeOut()){
+                g_ai.chooseAction();
+                g_ai.registerActionTo(&ngine);
                 ngine.execute();
             }
+            else{
+                ngine.execute();
+            }
+            
             
             gamewindow.update();
         }
