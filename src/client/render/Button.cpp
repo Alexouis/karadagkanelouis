@@ -2,7 +2,7 @@
 #include "GameWindow.h"
 #include "iostream"
 
-#define START 0x40  //[code value] =  [0100 0000]
+#define START 0x30  //[code value] =  [0011 0000]
 
 namespace render {
     Button::Button()

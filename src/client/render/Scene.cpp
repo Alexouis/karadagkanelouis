@@ -3,7 +3,7 @@
 #include "Button.h"
 #include <iostream>
 
-#define START 0x40  //[code value] =  [0100 0000]
+#define START 0x30  //[code value] =  [0011 0000]
 
 namespace render {
 
@@ -51,11 +51,6 @@ namespace render {
             {
                 sprite.setTexture(texture);
             }
-            
-            // else
-            // {
-            //     std::cout << "Impossible de charger l'image" << std::endl;
-            // }
 
             size = sf::Vector2f(100.f,50.f);
             pos = sf::Vector2i(960,450);
