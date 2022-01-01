@@ -187,6 +187,59 @@ void randomMap(void){
 } 
 
 
+ void engineExplo(void){
+
+    render::GameWindow gamewindow;
+    engine::Engine ngine;
+    ai::AI g_ai;
+    std::unique_ptr<engine::Command> cmdHolder;
+    
+
+    gamewindow.shareStateWith(ngine);
+    ngine.shareStateWith(&g_ai);
+    gamewindow.update();
+    //ngine.start();
+
+    bool debug = false;
+    sf::Event event;
+    sf::Vector2f mousePosScreen = gamewindow.window.mapPixelToCoords(sf::Vector2i(0,0));
+    sf::Vector2f mousePosWorld  = gamewindow.screenToWorld(mousePosScreen);
+    gamewindow.update(event,(sf::Vector2i)mousePosScreen);
+
+    while(gamewindow.window.isOpen()){
+
+        mousePosScreen = gamewindow.window.mapPixelToCoords(sf::Mouse::getPosition(gamewindow.window));
+        mousePosWorld = gamewindow.screenToWorld(mousePosScreen);
+        while(gamewindow.window.pollEvent(event)) {
+            if (event.type == sf::Event::Closed) {
+                gamewindow.window.close();
+            }
+            gamewindow.handleZoom(event,mousePosScreen);
+            if(!ngine.isActionFromAI() && !ngine.timeOut()){
+                gamewindow.handleEvents (event, mousePosScreen, mousePosWorld, ngine);
+            }
+            gamewindow.update();
+        }
+
+        if(ngine.isActionFromAI() && !ngine.timeOut()){
+            // AI
+            gamewindow.update();
+        }
+        else if(ngine.timeOut()){
+            ngine.execute();
+            gamewindow.update();
+        }
+        
+        gamewindow.window.clear();
+        gamewindow.draw();
+        gamewindow.window.display();
+
+    }
+
+    
+} 
+
+
 
 int main(int argc,char* argv[])
 {
