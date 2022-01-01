@@ -287,10 +287,7 @@ namespace render {
                 {
                     gameWindow->nextScene();
                 }
-                else
-                {
-                    gameWindow->selected = m_type;
-                }
+                gameWindow->selected = m_type;
             }
 
             else

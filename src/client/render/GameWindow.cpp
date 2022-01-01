@@ -144,18 +144,6 @@ namespace render {
         if(event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::D) {
             //debug = !debug;
         }
-        if(event.type == sf::Event::MouseWheelMoved)
-        {
-            if(event.mouseWheel.delta == 1){
-                this->setZoom(0.8); 
-                this->isZoomed = 1;  
-            }
-            else{
-                this->setZoom(1.25); 
-                this->isZoomed = 1;    
-            }   
-            this->update(event,(sf::Vector2i)mousePosScreen);
-        }
         if(event.type == sf::Event::MouseButtonPressed){
             switch(event.mouseButton.button)
             {
@@ -177,6 +165,22 @@ namespace render {
         }
         if(event.type == sf::Event::MouseMoved || event.type == sf::Event::MouseButtonReleased)
         {
+            this->update(event,(sf::Vector2i)mousePosScreen);
+        }
+    }
+
+
+    void GameWindow::handleZoom (sf::Event& event, sf::Vector2f& mousePosScreen){
+        if(event.type == sf::Event::MouseWheelMoved)
+        {
+            if(event.mouseWheel.delta == 1){
+                this->setZoom(0.8); 
+                this->isZoomed = 1;  
+            }
+            else{
+                this->setZoom(1.25); 
+                this->isZoomed = 1;    
+            }   
             this->update(event,(sf::Vector2i)mousePosScreen);
         }
     }

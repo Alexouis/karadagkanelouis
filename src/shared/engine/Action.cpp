@@ -16,24 +16,28 @@ namespace engine{
 
     }
 
-    void Action::move(std::shared_ptr<state::State>& gstate, int dstX, int dstY){
-        gstate->moveCurrentPlayer(dstX, dstY);
+    void Action::move (std::unique_ptr<Action_Args>& args){
+        args->state->moveCurrentPlayer(args->point[0], args->point[1]);
     }
 
-    void Action::attack(std::shared_ptr<state::State>& gstate, int targetX, int targetY){
-        gstate->makeAttackOn(targetX, targetY);
+    void Action::attack (std::unique_ptr<Action_Args>& args){
+        args->state->makeAttackOn(args->point[0], args->point[1]);
     }
 
-    void Action::select(std::shared_ptr<state::State>& gstate, int boxX, int boxY){
-        gstate->setCurrPlayerAttack(boxX);
+    void Action::select (std::unique_ptr<Action_Args>& args){
+        args->state->setCurrPlayerAttack(args->selected);
     }
 
-    void Action::passTurn (std::shared_ptr<state::State>& gstate, int targetX, int targetY){
-        gstate->passTurn();
+    void Action::passTurn (std::unique_ptr<Action_Args>& args){
+        args->state->passTurn();
     }
 
-    void Action::doNothing (std::shared_ptr<state::State>& gstate, int targetX, int targetY){
+    void Action::doNothing (std::unique_ptr<Action_Args>& args){
         return;
+    }
+
+    void Action::startGame (std::unique_ptr<Action_Args>& args){
+        args->state->chronoStart(state::State::chronoStep, state::State::chronoCount);
     }
 
 

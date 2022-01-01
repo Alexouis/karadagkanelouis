@@ -2,6 +2,7 @@
 #include <functional>
 #include <iostream>
 #include <cstdlib>
+#include <csignal>
 
 namespace state {
     /*
@@ -16,7 +17,7 @@ namespace state {
         MapTile tile;
         tile.state = FREE;
         tile.type  = GRASS;
-        this->gameMap.resize(mapHeight);
+        this->gameMap.resize(22);
 
         for(unsigned int i = 0; i < mapWidth; i++){
             for(unsigned int j = 0; j < mapHeight; j++){
@@ -59,6 +60,8 @@ namespace state {
         this->playersCount = 2;
         this->actualPlayerIndex = 0;
         this->gameOver = false;
+        this->chrono = std::unique_ptr<Chrono>(new Chrono);
+        this->chrono->bind(SIGALRM);
     };
     void State::initPlayer (){
 
@@ -72,7 +75,7 @@ namespace state {
     };
     void State::passTurn (){
         this->actualPlayerIndex = this->players_id[this->actualPlayerIndex].next;
-        this->ngine->chrono->start(1,10);
+        this->chrono->start(1,10);
     };
     void State::incrementTurn (){
         this->turn++;
@@ -113,15 +116,17 @@ namespace state {
         this->gameOver = gameOver;
     };
     void State::makeAttackOn (int targetX, int targetY){
-        char st = this->gameMap[targetY][targetX].state;
-        if(st == OCCUPIED){
-            std::string attackerId = this->players_id[this->actualPlayerIndex].id;
-            std::string taregtId = this->players_id[this->gameMap[targetY][targetX].player_index].id;
-            this->players[attackerId.back()-'0']->find(attackerId)->second->attack(this->players[taregtId.back()-'0']->find(taregtId)->second);
+        if((targetX >= 0) && (targetY >= 0) && (targetX < this->gameMap.size()) && (targetY < this->gameMap.size())){
+            char st = this->gameMap[targetY][targetX].state;
+            if(st == OCCUPIED){
+                std::string attackerId = this->players_id[this->actualPlayerIndex].id;
+                std::string taregtId = this->players_id[this->gameMap[targetY][targetX].player_index].id;
+                this->players[attackerId.back()-'0']->find(attackerId)->second->attack(this->players[taregtId.back()-'0']->find(taregtId)->second);
+            }
         }
     };
     void State::moveCurrentPlayer (int dstX, int dstY){
-        if((dstX >= 0 && dstY >= 0) && (dstX < this->gameMap.size() && dstY < this->gameMap.size())){
+        if((dstX >= 0) && (dstY >= 0) && (dstX < this->gameMap.size()) && (dstY < this->gameMap.size())){
             std::string id = this->players_id[this->actualPlayerIndex].id;
             Position prevPos = this->players[id.back()-'0']->find(id)->second->getPosition();
             this->gameMap[prevPos.getY()][prevPos.getX()].state = FREE;
@@ -183,6 +188,7 @@ namespace state {
         }
         return found;
     }
+
     char State::weakestEnemyIndexTo (char p_index){
         Player p;
         p.getLevel();
@@ -198,5 +204,9 @@ namespace state {
             }
         }
         return found;
+    }
+
+    void State::chronoStart (char chronoStep, char chronoCount){
+        this->chrono->start(chronoStep, chronoCount);
     }
 };
