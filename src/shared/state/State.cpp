@@ -172,7 +172,7 @@ namespace state {
         this->ngine = ngine;
     }
 
-    char State::closestEnemyIndexTo (char p_index){
+    char State::closestEnemyIndexTo (char p_index, int* pos){
         ID *id = &this->players_id[p_index];
         char enemies = !(id->id.back()-'0');
         Position source = this->players[id->id.back()-'0']->find(id->id)->second->getPosition();
@@ -185,13 +185,15 @@ namespace state {
             d = abs(target.getX() - source.getX()) + abs(target.getY() - source.getY());
             if(d < min){
                 min = d;
-                found = this->gameMap[target.getX()][target.getY()].player_index;
+                pos[0] = target.getX();
+                pos[1] = target.getY();
+                found = this->gameMap[pos[1]][pos[0]].player_index;
             }
         }
         return found;
     }
 
-    char State::weakestEnemyIndexTo (char p_index){
+    char State::weakestEnemyIndexTo (char p_index, int* pos){
         Player p;
         p.getLevel();
         ID *id = &this->players_id[p_index];
@@ -202,7 +204,9 @@ namespace state {
             level = enemy.second->getLevel();
             if(level < weakest){
                 weakest = level;
-                found = this->gameMap[enemy.second->getPosition().getX()][enemy.second->getPosition().getY()].player_index;
+                pos[0] = enemy.second->getPosition().getX();
+                pos[1] = enemy.second->getPosition().getY();
+                found = this->gameMap[pos[1]][pos[0]].player_index;
             }
         }
         return found;
