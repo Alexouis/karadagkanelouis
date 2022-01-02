@@ -101,10 +101,14 @@ namespace render{
         for(const auto& [key, value] : playersStats)
         {
             ss << key << " - HP : " << value.getHp() << " - PA : " << (int)value.getAp() << " - PM : " << (int)value.getMp() << std::endl ;
-            std::cout << ss.str() << std::endl;
-            holder.reset(new Info(ss.str(),myfont, fontSize, pos, gameWindow));
+            holder= std::unique_ptr<Info>(new Info(ss.str(),myfont, fontSize, pos, gameWindow));
             boxes[key]=std::move(holder);
         } 
+
+        pos = sf::Vector2i(880,440);
+        ss << "Temps restant: "<< (int)this->gState->chronoCount;
+        holder.reset(new Info(ss.str(),myfont, fontSize, pos, gameWindow));
+        boxes["Chrono"]=std::move(holder);
 
 
     };
@@ -112,6 +116,7 @@ namespace render{
     void FightScene::update(){
         sf::Time t;
         state::Position p;
+        std::stringstream ss;
         char objIndex = this->gState->getActualPlayerIndex();
         for(char i=0; i<this->gState->getPlayersCount(); i++){
             p = this->gState->playerPosition(i);
@@ -119,10 +124,9 @@ namespace render{
             this->animatedObjects[i]->update(t,this->frameInfos[playerClass],playerClass+"_idle_se",this->worldToScreen(p));
         }
         std::map<std::string,state::Stats> playersStats = this->gState->getPlayerStats();
-        // for(const auto& [key, value] : playersStats)
-        // {
-        //     std::cout << key << " - HP : " << value.getHp() << " - PA : " << (int)value.getAp() << " - PM : " << (int)value.getMp() << std::endl ;
-        // }
+
+        ss << "Temps restant: "<< (int)this->gState->chronoCount;
+        this->boxes["Chrono"]->setText(ss.str());
     };
 
     void FightScene::update(sf::Event& e, sf::Vector2i m_mousePosition, GameWindow* gameWindow){     
@@ -131,7 +135,6 @@ namespace render{
         for(const auto& [key, value] : playersStats)
         {
             ss << key << " - HP : " << value.getHp() << " - PA : " << (int)value.getAp() << " - PM : " << (int)value.getMp() << std::endl ;
-            std::cout << ss.str() << std::endl;
             this->boxes[key]->setText(ss.str());
         } 
         for(const auto& [key, value] : this->boxes){
