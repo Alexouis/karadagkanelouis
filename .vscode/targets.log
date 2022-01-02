@@ -6,7 +6,7 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 # This is free software: you are free to change and redistribute it.
 # There is NO WARRANTY, to the extent permitted by law.
 
-# Make data base, printed on Sat Jan  1 21:01:10 2022
+# Make data base, printed on Sun Jan  2 13:41:44 2022
 
 # Variables
 
@@ -15,9 +15,11 @@ GDK_BACKEND = x11
 # environment
 LC_ALL = C
 # environment
-VSCODE_IPC_HOOK_EXTHOST = /run/user/1000/vscode-ipc-21963c46-c484-4d25-ba99-265e3b7b195c.sock
+GJS_DEBUG_OUTPUT = stderr
 # environment
-VSCODE_CWD = /home/mkas/ENSEA/S9/SE/Correction_TP4
+VSCODE_IPC_HOOK_EXTHOST = /run/user/1000/vscode-ipc-ced22873-4e6d-4e4e-ace6-786327ac1246.sock
+# environment
+VSCODE_CWD = /home/mkas
 # environment
 WINDOWPATH = 2
 # environment
@@ -45,9 +47,9 @@ VSCODE_LOG_STACK = false
 # automatic
 %F = $(notdir $%)
 # environment
-CONDA_PROMPT_MODIFIER = (base) 
+VSCODE_CODE_CACHE_PATH = /home/mkas/.config/Code/CachedData/899d46d82c4c95423fb7e10e68eba52050e30ba3
 # environment
-VSCODE_CODE_CACHE_PATH = /home/mkas/.config/Code/CachedData/ee8c7def80afc00dd6e593ef12f37756d8f504ea
+POWERSHELL_UPDATECHECK = Off
 # environment
 LANG = C
 # environment
@@ -56,12 +58,8 @@ XAUTHORITY = /run/user/1000/gdm/Xauthority
 .LOADED := 
 # default
 .INCLUDE_DIRS = /usr/local/include /usr/include /usr/include
-# environment
-GNOME_TERMINAL_SERVICE = :1.124
 # makefile
 MAKEFLAGS = pqrR
-# environment
-DBUS_STARTER_ADDRESS = unix:path=/run/user/1000/bus,guid=4a9983b9fb0592d65f609fee61d07ddb
 # makefile
 CURDIR := /home/mkas/ENSEA/karadagkanelouis
 # environment
@@ -84,22 +82,18 @@ VSCODE_CRASH_REPORTER_START_OPTIONS = {"companyName":"Microsoft","productName":"
 XDG_SESSION_DESKTOP = gnome
 # makefile (from 'Makefile', line 1)
 MAKEFILE_LIST := Makefile
-# environment
-CONDA_SHLVL = 1
 # automatic
 @F = $(notdir $@)
 # environment
 VSCODE_VERBOSE_LOGGING = true
 # environment
-VSCODE_PID = 8075
+VSCODE_PID = 3184
 # environment
 XDG_SESSION_TYPE = x11
 # automatic
 ?D = $(patsubst %/,%,$(dir $?))
 # environment
-CONDA_PYTHON_EXE = /home/mkas/anaconda3/bin/python
-# environment
-SESSION_MANAGER = local/kalikane:@/tmp/.ICE-unix/1898,unix/kalikane:/tmp/.ICE-unix/1898
+SESSION_MANAGER = local/kalikane:@/tmp/.ICE-unix/2060,unix/kalikane:/tmp/.ICE-unix/2060
 # automatic
 *F = $(notdir $*)
 # environment
@@ -107,23 +101,17 @@ QT_QPA_PLATFORMTHEME = qt5ct
 # environment
 CHROME_DESKTOP = code-url-handler.desktop
 # environment
-DBUS_SESSION_BUS_ADDRESS = unix:path=/run/user/1000/bus,guid=4a9983b9fb0592d65f609fee61d07ddb
+DBUS_SESSION_BUS_ADDRESS = unix:path=/run/user/1000/bus
 # automatic
 <D = $(patsubst %/,%,$(dir $<))
 # environment
 VSCODE_NLS_CONFIG = {"locale":"en-us","availableLanguages":{},"_languagePackSupport":true}
 # environment
 BREAKPAD_DUMP_LOCATION = /home/mkas/.config/Code/exthost Crash Reports
-# environment
-ANDROID_SDK_ROOT = /home/mkas/Android/Sdk
 # default
 MAKE_HOST := x86_64-pc-linux-gnu
 # environment
-ANDROID_HOME = /home/mkas/Android/Sdk
-# environment
 GNOME_DESKTOP_SESSION_ID = this-is-deprecated
-# environment
-CONDA_PREFIX = /home/mkas/anaconda3
 # makefile
 SHELL = /bin/sh
 # default
@@ -131,17 +119,17 @@ MAKECMDGOALS := all
 # environment
 XMODIFIERS = @im=ibus
 # makefile (from 'Makefile', line 15)
-HEADERS := src/shared/engine/Command.h src/shared/engine/Chrono.h src/shared/engine/Action_Args.h src/shared/engine/Engine.h src/shared/engine/Action.h src/shared/ai/AdvancedAI.h src/shared/ai/HeuristicAI.h src/shared/ai/AI.h src/shared/state/playerOrientation.h src/shared/state/playerStatus.h src/shared/state/attackName.h src/shared/state/State.h src/shared/state/playerClass.h src/shared/state/Attack.h src/shared/state/Stats.h src/shared/state/Player.h src/shared/state/tileType.h src/shared/state/tileState.h src/shared/state/ID.h src/shared/state/MapTile.h src/shared/state/Position.h src/shared/state/attackType.h src/shared/state.h src/shared/ai.h src/shared/engine.h src/client/render.h src/client/render/TextOrTexture.h src/client/render/TextureSprite.h src/client/render/buttonState.h src/client/render/SceneId.h src/client/render/buttonStyle.h src/client/render/Button.h src/client/render/FightScene.h src/client/render/Box.h src/client/render/AnimatedObject.h src/client/render/Scene.h src/client/render/GameWindow.h src/client/render/Info.h
+HEADERS := src/shared/engine/Command.h src/shared/engine/Action_Args.h src/shared/engine/Engine.h src/shared/engine/Action.h src/shared/ai/AdvancedAI.h src/shared/ai/HeuristicAI.h src/shared/ai/AI.h src/shared/state/playerOrientation.h src/shared/state/playerStatus.h src/shared/state/Chrono.h src/shared/state/attackName.h src/shared/state/State.h src/shared/state/playerClass.h src/shared/state/Attack.h src/shared/state/Stats.h src/shared/state/Player.h src/shared/state/tileType.h src/shared/state/tileState.h src/shared/state/ID.h src/shared/state/MapTile.h src/shared/state/Position.h src/shared/state/attackType.h src/shared/state.h src/shared/ai.h src/shared/engine.h src/client/render.h src/client/render/TextOrTexture.h src/client/render/TextureSprite.h src/client/render/buttonState.h src/client/render/SceneId.h src/client/render/buttonStyle.h src/client/render/Button.h src/client/render/FightScene.h src/client/render/Box.h src/client/render/AnimatedObject.h src/client/render/Scene.h src/client/render/GameWindow.h src/client/render/Info.h
 # environment
-SHLVL = 1
+GJS_DEBUG_TOPICS = JS ERROR;JS LOG
 # environment
-GNOME_TERMINAL_SCREEN = /org/gnome/Terminal/screen/d1d4400f_faa4_44f0_9aee_1c4392ffb0af
+SHLVL = 0
 # environment
 MAKELEVEL := 0
 # default
 MAKE = $(MAKE_COMMAND)
 # environment
-PATH = /home/mkas/anaconda3/bin:/home/mkas/anaconda3/condabin:/home/mkas/.local/bin:/home/mkas/bin:/usr/local/sbin:/usr/sbin:/sbin:/usr/local/bin:/usr/bin:/bin:/usr/local/games:/usr/games:/snap/bin:/home/mkas/.dotnet/tools:/home/mkas/flutter/bin:/home/mkas/Android/Sdk/tools:/home/mkas/Android/Sdk/platform-tools
+PATH = /usr/local/sbin:/usr/sbin:/sbin:/usr/local/bin:/usr/bin:/bin:/usr/local/games:/usr/games:/snap/bin:/home/mkas/.dotnet/tools
 # default
 MAKEFILES := 
 # automatic
@@ -158,8 +146,6 @@ USERNAME = mkas
 ?F = $(notdir $?)
 # environment
 XDG_CURRENT_DESKTOP = GNOME
-# environment
-LS_COLORS = rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.webp=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:
 # automatic
 +F = $(notdir $+)
 # environment
@@ -169,11 +155,13 @@ ORIGINAL_XDG_CURRENT_DESKTOP = GNOME
 # 'override' directive
 GNUMAKEFLAGS := 
 # environment
-CONDA_DEFAULT_ENV = base
-# environment
 LOGNAME = mkas
+# environment
+GIO_LAUNCHED_DESKTOP_FILE = /usr/share/applications/code.desktop
 # makefile
 .DEFAULT_GOAL := all
+# environment
+SYSTEMD_EXEC_PID = 1966
 # environment
 DISPLAY = :1
 # environment
@@ -185,19 +173,15 @@ MAKE_VERSION := 4.3
 # 'override' directive
 .SHELLSTATUS := 0
 # environment
-DBUS_STARTER_BUS_TYPE = session
+GIO_LAUNCHED_DESKTOP_FILE_PID = 3184
 # environment
-SSH_AGENT_PID = 1857
+SSH_AGENT_PID = 2159
 # environment
-_ = /usr/bin/code
+_ = /usr/share/code/code
 # environment
 XDG_RUNTIME_DIR = /run/user/1000
 # environment
 GPG_AGENT_INFO = /run/user/1000/gnupg/S.gpg-agent:0:1
-# environment
-COLORTERM = truecolor
-# environment
-_CE_M = 
 # environment
 POWERSHELL_TELEMETRY_OPTOUT = 1
 # environment
@@ -213,13 +197,9 @@ _JAVA_OPTIONS = -Dawt.useSystemAAFontSettings=on -Dswing.aatext=true
 # environment
 ELECTRON_RUN_AS_NODE = 1
 # environment
-VSCODE_IPC_HOOK = /run/user/1000/vscode-dbd344ef-1.61.0-main.sock
-# environment
-TERM = xterm-256color
+VSCODE_IPC_HOOK = /run/user/1000/vscode-dbd344ef-1.63.2-main.sock
 # environment
 DOTNET_CLI_TELEMETRY_OPTOUT = 1
-# environment
-IM_CONFIG_PHASE = 1
 # default
 .RECIPEPREFIX := 
 # automatic
@@ -228,24 +208,14 @@ IM_CONFIG_PHASE = 1
 SUFFIXES := 
 # environment
 QT_AUTO_SCREEN_SCALE_FACTOR = 0
-# environment
-VSCODE_CLI = 1
-# environment
-ELECTRON_NO_ATTACH_CONSOLE = 1
-# environment
-VTE_VERSION = 6402
 # default
 .FEATURES := target-specific order-only second-expansion else-if shortest-stem undefine oneshell nocomment grouped-target extra-prereqs archives jobserver output-sync check-symlink load
 # environment
 XDG_MENU_PREFIX = gnome-
 # environment
-CONDA_EXE = /home/mkas/anaconda3/bin/conda
-# environment
-_CE_CONDA = 
-# environment
 GDMSESSION = gnome
 # variable set hash-table stats:
-# Load=117/1024=11%, Rehash=0, Collisions=16/157=10%
+# Load=102/1024=10%, Rehash=0, Collisions=8/142=6%
 
 # Pattern-specific Variable Values
 
@@ -273,7 +243,6 @@ code-coverage:
 
 distclean: clean
 #  Implicit rule search has not been done.
- 
 #  Modification time never checked.
 #  File has not been updated.
 #  recipe to execute (from 'Makefile', line 38):
@@ -320,6 +289,7 @@ testdocker:
 configure:
 #  Phony target (prerequisite of .PHONY).
 #  Implicit rule search has not been done.
+ 
 #  File does not exist.
 #  File has not been updated.
 #  recipe to execute (from 'Makefile', line 61):
@@ -546,6 +516,6 @@ install_submodules:
 # strcache performance: lookups = 120 / hit rate = 53%
 # hash-table stats:
 # Load=56/8192=1%, Rehash=0, Collisions=0/120=0%
-# Finished Make data base on Sat Jan  1 21:01:10 2022
+# Finished Make data base on Sun Jan  2 13:41:44 2022
 
  
