@@ -211,4 +211,18 @@ namespace state {
     void State::chronoStart (char chronoStep, char chronoCount){
         this->chrono->start(chronoStep, chronoCount);
     }
+
+    std::map<std::string,state::Stats> State::getPlayerStats()
+    {
+        std::map<std::string,state::Stats> playersStats;
+        
+        for(unsigned int i = 0; i < this->players_id.size(); i++)
+        {
+            std::string id = this->players_id[i].id;
+            playersStats[id]=this->players[id.back()-'0']->find(id)->second->getStats();  
+        }
+
+        return(playersStats);
+        
+    }
 };
