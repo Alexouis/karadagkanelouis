@@ -46,10 +46,10 @@ namespace ai{
             this->targetY = p.getY();
             int x = rand() % 2;
             if(x){
-                float dx = (rand() % 3) -1;
+                float dx = 2*(rand() % 2) -1;
                 this->targetX += dx;
             }else{
-                float dy = (rand() % 3) -1;
+                float dy = 2*(rand() % 2) -1;
                 this->targetY += dy;
             }
         }
@@ -66,10 +66,10 @@ namespace ai{
     void AI::bindState (std::shared_ptr<state::State>& gstate){
         this->gstate = gstate;
     }
-    char AI::closestEnemyIndexTo (char p_index){
-        return this->gstate->closestEnemyIndexTo(p_index);
+    char AI::closestEnemyIndexTo (char p_index, int* pos){
+        return this->gstate->closestEnemyIndexTo(p_index, pos);
     }
-    char AI::weakestEnemyIndexTo (char p_index){
-        return this->gstate->weakestEnemyIndexTo(p_index);
+    char AI::weakestEnemyIndexTo (char p_index, int* pos){
+        return this->gstate->weakestEnemyIndexTo(p_index, pos);
     }
 }

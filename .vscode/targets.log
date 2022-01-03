@@ -6,7 +6,7 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 # This is free software: you are free to change and redistribute it.
 # There is NO WARRANTY, to the extent permitted by law.
 
-# Make data base, printed on Thu Dec 30 17:17:42 2021
+# Make data base, printed on Sun Jan  2 13:41:44 2022
 
 # Variables
 
@@ -17,7 +17,7 @@ LC_ALL = C
 # environment
 GJS_DEBUG_OUTPUT = stderr
 # environment
-VSCODE_IPC_HOOK_EXTHOST = /run/user/1000/vscode-ipc-3902085f-5b9c-479b-b83f-3042f62c7a40.sock
+VSCODE_IPC_HOOK_EXTHOST = /run/user/1000/vscode-ipc-ced22873-4e6d-4e4e-ace6-786327ac1246.sock
 # environment
 VSCODE_CWD = /home/mkas
 # environment
@@ -45,10 +45,11 @@ XDG_DATA_DIRS = /usr/share/gnome:/usr/local/share:/usr/share:/var/lib/snapd/desk
 # environment
 VSCODE_LOG_STACK = false
 # automatic
- 
 %F = $(notdir $%)
 # environment
-VSCODE_CODE_CACHE_PATH = /home/mkas/.config/Code/CachedData/ee8c7def80afc00dd6e593ef12f37756d8f504ea
+VSCODE_CODE_CACHE_PATH = /home/mkas/.config/Code/CachedData/899d46d82c4c95423fb7e10e68eba52050e30ba3
+# environment
+POWERSHELL_UPDATECHECK = Off
 # environment
 LANG = C
 # environment
@@ -86,13 +87,13 @@ MAKEFILE_LIST := Makefile
 # environment
 VSCODE_VERBOSE_LOGGING = true
 # environment
-VSCODE_PID = 2440
+VSCODE_PID = 3184
 # environment
 XDG_SESSION_TYPE = x11
 # automatic
 ?D = $(patsubst %/,%,$(dir $?))
 # environment
-SESSION_MANAGER = local/kalikane:@/tmp/.ICE-unix/1922,unix/kalikane:/tmp/.ICE-unix/1922
+SESSION_MANAGER = local/kalikane:@/tmp/.ICE-unix/2060,unix/kalikane:/tmp/.ICE-unix/2060
 # automatic
 *F = $(notdir $*)
 # environment
@@ -118,7 +119,7 @@ MAKECMDGOALS := all
 # environment
 XMODIFIERS = @im=ibus
 # makefile (from 'Makefile', line 15)
-HEADERS := src/shared/engine/Command.h src/shared/engine/Chrono.h src/shared/engine/Engine.h src/shared/engine/Action.h src/shared/ai/AdvancedAI.h src/shared/ai/HeuristicAI.h src/shared/ai/AI.h src/shared/state/playerOrientation.h src/shared/state/playerStatus.h src/shared/state/attackName.h src/shared/state/State.h src/shared/state/playerClass.h src/shared/state/Attack.h src/shared/state/Stats.h src/shared/state/Player.h src/shared/state/tileType.h src/shared/state/tileState.h src/shared/state/MapTile.h src/shared/state/Position.h src/shared/state/attackType.h src/shared/state.h src/shared/ai.h src/shared/engine.h src/client/render.h src/client/render/TextOrTexture.h src/client/render/TextureSprite.h src/client/render/buttonState.h src/client/render/SceneId.h src/client/render/buttonStyle.h src/client/render/Button.h src/client/render/FightScene.h src/client/render/Box.h src/client/render/AnimatedObject.h src/client/render/Scene.h src/client/render/GameWindow.h src/client/render/Info.h
+HEADERS := src/shared/engine/Command.h src/shared/engine/Action_Args.h src/shared/engine/Engine.h src/shared/engine/Action.h src/shared/ai/AdvancedAI.h src/shared/ai/HeuristicAI.h src/shared/ai/AI.h src/shared/state/playerOrientation.h src/shared/state/playerStatus.h src/shared/state/Chrono.h src/shared/state/attackName.h src/shared/state/State.h src/shared/state/playerClass.h src/shared/state/Attack.h src/shared/state/Stats.h src/shared/state/Player.h src/shared/state/tileType.h src/shared/state/tileState.h src/shared/state/ID.h src/shared/state/MapTile.h src/shared/state/Position.h src/shared/state/attackType.h src/shared/state.h src/shared/ai.h src/shared/engine.h src/client/render.h src/client/render/TextOrTexture.h src/client/render/TextureSprite.h src/client/render/buttonState.h src/client/render/SceneId.h src/client/render/buttonStyle.h src/client/render/Button.h src/client/render/FightScene.h src/client/render/Box.h src/client/render/AnimatedObject.h src/client/render/Scene.h src/client/render/GameWindow.h src/client/render/Info.h
 # environment
 GJS_DEBUG_TOPICS = JS ERROR;JS LOG
 # environment
@@ -135,8 +136,6 @@ MAKEFILES :=
 ^F = $(notdir $^)
 # environment
 COMMAND_NOT_FOUND_INSTALL_PROMPT = 1
-# environment
-INVOCATION_ID = 509f4703395d4d40bd82b5a70ce188a5
 # environment
 QSYS_ROOTDIR = /home/mkas/intelFPGA_lite/20.1/quartus/sopc_builder/bin
 # environment
@@ -162,6 +161,8 @@ GIO_LAUNCHED_DESKTOP_FILE = /usr/share/applications/code.desktop
 # makefile
 .DEFAULT_GOAL := all
 # environment
+SYSTEMD_EXEC_PID = 1966
+# environment
 DISPLAY = :1
 # environment
 USER = mkas
@@ -172,11 +173,9 @@ MAKE_VERSION := 4.3
 # 'override' directive
 .SHELLSTATUS := 0
 # environment
-MANAGERPID = 1688
+GIO_LAUNCHED_DESKTOP_FILE_PID = 3184
 # environment
-GIO_LAUNCHED_DESKTOP_FILE_PID = 2440
-# environment
-SSH_AGENT_PID = 1880
+SSH_AGENT_PID = 2159
 # environment
 _ = /usr/share/code/code
 # environment
@@ -185,8 +184,6 @@ XDG_RUNTIME_DIR = /run/user/1000
 GPG_AGENT_INFO = /run/user/1000/gnupg/S.gpg-agent:0:1
 # environment
 POWERSHELL_TELEMETRY_OPTOUT = 1
-# environment
-JOURNAL_STREAM = 8:25927
 # environment
 XDG_SESSION_CLASS = user
 # environment
@@ -200,11 +197,9 @@ _JAVA_OPTIONS = -Dawt.useSystemAAFontSettings=on -Dswing.aatext=true
 # environment
 ELECTRON_RUN_AS_NODE = 1
 # environment
-VSCODE_IPC_HOOK = /run/user/1000/vscode-dbd344ef-1.61.0-main.sock
+VSCODE_IPC_HOOK = /run/user/1000/vscode-dbd344ef-1.63.2-main.sock
 # environment
 DOTNET_CLI_TELEMETRY_OPTOUT = 1
-# environment
-IM_CONFIG_PHASE = 1
 # default
 .RECIPEPREFIX := 
 # automatic
@@ -220,7 +215,7 @@ XDG_MENU_PREFIX = gnome-
 # environment
 GDMSESSION = gnome
 # variable set hash-table stats:
-# Load=104/1024=10%, Rehash=0, Collisions=7/144=5%
+# Load=102/1024=10%, Rehash=0, Collisions=8/142=6%
 
 # Pattern-specific Variable Values
 
@@ -230,7 +225,6 @@ GDMSESSION = gnome
 
 # . (device 2051, inode 25036745): 27 files, no impossibilities.
 
- 
 # 27 files, no impossibilities in 1 directories.
 
 # Implicit Rules
@@ -295,6 +289,7 @@ testdocker:
 configure:
 #  Phony target (prerequisite of .PHONY).
 #  Implicit rule search has not been done.
+ 
 #  File does not exist.
 #  File has not been updated.
 #  recipe to execute (from 'Makefile', line 61):
@@ -511,7 +506,6 @@ install_submodules:
 # Load=31/1024=3%, Rehash=0, Collisions=0/84=0%
 # VPATH Search Paths
 
- 
 # No 'vpath' search paths.
 
 # No general ('VPATH' variable) search path.
@@ -522,6 +516,6 @@ install_submodules:
 # strcache performance: lookups = 120 / hit rate = 53%
 # hash-table stats:
 # Load=56/8192=1%, Rehash=0, Collisions=0/120=0%
-# Finished Make data base on Thu Dec 30 17:17:42 2021
+# Finished Make data base on Sun Jan  2 13:41:44 2022
 
  

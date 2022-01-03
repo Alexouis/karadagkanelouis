@@ -9,12 +9,13 @@
  * __________________________________________________________________________
  */
 
+#include "State.h"
 #include "Chrono.h"
 #include <unistd.h>
 #include <csignal>
 #include <iostream>
 
-namespace engine{
+namespace state{
 
     Chrono::Chrono (){
     }
@@ -25,16 +26,14 @@ namespace engine{
         signal(sigNum, &Chrono::handler);
     }
     void Chrono::handler (int){
-        state::State::chronoCount--;
-        std::cout << "hand\n";
-        if(state::State::chronoCount){
-            alarm(state::State::chronoStep);
+        State::chronoCount--;
+        if(State::chronoCount){
+            alarm(State::chronoStep);
         }
     }
     void Chrono::start (char chronoStep, char ChronoCount) {
-        state::State::chronoStep = chronoStep;
-        state::State::chronoCount = ChronoCount;
-        std::cout << "start\n";
-        alarm(state::State::chronoStep);
+        State::chronoStep = chronoStep;
+        State::chronoCount = ChronoCount;
+        alarm(State::chronoStep);
     }
 }

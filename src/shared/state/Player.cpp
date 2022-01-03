@@ -124,14 +124,33 @@ namespace state {
     };
 
     void Player::move (Position destination){
-        Player::position.setX(destination.getX());
-        Player::position.setY(destination.getY());
+        int deltaX = abs(this->position.getX()-destination.getX());
+        int deltaY = abs(this->position.getY()-destination.getY());
+        bool can_move = stats.getMp() >= deltaX + deltaY ;
+        if(can_move) 
+        {
+            Player::position.setX(destination.getX());
+            Player::position.setY(destination.getY());
+            this->stats.setMp(stats.getMp()-deltaX-deltaY);
+        }
     };
 
     void Player::move (int x, int y){
-        Player::position.setX(x);
-        Player::position.setY(y);
+        int deltaX = abs(this->position.getX()-x);
+        int deltaY = abs(this->position.getY()-y);
+        bool can_move = stats.getMp() >= deltaX + deltaY ;
+        if(can_move) 
+        {
+            Player::position.setX(x);
+            Player::position.setY(y);
+            this->stats.setMp(stats.getMp()-deltaX-deltaY);
+        }
+        
     };
+
+    void Player::resetPoints(){
+        this->stats.resetPoints(this->pClass,this->level);
+    }
 
     const std::string& Player::getName() const{
         return Player::name;

@@ -1,8 +1,10 @@
 #include "FightScene.h"
 #include "GameWindow.h"
 #include "Button.h"
+#include "Info.h"
 #include <fstream>
 #include <iostream> 
+#include <iterator>
 
 #define GAMEWINDOWHEIGHT 600
 #define GAMEWINDOWWIDTH 2000
@@ -58,62 +60,94 @@ namespace render{
         pos = sf::Vector2i(60,30);
         fontSize = 15;
         std::unique_ptr<Box> holder = std::unique_ptr<Button>(new Button("MENU", fontSize,myfont, size, pos , CANCEL, MENU, gameWindow)); 
-        this->boxes.push_back(std::move(holder));
+        boxes["MENU"]=std::move(holder);
 
         size = sf::Vector2f(100.f,100.f);
         pos = sf::Vector2i(980,530);
         fontSize = 15;
         holder = std::unique_ptr<Button>(new Button("\n\n   PASSER \n\nSON TOUR!",fontSize, myfont,size, pos, CLEAN, PASS, gameWindow));
-        this->boxes.push_back(std::move(holder));
+        boxes["PASS"]=std::move(holder);
 
         size = sf::Vector2f(100.f,50.f);
         pos = sf::Vector2i(1180,525);
         fontSize = 25;
         holder = std::unique_ptr<Button>(new Button("Sort 1",fontSize, myfont, size, pos, SAVE, SPELL1, gameWindow));
-        this->boxes.push_back(std::move(holder));
+        boxes["SORT1"]=std::move(holder);
 
         size = sf::Vector2f(100.f,50.f);
         pos = sf::Vector2i(1285,525);
-        fontSize = 25;
         holder = std::unique_ptr<Button>(new Button("Sort 2",fontSize, myfont, size, pos, SAVE, SPELL2, gameWindow));
-        this->boxes.push_back(std::move(holder));
+        boxes["SORT2"]=std::move(holder);
 
         size = sf::Vector2f(100.f,50.f);
         pos = sf::Vector2i(1390,525);
-        fontSize = 25;
         holder = std::unique_ptr<Button>(new Button(" ",fontSize, myfont, size, pos, SAVE, SPELL3, gameWindow));
-        this->boxes.push_back(std::move(holder));
+        boxes["SORT3"]=std::move(holder);
 
         size = sf::Vector2f(100.f,50.f);
         pos = sf::Vector2i(1495,525);
-        fontSize = 25;
         holder = std::unique_ptr<Button>(new Button(" ",fontSize, myfont, size, pos, SAVE, SPELL4, gameWindow));
-        this->boxes.push_back(std::move(holder));
+        boxes["SORT4"]=std::move(holder);
 
         size = sf::Vector2f(100.f,50.f);
         pos = sf::Vector2i(1600,525);
         fontSize = 25;
-        holder.reset(new Button(" ",fontSize, myfont, size, pos, SAVE, SPELL5, gameWindow));
-        this->boxes.push_back(std::move(holder));
+        holder = std::unique_ptr<Button>(new Button(" ",fontSize, myfont, size, pos, SAVE, SPELL5, gameWindow));
+        boxes["SORT5"]=std::move(holder);
+
+        pos = sf::Vector2i(800,10);
+        std::map<std::string,state::Stats> playersStats = this->gState->getPlayerStats();
+        std::stringstream ss;
+        for(const auto& [key, value] : playersStats)
+        {
+            ss << key << " - HP : " << value.getHp() << " - PA : " << (int)value.getAp() << " - PM : " << (int)value.getMp() << std::endl ;
+            holder= std::unique_ptr<Info>(new Info(ss.str(),myfont, fontSize, pos, gameWindow));
+            boxes[key]=std::move(holder);
+        } 
+
+        pos = sf::Vector2i(880,440);
+        ss << "Temps restant: "<< (int)this->gState->chronoCount;
+        holder.reset(new Info(ss.str(),myfont, fontSize, pos, gameWindow));
+        boxes["Chrono"]=std::move(holder);
+
 
     };
 
     void FightScene::update(){
         sf::Time t;
         state::Position p;
+        std::stringstream ss;
         char objIndex = this->gState->getActualPlayerIndex();
         for(char i=0; i<this->gState->getPlayersCount(); i++){
             p = this->gState->playerPosition(i);
             std::string playerClass = (this->gState->getPlayerClass(i) == state::playerClass::HERO) ? "valla" : "demon";
             this->animatedObjects[i]->update(t,this->frameInfos[playerClass],playerClass+"_idle_se",this->worldToScreen(p));
         }
+        std::map<std::string,state::Stats> playersStats = this->gState->getPlayerStats();
+
+        ss << "Temps restant: "<< (int)this->gState->chronoCount;
+        this->boxes["Chrono"]->setText(ss.str());
+    };
+
+    void FightScene::update(sf::Event& e, sf::Vector2i m_mousePosition, GameWindow* gameWindow){     
+        std::map<std::string,state::Stats> playersStats = this->gState->getPlayerStats();
+        std::stringstream ss;
+        for(const auto& [key, value] : playersStats)
+        {
+            ss << key << " - HP : " << value.getHp() << " - PA : " << (int)value.getAp() << " - PM : " << (int)value.getMp() << std::endl ;
+            this->boxes[key]->setText(ss.str());
+        } 
+        for(const auto& [key, value] : this->boxes){
+            (*value).update(e,m_mousePosition, gameWindow);
+        }
     };
 
 
     void FightScene::draw (sf::RenderTarget& target, sf::RenderStates states) const{
+
         target.draw(*(this->gameMap), states);
-        for (const auto& button : boxes){
-            target.draw(*button,states);
+        for (const auto& [key, value] : boxes){
+            target.draw(*value,states);
         }
         for (const auto& animObj : animatedObjects){
             target.draw(*animObj,states);

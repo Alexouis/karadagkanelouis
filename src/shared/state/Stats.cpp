@@ -51,6 +51,32 @@ namespace state
         mp = coeffStats["mp"]+level/20;
         ap = coeffStats["ap"]+level/30;
     };
+    
+    void Stats::resetPoints(char playerClass, char level)
+    {
+        std::map<std::string, char> coeffStats;
+
+        switch(playerClass)
+        {
+            case HERO:
+                coeffStats["mp"] = 3 ;
+                coeffStats["ap"] = 6 ;
+                break;
+
+            case DEMON:
+                coeffStats["mp"] = 4 ;
+                coeffStats["ap"] = 6 ;
+                break;
+
+            default:
+                coeffStats["mp"] = 3 ;
+                coeffStats["ap"] = 3 ;
+                break;
+        }
+
+        mp = coeffStats["mp"]+level/20;
+        ap = coeffStats["ap"]+level/30;
+    }
 
     // Setters and Getters
 

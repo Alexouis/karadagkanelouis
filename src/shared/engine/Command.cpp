@@ -10,11 +10,11 @@
  */
 
 #include "Command.h"
+#include <iostream>
 
 namespace engine{
-   Command::Command (void(*action)(std::shared_ptr<state::State>&, int, int), int x, int y){
-      this->x = x;
-      this->y = y;
+   Command::Command (void(*action)(std::unique_ptr<Action_Args>&) , std::unique_ptr<Action_Args>& args){
+      this->args = std::move(args);
       this->action = action;
    }
 
