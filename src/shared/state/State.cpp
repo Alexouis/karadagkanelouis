@@ -228,13 +228,11 @@ namespace state {
         
     }
 
-    std::vector<ID> State::getPlayersID()
-    {
+    std::vector<ID> State::getPlayersID(){
         return(this->players_id);
     }
 
-    std::map<std::string,std::vector<Attack>> State::getPlayersAttacks()
-    {
+    std::map<std::string,std::vector<Attack>> State::getPlayersAttacks(){
         std::map<std::string,std::vector<Attack>> playersAttacks;
         
         for(unsigned int i = 0; i < this->players_id.size(); i++)
@@ -244,6 +242,7 @@ namespace state {
         }
 
         return(playersAttacks);
+    }
         
     state::Stats State::getPlayerStats(char p_index){
         std::string id  = this->players_id[p_index].id;
