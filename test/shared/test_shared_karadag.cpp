@@ -175,8 +175,26 @@ BOOST_AUTO_TEST_CASE(TestSFML)
 
     //State test
 
-    //State gameState();
-    //gameState.init();
+    State gameState(2000,1000);
+    gameState.init();
+    gameState.initPlayer();
+    gameState.initMap();
+    gameState.isDead(0);
+    gameState.endGame();
+    bool gover = gameState.getGameOver();
+    gameState.setGameOver(gover);
+    gameState.setGameOver(false);
+    BOOST_CHECK_EQUAL(gameState.getGameOver(),false);
+
+    ///////////////////////////////////////////////////
+    
+
+
+
+
+
+
+
 
 
 
