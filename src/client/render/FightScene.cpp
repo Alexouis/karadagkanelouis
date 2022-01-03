@@ -144,6 +144,7 @@ namespace render{
 
 
     void FightScene::draw (sf::RenderTarget& target, sf::RenderStates states) const{
+
         target.draw(*(this->gameMap), states);
         for (const auto& [key, value] : boxes){
             target.draw(*value,states);
