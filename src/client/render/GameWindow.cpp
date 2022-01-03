@@ -18,6 +18,8 @@ namespace render {
         this->window.create(sf::VideoMode(this->width, this->height), "TMX Loader");
         this->window.setVerticalSyncEnabled(true);
         this->view = this->window.getView();
+        this->view.zoom(this->zoom);
+        this->window.setView(this->view);
         this->initScenes(); 
                
 
