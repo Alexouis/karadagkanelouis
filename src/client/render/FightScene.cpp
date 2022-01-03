@@ -144,6 +144,20 @@ namespace render{
 
 
     void FightScene::draw (sf::RenderTarget& target, sf::RenderStates states) const{
+        // sf::VertexArray m_gridVertices;
+        // uint m_tileWidth = 519;
+        // uint m_tileHeight = 268;
+        // uint m_width = 22;
+        // uint m_height = 22;
+        // float m_tileRatio = static_cast<float>(m_tileWidth) / static_cast<float>(m_tileHeight);
+        
+        // sf::Color debugColour(255u, 0u, 20u, 120u);
+        // float mapHeight = static_cast<float>(m_tileHeight * m_height);
+        // m_gridVertices.append(sf::Vertex(ml.isometricToOrthogonal(sf::Vector2f(0.f, 0.f)), debugColour));
+        // m_gridVertices.append(sf::Vertex(ml.isometricToOrthogonal(sf::Vector2f(static_cast<float>(m_tileWidth) / m_tileRatio, 0.f)), debugColour));
+        // m_gridVertices.append(sf::Vertex(ml.isometricToOrthogonal(sf::Vector2f(static_cast<float>(m_tileWidth) / m_tileRatio, static_cast<float>(m_tileHeight))), debugColour));
+        // m_gridVertices.append(sf::Vertex(ml.isometricToOrthogonal(sf::Vector2f(0.f, static_cast<float>(m_tileHeight))), debugColour));
+        // m_gridVertices.append(sf::Vertex(ml.isometricToOrthogonal(sf::Vector2f(0.f, 0.f)), debugColour));
 
         target.draw(*(this->gameMap), states);
         for (const auto& [key, value] : boxes){
@@ -152,6 +166,8 @@ namespace render{
         for (const auto& animObj : animatedObjects){
             target.draw(*animObj,states);
         }
+
+        //target.draw(*m_gridVertices,states);
 
     };
 
