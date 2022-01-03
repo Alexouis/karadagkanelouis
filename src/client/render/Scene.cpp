@@ -1,6 +1,7 @@
 #include "Scene.h"
 #include "GameWindow.h"
 #include "Button.h"
+#include "Info.h"
 #include <iostream>
 
 #define START 0x30  //[code value] =  [0011 0000]
@@ -55,7 +56,10 @@ namespace render {
             pos = sf::Vector2i(1000,450);
             fontSize = 15;
             std::unique_ptr<Box> holder = std::unique_ptr<Button>(new Button("JOUER", fontSize, myfont, size, pos , SAVE, START, gameWindow)); 
-            this->boxes.push_back(std::move(holder));
+            boxes["JOUER"]=std::move(holder);
+            pos = sf::Vector2i(10,10);
+            holder = std::unique_ptr<Info>(new Info("PLT - Nouhou KANE, Alexandre LOUIS & Mustafa KARADAG",myfont,fontSize, pos, gameWindow));
+            boxes["TITLE"]=std::move(holder);
         }
 
         else if(type == "end")
@@ -69,17 +73,17 @@ namespace render {
     };
     
     void Scene::update(sf::Event& e, sf::Vector2i m_mousePosition, GameWindow* gameWindow){        
-        for(auto &boxe : this->boxes){
-            (*boxe).update(e,m_mousePosition, gameWindow);
+        for(const auto& [key, value] : this->boxes){
+            (*value).update(e,m_mousePosition, gameWindow);
         }
     };
 
     // Setters and Getters
-    const std::vector<std::unique_ptr<Box>>& Scene::getBoxes() const{
+    const std::map<std::string,std::unique_ptr<Box>>& Scene::getBoxes() const{
         return this->boxes;
     };
 
-    void Scene::setBoxes(const std::vector<std::unique_ptr<Box>>& boxes){
+    void Scene::setBoxes(const std::map<std::string,std::unique_ptr<Box>>& boxes){
     };
 
     char Scene::getId() const{
@@ -92,8 +96,8 @@ namespace render {
 
     void Scene::draw (sf::RenderTarget& target, sf::RenderStates states) const{
         target.draw(this->sprite, states);
-        for (const auto& button : boxes){
-            target.draw(*button,states);
+        for (const auto& [key, value] : boxes){
+            target.draw(*value,states);
         }
     }
 

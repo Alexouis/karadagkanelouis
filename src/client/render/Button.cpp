@@ -240,7 +240,7 @@ namespace render {
             {
                 m_button.setScale(m_button.getScale()*(gameWindow->zoom));
             }
-            m_button.setPosition(gameWindow->window.mapPixelToCoords((sf::Vector2i)pos));
+            m_button.setPosition(gameWindow->window.mapPixelToCoords(m_position));
             m_text.setScale(m_button.getScale());
             sf::Vector2f textPosition = sf::Vector2f(m_button.getPosition().x, m_button.getPosition().y - m_button.getGlobalBounds().height/4);
             m_text.setPosition(textPosition);
@@ -359,14 +359,6 @@ namespace render {
     
     void Button::setM_btnState(const enum buttonState& m_btnState){
         this->m_btnState = m_btnState;
-    };
-    
-    const sf::Text& Button::getM_text() const{
-        return m_text;
-    };
-    
-    void Button::setM_text(const sf::Text& m_text){
-        this->m_text = m_text;
     };
     
     const sf::Color& Button::getM_bgNormal() const{
@@ -537,7 +529,7 @@ namespace render {
         m_button.setPoint(2, sf::Vector2f(150, 30));
         m_button.setPoint(3, sf::Vector2f(0, 30));
         m_button.setOrigin(m_button.getGlobalBounds().width/2, m_button.getGlobalBounds().height/2);
-        m_button.setPosition(pos);
+        //m_button.setPosition(m_position);
     };
     
     const sf::Font& Button::getM_font() const{
