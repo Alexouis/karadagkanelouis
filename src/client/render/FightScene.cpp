@@ -13,7 +13,7 @@
 #define map_sizeX 22
 #define map_sizeY 22
 
-
+#define CODE_MASK(X)   ((   X & 0x70 ) >> 4 )  //return code
 #define SPELL1 0x0 //[code value] =  [0000 0000]
 #define SPELL2 0x1 //[code value] =  [0000 0001]
 #define SPELL3 0x2 //[code value] =  [0000 0010]
@@ -30,6 +30,7 @@ namespace render{
         this->gameMap->load("map_1.tmx");
         this->loadFrameInfos("data/frames_info.json");
         this->texture.loadFromFile("res/frames.png");
+        this->playersAttacks = this->gState->getPlayersAttacks();
 
         this->initButtons(gameWindow);
 
@@ -56,6 +57,7 @@ namespace render{
         {
             std::cerr<<"Could not find contb.ttf font."<<std::endl;
         }
+
         size = sf::Vector2f(80.f,30.f);
         pos = sf::Vector2i(60,30);
         fontSize = 15;
@@ -96,7 +98,7 @@ namespace render{
         boxes["SORT5"]=std::move(holder);
 
         pos = sf::Vector2i(800,10);
-        std::map<std::string,state::Stats> playersStats = this->gState->getPlayerStats();
+        this->playersStats = this->gState->getPlayerStats();
         std::stringstream ss;
         for(const auto& [key, value] : playersStats)
         {
@@ -123,22 +125,30 @@ namespace render{
             std::string playerClass = (this->gState->getPlayerClass(i) == state::playerClass::HERO) ? "valla" : "demon";
             this->animatedObjects[i]->update(t,this->frameInfos[playerClass],playerClass+"_idle_se",this->worldToScreen(p));
         }
-        std::map<std::string,state::Stats> playersStats = this->gState->getPlayerStats();
+        this->playersStats = this->gState->getPlayerStats();
         if(this->showVertex)
         {
             this->moveRange();
         }
         else
         {
-            this->rangeVertex.clear();
+            this->moveVertex.clear();
         }
         ss << "Temps restant: "<< (int)this->gState->chronoCount;
         this->boxes["Chrono"]->setText(ss.str());
     };
 
     void FightScene::update(sf::Event& e, sf::Vector2i m_mousePosition, GameWindow* gameWindow){     
-        std::map<std::string,state::Stats> playersStats = this->gState->getPlayerStats();
+        this->playersStats = this->gState->getPlayerStats();
         std::stringstream ss;
+        if(CODE_MASK(gameWindow->selected)==0)
+        {
+            this->attackRange(gameWindow->selected);
+        }
+        else
+        {
+            this->attackVertex.clear();
+        }
         for(const auto& [key, value] : playersStats)
         {
             ss << key << "   HP : " << value.getHp() << "   PA : " << (int)value.getAp() << "   PM : " << (int)value.getMp() << std::endl ;
@@ -156,8 +166,11 @@ namespace render{
     void FightScene::draw (sf::RenderTarget& target, sf::RenderStates states) const{
         target.draw(*(this->gameMap), states);
 
-        for (int i=0; i<this->rangeVertex.size(); i++){
-            target.draw(this->rangeVertex[i],states);
+        for (int i=0; i<this->moveVertex.size(); i++){
+            target.draw(this->moveVertex[i],states);
+        }
+        for (int i=0; i<this->attackVertex.size(); i++){
+            target.draw(this->attackVertex[i],states);
         }
         for (const auto& animObj : animatedObjects){
             target.draw(*animObj,states);
@@ -184,8 +197,8 @@ namespace render{
 
     void FightScene::moveRange()
     {
-        std::map<std::string,state::Stats> playersStats = this->gState->getPlayerStats();
-        rangeVertex.clear();
+        this->playersStats = this->gState->getPlayerStats();
+        moveVertex.clear();
         uint m_tileWidth = 519;
         uint m_tileHeight = 268;
         float m_tileRatio = static_cast<float>(m_tileWidth) / static_cast<float>(m_tileHeight);
@@ -211,12 +224,70 @@ namespace render{
                     m_gridVertices.append(sf::Vertex(this->gameMap->isometricToOrthogonal(sf::Vector2f(i*x + static_cast<float>(m_tileWidth) / m_tileRatio, j*y + static_cast<float>(m_tileHeight))), debugColour));
                     m_gridVertices.append(sf::Vertex(this->gameMap->isometricToOrthogonal(sf::Vector2f(i*x, j*y + static_cast<float>(m_tileHeight))), debugColour));
                     m_gridVertices.setPrimitiveType(sf::Quads);
-                    rangeVertex.push_back(m_gridVertices);
+                    moveVertex.push_back(m_gridVertices);
                 }
                 
             }
             
         }
+    }
+
+    int FightScene::attackRange(char selected)
+    {
+        int p = 0;
+        std::vector<state::Attack> attacks = this->playersAttacks[gState->getPlayersID()[gState->getActualPlayerIndex()].id];
+        switch(selected)
+        {
+            case 0x0:
+            {
+                p = attacks[0].range;
+                break;
+            }
+
+            case 0x1:
+            {
+                p = attacks[1].range;
+                break;
+            }
+            default:
+            {
+                return 0;
+                break;
+            }
+        }
+        attackVertex.clear();
+        uint m_tileWidth = 519;
+        uint m_tileHeight = 268;
+        float m_tileRatio = static_cast<float>(m_tileWidth) / static_cast<float>(m_tileHeight);
+        float x = static_cast<float>(m_tileWidth) / m_tileRatio;
+        float y = static_cast<float>(m_tileHeight); 
+        int dx = 0, dy=0;
+        sf::Color debugColour(20u, 0u, 255u, 120u);
+
+        state::Position pos = this->gState->playerPosition(gState->getActualPlayerIndex());
+        
+        for(int i=pos.getX()-p; i<=pos.getX()+p; i++)
+        {
+            dx = abs(pos.getX()-i);
+            for(int j=pos.getY()-p; j<=pos.getY()+p; j++)
+            {
+                dy = abs(pos.getY()-j);
+                if(dx+dy<=p)
+                {
+                    sf::VertexArray m_gridVertices;
+                    m_gridVertices.append(sf::Vertex(this->gameMap->isometricToOrthogonal(sf::Vector2f(i*x, j*y)), debugColour));
+                    m_gridVertices.append(sf::Vertex(this->gameMap->isometricToOrthogonal(sf::Vector2f(i*x + static_cast<float>(m_tileWidth) / m_tileRatio, j*y)), debugColour));
+                    m_gridVertices.append(sf::Vertex(this->gameMap->isometricToOrthogonal(sf::Vector2f(i*x + static_cast<float>(m_tileWidth) / m_tileRatio, j*y + static_cast<float>(m_tileHeight))), debugColour));
+                    m_gridVertices.append(sf::Vertex(this->gameMap->isometricToOrthogonal(sf::Vector2f(i*x, j*y + static_cast<float>(m_tileHeight))), debugColour));
+                    m_gridVertices.setPrimitiveType(sf::Quads);
+                    attackVertex.push_back(m_gridVertices);
+                }
+                
+            }
+            
+        }
+
+        return 0;
     }
 
     Json::Value& FightScene::getFrameInfos(){
@@ -247,8 +318,8 @@ namespace render{
         float x = static_cast<float>(m_tileWidth) / m_tileRatio;
         float y = static_cast<float>(m_tileHeight); 
         sf::Vector2f worldPos = this->gameMap->orthogonalToIsometric(position);
-        worldPos.x = floor(worldPos.x/x-0.5);
-        worldPos.y = floor(worldPos.y/y-0.5);
+        worldPos.x = floor(worldPos.x/x);
+        worldPos.y = floor(worldPos.y/y);
         return worldPos;
     }
     
