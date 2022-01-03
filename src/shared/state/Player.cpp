@@ -113,8 +113,10 @@ namespace state {
         bool can_attack = stats.getAp() >= this->attacks[this->currentAttackIndex].cost;
         if(can_attack) 
         {
-            this->stats.setAp(stats.getAp()-this->attacks[this->currentAttackIndex].cost);
-            player->stats.setHp(player->stats.getShield()+player->stats.getHp()-this->attacks[this->currentAttackIndex].damage-this->stats.getAttack());
+            char new_ap = (char)(stats.getAp()-this->attacks[this->currentAttackIndex].cost);
+            this->stats.setAp((new_ap >=0 ? new_ap : 0));
+            char new_hp = (char)(player->stats.getShield()+player->stats.getHp()-this->attacks[this->currentAttackIndex].damage-this->stats.getAttack());
+            player->stats.setHp((new_hp >=0 ? new_hp : 0));
         }
     };
 
@@ -131,7 +133,8 @@ namespace state {
         {
             Player::position.setX(destination.getX());
             Player::position.setY(destination.getY());
-            this->stats.setMp(stats.getMp()-deltaX-deltaY);
+            char new_mp = (char)(stats.getMp()-deltaX-deltaY);
+            this->stats.setMp((new_mp >= 0 ? new_mp : 0));
         }
     };
 
@@ -143,7 +146,8 @@ namespace state {
         {
             Player::position.setX(x);
             Player::position.setY(y);
-            this->stats.setMp(stats.getMp()-deltaX-deltaY);
+            int new_mp = stats.getMp()-deltaX-deltaY;
+            this->stats.setMp((new_mp >= 0 ? new_mp : 0));
         }
         
     };
