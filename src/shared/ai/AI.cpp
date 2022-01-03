@@ -54,6 +54,10 @@ namespace ai{
             }
         }
     }
+
+    char AI::getSelection (char sel){
+        return this->selections[sel];
+    }
     void AI::registerActionTo (engine::Engine* ngine){
         ngine->registerTarget(this->targetX, this->targetY, this->selections[this->selected]);
     }
@@ -63,7 +67,8 @@ namespace ai{
     inline int AI::getRandValBetween (int a, int b){
         return ((rand() % (b-a+1)) +a);
     }
-    void AI::bindState (std::shared_ptr<state::State>& gstate){
+    void AI::bind (engine::Engine* ngine, std::shared_ptr<state::State>& gstate){
+        this->ngine  = std::shared_ptr<engine::Engine>(ngine);
         this->gstate = gstate;
     }
     char AI::closestEnemyIndexTo (char p_index, int* pos){

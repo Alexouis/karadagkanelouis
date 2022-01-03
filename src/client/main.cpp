@@ -196,7 +196,7 @@ void engineExplo(void){
     
 
     gamewindow.shareStateWith(ngine);
-    ngine.shareStateWith(&g_ai);
+    ngine.bind(&g_ai);
     gamewindow.update();
     //ngine.start();
 
@@ -250,7 +250,7 @@ void random_ai(void){
     
 
     gamewindow.shareStateWith(ngine);
-    ngine.shareStateWith(&g_ai);
+    ngine.bind(&g_ai);
     gamewindow.update();
     //ngine.start();
 

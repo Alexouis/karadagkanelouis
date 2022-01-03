@@ -116,8 +116,8 @@ namespace engine{
         return (!state::State::chronoCount);
     }
 
-    void Engine::shareStateWith (ai::AI* g_ai){
-        g_ai->bindState(this->currentState);
+    void Engine::bind (ai::AI* g_ai){
+        g_ai->bind(this, this->currentState);
     }
 
     Engine::~Engine (){}

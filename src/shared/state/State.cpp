@@ -216,12 +216,10 @@ namespace state {
         this->chrono->start(chronoStep, chronoCount);
     }
 
-    std::map<std::string,state::Stats> State::getPlayerStats()
-    {
+    std::map<std::string,state::Stats> State::getPlayerStats() {
         std::map<std::string,state::Stats> playersStats;
         
-        for(unsigned int i = 0; i < this->players_id.size(); i++)
-        {
+        for(unsigned int i = 0; i < this->players_id.size(); i++) {
             std::string id = this->players_id[i].id;
             playersStats[id]=this->players[id.back()-'0']->find(id)->second->getStats();  
         }
@@ -247,5 +245,9 @@ namespace state {
 
         return(playersAttacks);
         
+    state::Stats State::getPlayerStats(char p_index){
+        std::string id  = this->players_id[p_index].id;
+        state::Stats st =this->players[id.back()-'0']->find(id)->second->getStats();
+        return(st);
     }
 };
