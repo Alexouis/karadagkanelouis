@@ -141,24 +141,10 @@ namespace render {
 
 
     void GameWindow::handleEvents (sf::Event& event, sf::Vector2f& mousePosScreen, sf::Vector2f& mousePosWorld, engine::Engine& ngine){
-        if(event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::D) {
-            //debug = !debug;
-        }
-        if(event.type == sf::Event::MouseButtonPressed){
-            switch(event.mouseButton.button)
-            {
-                case sf::Mouse::Right:
-                {
-                    this->setCenter(mousePosScreen);
-                    break;
-                }
+        if(event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left){
+    
+            this->selected = MOVE;
 
-                case sf::Mouse::Left:
-                {
-                    this->selected = MOVE;
-                    break;
-                }
-            }
             this->update(event,(sf::Vector2i)mousePosScreen);
             ngine.registerTarget((int)(mousePosWorld.x), (int)(mousePosWorld.y), this->selected );
             ngine.execute();
@@ -171,6 +157,16 @@ namespace render {
 
 
     void GameWindow::handleZoom (sf::Event& event, sf::Vector2f& mousePosScreen){
+        if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::D)
+        {
+            this->update(event,(sf::Vector2i)mousePosScreen);
+        }
+        if(event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Right)
+        {
+            this->setCenter(mousePosScreen);
+
+            this->update(event,(sf::Vector2i)mousePosScreen);
+        }
         if(event.type == sf::Event::MouseWheelMoved)
         {
             if(event.mouseWheel.delta == 1){

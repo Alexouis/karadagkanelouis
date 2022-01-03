@@ -141,7 +141,7 @@ void renderMap(void){
             }      
             if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::D)
             {
-
+                gamewindow.update(event,mousePosScreen);
             }
             if (event.type == sf::Event::MouseButtonPressed){
                 switch(event.mouseButton.button)
@@ -279,13 +279,12 @@ void random_ai(void){
             g_ai.chooseAction();
             g_ai.registerActionTo(&ngine);
             ngine.execute();
-            gamewindow.update();
         }
         else if(ngine.timeOut()){
             ngine.execute();
-            gamewindow.update();
         }
         
+        gamewindow.update();
         gamewindow.window.clear();
         gamewindow.draw();
         gamewindow.window.display();

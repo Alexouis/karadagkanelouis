@@ -36,6 +36,8 @@ namespace render{
 
         this->mSprite.setTextureRect(sf::IntRect(i_x, i_y, scale_x, scale_y));
         this->mSprite.setPosition(positions);
+        //std::cout << "width =" << (int)this->mSprite.getGlobalBounds().width << "et height =" << this->mSprite.getGlobalBounds().height << std::endl;
+        this->mSprite.setOrigin(scale_x/2, scale_y);
         
     };
 

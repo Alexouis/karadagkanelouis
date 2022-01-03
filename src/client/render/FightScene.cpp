@@ -124,7 +124,14 @@ namespace render{
             this->animatedObjects[i]->update(t,this->frameInfos[playerClass],playerClass+"_idle_se",this->worldToScreen(p));
         }
         std::map<std::string,state::Stats> playersStats = this->gState->getPlayerStats();
-
+        if(this->showVertex)
+        {
+            this->attackRange();
+        }
+        else
+        {
+            this->rangeVertex.clear();
+        }
         ss << "Temps restant: "<< (int)this->gState->chronoCount;
         this->boxes["Chrono"]->setText(ss.str());
     };
@@ -134,24 +141,33 @@ namespace render{
         std::stringstream ss;
         for(const auto& [key, value] : playersStats)
         {
-            ss << key << " - HP : " << value.getHp() << " - PA : " << (int)value.getAp() << " - PM : " << (int)value.getMp() << std::endl ;
+            ss << key << "   HP : " << value.getHp() << "   PA : " << (int)value.getAp() << "   PM : " << (int)value.getMp() << std::endl ;
             this->boxes[key]->setText(ss.str());
         } 
         for(const auto& [key, value] : this->boxes){
             (*value).update(e,m_mousePosition, gameWindow);
         }
+        if(e.key.code == sf::Keyboard::D)
+        {
+            this->showVertex = !(this->showVertex);
+        }
     };
 
-
     void FightScene::draw (sf::RenderTarget& target, sf::RenderStates states) const{
-
         target.draw(*(this->gameMap), states);
-        for (const auto& [key, value] : boxes){
-            target.draw(*value,states);
+
+        for (int i=0; i<this->rangeVertex.size(); i++){
+            target.draw(this->rangeVertex[i],states);
         }
         for (const auto& animObj : animatedObjects){
             target.draw(*animObj,states);
         }
+        
+        for (const auto& [key, value] : boxes){
+            target.draw(*value,states);
+        }
+
+
 
     };
 
@@ -166,6 +182,42 @@ namespace render{
 		}
     }
 
+    void FightScene::attackRange()
+    {
+        rangeVertex.clear();
+        uint m_tileWidth = 519;
+        uint m_tileHeight = 268;
+        float m_tileRatio = static_cast<float>(m_tileWidth) / static_cast<float>(m_tileHeight);
+        float x = static_cast<float>(m_tileWidth) / m_tileRatio;
+        float y = static_cast<float>(m_tileHeight); 
+        int p = 2;
+        int dx = 0, dy=0;
+        sf::Color debugColour(255u, 0u, 20u, 120u);
+
+        state::Position pos = this->gState->playerPosition(gState->getActualPlayerIndex());
+        
+        for(int i=pos.getX()-p; i<=pos.getX()+p; i++)
+        {
+            dx = abs(pos.getX()-i);
+            for(int j=pos.getY()-p; j<=pos.getY()+p; j++)
+            {
+                dy = abs(pos.getY()-j);
+                if(dx+dy<=p)
+                {
+                    sf::VertexArray m_gridVertices;
+                    m_gridVertices.append(sf::Vertex(this->gameMap->isometricToOrthogonal(sf::Vector2f(i*x, j*y)), debugColour));
+                    m_gridVertices.append(sf::Vertex(this->gameMap->isometricToOrthogonal(sf::Vector2f(i*x + static_cast<float>(m_tileWidth) / m_tileRatio, j*y)), debugColour));
+                    m_gridVertices.append(sf::Vertex(this->gameMap->isometricToOrthogonal(sf::Vector2f(i*x + static_cast<float>(m_tileWidth) / m_tileRatio, j*y + static_cast<float>(m_tileHeight))), debugColour));
+                    m_gridVertices.append(sf::Vertex(this->gameMap->isometricToOrthogonal(sf::Vector2f(i*x, j*y + static_cast<float>(m_tileHeight))), debugColour));
+                    m_gridVertices.setPrimitiveType(sf::Quads);
+                    rangeVertex.push_back(m_gridVertices);
+                }
+                
+            }
+            
+        }
+    }
+
     Json::Value& FightScene::getFrameInfos(){
         return this->frameInfos;
     } 
@@ -176,17 +228,26 @@ namespace render{
     }
 
     sf::Vector2f FightScene::worldToScreen (state::Position position){
+        uint m_tileWidth = 519;
+        uint m_tileHeight = 268;
+        float m_tileRatio = static_cast<float>(m_tileWidth) / static_cast<float>(m_tileHeight);
+        float x = static_cast<float>(m_tileWidth) / m_tileRatio;
+        float y = static_cast<float>(m_tileHeight); 
+        
         sf::Vector2f screenPos = sf::Vector2f((float)position.getX(), (float)position.getY());
-        screenPos.x=screenPos.x*270+270/2;
-        screenPos.y=screenPos.y*270+270/2;
-        screenPos = this->gameMap->isometricToOrthogonal(screenPos);
+        screenPos = this->gameMap->isometricToOrthogonal(sf::Vector2f(position.getX()*x+x/2,position.getY()*y+y/2));
         return screenPos;
     }
 
     sf::Vector2f FightScene::screenToWorld (sf::Vector2f position){
+        uint m_tileWidth = 519;
+        uint m_tileHeight = 268;
+        float m_tileRatio = static_cast<float>(m_tileWidth) / static_cast<float>(m_tileHeight);
+        float x = static_cast<float>(m_tileWidth) / m_tileRatio;
+        float y = static_cast<float>(m_tileHeight); 
         sf::Vector2f worldPos = this->gameMap->orthogonalToIsometric(position);
-        worldPos.x = floor(worldPos.x/278);
-        worldPos.y = floor(worldPos.y/278);
+        worldPos.x = floor(worldPos.x/x-0.5);
+        worldPos.y = floor(worldPos.y/y-0.5);
         return worldPos;
     }
     
