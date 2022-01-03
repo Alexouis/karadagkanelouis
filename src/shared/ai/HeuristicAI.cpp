@@ -10,6 +10,8 @@
  */
 
 #include "HeuristicAI.h"
+#include <iostream>
+
 #define SPELL1 0x0 //[targetCode code value] =  [0 000 0000]
 #define SPELL2 0x1 //[targetCode code value] =  [0 000 0001]
 #define SPELL3 0x2 //[targetCode code value] =  [0 000 0010]
@@ -20,9 +22,6 @@
 #define MOVE 0x90  //[targetCode code value] =  [1 001 0000]
 
 namespace ai{
-    HeuristicAI::HeuristicAI (){
-
-    }
 
     HeuristicAI::~HeuristicAI (){
 
@@ -35,8 +34,8 @@ namespace ai{
         state::Stats st = this->gstate->getPlayerStats(this->gstate->getActualPlayerIndex());
         if(st.getMp()){
             int x = rand() % 2;
-            int deltaX = source.getX()-target[0];
-            int deltaY = source.getY()-target[1];
+            int deltaX = target[0] - source.getX();
+            int deltaY = target[1] - source.getY();
             int sx = (deltaX > 0) - (deltaX < 0);
             int sy = (deltaY > 0) - (deltaY < 0);
             int mx = sx*std::min(abs(deltaX), (int)st.getMp()) - ( !sy ) - ( !!sy ) * (!!sx) * x;
@@ -45,8 +44,11 @@ namespace ai{
             this->targetY = source.getY() + my;
             this->ngine->registerTarget(this->targetX, this->targetY, this->selected);
         }
-        this->selected = getRandValBetween(0,4);
+        this->selected = (char)getRandValBetween(0,4);
+        //std::cout << "rand = " << (int)this->selected << " and selected = " << (int)this->getSelection(this->selected) << std::endl;
+        //std::cout << "(x,y) = " << target[0] << " , " << target[1] << std::endl;
+
         this->ngine->registerTarget(this->targetX, this->targetY, this->getSelection(this->selected));
-        this->ngine->registerTarget(this->targetX, this->targetY, (char)MOVE);
+        this->ngine->registerTarget(target[0], target[1], (char)MOVE);
     }
 }

@@ -24,7 +24,6 @@
 
 namespace ai{
     AI::AI (){
-        this->initSrand ();
         this->selected = 6;
         this->selections[0] = (char)SPELL1; // attack selection
         this->selections[1] = (char)SPELL2; // attack selection
@@ -38,7 +37,7 @@ namespace ai{
 
     }
 
-    void AI::chooseAction (){
+    void AI::exploit (){
         this->selected = (char)this->getRandValBetween(0,6);
         if(this->selections[this->selected] == (char)MOVE){
             state::Position p = this->gstate->playerPosition(this->gstate->getActualPlayerIndex());
@@ -53,14 +52,13 @@ namespace ai{
                 this->targetY += dy;
             }
         }
+        this->ngine->registerTarget(this->targetX, this->targetY, this->selections[this->selected]);
     }
 
     char AI::getSelection (char sel){
         return this->selections[sel];
     }
-    void AI::registerActionTo (engine::Engine* ngine){
-        ngine->registerTarget(this->targetX, this->targetY, this->selections[this->selected]);
-    }
+    
     void AI::initSrand (){
         srand (time(NULL));
     }
