@@ -126,7 +126,7 @@ namespace render{
         std::map<std::string,state::Stats> playersStats = this->gState->getPlayerStats();
         if(this->showVertex)
         {
-            this->attackRange();
+            this->moveRange();
         }
         else
         {
@@ -182,15 +182,16 @@ namespace render{
 		}
     }
 
-    void FightScene::attackRange()
+    void FightScene::moveRange()
     {
+        std::map<std::string,state::Stats> playersStats = this->gState->getPlayerStats();
         rangeVertex.clear();
         uint m_tileWidth = 519;
         uint m_tileHeight = 268;
         float m_tileRatio = static_cast<float>(m_tileWidth) / static_cast<float>(m_tileHeight);
         float x = static_cast<float>(m_tileWidth) / m_tileRatio;
         float y = static_cast<float>(m_tileHeight); 
-        int p = 2;
+        int p = playersStats[gState->getPlayersID()[gState->getActualPlayerIndex()].id].getMp();
         int dx = 0, dy=0;
         sf::Color debugColour(255u, 0u, 20u, 120u);
 

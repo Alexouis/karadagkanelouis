@@ -229,4 +229,9 @@ namespace state {
         return(playersStats);
         
     }
+
+    std::vector<ID> State::getPlayersID()
+    {
+        return(this->players_id);
+    }
 };
