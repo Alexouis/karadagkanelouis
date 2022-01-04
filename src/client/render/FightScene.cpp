@@ -255,7 +255,10 @@ namespace render{
             }
         }
         attackVertex.clear();
-        uint m_tileHeight = this->gameMap->getTileSize().y;
+        uint m_tileWidth = 519;
+        uint m_tileHeight = 268;
+        float m_tileRatio = static_cast<float>(m_tileWidth) / static_cast<float>(m_tileHeight);
+        float x = static_cast<float>(m_tileWidth) / m_tileRatio;
         float y = static_cast<float>(m_tileHeight); 
         int dx = 0, dy=0;
         sf::Color debugColour(20u, 0u, 255u, 120u);
@@ -271,10 +274,10 @@ namespace render{
                 if(dx+dy<=p)
                 {
                     sf::VertexArray m_gridVertices;
-                    m_gridVertices.append(sf::Vertex(this->gameMap->isometricToOrthogonal(sf::Vector2f(i*y      , j*y)      ), debugColour));
-                    m_gridVertices.append(sf::Vertex(this->gameMap->isometricToOrthogonal(sf::Vector2f(i*(y + 1), j*y)      ), debugColour));
-                    m_gridVertices.append(sf::Vertex(this->gameMap->isometricToOrthogonal(sf::Vector2f(i*(y + 1), j*(y + 1))), debugColour));
-                    m_gridVertices.append(sf::Vertex(this->gameMap->isometricToOrthogonal(sf::Vector2f(i*y      , j*(y + 1))), debugColour));
+                    m_gridVertices.append(sf::Vertex(this->gameMap->isometricToOrthogonal(sf::Vector2f(i*x, j*y)), debugColour));
+                    m_gridVertices.append(sf::Vertex(this->gameMap->isometricToOrthogonal(sf::Vector2f(i*x + static_cast<float>(m_tileWidth) / m_tileRatio, j*y)), debugColour));
+                    m_gridVertices.append(sf::Vertex(this->gameMap->isometricToOrthogonal(sf::Vector2f(i*x + static_cast<float>(m_tileWidth) / m_tileRatio, j*y + static_cast<float>(m_tileHeight))), debugColour));
+                    m_gridVertices.append(sf::Vertex(this->gameMap->isometricToOrthogonal(sf::Vector2f(i*x, j*y + static_cast<float>(m_tileHeight))), debugColour));
                     m_gridVertices.setPrimitiveType(sf::Quads);
                     attackVertex.push_back(m_gridVertices);
                 }
