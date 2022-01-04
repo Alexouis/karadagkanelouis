@@ -75,4 +75,8 @@ namespace ai{
     char AI::weakestEnemyIndexTo (char p_index, int* pos){
         return this->gstate->weakestEnemyIndexTo(p_index, pos);
     }
+
+    inline float AI::action_dt (){
+        return (this->action_time_end.tv_sec - this->action_time_ini.tv_sec + (float)(this->action_time_end.tv_nsec - this->action_time_ini.tv_nsec)/1000000.f);
+    }
 }

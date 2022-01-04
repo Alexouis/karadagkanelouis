@@ -49,5 +49,8 @@ namespace ai{
             this->ngine->registerTarget(this->targetX, this->targetY, this->getSelection(this->selected));
             this->ngine->registerTarget(target[0], target[1], (char)MOVE);
         }
+        if(!st.getMp() && !st.getAp()){
+            this->ngine->registerTarget(target[0], target[1], (char)PASS);
+        }
     }
 }
