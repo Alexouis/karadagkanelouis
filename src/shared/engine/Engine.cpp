@@ -83,6 +83,7 @@ namespace engine{
 
     void Engine::execute(std::unique_ptr<Command>& cmd){
         cmd->action(cmd->args);
+        this->currentState->lock();
     }
 
     void Engine::setState(std::shared_ptr<state::State>& gState){
@@ -99,6 +100,7 @@ namespace engine{
         }
         else{
             this->registerTarget(selected);
+            this->execute();
         }
     }
 

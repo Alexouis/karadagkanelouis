@@ -147,6 +147,7 @@ namespace render{
             this->gameOver = true;
             this->winner = this->gState->getWinner();
         }
+        this->gState->unlock();
     };
 
     void FightScene::update(sf::Event& e, sf::Vector2i m_mousePosition, GameWindow* gameWindow){     

@@ -330,18 +330,19 @@ void heuristic_ai(void){
             else{
                 gamewindow.handleZoom(event,mousePosScreen);
                 if(!ngine.isActionFromAI() && !timeOut){
-                    gamewindow.handleEvents (event, mousePosScreen, mousePosWorld, ngine);
-                    gamewindow.update();
+                    gamewindow.handleEvents (event, mousePosScreen, mousePosWorld, ngine);  
+                    gamewindow.update(); 
                 }
+
             }
         }
 
         if(ngine.isActionFromAI() && !ngine.timeOut()){
             g_ai.exploit();
-            ngine.execute();
+            gamewindow.update();
         }
         else if(ngine.timeOut()){
-            ngine.execute();
+            gamewindow.update();
         }
         
         gamewindow.update();

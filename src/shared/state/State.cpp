@@ -169,6 +169,7 @@ namespace state {
 
     void State::unlock(){
         this->padlock = false;
+        this->ngine->execute();
     }
 
     bool State::isAI_Now(){
@@ -177,7 +178,7 @@ namespace state {
     }
 
     void State::connect (engine::Engine* ngine){
-        this->ngine = ngine;
+        this->ngine = std::shared_ptr<engine::Engine>(ngine);
     }
 
     char State::closestEnemyIndexTo (char p_index, int* pos){
