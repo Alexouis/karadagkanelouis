@@ -124,6 +124,10 @@ namespace state {
                 std::string attackerId = this->players_id[this->actualPlayerIndex].id;
                 std::string taregtId = this->players_id[this->gameMap[targetY][targetX].player_index].id;
                 this->players[attackerId.back()-'0']->find(attackerId)->second->attack(this->players[taregtId.back()-'0']->find(taregtId)->second);
+                if(this->isDead(this->gameMap[targetY][targetX].player_index))
+                {
+                    this->endGame();
+                }
             }
         }
     };

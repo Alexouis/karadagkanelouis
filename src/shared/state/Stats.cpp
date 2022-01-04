@@ -31,7 +31,7 @@ namespace state
             case DEMON:
                 coeffStats["attack"] = 30 ;
                 coeffStats["shield"] = 20 ;
-                coeffStats["hp"] = 140 ;
+                coeffStats["hp"] = 10 ;
                 coeffStats["mp"] = 4 ;
                 coeffStats["ap"] = 6 ;
                 break;

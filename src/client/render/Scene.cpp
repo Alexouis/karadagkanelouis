@@ -64,7 +64,14 @@ namespace render {
 
         else if(type == "end")
         {
-
+            if (!(this->texture).loadFromFile("res/utiles/bgEndDefeat.png"))
+            {
+                std::cerr<<"Could not find the image for the background"<<std::endl;
+            }
+            else
+            {
+                this->sprite.setTexture(this->texture);
+            }
         }
         
     };
@@ -93,6 +100,12 @@ namespace render {
     void Scene::setId(char id){
         this->id = id;
     };
+
+    bool Scene::isGameOver()
+    {
+          return this->gameOver;
+    }
+
 
     void Scene::draw (sf::RenderTarget& target, sf::RenderStates states) const{
         target.draw(this->sprite, states);

@@ -10,6 +10,7 @@
  */
 #include <iostream>
 #include "engine.h"
+#include <iostream> 
 
 #define CODE_MASK(X)   ((   X & 0x70 ) >> 4 )  //return code
 #define CODE_ACTION(X) (((  X & 0x10 ) >> 4 ) | ((  X & 0x20 ) >> 5 )) //to knw if move or attack

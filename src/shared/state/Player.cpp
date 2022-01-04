@@ -120,6 +120,10 @@ namespace state {
             this->stats.setAp((new_ap >=0 ? new_ap : 0));
             int new_hp = (player->stats.getShield()+player->stats.getHp()-this->attacks[this->currentAttackIndex].damage-this->stats.getAttack());
             player->stats.setHp((new_hp >=0 ? new_hp : 0));
+            if(new_hp <= 0)
+            {
+                player->setStatus(DEAD);
+            }
         }
     };
 

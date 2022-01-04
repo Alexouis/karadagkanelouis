@@ -13,6 +13,7 @@ namespace render {
     GameWindow::GameWindow()
     {
         this->zoom = MENU_DEFAULTZOOM;
+        this->zoomTot = this->zoom;
         this->isZoomed = (this->zoom != 1);
         this->currentScene = SceneId::MENU;        
         this->window.create(sf::VideoMode(this->width, this->height), "TMX Loader");
@@ -36,7 +37,7 @@ namespace render {
         this->scenes.push_back(std::move(holder));
         holder = std::unique_ptr<FightScene>(new FightScene(1,this));
         this->scenes.push_back(std::move(holder));
-        holder.reset(new Scene());
+        holder.reset(new Scene(2,"end",this));
         this->scenes.push_back(std::move(holder));
     };
 
@@ -48,6 +49,10 @@ namespace render {
     //void GameWindow::update()
     void GameWindow::update (){
         this->scenes[this->currentScene]->update();
+        if(this->currentScene == FIGHTSCENE && this->scenes[this->currentScene]->isGameOver())
+        {
+            this->nextScene();
+        }
     };
     
     void GameWindow::update (sf::Event& e, sf::Vector2i m_mousePosition)
@@ -85,13 +90,25 @@ namespace render {
             {
                 this->setCurrentScene(FIGHTSCENE);
                 this->zoom = FIGHTSCENE_DEFAULTZOOM;
+                this->zoomTot =this->zoom;
                 this->isZoomed = (this->zoom != 1);
                 this->view.zoom(this->zoom);
                 this->view.setCenter(DEFAULTXCENTER, DEFAULTYCENTER);
                 this->window.setView(this->view); 
                 break; 
             }
-                
+
+            case SceneId::FIGHTSCENE:
+            {
+                this->setCurrentScene(END);
+                this->zoom = (float)(1/this->zoomTot);
+                this->isZoomed = (this->zoom != 1);
+                this->view.zoom(this->zoom);
+                this->view.setCenter(960,300);
+                this->window.setView(this->view); 
+                break; 
+            }
+
             default:
                 break;
         }
@@ -114,6 +131,7 @@ namespace render {
     {
         if(this->zoom*zoom > 0)
         {
+            this->zoomTot = this->zoomTot*zoom;
             this->zoom = zoom;
             this->view.zoom(this->zoom);
             this->window.setView(this->view); 
@@ -169,7 +187,7 @@ namespace render {
 
             this->update(event,(sf::Vector2i)mousePosScreen);
         }
-        if(event.type == sf::Event::MouseWheelMoved)
+        if(event.type == sf::Event::MouseWheelMoved && this->getCurrentScene() == SceneId::FIGHTSCENE)
         {
             if(event.mouseWheel.delta == 1){
                 this->setZoom(0.8); 

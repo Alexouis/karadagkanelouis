@@ -141,7 +141,11 @@ namespace render{
         {
             ssStats << key << "   HP : " << value.getHp() << "   PA : " << value.getAp() << "   PM : " << value.getMp() << std::endl ;
             this->boxes[key]->setText(ssStats.str());
-        } 
+        }
+        if(this->gState->getGameOver())
+        {
+            this->gameOver = true;
+        }
     };
 
     void FightScene::update(sf::Event& e, sf::Vector2i m_mousePosition, GameWindow* gameWindow){     
