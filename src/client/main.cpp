@@ -215,11 +215,13 @@ void engineExplo(void){
             if (event.type == sf::Event::Closed) {
                 gamewindow.window.close();
             }
-            gamewindow.handleZoom(event,mousePosScreen);
-            if(!ngine.isActionFromAI() && !ngine.timeOut()){
-                gamewindow.handleEvents (event, mousePosScreen, mousePosWorld, ngine);
+            else{
+                gamewindow.handleZoom(event,mousePosScreen);
+                if(!ngine.isActionFromAI() && !ngine.timeOut()){
+                    gamewindow.handleEvents (event, mousePosScreen, mousePosWorld, ngine);
+                }
+                gamewindow.update();
             }
-            gamewindow.update();
         }
 
         if(ngine.isActionFromAI() && !ngine.timeOut()){
@@ -269,11 +271,13 @@ void random_ai(void){
             if (event.type == sf::Event::Closed) {
                 gamewindow.window.close();
             }
-            gamewindow.handleZoom(event,mousePosScreen);
-            if(!ngine.isActionFromAI() && !ngine.timeOut()){
-                gamewindow.handleEvents (event, mousePosScreen, mousePosWorld, ngine);
+            else{
+                gamewindow.handleZoom(event,mousePosScreen);
+                if(!ngine.isActionFromAI() && !ngine.timeOut()){
+                    gamewindow.handleEvents (event, mousePosScreen, mousePosWorld, ngine);
+                }
+                gamewindow.update();
             }
-            gamewindow.update();
         }
 
         if(ngine.isActionFromAI() && !ngine.timeOut()){
@@ -321,11 +325,13 @@ void heuristic_ai(void){
             if (event.type == sf::Event::Closed) {
                 gamewindow.window.close();
             }
-            gamewindow.handleZoom(event,mousePosScreen);
-            if(!ngine.isActionFromAI() && !ngine.timeOut()){
-                gamewindow.handleEvents (event, mousePosScreen, mousePosWorld, ngine);
+            else{
+                gamewindow.handleZoom(event,mousePosScreen);
+                if(!ngine.isActionFromAI() && !ngine.timeOut()){
+                    gamewindow.handleEvents (event, mousePosScreen, mousePosWorld, ngine);
+                }
+                gamewindow.update();
             }
-            gamewindow.update();
         }
 
         if(ngine.isActionFromAI() && !ngine.timeOut()){
