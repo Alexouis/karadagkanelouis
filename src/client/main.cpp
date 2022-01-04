@@ -311,7 +311,7 @@ void heuristic_ai(void){
     gamewindow.update();
     //ngine.start();
 
-    bool debug = false;
+    bool debug = false, timeOut;
     sf::Event event;
     sf::Vector2f mousePosScreen = gamewindow.window.mapPixelToCoords(sf::Vector2i(0,0));
     sf::Vector2f mousePosWorld  = gamewindow.screenToWorld(mousePosScreen);
@@ -321,16 +321,18 @@ void heuristic_ai(void){
 
         mousePosScreen = gamewindow.window.mapPixelToCoords(sf::Mouse::getPosition(gamewindow.window));
         mousePosWorld = gamewindow.screenToWorld(mousePosScreen);
+        
         while(gamewindow.window.pollEvent(event)) {
+            timeOut = ngine.timeOut();
             if (event.type == sf::Event::Closed) {
                 gamewindow.window.close();
             }
             else{
                 gamewindow.handleZoom(event,mousePosScreen);
-                if(!ngine.isActionFromAI() && !ngine.timeOut()){
+                if(!ngine.isActionFromAI() && !timeOut){
                     gamewindow.handleEvents (event, mousePosScreen, mousePosWorld, ngine);
+                    gamewindow.update();
                 }
-                gamewindow.update();
             }
         }
 

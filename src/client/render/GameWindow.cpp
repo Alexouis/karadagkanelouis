@@ -180,15 +180,13 @@ namespace render {
 
 
     void GameWindow::handleEvents (sf::Event& event, sf::Vector2f& mousePosScreen, sf::Vector2f& mousePosWorld, engine::Engine& ngine){
+        this->selected = (char)MOVE;
         if(event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left){
-    
-            this->selected = MOVE;
-
             this->update(event,(sf::Vector2i)mousePosScreen);
-            ngine.registerTarget((int)(mousePosWorld.x), (int)(mousePosWorld.y), this->selected );
+            ngine.registerTarget(floor(mousePosWorld.x), floor(mousePosWorld.y), this->selected );
             ngine.execute();
         }
-        if(event.type == sf::Event::MouseMoved || event.type == sf::Event::MouseButtonReleased)
+        if(event.type == sf::Event::MouseMoved )
         {
             this->update(event,(sf::Vector2i)mousePosScreen);
         }
@@ -218,6 +216,7 @@ namespace render {
             }   
             this->update(event,(sf::Vector2i)mousePosScreen);
         }
+        this->selected = (char)MOVE;
     }
     
 

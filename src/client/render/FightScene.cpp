@@ -108,7 +108,7 @@ namespace render{
         } 
 
         pos = sf::Vector2i(880,440);
-        ss << "Temps restant: "<< (int)this->gState->chronoCount;
+        ss << "Temps restant: "<< (int)state::State::chronoCount;
         holder.reset(new Info(ss.str(),myfont, fontSize, pos, gameWindow));
         boxes["Chrono"]=std::move(holder);
 
@@ -135,7 +135,7 @@ namespace render{
         {
             this->moveVertex.clear();
         }
-        ssChr << "Temps restant: "<< (int)this->gState->chronoCount;
+        ssChr << "Temps restant: "<< (int)state::State::chronoCount;
         this->boxes["Chrono"]->setText(ssChr.str());
         for(const auto& [key, value] : playersStats)
         {
