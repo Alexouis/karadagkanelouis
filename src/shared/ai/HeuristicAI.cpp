@@ -38,17 +38,16 @@ namespace ai{
             int deltaY = target[1] - source.getY();
             int sx = (deltaX > 0) - (deltaX < 0);
             int sy = (deltaY > 0) - (deltaY < 0);
-            int mx = sx*std::min(abs(deltaX), (int)st.getMp()) - ( !sy ) - ( !!sy ) * (!!sx) * x;
-            int my = sy*std::min(abs(deltaY), (int)st.getMp() - mx);
+            int mx = sx * (std::min(abs(deltaX) - ( !sy ), (int)st.getMp()) - ( !!sy ) * ( !!sx ) * x);
+            int my = sy * (std::min(abs(deltaY) - ( !sx ), (int)st.getMp() - abs(mx)));
             this->targetX = source.getX() + mx;
             this->targetY = source.getY() + my;
             this->ngine->registerTarget(this->targetX, this->targetY, this->selected);
         }
-        this->selected = (char)getRandValBetween(0,4);
-        //std::cout << "rand = " << (int)this->selected << " and selected = " << (int)this->getSelection(this->selected) << std::endl;
-        //std::cout << "(x,y) = " << target[0] << " , " << target[1] << std::endl;
-
-        this->ngine->registerTarget(this->targetX, this->targetY, this->getSelection(this->selected));
-        this->ngine->registerTarget(target[0], target[1], (char)MOVE);
+        if(st.getAp()){
+            this->selected = (char)getRandValBetween(0,4);
+            this->ngine->registerTarget(this->targetX, this->targetY, this->getSelection(this->selected));
+            this->ngine->registerTarget(target[0], target[1], (char)MOVE);
+        }
     }
 }

@@ -115,7 +115,7 @@ namespace state {
         {
             char new_ap = (char)(stats.getAp()-this->attacks[this->currentAttackIndex].cost);
             this->stats.setAp((new_ap >=0 ? new_ap : 0));
-            char new_hp = (char)(player->stats.getShield()+player->stats.getHp()-this->attacks[this->currentAttackIndex].damage-this->stats.getAttack());
+            int new_hp = (player->stats.getShield()+player->stats.getHp()-this->attacks[this->currentAttackIndex].damage-this->stats.getAttack());
             player->stats.setHp((new_hp >=0 ? new_hp : 0));
         }
     };
