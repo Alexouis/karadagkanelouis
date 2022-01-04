@@ -259,10 +259,7 @@ namespace render{
             }
         }
         attackVertex.clear();
-        uint m_tileWidth = 519;
-        uint m_tileHeight = 268;
-        float m_tileRatio = static_cast<float>(m_tileWidth) / static_cast<float>(m_tileHeight);
-        float x = static_cast<float>(m_tileWidth) / m_tileRatio;
+        uint m_tileHeight = this->gameMap->getTileSize().y;
         float y = static_cast<float>(m_tileHeight); 
         int dy_x=0;
         sf::Color debugColour(20u, 0u, 255u, 120u);
@@ -275,10 +272,10 @@ namespace render{
             for(int j=pos.getY()-dy_x; j<=pos.getY()+dy_x; j++)
             {
                 sf::VertexArray m_gridVertices;
-                m_gridVertices.append(sf::Vertex(this->gameMap->isometricToOrthogonal(sf::Vector2f(i*y+(271.f)      , j*y+(271.f))      ), debugColour));
-                m_gridVertices.append(sf::Vertex(this->gameMap->isometricToOrthogonal(sf::Vector2f(i*(y + 1)-(271.f), j*y+(271.f))      ), debugColour));
-                m_gridVertices.append(sf::Vertex(this->gameMap->isometricToOrthogonal(sf::Vector2f(i*(y + 1)-(271.f), j*(y + 1)-(271.f))), debugColour));
-                m_gridVertices.append(sf::Vertex(this->gameMap->isometricToOrthogonal(sf::Vector2f(i*y+(271.f)      , j*(y + 1)-(271.f))), debugColour));
+                m_gridVertices.append(sf::Vertex(this->gameMap->isometricToOrthogonal(sf::Vector2f(i*y      , j*y)      ), debugColour));
+                m_gridVertices.append(sf::Vertex(this->gameMap->isometricToOrthogonal(sf::Vector2f(i*(y + 1), j*y)      ), debugColour));
+                m_gridVertices.append(sf::Vertex(this->gameMap->isometricToOrthogonal(sf::Vector2f(i*(y + 1), j*(y + 1))), debugColour));
+                m_gridVertices.append(sf::Vertex(this->gameMap->isometricToOrthogonal(sf::Vector2f(i*y      , j*(y + 1))), debugColour));
                 m_gridVertices.setPrimitiveType(sf::Quads);
                 attackVertex.push_back(m_gridVertices);
                 
