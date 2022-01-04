@@ -27,11 +27,14 @@ namespace ai{
 
     }
     void HeuristicAI::exploit (){
+        state::Stats st = this->gstate->getPlayerStats(this->gstate->getActualPlayerIndex());
+        if(!st.getMp() && !st.getAp()){
+            this->ngine->registerTarget(0, 0, (char)PASS);
+        }
         this->selected = (char)MOVE;
         int target[2];
         char targetIndex = this->closestEnemyIndexTo(this->gstate->getActualPlayerIndex(), target);
         state::Position source = this->gstate->playerPosition(this->gstate->getActualPlayerIndex());
-        state::Stats st = this->gstate->getPlayerStats(this->gstate->getActualPlayerIndex());
         if(st.getMp()){
             int x = rand() % 2;
             int deltaX = target[0] - source.getX();
@@ -48,9 +51,6 @@ namespace ai{
             this->selected = (char)getRandValBetween(0,4);
             this->ngine->registerTarget(this->targetX, this->targetY, this->getSelection(this->selected));
             this->ngine->registerTarget(target[0], target[1], (char)MOVE);
-        }
-        if(!st.getMp() && !st.getAp()){
-            this->ngine->registerTarget(target[0], target[1], (char)PASS);
         }
     }
 }

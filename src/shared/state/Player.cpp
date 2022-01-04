@@ -117,9 +117,11 @@ namespace state {
         if(can_attack) 
         {
             int new_ap = stats.getAp()-this->attacks[this->currentAttackIndex].cost;
-            this->stats.setAp((new_ap >=0 ? new_ap : 0));
+            new_ap = (new_ap > new_ap ? new_ap : 0);
+            this->stats.setAp(new_ap);
             int new_hp = (player->stats.getShield()+player->stats.getHp()-this->attacks[this->currentAttackIndex].damage-this->stats.getAttack());
-            player->stats.setHp((new_hp >=0 ? new_hp : 0));
+            new_hp = (new_hp >0 ? new_hp : 0);
+            player->stats.setHp(new_hp);
             if(new_hp <= 0)
             {
                 player->setStatus(DEAD);
