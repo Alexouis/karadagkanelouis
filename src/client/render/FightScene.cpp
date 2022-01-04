@@ -118,7 +118,7 @@ namespace render{
     void FightScene::update(){
         sf::Time t;
         state::Position p;
-        std::stringstream ss;
+        std::stringstream ssChr,ssStats;
         char objIndex = this->gState->getActualPlayerIndex();
         for(char i=0; i<this->gState->getPlayersCount(); i++){
             p = this->gState->playerPosition(i);
@@ -134,8 +134,13 @@ namespace render{
         {
             this->moveVertex.clear();
         }
-        ss << "Temps restant: "<< (int)this->gState->chronoCount;
-        this->boxes["Chrono"]->setText(ss.str());
+        ssChr << "Temps restant: "<< (int)this->gState->chronoCount;
+        this->boxes["Chrono"]->setText(ssChr.str());
+        for(const auto& [key, value] : playersStats)
+        {
+            ssStats << key << "   HP : " << value.getHp() << "   PA : " << (int)value.getAp() << "   PM : " << (int)value.getMp() << std::endl ;
+            this->boxes[key]->setText(ssStats.str());
+        } 
     };
 
     void FightScene::update(sf::Event& e, sf::Vector2i m_mousePosition, GameWindow* gameWindow){     
@@ -149,11 +154,6 @@ namespace render{
         {
             this->attackVertex.clear();
         }
-        for(const auto& [key, value] : playersStats)
-        {
-            ss << key << "   HP : " << value.getHp() << "   PA : " << (int)value.getAp() << "   PM : " << (int)value.getMp() << std::endl ;
-            this->boxes[key]->setText(ss.str());
-        } 
         for(const auto& [key, value] : this->boxes){
             (*value).update(e,m_mousePosition, gameWindow);
         }
