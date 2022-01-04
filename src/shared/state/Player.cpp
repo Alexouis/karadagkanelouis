@@ -110,7 +110,10 @@ namespace state {
     };
     
     void Player::attack(std::unique_ptr<Player>& player){
+        int deltaX = abs(this->position.getX()-player->getPosition().getX());
+        int deltaY = abs(this->position.getY()-player->getPosition().getY());
         bool can_attack = stats.getAp() >= this->attacks[this->currentAttackIndex].cost;
+        can_attack = can_attack && (this->attacks[this->currentAttackIndex].range >= deltaX + deltaY);
         if(can_attack) 
         {
             char new_ap = (char)(stats.getAp()-this->attacks[this->currentAttackIndex].cost);
