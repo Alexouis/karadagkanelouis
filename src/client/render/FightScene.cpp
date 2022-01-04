@@ -102,7 +102,7 @@ namespace render{
         std::stringstream ss;
         for(const auto& [key, value] : playersStats)
         {
-            ss << key << " - HP : " << value.getHp() << " - PA : " << (int)value.getAp() << " - PM : " << (int)value.getMp() << std::endl ;
+            ss << key << " - HP : " << value.getHp() << " - PA : " << value.getAp() << " - PM : " << value.getMp() << std::endl ;
             holder= std::unique_ptr<Info>(new Info(ss.str(),myfont, fontSize, pos, gameWindow));
             boxes[key]=std::move(holder);
         } 
@@ -139,7 +139,7 @@ namespace render{
         this->boxes["Chrono"]->setText(ssChr.str());
         for(const auto& [key, value] : playersStats)
         {
-            ssStats << key << "   HP : " << value.getHp() << "   PA : " << (int)value.getAp() << "   PM : " << (int)value.getMp() << std::endl ;
+            ssStats << key << "   HP : " << value.getHp() << "   PA : " << value.getAp() << "   PM : " << value.getMp() << std::endl ;
             this->boxes[key]->setText(ssStats.str());
         } 
     };

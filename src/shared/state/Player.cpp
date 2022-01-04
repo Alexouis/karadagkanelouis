@@ -23,7 +23,7 @@ namespace state {
         attacks.push_back(punch);
     };
 
-    Player::Player(std::string name, playerClass pClass, Position position, char level, bool isAI){
+    Player::Player(std::string name, playerClass pClass, Position position, int level, bool isAI){
         Player::name = name;
         Player::pClass = pClass;
         Player::position = position;
@@ -43,7 +43,7 @@ namespace state {
                 shoot.type=DISTANCE;
                 shoot.damage = 20;
                 shoot.range = 5;
-                shoot.cost = 2;
+                shoot.cost = 3;
 
                 struct Attack powerfulShoot;
                 powerfulShoot.name=POWERFULSHOOT;
@@ -116,7 +116,7 @@ namespace state {
         can_attack = can_attack && (this->attacks[this->currentAttackIndex].range >= deltaX + deltaY);
         if(can_attack) 
         {
-            char new_ap = (char)(stats.getAp()-this->attacks[this->currentAttackIndex].cost);
+            int new_ap = stats.getAp()-this->attacks[this->currentAttackIndex].cost;
             this->stats.setAp((new_ap >=0 ? new_ap : 0));
             int new_hp = (player->stats.getShield()+player->stats.getHp()-this->attacks[this->currentAttackIndex].damage-this->stats.getAttack());
             player->stats.setHp((new_hp >=0 ? new_hp : 0));
@@ -136,7 +136,7 @@ namespace state {
         {
             Player::position.setX(destination.getX());
             Player::position.setY(destination.getY());
-            char new_mp = (char)(stats.getMp()-deltaX-deltaY);
+            int new_mp = (int)(stats.getMp()-deltaX-deltaY);
             this->stats.setMp((new_mp >= 0 ? new_mp : 0));
         }
     };
@@ -228,11 +228,11 @@ namespace state {
         Player::status = status;
     };
 
-    void Player::setLevel(char level){
+    void Player::setLevel(int level){
         Player::level = level;
     };
 
-    char Player::getLevel() const{
+    int Player::getLevel() const{
         return Player::level;
     };
 

@@ -14,16 +14,16 @@ namespace state
         ap = 3;
     }; 
 
-    Stats::Stats(char playerClass, char level){
+    Stats::Stats(char playerClass, int level){
 
-        std::map<std::string, char> coeffStats;
+        std::map<std::string, int> coeffStats;
 
         switch(playerClass)
         {
             case HERO:
                 coeffStats["attack"] = 25 ;
                 coeffStats["shield"] = 25 ;
-                coeffStats["hp"] = 80 ;
+                coeffStats["hp"] = 160 ;
                 coeffStats["mp"] = 3 ;
                 coeffStats["ap"] = 6 ;
                 break;
@@ -31,7 +31,7 @@ namespace state
             case DEMON:
                 coeffStats["attack"] = 30 ;
                 coeffStats["shield"] = 20 ;
-                coeffStats["hp"] = 70 ;
+                coeffStats["hp"] = 140 ;
                 coeffStats["mp"] = 4 ;
                 coeffStats["ap"] = 6 ;
                 break;
@@ -52,9 +52,9 @@ namespace state
         ap = coeffStats["ap"]+level/30;
     };
     
-    void Stats::resetPoints(char playerClass, char level)
+    void Stats::resetPoints(char playerClass, int level)
     {
-        std::map<std::string, char> coeffStats;
+        std::map<std::string, int> coeffStats;
 
         switch(playerClass)
         {
@@ -104,19 +104,19 @@ namespace state
         Stats::hp=hp;
     };
 
-    char Stats::getAp() const{
+    int Stats::getAp() const{
         return Stats::ap;
     };
 
-    void Stats::setAp(char ap){
+    void Stats::setAp(int ap){
         Stats::ap=ap;
     };
 
-    char Stats::getMp() const{
+    int Stats::getMp() const{
         return Stats::mp;
     };
 
-    void Stats::setMp(char mp){
+    void Stats::setMp(int mp){
         Stats::mp=mp;
     };
 
