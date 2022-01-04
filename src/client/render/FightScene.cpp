@@ -145,6 +145,7 @@ namespace render{
         if(this->gState->getGameOver())
         {
             this->gameOver = true;
+            this->winner = this->gState->getWinner();
         }
     };
 

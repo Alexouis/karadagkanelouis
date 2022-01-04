@@ -64,14 +64,7 @@ namespace render {
 
         else if(type == "end")
         {
-            if (!(this->texture).loadFromFile("res/utiles/bgEndDefeat.png"))
-            {
-                std::cerr<<"Could not find the image for the background"<<std::endl;
-            }
-            else
-            {
-                this->sprite.setTexture(this->texture);
-            }
+            
         }
         
     };
@@ -84,6 +77,18 @@ namespace render {
             (*value).update(e,m_mousePosition, gameWindow);
         }
     };
+
+    void Scene::setTexture(std::string stexture)
+    {
+        if (!(this->texture).loadFromFile(stexture))
+        {
+            std::cerr<<"Could not find the image for the background"<<std::endl;
+        }
+        else
+        {
+            this->sprite.setTexture(this->texture);
+        }
+    }
 
     // Setters and Getters
     const std::map<std::string,std::unique_ptr<Box>>& Scene::getBoxes() const{
@@ -104,6 +109,11 @@ namespace render {
     bool Scene::isGameOver()
     {
           return this->gameOver;
+    }
+
+    state::playerClass Scene::whosWinner()
+    {
+          return this->winner;
     }
 
 

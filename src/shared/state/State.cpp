@@ -117,6 +117,9 @@ namespace state {
     void State::setGameOver(bool gameOver){
         this->gameOver = gameOver;
     };
+    playerClass State::getWinner() const{
+        return this->winner;
+    };
     void State::makeAttackOn (int targetX, int targetY){
         if((targetX >= 0) && (targetY >= 0) && (targetX < this->gameMap.size()) && (targetY < this->gameMap.size())){
             char st = this->gameMap[targetY][targetX].state;
@@ -126,6 +129,7 @@ namespace state {
                 this->players[attackerId.back()-'0']->find(attackerId)->second->attack(this->players[taregtId.back()-'0']->find(taregtId)->second);
                 if(this->isDead(this->gameMap[targetY][targetX].player_index))
                 {
+                    this->winner = this->players[attackerId.back()-'0']->find(attackerId)->second->getPClass();
                     this->endGame();
                 }
             }

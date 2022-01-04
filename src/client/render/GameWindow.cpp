@@ -100,7 +100,26 @@ namespace render {
 
             case SceneId::FIGHTSCENE:
             {
+                state::playerClass winner = this->scenes[this->currentScene]->whosWinner();
+
                 this->setCurrentScene(END);
+
+                switch(winner)
+                {
+                    case state::playerClass::HERO:
+                    {
+                        this->scenes[this->currentScene]->setTexture("res/utiles/bgEndHero.png");
+                        break;
+                    }
+
+                    case state::playerClass::DEMON:
+                    {
+                        this->scenes[this->currentScene]->setTexture("res/utiles/bgEndDemon.png");
+                        break;
+                    }
+                }
+
+                
                 this->zoom = (float)(1/this->zoomTot);
                 this->isZoomed = (this->zoom != 1);
                 this->view.zoom(this->zoom);
