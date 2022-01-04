@@ -119,6 +119,7 @@ namespace render{
         sf::Time t;
         state::Position p;
         std::stringstream ssChr,ssStats;
+        this->playersStats = this->gState->getPlayerStats();
         char objIndex = this->gState->getActualPlayerIndex();
         for(char i=0; i<this->gState->getPlayersCount(); i++){
             p = this->gState->playerPosition(i);
@@ -144,8 +145,6 @@ namespace render{
     };
 
     void FightScene::update(sf::Event& e, sf::Vector2i m_mousePosition, GameWindow* gameWindow){     
-        this->playersStats = this->gState->getPlayerStats();
-        std::stringstream ss;
         if(CODE_MASK(gameWindow->selected)==0)
         {
             this->attackRange(gameWindow->selected);
