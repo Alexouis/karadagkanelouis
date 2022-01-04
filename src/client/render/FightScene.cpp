@@ -256,10 +256,7 @@ namespace render{
             }
         }
         attackVertex.clear();
-        uint m_tileWidth = 519;
-        uint m_tileHeight = 268;
-        float m_tileRatio = static_cast<float>(m_tileWidth) / static_cast<float>(m_tileHeight);
-        float x = static_cast<float>(m_tileWidth) / m_tileRatio;
+        uint m_tileHeight = this->gameMap->getTileSize().y;
         float y = static_cast<float>(m_tileHeight); 
         int dx = 0, dy=0;
         sf::Color debugColour(20u, 0u, 255u, 120u);
@@ -275,10 +272,10 @@ namespace render{
                 if(dx+dy<=p)
                 {
                     sf::VertexArray m_gridVertices;
-                    m_gridVertices.append(sf::Vertex(this->gameMap->isometricToOrthogonal(sf::Vector2f(i*x, j*y)), debugColour));
-                    m_gridVertices.append(sf::Vertex(this->gameMap->isometricToOrthogonal(sf::Vector2f(i*x + static_cast<float>(m_tileWidth) / m_tileRatio, j*y)), debugColour));
-                    m_gridVertices.append(sf::Vertex(this->gameMap->isometricToOrthogonal(sf::Vector2f(i*x + static_cast<float>(m_tileWidth) / m_tileRatio, j*y + static_cast<float>(m_tileHeight))), debugColour));
-                    m_gridVertices.append(sf::Vertex(this->gameMap->isometricToOrthogonal(sf::Vector2f(i*x, j*y + static_cast<float>(m_tileHeight))), debugColour));
+                    m_gridVertices.append(sf::Vertex(this->gameMap->isometricToOrthogonal(sf::Vector2f(i*y      , j*y)      ), debugColour));
+                    m_gridVertices.append(sf::Vertex(this->gameMap->isometricToOrthogonal(sf::Vector2f(i*(y + 1), j*y)      ), debugColour));
+                    m_gridVertices.append(sf::Vertex(this->gameMap->isometricToOrthogonal(sf::Vector2f(i*(y + 1), j*(y + 1))), debugColour));
+                    m_gridVertices.append(sf::Vertex(this->gameMap->isometricToOrthogonal(sf::Vector2f(i*y      , j*(y + 1))), debugColour));
                     m_gridVertices.setPrimitiveType(sf::Quads);
                     attackVertex.push_back(m_gridVertices);
                 }
@@ -300,25 +297,18 @@ namespace render{
     }
 
     sf::Vector2f FightScene::worldToScreen (state::Position position){
-        uint m_tileWidth = 519;
-        uint m_tileHeight = 268;
-        float m_tileRatio = static_cast<float>(m_tileWidth) / static_cast<float>(m_tileHeight);
-        float x = static_cast<float>(m_tileWidth) / m_tileRatio;
+        uint m_tileHeight = this->gameMap->getTileSize().y;
         float y = static_cast<float>(m_tileHeight); 
-        
         sf::Vector2f screenPos = sf::Vector2f((float)position.getX(), (float)position.getY());
-        screenPos = this->gameMap->isometricToOrthogonal(sf::Vector2f(position.getX()*x+x/2,position.getY()*y+y/2));
+        screenPos = this->gameMap->isometricToOrthogonal(sf::Vector2f(position.getX()*y+y/2,position.getY()*y+y/2));
         return screenPos;
     }
 
     sf::Vector2f FightScene::screenToWorld (sf::Vector2f position){
-        uint m_tileWidth = 519;
-        uint m_tileHeight = 268;
-        float m_tileRatio = static_cast<float>(m_tileWidth) / static_cast<float>(m_tileHeight);
-        float x = static_cast<float>(m_tileWidth) / m_tileRatio;
+        uint m_tileHeight = this->gameMap->getTileSize().y;
         float y = static_cast<float>(m_tileHeight); 
         sf::Vector2f worldPos = this->gameMap->orthogonalToIsometric(position);
-        worldPos.x = floor(worldPos.x/x);
+        worldPos.x = floor(worldPos.x/y);
         worldPos.y = floor(worldPos.y/y);
         return worldPos;
     }

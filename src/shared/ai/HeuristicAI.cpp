@@ -39,7 +39,7 @@ namespace ai{
             int sx = (deltaX > 0) - (deltaX < 0);
             int sy = (deltaY > 0) - (deltaY < 0);
             int mx = sx * (std::min(abs(deltaX) - ( !sy ), (int)st.getMp()) - ( !!sy ) * ( !!sx ) * x);
-            int my = sy * (std::min(abs(deltaY) - ( !sx ), (int)st.getMp() - abs(mx)));
+            int my = sy * (std::min(abs(deltaY) - ( !sx ), (int)st.getMp() - abs(mx)) - ( !!sy ) * ( !!sx ) * ( !x ));
             this->targetX = source.getX() + mx;
             this->targetY = source.getY() + my;
             this->ngine->registerTarget(this->targetX, this->targetY, this->selected);
