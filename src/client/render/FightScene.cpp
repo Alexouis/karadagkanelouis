@@ -214,6 +214,7 @@ namespace render{
         sf::Color debugColour(255u, 0u, 20u, 120u);
 
         state::Position pos = this->gState->playerPosition(gState->getActualPlayerIndex());
+
         
         for(int i=pos.getX()-p; i<=pos.getX()+p; i++)
         {
