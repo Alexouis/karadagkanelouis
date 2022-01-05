@@ -51,6 +51,13 @@
     ./bin/client random_ai //2.final->(simple IA = essaie d'attaquer betement un joueur immobile).
 ---
 #### [Jalon 3] :
-    dans cette partie un joueur à la possibilité de jouer avec une IA plus performente que celle random. Pour jouer, il suffit d'appuier sur la touche "D" pour voir sa paortée de mouvement puis cliquer sur une position pour se déplacer. Pour attaquer, il faut cliquer sur un sort (sort1 ou sort2) puis cliquer sur la cible. Pour l'instant, il n'est pas possible d'annuler l'effet de click sur un sort à moins de passer son tour. on ne pourra pas se déplacer si on a plus de points de movement. On ne pourra pas attaquer non plus si on a plus de points d'attaque. Losrqu'on son temps a épuisé, le joeur pass sont tour automatiquement.
+    dans cette partie un joueur à la possibilité de jouer avec une IA plus performente que celle 
+    random. Pour jouer, il suffit d'appuier sur la touche "D" pour voir sa paortée de mouvement 
+    puis cliquer sur une position pour se déplacer. Pour attaquer, il faut cliquer sur un sort 
+    (sort1 ou sort2) puis cliquer sur la cible. Pour l'instant, il n'est pas possible d'annuler 
+    l'effet de click sur un sort à moins de passer son tour. on ne pourra pas se déplacer si on a 
+    plus de points de movement. On ne pourra pas attaquer non plus si on a plus de points d'attaque. 
+    Losrqu'on son temps a épuisé, le joeur pass sont tour automatiquement.
+    
     Pour lancer une partie : ./bin/client heuristic_ai
 ---
