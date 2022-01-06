@@ -1,8 +1,11 @@
 #include "State.h"
 #include <functional>
+#include <string>
+#include <fstream>
 #include <iostream>
 #include <cstdlib>
 #include <csignal>
+#include <json/json.h>
 
 namespace state {
     /*
@@ -13,16 +16,26 @@ namespace state {
     char state::State::chronoStep = 1;
     State::State (int mapWidth, int mapHeight){
         this->init();
-
+        Json::Reader reader;
+        Json::Value tilesState;
+		std::ifstream test("res/map/tiles.json", std::ifstream::binary);
+		bool parsingSuccessful = reader.parse( test, tilesState, false );
+		if ( !parsingSuccessful ){
+			// report to the user the failure and their locations in the document.
+			std::cout  << reader.getFormatedErrorMessages() << "\n";
+		}
+         
         MapTile tile;
-        tile.state = FREE;
         tile.type  = GRASS;
         this->gameMap.resize(22);
 
         for(unsigned int i = 0; i < mapWidth; i++){
             for(unsigned int j = 0; j < mapHeight; j++){
+                tile.state = (state::tileState)(tilesState[std::to_string(i)][std::to_string(j)].asInt());
                 this->gameMap[j].push_back(tile);
+                std::cout << (int)tile.state << " ";
             }
+            std::cout << std::endl;
         }
 
         this->players.resize(this->playersCount);

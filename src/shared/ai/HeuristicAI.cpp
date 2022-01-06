@@ -48,7 +48,6 @@ namespace ai{
             this->ngine->registerTarget(this->targetX, this->targetY, this->selected);
         }
         if(st.getAp()){
-            std::cout << "ap > 0" <<std::endl;
             this->selected = (char)(getRandValBetween(0,1));
             this->ngine->registerTarget(this->targetX, this->targetY, this->getSelection(this->selected));
             this->ngine->registerTarget(target[0], target[1], (char)MOVE);

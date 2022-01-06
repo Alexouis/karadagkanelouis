@@ -44,7 +44,6 @@
      ./bin/client client
 ---
 #### [Jalon 2] :
-
     ./bin/client render //2.1->(affiche de la map de jeu utilisée)
     ./bin/client randomMap //2.1->(affichache aléatoire de map).
     ./bin/client engine //2.2->(engine simple : clique sur map --> effet).
@@ -55,9 +54,15 @@
     random. Pour jouer, il suffit d'appuier sur la touche "D" pour voir sa paortée de mouvement 
     puis cliquer sur une position pour se déplacer. Pour attaquer, il faut cliquer sur un sort 
     (sort1 ou sort2) puis cliquer sur la cible. Pour l'instant, il n'est pas possible d'annuler 
-    l'effet de click sur un sort à moins de passer son tour. on ne pourra pas se déplacer si on a 
+    l'effet de clic sur un sort à moins de passer son tour. on ne pourra pas se déplacer si on a 
     plus de points de movement. On ne pourra pas attaquer non plus si on a plus de points d'attaque. 
     Losrqu'on son temps a épuisé, le joeur pass sont tour automatiquement.
+    Fonctionalités : 
+        recentrage : clic droit 
+        zoom       : tourner la molette
+        deplacement: clic sur map
+        attaque    : clic sur sort puis sur cible
+        portee     : appui sur touche "D"
     
-    Pour lancer une partie : ./bin/client heuristic_ai
+    Pour lancer une partie : ./bin/client rollback
 ---

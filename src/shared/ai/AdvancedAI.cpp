@@ -12,9 +12,7 @@
 #include "AdvancedAI.h"
 
 namespace ai{
-    AdvancedAI::~AdvancedAI{
-
-    }
+    
 
     
 }
