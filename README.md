@@ -64,5 +64,5 @@
         attaque    : clic sur sort puis sur cible
         portee     : appui sur touche "D"
     
-    Pour lancer une partie : ./bin/client rollback
+    Pour lancer une partie : ./bin/client heuristic_ai
 ---
