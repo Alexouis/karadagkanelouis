@@ -381,7 +381,7 @@ int main(int argc,char* argv[])
         engineExplo();
     }else if(strcmp(argv[1], "random_ai") == 0){
         random_ai();
-    }else if(strcmp(argv[1], "rollback") == 0){
+    }else if(strcmp(argv[1], "heuristic_ai") == 0){
         heuristic_ai();
     }else{
         std::cout << "Expected one argument like 'client' or 'render'" << std::endl;
