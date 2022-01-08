@@ -161,8 +161,15 @@ install_submodules :
 .PHONY : install_submodules
 
 
-install_extern_deps :
+install_extern_deps_rsa :
 	@echo 'submodules intallation'
 	@rm -rf extern/tmx-loader
 	@git clone git@github.com:nskley/tmx-loader.git extern/tmx-loader
-.PHONY : install_extern_deps
+.PHONY : install_extern_deps_rsa
+
+
+install_extern_deps_https :
+	@echo 'submodules intallation'
+	@rm -rf extern/tmx-loader
+	@git clone https://github.com/nskley/tmx-loader.git
+.PHONY : install_extern_deps_https
