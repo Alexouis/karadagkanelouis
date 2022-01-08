@@ -5,8 +5,8 @@ namespace state {
     Player::Player(){
         name = "player";
         pClass = HERO;
-        position.setX(0);
-        position.setY(0);
+        position.x = 0;
+        position.y = 0;
         level = 1;
         orientation = WEST;
         isAI = false;
@@ -23,7 +23,7 @@ namespace state {
         attacks.push_back(punch);
     };
 
-    Player::Player(std::string name, playerClass pClass, Position position, char level, bool isAI){
+    Player::Player(std::string name, playerClass pClass, Position position, int level, bool isAI){
         Player::name = name;
         Player::pClass = pClass;
         Player::position = position;
@@ -43,7 +43,7 @@ namespace state {
                 shoot.type=DISTANCE;
                 shoot.damage = 20;
                 shoot.range = 5;
-                shoot.cost = 2;
+                shoot.cost = 3;
 
                 struct Attack powerfulShoot;
                 powerfulShoot.name=POWERFULSHOOT;
@@ -91,8 +91,8 @@ namespace state {
     void Player::init (){
         name = "player";
         pClass = HERO;
-        position.setX(0);
-        position.setY(0);
+        position.x = 0;
+        position.y = 0;
         level = 1;
         orientation = WEST;
         isAI = false;
@@ -110,11 +110,22 @@ namespace state {
     };
     
     void Player::attack(std::unique_ptr<Player>& player){
-        bool can_attack = stats.getAp() >= this->attacks[this->currentAttackIndex].cost;
+        int deltaX = abs(this->position.x-player->getPosition().x);
+        int deltaY = abs(this->position.y-player->getPosition().y);
+        bool can_attack = (stats.getAp() >= this->attacks[this->currentAttackIndex].cost);
+        can_attack = (can_attack && (this->attacks[this->currentAttackIndex].range >= deltaX + deltaY));
         if(can_attack) 
         {
-            this->stats.setAp(stats.getAp()-this->attacks[this->currentAttackIndex].cost);
-            player->stats.setHp(player->stats.getShield()+player->stats.getHp()-this->attacks[this->currentAttackIndex].damage-this->stats.getAttack());
+            int new_ap = stats.getAp()-this->attacks[this->currentAttackIndex].cost;
+            new_ap = (new_ap > 0 ? new_ap : 0);
+            this->stats.setAp(new_ap);
+            int new_hp = (player->stats.getShield()+player->stats.getHp()-this->attacks[this->currentAttackIndex].damage-this->stats.getAttack());
+            new_hp = (new_hp >0 ? new_hp : 0);
+            player->stats.setHp(new_hp);
+            if(new_hp <= 0)
+            {
+                player->setStatus(DEAD);
+            }
         }
     };
 
@@ -124,26 +135,28 @@ namespace state {
     };
 
     void Player::move (Position destination){
-        int deltaX = abs(this->position.getX()-destination.getX());
-        int deltaY = abs(this->position.getY()-destination.getY());
+        int deltaX = abs(this->position.x-destination.x);
+        int deltaY = abs(this->position.y-destination.y);
         bool can_move = stats.getMp() >= deltaX + deltaY ;
         if(can_move) 
         {
-            Player::position.setX(destination.getX());
-            Player::position.setY(destination.getY());
-            this->stats.setMp(stats.getMp()-deltaX-deltaY);
+            Player::position.x = destination.x;
+            Player::position.y = destination.y;
+            int new_mp = (int)(stats.getMp()-deltaX-deltaY);
+            this->stats.setMp((new_mp >= 0 ? new_mp : 0));
         }
     };
 
     void Player::move (int x, int y){
-        int deltaX = abs(this->position.getX()-x);
-        int deltaY = abs(this->position.getY()-y);
+        int deltaX = abs(this->position.x-x);
+        int deltaY = abs(this->position.y-y);
         bool can_move = stats.getMp() >= deltaX + deltaY ;
         if(can_move) 
         {
-            Player::position.setX(x);
-            Player::position.setY(y);
-            this->stats.setMp(stats.getMp()-deltaX-deltaY);
+            Player::position.x = x;
+            Player::position.y = y;
+            int new_mp = stats.getMp()-deltaX-deltaY;
+            this->stats.setMp((new_mp >= 0 ? new_mp : 0));
         }
         
     };
@@ -177,8 +190,8 @@ namespace state {
     };
 
     void Player::setPosXY(int x, int y){
-        Player::position.setX(x);
-        Player::position.setY(y);
+        Player::position.x = x;
+        Player::position.y = y;
     };
 
     char Player::getOrientation() const{
@@ -221,11 +234,11 @@ namespace state {
         Player::status = status;
     };
 
-    void Player::setLevel(char level){
+    void Player::setLevel(int level){
         Player::level = level;
     };
 
-    char Player::getLevel() const{
+    int Player::getLevel() const{
         return Player::level;
     };
 

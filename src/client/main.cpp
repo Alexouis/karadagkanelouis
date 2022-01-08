@@ -27,6 +27,7 @@
 #include <state.h>
 #include <engine.h>
 #include <render.h>
+#include <ai.h>
 
 #include <json/json.h>
 
@@ -141,7 +142,7 @@ void renderMap(void){
             }      
             if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::D)
             {
-
+                gamewindow.update(event,mousePosScreen);
             }
             if (event.type == sf::Event::MouseButtonPressed){
                 switch(event.mouseButton.button)
@@ -196,7 +197,7 @@ void engineExplo(void){
     
 
     gamewindow.shareStateWith(ngine);
-    ngine.shareStateWith(&g_ai);
+    ngine.bind(&g_ai);
     gamewindow.update();
     //ngine.start();
 
@@ -214,11 +215,13 @@ void engineExplo(void){
             if (event.type == sf::Event::Closed) {
                 gamewindow.window.close();
             }
-            gamewindow.handleZoom(event,mousePosScreen);
-            if(!ngine.isActionFromAI() && !ngine.timeOut()){
-                gamewindow.handleEvents (event, mousePosScreen, mousePosWorld, ngine);
+            else{
+                gamewindow.handleZoom(event,mousePosScreen);
+                if(!ngine.isActionFromAI() && !ngine.timeOut()){
+                    gamewindow.handleEvents (event, mousePosScreen, mousePosWorld, ngine);
+                }
+                gamewindow.update();
             }
-            gamewindow.update();
         }
 
         if(ngine.isActionFromAI() && !ngine.timeOut()){
@@ -247,10 +250,10 @@ void random_ai(void){
     engine::Engine ngine;
     ai::AI g_ai;
     std::unique_ptr<engine::Command> cmdHolder;
-    
+    ai::AI::initSrand();
 
     gamewindow.shareStateWith(ngine);
-    ngine.shareStateWith(&g_ai);
+    ngine.bind(&g_ai);
     gamewindow.update();
     //ngine.start();
 
@@ -268,24 +271,81 @@ void random_ai(void){
             if (event.type == sf::Event::Closed) {
                 gamewindow.window.close();
             }
-            gamewindow.handleZoom(event,mousePosScreen);
-            if(!ngine.isActionFromAI() && !ngine.timeOut()){
-                gamewindow.handleEvents (event, mousePosScreen, mousePosWorld, ngine);
+            else{
+                gamewindow.handleZoom(event,mousePosScreen);
+                if(!ngine.isActionFromAI() && !ngine.timeOut()){
+                    gamewindow.handleEvents (event, mousePosScreen, mousePosWorld, ngine);
+                }
+                gamewindow.update();
             }
-            gamewindow.update();
         }
 
         if(ngine.isActionFromAI() && !ngine.timeOut()){
-            g_ai.chooseAction();
-            g_ai.registerActionTo(&ngine);
+            g_ai.exploit();
             ngine.execute();
-            gamewindow.update();
         }
         else if(ngine.timeOut()){
             ngine.execute();
+        }
+        
+        gamewindow.update();
+        gamewindow.window.clear();
+        gamewindow.draw();
+        gamewindow.window.display();
+
+    }
+    
+} 
+
+
+
+void heuristic_ai(void){
+    render::GameWindow gamewindow;
+    engine::Engine ngine;
+    ai::HeuristicAI g_ai;
+    std::unique_ptr<engine::Command> cmdHolder;
+    ai::AI::initSrand();
+
+    gamewindow.shareStateWith(ngine);
+    ngine.bind(&g_ai);
+    gamewindow.update();
+    //ngine.start();
+
+    bool debug = false, timeOut;
+    sf::Event event;
+    sf::Vector2f mousePosScreen = gamewindow.window.mapPixelToCoords(sf::Vector2i(0,0));
+    sf::Vector2f mousePosWorld  = gamewindow.screenToWorld(mousePosScreen);
+    gamewindow.update(event,(sf::Vector2i)mousePosScreen);
+
+    while(gamewindow.window.isOpen()){
+
+        mousePosScreen = gamewindow.window.mapPixelToCoords(sf::Mouse::getPosition(gamewindow.window));
+        mousePosWorld = gamewindow.screenToWorld(mousePosScreen);
+        
+        while(gamewindow.window.pollEvent(event)) {
+            timeOut = ngine.timeOut();
+            if (event.type == sf::Event::Closed) {
+                gamewindow.window.close();
+            }
+            else{
+                gamewindow.handleZoom(event,mousePosScreen);
+                if(!ngine.isActionFromAI() && !timeOut){
+                    gamewindow.handleEvents (event, mousePosScreen, mousePosWorld, ngine);  
+                    gamewindow.update(); 
+                }
+
+            }
+        }
+
+        if(ngine.isActionFromAI() && !ngine.timeOut()){
+            g_ai.exploit();
+            gamewindow.update();
+        }
+        else if(ngine.timeOut()){
             gamewindow.update();
         }
         
+        gamewindow.update();
         gamewindow.window.clear();
         gamewindow.draw();
         gamewindow.window.display();
@@ -321,6 +381,8 @@ int main(int argc,char* argv[])
         engineExplo();
     }else if(strcmp(argv[1], "random_ai") == 0){
         random_ai();
+    }else if(strcmp(argv[1], "heuristic_ai") == 0){
+        heuristic_ai();
     }else{
         std::cout << "Expected one argument like 'client' or 'render'" << std::endl;
     }

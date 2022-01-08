@@ -64,7 +64,7 @@ namespace render {
 
         else if(type == "end")
         {
-
+            
         }
         
     };
@@ -77,6 +77,18 @@ namespace render {
             (*value).update(e,m_mousePosition, gameWindow);
         }
     };
+
+    void Scene::setTexture(std::string stexture)
+    {
+        if (!(this->texture).loadFromFile(stexture))
+        {
+            std::cerr<<"Could not find the image for the background"<<std::endl;
+        }
+        else
+        {
+            this->sprite.setTexture(this->texture);
+        }
+    }
 
     // Setters and Getters
     const std::map<std::string,std::unique_ptr<Box>>& Scene::getBoxes() const{
@@ -93,6 +105,17 @@ namespace render {
     void Scene::setId(char id){
         this->id = id;
     };
+
+    bool Scene::isGameOver()
+    {
+          return this->gameOver;
+    }
+
+    state::playerClass Scene::whosWinner()
+    {
+          return this->winner;
+    }
+
 
     void Scene::draw (sf::RenderTarget& target, sf::RenderStates states) const{
         target.draw(this->sprite, states);

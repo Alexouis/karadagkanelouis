@@ -10,6 +10,7 @@
  */
 #include <iostream>
 #include "engine.h"
+#include <iostream> 
 
 #define CODE_MASK(X)   ((   X & 0x70 ) >> 4 )  //return code
 #define CODE_ACTION(X) (((  X & 0x10 ) >> 4 ) | ((  X & 0x20 ) >> 5 )) //to knw if move or attack
@@ -82,6 +83,7 @@ namespace engine{
 
     void Engine::execute(std::unique_ptr<Command>& cmd){
         cmd->action(cmd->args);
+        this->currentState->lock();
     }
 
     void Engine::setState(std::shared_ptr<state::State>& gState){
@@ -98,6 +100,7 @@ namespace engine{
         }
         else{
             this->registerTarget(selected);
+            this->execute();
         }
     }
 
@@ -116,8 +119,8 @@ namespace engine{
         return (!state::State::chronoCount);
     }
 
-    void Engine::shareStateWith (ai::AI* g_ai){
-        g_ai->bindState(this->currentState);
+    void Engine::bind (ai::AI* g_ai){
+        g_ai->bind(this, this->currentState);
     }
 
     Engine::~Engine (){}

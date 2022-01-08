@@ -6,7 +6,7 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 # This is free software: you are free to change and redistribute it.
 # There is NO WARRANTY, to the extent permitted by law.
 
-# Make data base, printed on Sun Jan  2 13:41:44 2022
+# Make data base, printed on Thu Jan  6 00:27:42 2022
 
 # Variables
 
@@ -17,7 +17,7 @@ LC_ALL = C
 # environment
 GJS_DEBUG_OUTPUT = stderr
 # environment
-VSCODE_IPC_HOOK_EXTHOST = /run/user/1000/vscode-ipc-ced22873-4e6d-4e4e-ace6-786327ac1246.sock
+VSCODE_IPC_HOOK_EXTHOST = /run/user/1000/vscode-ipc-d8a4e914-2a09-4f5a-9911-61a597f1069e.sock
 # environment
 VSCODE_CWD = /home/mkas
 # environment
@@ -87,13 +87,13 @@ MAKEFILE_LIST := Makefile
 # environment
 VSCODE_VERBOSE_LOGGING = true
 # environment
-VSCODE_PID = 3184
+VSCODE_PID = 20373
 # environment
 XDG_SESSION_TYPE = x11
 # automatic
 ?D = $(patsubst %/,%,$(dir $?))
 # environment
-SESSION_MANAGER = local/kalikane:@/tmp/.ICE-unix/2060,unix/kalikane:/tmp/.ICE-unix/2060
+SESSION_MANAGER = local/kalikane:@/tmp/.ICE-unix/2059,unix/kalikane:/tmp/.ICE-unix/2059
 # automatic
 *F = $(notdir $*)
 # environment
@@ -161,7 +161,7 @@ GIO_LAUNCHED_DESKTOP_FILE = /usr/share/applications/code.desktop
 # makefile
 .DEFAULT_GOAL := all
 # environment
-SYSTEMD_EXEC_PID = 1966
+SYSTEMD_EXEC_PID = 1976
 # environment
 DISPLAY = :1
 # environment
@@ -173,9 +173,9 @@ MAKE_VERSION := 4.3
 # 'override' directive
 .SHELLSTATUS := 0
 # environment
-GIO_LAUNCHED_DESKTOP_FILE_PID = 3184
+GIO_LAUNCHED_DESKTOP_FILE_PID = 20373
 # environment
-SSH_AGENT_PID = 2159
+SSH_AGENT_PID = 2169
 # environment
 _ = /usr/share/code/code
 # environment
@@ -277,6 +277,7 @@ diapdf: rapport/state.pdf rapport/render.pdf rapport/engine.pdf rapport/ai.pdf r
 #  File has not been updated.
 
 testdocker:
+ 
 #  Phony target (prerequisite of .PHONY).
 #  Implicit rule search has not been done.
 #  File does not exist.
@@ -289,7 +290,6 @@ testdocker:
 configure:
 #  Phony target (prerequisite of .PHONY).
 #  Implicit rule search has not been done.
- 
 #  File does not exist.
 #  File has not been updated.
 #  recipe to execute (from 'Makefile', line 61):
@@ -516,6 +516,7 @@ install_submodules:
 # strcache performance: lookups = 120 / hit rate = 53%
 # hash-table stats:
 # Load=56/8192=1%, Rehash=0, Collisions=0/120=0%
-# Finished Make data base on Sun Jan  2 13:41:44 2022
+# Finished Make data base on Thu Jan  6 00:27:42 2022
+ 
 
  

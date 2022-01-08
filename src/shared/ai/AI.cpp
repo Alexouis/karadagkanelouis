@@ -24,7 +24,6 @@
 
 namespace ai{
     AI::AI (){
-        this->initSrand ();
         this->selected = 6;
         this->selections[0] = (char)SPELL1; // attack selection
         this->selections[1] = (char)SPELL2; // attack selection
@@ -38,12 +37,12 @@ namespace ai{
 
     }
 
-    void AI::chooseAction (){
+    void AI::exploit (){
         this->selected = (char)this->getRandValBetween(0,6);
         if(this->selections[this->selected] == (char)MOVE){
             state::Position p = this->gstate->playerPosition(this->gstate->getActualPlayerIndex());
-            this->targetX = p.getX();
-            this->targetY = p.getY();
+            this->targetX = p.x;
+            this->targetY = p.y;
             int x = rand() % 2;
             if(x){
                 float dx = 2*(rand() % 2) -1;
@@ -53,17 +52,21 @@ namespace ai{
                 this->targetY += dy;
             }
         }
+        this->ngine->registerTarget(this->targetX, this->targetY, this->selections[this->selected]);
     }
-    void AI::registerActionTo (engine::Engine* ngine){
-        ngine->registerTarget(this->targetX, this->targetY, this->selections[this->selected]);
+
+    char AI::getSelection (char sel){
+        return this->selections[sel];
     }
+    
     void AI::initSrand (){
         srand (time(NULL));
     }
     inline int AI::getRandValBetween (int a, int b){
         return ((rand() % (b-a+1)) +a);
     }
-    void AI::bindState (std::shared_ptr<state::State>& gstate){
+    void AI::bind (engine::Engine* ngine, std::shared_ptr<state::State>& gstate){
+        this->ngine  = std::shared_ptr<engine::Engine>(ngine);
         this->gstate = gstate;
     }
     char AI::closestEnemyIndexTo (char p_index, int* pos){
@@ -71,5 +74,9 @@ namespace ai{
     }
     char AI::weakestEnemyIndexTo (char p_index, int* pos){
         return this->gstate->weakestEnemyIndexTo(p_index, pos);
+    }
+
+    inline float AI::action_dt (){
+        return (this->action_time_end.tv_sec - this->action_time_ini.tv_sec + (float)(this->action_time_end.tv_nsec - this->action_time_ini.tv_nsec)/1000000.f);
     }
 }

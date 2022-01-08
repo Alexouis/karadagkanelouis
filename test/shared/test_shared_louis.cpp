@@ -39,12 +39,10 @@ BOOST_AUTO_TEST_CASE(TestSFML)
     attacks.push_back(powerfulStrike);
 
     //Test Position
-    Position pos{};
-    pos.setX(1);
-    pos.setY(9);
+    Position pos(1,9);
 
-    BOOST_CHECK_EQUAL(pos.getX(),1);
-    BOOST_CHECK_EQUAL(pos.getY(),9);
+    BOOST_CHECK_EQUAL(pos.x,1);
+    BOOST_CHECK_EQUAL(pos.y,9);
 
 
 
@@ -106,8 +104,8 @@ BOOST_AUTO_TEST_CASE(TestSFML)
 
     erza.setPosition(pos);
     erza.setPosition(Position(1,9));
-    BOOST_CHECK_EQUAL(erza.getPosition().getX(),1);
-    BOOST_CHECK_EQUAL(erza.getPosition().getY(),9);
+    BOOST_CHECK_EQUAL(erza.getPosition().x,1);
+    BOOST_CHECK_EQUAL(erza.getPosition().y,9);
 
 
 

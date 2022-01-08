@@ -1,8 +1,11 @@
 #include "State.h"
 #include <functional>
+#include <string>
+#include <fstream>
 #include <iostream>
 #include <cstdlib>
 #include <csignal>
+#include <json/json.h>
 
 namespace state {
     /*
@@ -13,16 +16,26 @@ namespace state {
     char state::State::chronoStep = 1;
     State::State (int mapWidth, int mapHeight){
         this->init();
-
+        Json::Reader reader;
+        Json::Value tilesState;
+		std::ifstream test("res/map/tiles.json", std::ifstream::binary);
+		bool parsingSuccessful = reader.parse( test, tilesState, false );
+		if ( !parsingSuccessful ){
+			// report to the user the failure and their locations in the document.
+			std::cout  << reader.getFormatedErrorMessages() << "\n";
+		}
+         
         MapTile tile;
-        tile.state = FREE;
         tile.type  = GRASS;
         this->gameMap.resize(22);
 
         for(unsigned int i = 0; i < mapWidth; i++){
             for(unsigned int j = 0; j < mapHeight; j++){
+                tile.state = (state::tileState)(tilesState[std::to_string(i)][std::to_string(j)].asInt());
                 this->gameMap[j].push_back(tile);
+                std::cout << (int)tile.state << " ";
             }
+            std::cout << std::endl;
         }
 
         this->players.resize(this->playersCount);
@@ -117,6 +130,9 @@ namespace state {
     void State::setGameOver(bool gameOver){
         this->gameOver = gameOver;
     };
+    playerClass State::getWinner() const{
+        return this->winner;
+    };
     void State::makeAttackOn (int targetX, int targetY){
         if((targetX >= 0) && (targetY >= 0) && (targetX < this->gameMap.size()) && (targetY < this->gameMap.size())){
             char st = this->gameMap[targetY][targetX].state;
@@ -124,6 +140,11 @@ namespace state {
                 std::string attackerId = this->players_id[this->actualPlayerIndex].id;
                 std::string taregtId = this->players_id[this->gameMap[targetY][targetX].player_index].id;
                 this->players[attackerId.back()-'0']->find(attackerId)->second->attack(this->players[taregtId.back()-'0']->find(taregtId)->second);
+                if(this->isDead(this->gameMap[targetY][targetX].player_index))
+                {
+                    this->winner = this->players[attackerId.back()-'0']->find(attackerId)->second->getPClass();
+                    this->endGame();
+                }
             }
         }
     };
@@ -131,7 +152,7 @@ namespace state {
         if((dstX >= 0) && (dstY >= 0) && (dstX < this->gameMap.size()) && (dstY < this->gameMap.size())){
             std::string id = this->players_id[this->actualPlayerIndex].id;
             Position prevPos = this->players[id.back()-'0']->find(id)->second->getPosition();
-            this->gameMap[prevPos.getY()][prevPos.getX()].state = FREE;
+            this->gameMap[prevPos.y][prevPos.x].state = FREE;
             this->gameMap[dstY][dstX].player_index = this->actualPlayerIndex;
             this->players[id.back()-'0']->find(id)->second->move(dstX,dstY);
             this->gameMap[dstY][dstX].state = OCCUPIED;
@@ -161,6 +182,7 @@ namespace state {
 
     void State::unlock(){
         this->padlock = false;
+        this->ngine->execute();
     }
 
     bool State::isAI_Now(){
@@ -169,7 +191,7 @@ namespace state {
     }
 
     void State::connect (engine::Engine* ngine){
-        this->ngine = ngine;
+        this->ngine = std::shared_ptr<engine::Engine>(ngine);
     }
 
     char State::closestEnemyIndexTo (char p_index, int* pos){
@@ -182,11 +204,11 @@ namespace state {
 
         for(auto const& enemy : *(this->players[enemies])){
             target = enemy.second->getPosition();
-            d = abs(target.getX() - source.getX()) + abs(target.getY() - source.getY());
+            d = abs(target.x - source.x) + abs(target.y - source.y);
             if(d < min){
                 min = d;
-                pos[0] = target.getX();
-                pos[1] = target.getY();
+                pos[0] = target.x;
+                pos[1] = target.y;
                 found = this->gameMap[pos[1]][pos[0]].player_index;
             }
         }
@@ -204,8 +226,8 @@ namespace state {
             level = enemy.second->getLevel();
             if(level < weakest){
                 weakest = level;
-                pos[0] = enemy.second->getPosition().getX();
-                pos[1] = enemy.second->getPosition().getY();
+                pos[0] = enemy.second->getPosition().x;
+                pos[1] = enemy.second->getPosition().y;
                 found = this->gameMap[pos[1]][pos[0]].player_index;
             }
         }
@@ -216,17 +238,37 @@ namespace state {
         this->chrono->start(chronoStep, chronoCount);
     }
 
-    std::map<std::string,state::Stats> State::getPlayerStats()
-    {
+    std::map<std::string,state::Stats> State::getPlayerStats() {
         std::map<std::string,state::Stats> playersStats;
         
-        for(unsigned int i = 0; i < this->players_id.size(); i++)
-        {
+        for(unsigned int i = 0; i < this->players_id.size(); i++) {
             std::string id = this->players_id[i].id;
             playersStats[id]=this->players[id.back()-'0']->find(id)->second->getStats();  
         }
 
         return(playersStats);
         
+    }
+
+    std::vector<ID> State::getPlayersID(){
+        return(this->players_id);
+    }
+
+    std::map<std::string,std::vector<Attack>> State::getPlayersAttacks(){
+        std::map<std::string,std::vector<Attack>> playersAttacks;
+        
+        for(unsigned int i = 0; i < this->players_id.size(); i++)
+        {
+            std::string id = this->players_id[i].id;
+            playersAttacks[id]=this->players[id.back()-'0']->find(id)->second->getAttacks();  
+        }
+
+        return(playersAttacks);
+    }
+        
+    state::Stats State::getPlayerStats(char p_index){
+        std::string id  = this->players_id[p_index].id;
+        state::Stats st =this->players[id.back()-'0']->find(id)->second->getStats();
+        return(st);
     }
 };
