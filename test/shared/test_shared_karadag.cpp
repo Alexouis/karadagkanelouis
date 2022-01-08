@@ -80,6 +80,8 @@ BOOST_AUTO_TEST_CASE(TestSFML)
     stat.setHp(200);
     stat.setMp(4);
     stat.setShield(40);
+    stat.resetPoints(HERO,60);
+    stat.resetPoints(DEMON,60);
 
     BOOST_CHECK_EQUAL(stat.getAp(),5);
     BOOST_CHECK_EQUAL(stat.getAttack(),30);
@@ -89,6 +91,7 @@ BOOST_AUTO_TEST_CASE(TestSFML)
     
     //Test Player
     Player erza{};
+    erza.resetPoints();
     Player valla("hahaha",DEMON,Position(3,5),1,0);
     valla.move(Position(2,5));
     valla.move(2,5);
@@ -165,6 +168,9 @@ BOOST_AUTO_TEST_CASE(TestSFML)
     std::unique_ptr<Player> target{};
     target->setStats(stat);
     
+    Player ai{};
+    ai.setIsAI(true);
+
     //  faire attaquer
     BOOST_CHECK_EQUAL(target->getStats().getHp(),100);
     char mmm = 0;
@@ -173,6 +179,13 @@ BOOST_AUTO_TEST_CASE(TestSFML)
     valla.attack(target);
     BOOST_CHECK_EQUAL(target->getStats().getHp(),90);
 
+
+    //Chrono test
+
+    Chrono krono{};
+    krono.handler(5);
+
+
     //State test
 
     State gameState(2000,1000);
@@ -180,6 +193,7 @@ BOOST_AUTO_TEST_CASE(TestSFML)
     gameState.initPlayer();
     gameState.initMap();
     gameState.isDead(0);
+    gameState.passTurn();
     gameState.endGame();
     bool gover = gameState.getGameOver();
     gameState.setGameOver(gover);
