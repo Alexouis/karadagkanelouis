@@ -53,6 +53,7 @@
     ./bin/client random_ai //2.final->(simple IA = essaie d'attaquer betement un joueur immobile).
 ---
 #### [Jalon 3] :
+    [3.1]
     dans cette partie un joueur à la possibilité de jouer avec une IA plus performente que celle 
     random. Pour jouer, il suffit d'appuier sur la touche "D" pour voir sa paortée de mouvement 
     puis cliquer sur une position pour se déplacer. Pour attaquer, il faut cliquer sur un sort 
