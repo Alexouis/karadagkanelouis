@@ -42,35 +42,6 @@ using namespace std;
 using namespace state;
 using namespace render;
 
-bool called = false;
-bool readyToMove = false;
-
-void sigalrm_handler(int sig) { 
-    readyToMove = true;
-    alarm(1);
-}
-
-
-
-
-sf::Vector2f randomPosition(sf::Vector2f currPos){
-    sf::Vector2f dst = currPos;
-
-    if(!called){
-        srand (time(NULL));
-    }
-    int x = rand() % 2;
-    if(x){
-        float dx = (rand() % 3) -1;
-        dst.x   += ((currPos.x + dx >=0) && (currPos.x + dx < MAP_SIZE_XY)) * dx;
-    }else{
-        float dy = (rand() % 3) -1;
-        dst.y   += ((currPos.y + dy >=0) && (currPos.y + dy < MAP_SIZE_XY)) * dy;
-    }
-
-    return dst;
-}
-
 
 void testSFML() {
     sf::Texture texture;
@@ -139,6 +110,7 @@ void renderMap(void){
             if (event.type == sf::Event::Closed)
             {
                 gamewindow.window.close();
+                return;
             }      
             if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::D)
             {
@@ -214,6 +186,7 @@ void engineExplo(void){
         while(gamewindow.window.pollEvent(event)) {
             if (event.type == sf::Event::Closed) {
                 gamewindow.window.close();
+                return;
             }
             else{
                 gamewindow.handleZoom(event,mousePosScreen);
@@ -270,6 +243,7 @@ void random_ai(void){
         while(gamewindow.window.pollEvent(event)) {
             if (event.type == sf::Event::Closed) {
                 gamewindow.window.close();
+                return;
             }
             else{
                 gamewindow.handleZoom(event,mousePosScreen);
@@ -326,6 +300,7 @@ void heuristic_ai(void){
             timeOut = ngine.timeOut();
             if (event.type == sf::Event::Closed) {
                 gamewindow.window.close();
+                return;
             }
             else{
                 gamewindow.handleZoom(event,mousePosScreen);
