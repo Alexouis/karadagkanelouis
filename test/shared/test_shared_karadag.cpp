@@ -64,12 +64,10 @@ BOOST_AUTO_TEST_CASE(TestSFML)
 
 
     //Test Position
-    Position pos{};
-    pos.setX(1);
-    pos.setY(9);
+    Position pos(1,9);
 
-    BOOST_CHECK_EQUAL(pos.getX(),1);
-    BOOST_CHECK_EQUAL(pos.getY(),9);
+    BOOST_CHECK_EQUAL(pos.x,1);
+    BOOST_CHECK_EQUAL(pos.y,9);
 
 
 
@@ -93,8 +91,8 @@ BOOST_AUTO_TEST_CASE(TestSFML)
     valla.move(Position(2,5));
     valla.move(2,5);
     valla.setPosXY(5,8);
-    BOOST_CHECK_EQUAL(valla.getPosition().getX(),5);
-    BOOST_CHECK_EQUAL(valla.getPosition().getY(),8);
+    BOOST_CHECK_EQUAL(valla.getPosition().x,5);
+    BOOST_CHECK_EQUAL(valla.getPosition().y,8);
     erza.init();
     int x=erza.getLevel();
     
@@ -141,8 +139,8 @@ BOOST_AUTO_TEST_CASE(TestSFML)
     BOOST_CHECK_EQUAL(erza.getStats().getAttack(),30);
 
     erza.setPosition(pos);
-    BOOST_CHECK_EQUAL(erza.getPosition().getX(),1);
-    BOOST_CHECK_EQUAL(erza.getPosition().getY(),9);
+    BOOST_CHECK_EQUAL(erza.getPosition().x,1);
+    BOOST_CHECK_EQUAL(erza.getPosition().y,9);
 
     std::vector<Attack> attack_list;
     Attack hit;

@@ -5,8 +5,8 @@ namespace state {
     Player::Player(){
         name = "player";
         pClass = HERO;
-        position.setX(0);
-        position.setY(0);
+        position.x = 0;
+        position.y = 0;
         level = 1;
         orientation = WEST;
         isAI = false;
@@ -91,8 +91,8 @@ namespace state {
     void Player::init (){
         name = "player";
         pClass = HERO;
-        position.setX(0);
-        position.setY(0);
+        position.x = 0;
+        position.y = 0;
         level = 1;
         orientation = WEST;
         isAI = false;
@@ -110,8 +110,8 @@ namespace state {
     };
     
     void Player::attack(std::unique_ptr<Player>& player){
-        int deltaX = abs(this->position.getX()-player->getPosition().getX());
-        int deltaY = abs(this->position.getY()-player->getPosition().getY());
+        int deltaX = abs(this->position.x-player->getPosition().x);
+        int deltaY = abs(this->position.y-player->getPosition().y);
         bool can_attack = (stats.getAp() >= this->attacks[this->currentAttackIndex].cost);
         can_attack = (can_attack && (this->attacks[this->currentAttackIndex].range >= deltaX + deltaY));
         if(can_attack) 
@@ -135,26 +135,26 @@ namespace state {
     };
 
     void Player::move (Position destination){
-        int deltaX = abs(this->position.getX()-destination.getX());
-        int deltaY = abs(this->position.getY()-destination.getY());
+        int deltaX = abs(this->position.x-destination.x);
+        int deltaY = abs(this->position.y-destination.y);
         bool can_move = stats.getMp() >= deltaX + deltaY ;
         if(can_move) 
         {
-            Player::position.setX(destination.getX());
-            Player::position.setY(destination.getY());
+            Player::position.x = destination.x;
+            Player::position.y = destination.y;
             int new_mp = (int)(stats.getMp()-deltaX-deltaY);
             this->stats.setMp((new_mp >= 0 ? new_mp : 0));
         }
     };
 
     void Player::move (int x, int y){
-        int deltaX = abs(this->position.getX()-x);
-        int deltaY = abs(this->position.getY()-y);
+        int deltaX = abs(this->position.x-x);
+        int deltaY = abs(this->position.y-y);
         bool can_move = stats.getMp() >= deltaX + deltaY ;
         if(can_move) 
         {
-            Player::position.setX(x);
-            Player::position.setY(y);
+            Player::position.x = x;
+            Player::position.y = y;
             int new_mp = stats.getMp()-deltaX-deltaY;
             this->stats.setMp((new_mp >= 0 ? new_mp : 0));
         }
@@ -190,8 +190,8 @@ namespace state {
     };
 
     void Player::setPosXY(int x, int y){
-        Player::position.setX(x);
-        Player::position.setY(y);
+        Player::position.x = x;
+        Player::position.y = y;
     };
 
     char Player::getOrientation() const{

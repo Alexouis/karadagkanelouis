@@ -37,14 +37,14 @@ namespace ai{
         state::Position source = this->gstate->playerPosition(this->gstate->getActualPlayerIndex());
         if(st.getMp()){
             int x = rand() % 2;
-            int deltaX = target[0] - source.getX();
-            int deltaY = target[1] - source.getY();
+            int deltaX = target[0] - source.x;
+            int deltaY = target[1] - source.y;
             int sx = (deltaX > 0) - (deltaX < 0);
             int sy = (deltaY > 0) - (deltaY < 0);
             int mx = sx * (std::min(abs(deltaX) - ( !sy ), (int)st.getMp()) - ( !!sy ) * ( !!sx ) * x);
             int my = sy * (std::min(abs(deltaY) - ( !sx ), (int)st.getMp() - abs(mx)) - ( !!sy ) * ( !!sx ) * ( !x ));
-            this->targetX = source.getX() + mx;
-            this->targetY = source.getY() + my;
+            this->targetX = source.x + mx;
+            this->targetY = source.y + my;
             this->ngine->registerTarget(this->targetX, this->targetY, this->selected);
         }
         if(st.getAp()){

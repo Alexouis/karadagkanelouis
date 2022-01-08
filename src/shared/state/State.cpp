@@ -152,7 +152,7 @@ namespace state {
         if((dstX >= 0) && (dstY >= 0) && (dstX < this->gameMap.size()) && (dstY < this->gameMap.size())){
             std::string id = this->players_id[this->actualPlayerIndex].id;
             Position prevPos = this->players[id.back()-'0']->find(id)->second->getPosition();
-            this->gameMap[prevPos.getY()][prevPos.getX()].state = FREE;
+            this->gameMap[prevPos.y][prevPos.x].state = FREE;
             this->gameMap[dstY][dstX].player_index = this->actualPlayerIndex;
             this->players[id.back()-'0']->find(id)->second->move(dstX,dstY);
             this->gameMap[dstY][dstX].state = OCCUPIED;
@@ -204,11 +204,11 @@ namespace state {
 
         for(auto const& enemy : *(this->players[enemies])){
             target = enemy.second->getPosition();
-            d = abs(target.getX() - source.getX()) + abs(target.getY() - source.getY());
+            d = abs(target.x - source.x) + abs(target.y - source.y);
             if(d < min){
                 min = d;
-                pos[0] = target.getX();
-                pos[1] = target.getY();
+                pos[0] = target.x;
+                pos[1] = target.y;
                 found = this->gameMap[pos[1]][pos[0]].player_index;
             }
         }
@@ -226,8 +226,8 @@ namespace state {
             level = enemy.second->getLevel();
             if(level < weakest){
                 weakest = level;
-                pos[0] = enemy.second->getPosition().getX();
-                pos[1] = enemy.second->getPosition().getY();
+                pos[0] = enemy.second->getPosition().x;
+                pos[1] = enemy.second->getPosition().y;
                 found = this->gameMap[pos[1]][pos[0]].player_index;
             }
         }

@@ -41,8 +41,8 @@ namespace ai{
         this->selected = (char)this->getRandValBetween(0,6);
         if(this->selections[this->selected] == (char)MOVE){
             state::Position p = this->gstate->playerPosition(this->gstate->getActualPlayerIndex());
-            this->targetX = p.getX();
-            this->targetY = p.getY();
+            this->targetX = p.x;
+            this->targetY = p.y;
             int x = rand() % 2;
             if(x){
                 float dx = 2*(rand() % 2) -1;

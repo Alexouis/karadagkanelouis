@@ -216,10 +216,10 @@ namespace render{
         state::Position pos = this->gState->playerPosition(gState->getActualPlayerIndex());
 
         
-        for(int i=pos.getX()-p; i<=pos.getX()+p; i++)
+        for(int i=pos.x-p; i<=pos.x+p; i++)
         {
-            dy_x = p-abs(pos.getX()-i);
-            for(int j=pos.getY()-dy_x; j<=pos.getY()+dy_x; j++)
+            dy_x = p-abs(pos.x-i);
+            for(int j=pos.y-dy_x; j<=pos.y+dy_x; j++)
             {
                 sf::VertexArray m_gridVertices;
                 m_gridVertices.append(sf::Vertex(this->gameMap->isometricToOrthogonal(sf::Vector2f(i*x    , j*y    )), debugColour));
@@ -266,10 +266,10 @@ namespace render{
 
         state::Position pos = this->gState->playerPosition(gState->getActualPlayerIndex());
 
-        for(int i=pos.getX()-p; i<=pos.getX()+p; i++)
+        for(int i=pos.x-p; i<=pos.x+p; i++)
         {
-            dy_x = p-abs(pos.getX()-i);
-            for(int j=pos.getY()-dy_x; j<=pos.getY()+dy_x; j++)
+            dy_x = p-abs(pos.x-i);
+            for(int j=pos.y-dy_x; j<=pos.y+dy_x; j++)
             {
                 sf::VertexArray m_gridVertices;
                 m_gridVertices.append(sf::Vertex(this->gameMap->isometricToOrthogonal(sf::Vector2f(i*x    , j*y    )), debugColour));
@@ -296,8 +296,8 @@ namespace render{
     sf::Vector2f FightScene::worldToScreen (state::Position position){
         uint m_tileHeight = this->gameMap->getTileSize().y;
         float y = static_cast<float>(m_tileHeight); 
-        sf::Vector2f screenPos = sf::Vector2f((float)position.getX(), (float)position.getY());
-        screenPos = this->gameMap->isometricToOrthogonal(sf::Vector2f(position.getX()*y+y/2,position.getY()*y+y/2));
+        sf::Vector2f screenPos = sf::Vector2f((float)position.x, (float)position.y);
+        screenPos = this->gameMap->isometricToOrthogonal(sf::Vector2f(position.x*y+y/2,position.y*y+y/2));
         return screenPos;
     }
 
