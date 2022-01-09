@@ -199,7 +199,7 @@ namespace state {
     };
 
     void Player::setOrientation(char playerOrientation){
-        Player::orientation = orientation;
+        Player::orientation = playerOrientation;
     };
 
     bool Player::getPlaying() const{
