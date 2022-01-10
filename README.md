@@ -12,7 +12,7 @@
 #### Logiciels requis :
     make install-requirements
 #### Installations de dependances (à faire si vous utilisez un tag)
-        make install_extern_deps_https
+    make install_extern_deps_https
 #### Installation de sous modules (à faire en cas de clone du projet)
     make install_submodules
 #### clean extern configure build :
