@@ -12,10 +12,11 @@ BOOST_AUTO_TEST_CASE(TestStaticAssert)
 }
 
 using namespace state;
+using namespace engine;
 
-BOOST_AUTO_TEST_CASE(TestSFML)
+BOOST_AUTO_TEST_CASE(testenumstate)
 {
-  {
+  
     
     ::sf::Texture texture;
     BOOST_CHECK(texture.getSize() == ::sf::Vector2<unsigned int> {});
@@ -61,16 +62,18 @@ BOOST_AUTO_TEST_CASE(TestSFML)
     house.state=OBSTACLE; 
     
 
-
-
+}
+BOOST_AUTO_TEST_CASE(test_Position)
+{
     //Test Position
     Position pos(1,9);
 
     BOOST_CHECK_EQUAL(pos.x,1);
     BOOST_CHECK_EQUAL(pos.y,9);
 
-
-
+}
+BOOST_AUTO_TEST_CASE(test_Stats)
+{
     //Test Stats
     Stats stat{};
     stat.setAp(5);
@@ -81,13 +84,25 @@ BOOST_AUTO_TEST_CASE(TestSFML)
     stat.resetPoints(HERO,60);
     stat.resetPoints(DEMON,60);
 
-    BOOST_CHECK_EQUAL(stat.getAp(),5);
+    BOOST_CHECK_EQUAL(stat.getAp(),8);
     BOOST_CHECK_EQUAL(stat.getAttack(),30);
     BOOST_CHECK_EQUAL(stat.getHp(),200);
-    BOOST_CHECK_EQUAL(stat.getMp(),4);
+    BOOST_CHECK_EQUAL(stat.getMp(),7);
     BOOST_CHECK_EQUAL(stat.getShield(),40);
-    
+}
+BOOST_AUTO_TEST_CASE(test_Player)
+{   
     //Test Player
+
+    Stats stat{};
+    stat.setAp(5);
+    stat.setAttack(30);
+    stat.setHp(200);
+    stat.setMp(4);
+    stat.setShield(40);
+    
+    Position pos(1,9);
+    
     Player erza{};
     erza.resetPoints();
     Player valla("hahaha",DEMON,Position(3,5),1,0);
@@ -144,13 +159,13 @@ BOOST_AUTO_TEST_CASE(TestSFML)
     BOOST_CHECK_EQUAL(erza.getPosition().y,9);
     std::vector<Attack> attack_list;
     Attack hit;
-    hit.damage=10;
+    hit.damage=10000;
     hit.cost = 5;
     Attack fire;
     Attack shot;
-    attacks.push_back(hit);
-    attacks.push_back(fire);
-    attacks.push_back(shot);
+    attack_list.push_back(hit);
+    attack_list.push_back(fire);
+    attack_list.push_back(shot);
 
     erza.setAttacks(attack_list);
     valla.setAttacks(erza.getAttacks());
@@ -161,58 +176,78 @@ BOOST_AUTO_TEST_CASE(TestSFML)
     valla.setStats(stat);
     std::unique_ptr<Player> target = std::unique_ptr<Player>(new Player());
     target->setStats(stat);
-<<<<<<< HEAD
     
     Player ai{};
     ai.setIsAI(true);
+    BOOST_CHECK(ai.getIsAI());
 
-=======
->>>>>>> 6c43028d725969fddeb183ba73b7b32606b8356a
     //  faire attaquer
     BOOST_CHECK_EQUAL(target->getStats().getHp(),100);
     char mmm = 0;
     valla.setCurrentAttackIndex(mmm);
     BOOST_CHECK_EQUAL(valla.getCurrentAttackIndex(),mmm);
     valla.attack(target);
-<<<<<<< HEAD
-    BOOST_CHECK_EQUAL(target->getStats().getHp(),90);
+    BOOST_CHECK_EQUAL(target->getStats().getHp(),0);
 
 
     //Chrono test
 
-    Chrono krono{};
-    krono.handler(5);
-
-
+}
     //State test
-
-    State gameState(2000,1000);
+BOOST_AUTO_TEST_CASE(test_State)
+{
+    //State gameState;
+  //  State gameState{2000,1000};
+    State gameState(22,22);
+    //(2000,1000);
     gameState.init();
     gameState.initPlayer();
+    gameState.initPositions();
+   // gameState->State->initPlayer();
     gameState.initMap();
     gameState.isDead(0);
+    BOOST_CHECK_EQUAL(gameState.playerPosition(0).x,10);
+    BOOST_CHECK_EQUAL(gameState.playerPosition(0).y,10);
+    gameState.moveCurrentPlayer(9,10);
+    BOOST_CHECK_EQUAL(gameState.playerPosition(0).x,9);
+    BOOST_CHECK_EQUAL(gameState.playerPosition(0).y,10);
     gameState.passTurn();
+    BOOST_CHECK_EQUAL(gameState.getActualPlayerIndex(),1);
+    gameState.setCurrPlayerAttack(0);
+    gameState.getPlayerStats(1).setAttack(10000);
+    gameState.makeAttackOn(9,10);
+    auto a = gameState.getPlayerClass(0);
+    BOOST_CHECK_EQUAL(gameState.getPlayersCount(),2);
+    BOOST_CHECK(gameState.isAI_Now());
+    int target [2];
+    char closest_enemy_index= gameState.closestEnemyIndexTo(1,target);
+    char weakest_enemy_index= gameState.weakestEnemyIndexTo(1,target);
+    gameState.chronoStart(1,1);
+    std::map<std::string,state::Stats> plStat = gameState.getPlayerStats();
+    std::vector<ID> plId = gameState.getPlayersID();
+    std::map<std::string,std::vector<Attack>> vectAttack = gameState.getPlayersAttacks();
+
+
+    gameState.lock();
+    //gameState.unlock();
     gameState.endGame();
     bool gover = gameState.getGameOver();
     gameState.setGameOver(gover);
-    gameState.setGameOver(false);
-    BOOST_CHECK_EQUAL(gameState.getGameOver(),false);
+    gameState.setGameOver(true);
+    BOOST_CHECK(gameState.getGameOver());
 
     ///////////////////////////////////////////////////
     
+}
+
+BOOST_AUTO_TEST_CASE(test_Engine)
+{
+    Engine ngin{};
+   // ngin.start();
+  //  ngin.stop();
+ //   ngin.Start();
 
 
-
-
-
-
-
-
-
-
-=======
->>>>>>> 6c43028d725969fddeb183ba73b7b32606b8356a
-  }  
 }
 
 /* vim: set sw=2 sts=2 et : */
