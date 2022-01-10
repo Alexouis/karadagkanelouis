@@ -11,9 +11,12 @@
 
 #### Logiciels requis :
     make install-requirements
-#### If specific tag version (otherwise : error !)
-    make install_extern_deps
-#### install submodules (only if not tag but hole project)
+#### Installations de dependances (à faire si vous utilisez un tag)
+    //[si vous avez une clé rsa]:
+        make install_extern_deps_rsa
+    //[sans clé rsa -> https]:
+        make install_extern_deps_https
+#### Installation de sous modules (à faire en cas de clone du projet)
     make install_submodules
 #### clean extern configure build :
     make
@@ -50,6 +53,7 @@
     ./bin/client random_ai //2.final->(simple IA = essaie d'attaquer betement un joueur immobile).
 ---
 #### [Jalon 3] :
+    [3.1]
     dans cette partie un joueur à la possibilité de jouer avec une IA plus performente que celle 
     random. Pour jouer, il suffit d'appuier sur la touche "D" pour voir sa paortée de mouvement 
     puis cliquer sur une position pour se déplacer. Pour attaquer, il faut cliquer sur un sort 
@@ -58,7 +62,7 @@
     plus de points de movement. On ne pourra pas attaquer non plus si on a plus de points d'attaque. 
     Losrqu'on son temps a épuisé, le joeur pass sont tour automatiquement.
     Fonctionalités : 
-        recentrage : clic droit 
+        recentrage : clic droit sur la map
         zoom       : tourner la molette
         deplacement: clic sur map
         attaque    : clic sur sort puis sur cible
