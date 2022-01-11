@@ -47,6 +47,8 @@ namespace render{
 
     };
 
+    /*  Permet de créer les boutons qui seront affichés pour une scène donnée. 
+        On indique notamment leur taille, leur position, leur contenu et leur couleur.  */
     void FightScene::initButtons(GameWindow* gameWindow)
     {   
         sf::Vector2f size;
@@ -115,6 +117,7 @@ namespace render{
 
     };
 
+    //  Permet d’actualiser le contenu de la fenêtre.
     void FightScene::update(){
         sf::Time t;
         state::Position p;
@@ -150,6 +153,8 @@ namespace render{
         this->gState->unlock();
     };
 
+    /*  Permet d’actualiser le contenu de la fenêtre et de transmettre des informations tel que 
+        la position du clic ou le type d’évènement. */
     void FightScene::update(sf::Event& e, sf::Vector2i m_mousePosition, GameWindow* gameWindow){     
         if(CODE_MASK(gameWindow->selected)==0)
         {
@@ -168,6 +173,7 @@ namespace render{
         }
     };
 
+    //  Pour dessiner la scène dans le fenêtre.
     void FightScene::draw (sf::RenderTarget& target, sf::RenderStates states) const{
         target.draw(*(this->gameMap), states);
 
@@ -189,7 +195,7 @@ namespace render{
 
     };
 
-
+    //  Setter de frameInfos.
     void FightScene::loadFrameInfos(std::string path){
         Json::Reader reader;
 		std::ifstream test(path, std::ifstream::binary);
@@ -200,6 +206,7 @@ namespace render{
 		}
     }
 
+    //  Permet de tracer la portée de déplacement du joueur dont c’est le tour.
     void FightScene::moveRange()
     {
         this->playersStats = this->gState->getPlayerStats();
@@ -232,6 +239,7 @@ namespace render{
         }
     }
 
+    //  Permet de tracer la portée de l’attaque qui a été sélectionnée par le joueur.
     int FightScene::attackRange(char selected)
     {
         int p = 0;
@@ -284,23 +292,18 @@ namespace render{
         return 0;
     }
 
+    //  Getter de frameInfos.
     Json::Value& FightScene::getFrameInfos(){
         return this->frameInfos;
     } 
 
-
+    //  Pour partager le state avec la scène.
     void FightScene::bindState(engine::Engine& ngine){
         ngine.setState(this->gState);
     }
 
-    sf::Vector2f FightScene::worldToScreen (state::Position position){
-        uint m_tileHeight = this->gameMap->getTileSize().y;
-        float y = static_cast<float>(m_tileHeight); 
-        sf::Vector2f screenPos = sf::Vector2f((float)position.x, (float)position.y);
-        screenPos = this->gameMap->isometricToOrthogonal(sf::Vector2f(position.x*y+y/2,position.y*y+y/2));
-        return screenPos;
-    }
-
+    /*  Permet de passer des coordonnées orthogonales en pixel de la fenêtre aux coordonnées de la map 
+        (cases) du jeu.*/
     sf::Vector2f FightScene::screenToWorld (sf::Vector2f position){
         uint m_tileHeight = this->gameMap->getTileSize().y;
         float y = static_cast<float>(m_tileHeight); 
@@ -309,7 +312,15 @@ namespace render{
         worldPos.y = floor(worldPos.y/y);
         return worldPos;
     }
-    
+
+    //  Fait l’opération inverse.
+    sf::Vector2f FightScene::worldToScreen (state::Position position){
+        uint m_tileHeight = this->gameMap->getTileSize().y;
+        float y = static_cast<float>(m_tileHeight); 
+        sf::Vector2f screenPos = sf::Vector2f((float)position.x, (float)position.y);
+        screenPos = this->gameMap->isometricToOrthogonal(sf::Vector2f(position.x*y+y/2,position.y*y+y/2));
+        return screenPos;
+    }
 
     FightScene::~FightScene(){
 

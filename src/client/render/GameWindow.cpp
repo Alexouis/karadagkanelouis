@@ -123,8 +123,7 @@ namespace render {
         }
     }
 
-    // Setters and Getters
-
+    //-----------------------------Setters and Getters-----------------------------
 
     SceneId GameWindow::getCurrentScene() const
     {

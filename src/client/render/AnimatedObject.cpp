@@ -23,10 +23,12 @@ namespace render{
         this->mCurrentFrame = 0;        
     };
 
+    //  Pour dessiner l’animation (afficher successivement les différents frames).
     void AnimatedObject::draw (sf::RenderTarget& target, sf::RenderStates states) const{
         target.draw(this->mSprite, states);        
     };
 
+    // Permet de mettre à jour l’objet animé, en actualisant la frame à afficher et le temps écoulé. 
     void AnimatedObject::update (sf::Time dt, Json::Value framesInfos, std::string frameKey, sf::Vector2f positions){
         
         int i_x=framesInfos[frameKey]["w"].asInt()*mCurrentFrame;
@@ -41,7 +43,8 @@ namespace render{
         
     };
 
-
+    //-----------------------------Setters and Getters-----------------------------
+    
     const sf::Sprite& AnimatedObject::getMSprite() const{
         return this->mSprite;
     };

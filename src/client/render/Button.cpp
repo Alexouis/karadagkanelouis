@@ -15,7 +15,7 @@ namespace render {
   
     dimensions = size; 
 
-        //set position
+    //set position
     m_position = position;
 
     //set initial state
@@ -122,6 +122,7 @@ namespace render {
 
     };
     
+    // Pour dessiner le bouton.
     void Button::draw (sf::RenderTarget& target, sf::RenderStates states) const{
         switch(m_style)
     {
@@ -162,9 +163,10 @@ namespace render {
     }
     };
 
+    // pour réactualiser le bouton.
     void Button::update(sf::Event& e, sf::Vector2i  m_mousePosition, GameWindow* gameWindow)
     {
-            //perform updates for settings from user
+            //La mise à jour dépend du style du bouton
     switch(m_style)
     {
         case NONE:
@@ -252,7 +254,7 @@ namespace render {
     
     
 
-    //perform updates for user mouse interactions
+    //La mise à jour dépend des actions utilisateur avec la souris
     sf::Vector2i mousePosition = m_mousePosition;
 
     bool mouseInButton =    mousePosition.x >= m_button.getPosition().x - m_button.getGlobalBounds().width/2
@@ -351,7 +353,8 @@ namespace render {
     }
     }
     
-    // Setters and Getters
+    //-----------------------------Setters and Getters-----------------------------
+    
     const enum buttonState& Button::getM_btnState() const{
         return m_btnState;
     };
