@@ -13,16 +13,23 @@ namespace render {
 
     };
 
+    //  Pour mettre à jour l’affichage de la scène.
     void Box::update(sf::Event& event, sf::Vector2i m_mousePosition, GameWindow* gameWindow)
     {
         
     };
 
+    //  Pour afficher la Box sur la scène à la position souhaitée.
     void Box::draw (sf::RenderTarget& target, sf::RenderStates states) const{
         std::cout << "Draw Box" << std::endl;
     };
 
-    // Setters and Getters
+    // Permet de mettre à jour m_text et ainsi modifier le texte contenu par la box.
+    void Box::setText(std::string s){
+        this->m_text.setString(s);
+    };
+
+    //-----------------------------Setters and Getters-----------------------------
     const sf::Vector2i& Box::getM_position() const{};
 
     void Box::setM_position(const sf::Vector2i& pos){};
@@ -38,11 +45,6 @@ namespace render {
     const sf::Sprite& Box::getSprite() const{};
 
     void Box::setSprite(const sf::Sprite& sprite){};
-
-
-    void Box::setText(std::string s){
-        this->m_text.setString(s);
-    };
     
     void Box::setM_text(const sf::Text& m_text){
         this->m_text = m_text;
