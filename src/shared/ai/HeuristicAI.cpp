@@ -26,6 +26,9 @@ namespace ai{
     HeuristicAI::~HeuristicAI (){
 
     }
+
+    /*  permet de simuler l’action que l’IA a choisi d’effectuer comme le fait de cliquer sur un bouton 
+    ou sur la map par exemple. */
     void HeuristicAI::exploit (){
         state::Stats st = this->gstate->getPlayerStats(this->gstate->getActualPlayerIndex());
         if(!st.getMp() && !st.getAp()){

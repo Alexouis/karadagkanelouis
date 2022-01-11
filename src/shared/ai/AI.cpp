@@ -37,6 +37,8 @@ namespace ai{
 
     }
 
+    /*  permet de simuler l’action que l’IA a choisi d’effectuer comme le fait de cliquer sur un bouton 
+    ou sur la map par exemple. */
     void AI::exploit (){
         this->selected = (char)this->getRandValBetween(0,6);
         if(this->selections[this->selected] == (char)MOVE){
@@ -55,27 +57,38 @@ namespace ai{
         this->ngine->registerTarget(this->targetX, this->targetY, this->selections[this->selected]);
     }
 
+    //  Reçoit le code du bouton associé à l'indice passé en paramètre de la fonction.
     char AI::getSelection (char sel){
         return this->selections[sel];
     }
     
+    //  Permet de démarrer le générateur de nombre aléatoire.
     void AI::initSrand (){
         srand (time(NULL));
     }
+
+    //  Retourne de manière aléatoire un entier entre un intervalle passé en argument.
     inline int AI::getRandValBetween (int a, int b){
         return ((rand() % (b-a+1)) +a);
     }
+
+    //  Permet partager le state ainsi que l’engine aux IA.
     void AI::bind (engine::Engine* ngine, std::shared_ptr<state::State>& gstate){
         this->ngine  = std::shared_ptr<engine::Engine>(ngine);
         this->gstate = gstate;
     }
+
+    //  Renvoie l’index de l’ennemi le plus proche.
     char AI::closestEnemyIndexTo (char p_index, int* pos){
         return this->gstate->closestEnemyIndexTo(p_index, pos);
     }
+
+    //  Renvoie l’index de l’ennemi le plus faible.
     char AI::weakestEnemyIndexTo (char p_index, int* pos){
         return this->gstate->weakestEnemyIndexTo(p_index, pos);
     }
 
+    //  Permet de mesurer le temps entre deux actions successives de l’IA.
     inline float AI::action_dt (){
         return (this->action_time_end.tv_sec - this->action_time_ini.tv_sec + (float)(this->action_time_end.tv_nsec - this->action_time_ini.tv_nsec)/1000000.f);
     }
