@@ -71,8 +71,8 @@ namespace engine{
 
     void Engine::execute(){
         if(!this->qcmd.empty()){
-            std::unique_ptr<Command> cmd = std::move(this->qcmd.front());
-            cmd->action(cmd->args);
+            this->qcmd.front()->action(this->qcmd.front()->args);
+            this->cmdHistory.push(std::move(this->qcmd.front()));
             this->qcmd.pop();
             return;
         }
@@ -83,6 +83,7 @@ namespace engine{
 
     void Engine::execute(std::unique_ptr<Command>& cmd){
         cmd->action(cmd->args);
+        this->cmdHistory.push(std::move(cmd));
         this->currentState->lock();
     }
 
@@ -121,6 +122,21 @@ namespace engine{
 
     void Engine::bind (ai::AI* g_ai){
         g_ai->bind(this, this->currentState);
+    }
+
+
+    void Engine::undo(){
+        if(!this->cmdHistory.empty()){
+            this->cmdUndid.push_back(std::move(this->cmdHistory.top()));
+            this->cmdHistory.pop();
+        }
+    }
+
+    void Engine::redo(){
+        if(!this->cmdUndid.empty()){
+            this->cmdHistory.push(std::move(this->cmdUndid.back()));
+            this->cmdUndid.pop_back();
+        }
     }
 
     Engine::~Engine (){}
