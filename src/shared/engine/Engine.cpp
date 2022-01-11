@@ -29,8 +29,12 @@
 
 namespace engine{
     Engine::Engine(){
+        this->cmd.reserve(2);
         this->action.reserve(2);
         this->selection.reserve(4);
+
+        this->cmd[0] = &Engine::atck_cmd;
+        this->cmd[1] = &Engine::move_cmd;
         
         this->action[1] = &Action::move;
         this->action[0] = &Action::attack;
@@ -94,8 +98,7 @@ namespace engine{
 
     void Engine::registerTarget (int x, int y, char selected){
         if(ACTION(selected)){
-            std::unique_ptr<Action_Args> args = std::unique_ptr<Action_Args>(new Action_Args(this->currentState, x, y));
-            this->cmdHolder = std::unique_ptr<Command>(new Command(this->action[CODE_ACTION(this->selected)], args));
+            this->cmdHolder = (this->cmd[CODE_ACTION(this->selected)])(this->currentState, x, y);
             this->qcmd.push(std::move(cmdHolder));
             this->selected = selected;
         }
@@ -107,7 +110,8 @@ namespace engine{
 
     void Engine::registerTarget (char selected){
         this->selected = selected;
-        std::unique_ptr<Action_Args> args = std::unique_ptr<Action_Args>(new Action_Args(this->currentState, VALUE_MASK(selected)));
+        char old_attack_index = this->currentState->getCurrAttackIndex(this->currentState->getActualPlayerIndex());
+        std::unique_ptr<Action_Args> args = std::unique_ptr<Action_Args>(new Action_Args(this->currentState, VALUE_MASK(selected), old_attack_index));
         this->cmdHolder = std::unique_ptr<Command>(new Command(this->selection[CODE_MASK(selected)], args));
         this->qcmd.push(std::move(cmdHolder));
     }
@@ -137,6 +141,22 @@ namespace engine{
             this->cmdHistory.push(std::move(this->cmdUndid.back()));
             this->cmdUndid.pop_back();
         }
+    }
+
+
+    std::unique_ptr<Command> Engine::move_cmd (std::shared_ptr<state::State>& gstate, int x, int y){
+        int old_mp = gstate->get_MP(gstate->getActualPlayerIndex());
+        state::Position old_pos = gstate->playerPosition(gstate->getActualPlayerIndex());
+        auto args = std::unique_ptr<Action_Args>(new Action_Args(gstate, x, y, old_pos, old_mp));
+        auto cmd = std::unique_ptr<Command>(new Command(&Action::move, args));
+        return cmd;
+    }
+    std::unique_ptr<Command> Engine::atck_cmd (std::shared_ptr<state::State>& gstate, int x, int y){
+        int old_ap_thp[2];
+        gstate->pull_AP_THP(x, y, old_ap_thp);
+        auto args = std::unique_ptr<Action_Args>(new Action_Args(gstate, x, y, old_ap_thp));
+        auto cmd = std::unique_ptr<Command>(new Command(&Action::attack, args));
+        return cmd;
     }
 
     Engine::~Engine (){}

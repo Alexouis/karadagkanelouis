@@ -271,4 +271,25 @@ namespace state {
         state::Stats st =this->players[id.back()-'0']->find(id)->second->getStats();
         return(st);
     }
+
+    void State::pull_AP_THP (int x, int y, int ap_thp[2]){
+        if((x >= 0) && (y >= 0) && (x < this->gameMap.size()) && (y < this->gameMap.size())){
+            ap_thp[0] = this->getPlayerStats(this->actualPlayerIndex).getAp();
+            char st = this->gameMap[y][x].state;
+            if(st == OCCUPIED){
+                std::string taregtId = this->players_id[this->gameMap[y][y].player_index].id;
+                ap_thp[1] = this->players[taregtId.back()-'0']->find(taregtId)->second->getStats().getHp();
+            }
+            else{
+                ap_thp[1] = -100;
+            }
+        }
+    }
+    int State::get_MP (char p_index){
+        return this->getPlayerStats(p_index).getMp();
+    }
+    char State::getCurrAttackIndex (char p_index){
+        std::string id = this->players_id[p_index].id;
+        return this->players[id.back()-'0']->find(id)->second->getCurrentAttackIndex();
+    }
 };

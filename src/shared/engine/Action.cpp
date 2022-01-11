@@ -40,5 +40,15 @@ namespace engine{
         args->state->chronoStart(state::State::chronoStep, state::State::chronoCount);
     }
 
+    void Action::cancel_move (std::unique_ptr<Action_Args>& args){
+        //args->state->cancel_move();
+    }
+    void Action::cancel_attack (std::unique_ptr<Action_Args>& args){
+        
+    }
+    void Action::cancel_select (std::unique_ptr<Action_Args>& args){
+
+    }
+
 
 }
