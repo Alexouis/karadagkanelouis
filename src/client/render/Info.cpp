@@ -18,10 +18,12 @@ namespace render{
         this->m_text.setPosition(gameWindow->window.mapPixelToCoords(m_position));
     };
     
+    //  Pour écrire l’info sur la scène.
     void Info::draw (sf::RenderTarget& target, sf::RenderStates  states) const{
         target.draw(m_text, states);
     };
 
+    //  Pour réactualiser l’info (le texte) affichée.
     void Info::update(sf::Event& event, sf::Vector2i m_mousePosition, GameWindow* gameWindow)
     {
         if(gameWindow->isZoomed)
@@ -31,7 +33,8 @@ namespace render{
         this->m_text.setPosition(gameWindow->window.mapPixelToCoords(m_position));
     };
 
-    // Setters and Getters
+    //-----------------------------Setters and Getters-----------------------------
+    
     const sf::Font& Info::getM_font() const{
         return m_font;
     };
