@@ -185,9 +185,17 @@ namespace render {
             this->update(event,(sf::Vector2i)mousePosScreen);
             ngine.registerTarget(floor(mousePosWorld.x), floor(mousePosWorld.y), this->selected );
         }
-        if(event.type == sf::Event::MouseMoved )
+        if (event.type == sf::Event::MouseMoved )
         {
             this->update(event,(sf::Vector2i)mousePosScreen);
+        }
+        if (event.type == sf::Event::KeyPressed) {
+            if(event.key.code == sf::Keyboard::B){
+                ngine.undo();
+            }
+            else if(event.key.code == sf::Keyboard::N){
+                ngine.redo();
+            }
         }
     }
 
