@@ -88,6 +88,7 @@ namespace state {
         }
     }
 
+    //  Pour initialiser les différents aspect du joueur en début de partie
     void Player::init (){
         name = "player";
         pClass = HERO;
@@ -109,6 +110,10 @@ namespace state {
         attacks.push_back(punch);
     };
     
+    /*  cette méthode prend en argument un std ::unique_ptr pointant sur le joueur à attaquer. 
+        Elle vérifie que l’attaquant puisse attaquer (qu’il possède suffisamment de points d’action) 
+        et mettre à jour les stats du joueur attaqué (diminuer ses points de vie) mais également celles 
+        du joueur attaquant (diminuer ses AP)    */
     void Player::attack(std::unique_ptr<Player>& player){
         int deltaX = abs(this->position.x-player->getPosition().x);
         int deltaY = abs(this->position.y-player->getPosition().y);
@@ -129,10 +134,17 @@ namespace state {
         }
     };
 
+    /*  permet de passer le tour du joueur. Elle agit en réalité sur les variables playing (<=false) 
+        et status(<=WAITING) du joueur */
     void Player::pass (){
         playing = false;
         status = WAITING;
     };
+
+    /*  Les deux méthodes move() permettent de déplacer le joueur d’une position à un autre. 
+        Il s’agit en réalité de mettre à jour la position du joueur avec celle passée en paramètres. 
+        Tout comme pour attack(), la fonction vérifie que le joueur a suffisamment de points de mouvement 
+        pour se déplacer avant d’effectuer le changement.   */
 
     void Player::move (Position destination){
         int deltaX = abs(this->position.x-destination.x);
@@ -161,9 +173,13 @@ namespace state {
         
     };
 
+    /*  permet de restituer les points de mouvement (MP) et d’action (AP) du joueur à chaque fois 
+        que son tour commence    */
     void Player::resetPoints(){
         this->stats.resetPoints(this->pClass,this->level);
     }
+
+    //-----------------------------Setters and Getters-----------------------------
 
     const std::string& Player::getName() const{
         return Player::name;
