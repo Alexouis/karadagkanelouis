@@ -277,7 +277,7 @@ namespace state {
             ap_thp[0] = this->getPlayerStats(this->actualPlayerIndex).getAp();
             char st = this->gameMap[y][x].state;
             if(st == OCCUPIED){
-                std::string taregtId = this->players_id[this->gameMap[y][y].player_index].id;
+                std::string taregtId = this->players_id[this->gameMap[y][x].player_index].id;
                 ap_thp[1] = this->players[taregtId.back()-'0']->find(taregtId)->second->getStats().getHp();
             }
             else{
@@ -291,5 +291,26 @@ namespace state {
     char State::getCurrAttackIndex (char p_index){
         std::string id = this->players_id[p_index].id;
         return this->players[id.back()-'0']->find(id)->second->getCurrentAttackIndex();
+    }
+
+    void State::cancel_move (int old_pos_mp[3]){
+        std::string id = this->players_id[this->actualPlayerIndex].id;
+        this->players[id.back()-'0']->find(id)->second->setPosition(Position(old_pos_mp[0],old_pos_mp[1]));
+        this->players[id.back()-'0']->find(id)->second->setMp(old_pos_mp[2]);
+    }
+    void State::cancel_attack (int target[2], int old_ap_thp[2]){
+        auto sourceID = this->players_id[this->actualPlayerIndex].id;
+        this->players[sourceID.back()-'0']->find(sourceID)->second->setAp(old_ap_thp[0]);
+        if(old_ap_thp[1] != -100){
+            char st = this->gameMap[target[1]][target[0]].state;
+            if(st == OCCUPIED){
+                std::string taregtId = this->players_id[this->gameMap[target[1]][target[0]].player_index].id;
+                this->players[taregtId.back()-'0']->find(taregtId)->second->setHp(old_ap_thp[1]);
+            }
+        }
+    }
+    void State::cancel_select (int old_attack_index){
+        auto id = this->players_id[this->actualPlayerIndex].id;
+        this->players[id.back()-'0']->find(id)->second->setCurrentAttackIndex(old_attack_index);
     }
 };

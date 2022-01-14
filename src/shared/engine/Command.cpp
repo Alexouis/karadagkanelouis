@@ -13,9 +13,10 @@
 #include <iostream>
 
 namespace engine{
-   Command::Command (void(*action)(std::unique_ptr<Action_Args>&) , std::unique_ptr<Action_Args>& args){
+   Command::Command (void(*action[2])(std::unique_ptr<Action_Args>&) , std::unique_ptr<Action_Args>& args){
       this->args = std::move(args);
-      this->action = action;
+      this->action = action[0];
+      this->undo = action[1];
    }
 
 

@@ -41,13 +41,13 @@ namespace engine{
     }
 
     void Action::cancel_move (std::unique_ptr<Action_Args>& args){
-        //args->state->cancel_move();
+        args->state->cancel_move(args->old_pos_mp);
     }
     void Action::cancel_attack (std::unique_ptr<Action_Args>& args){
-        
+        args->state->cancel_attack(args->point, args->old_ap_thp);
     }
     void Action::cancel_select (std::unique_ptr<Action_Args>& args){
-
+        args->state->setCurrPlayerAttack(args->old_attack_index);
     }
 
 

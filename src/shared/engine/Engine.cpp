@@ -28,21 +28,22 @@
 
 
 namespace engine{
+    typedef void (*Func)(std::unique_ptr<Action_Args>&);
     Engine::Engine(){
         this->cmd.reserve(2);
-        this->action.reserve(2);
-        this->selection.reserve(4);
+        //this->selection.reserve(4);
 
         this->cmd[0] = &Engine::atck_cmd;
         this->cmd[1] = &Engine::move_cmd;
-        
-        this->action[1] = &Action::move;
-        this->action[0] = &Action::attack;
 
-        this->selection[0] = &Action::select;
-        this->selection[1] = &Action::doNothing;
-        this->selection[2] = &Action::passTurn;
-        this->selection[3] = &Action::startGame;
+        this->selection[0][0] = &Action::select;
+        this->selection[0][1] = &Action::cancel_select;
+        this->selection[1][0] = &Action::doNothing;
+        this->selection[1][1] = &Action::doNothing;
+        this->selection[2][0] = &Action::passTurn;
+        this->selection[2][1] = &Action::doNothing;
+        this->selection[3][0] = &Action::startGame;
+        this->selection[3][1] = &Action::doNothing;
     }
 
 
@@ -111,7 +112,7 @@ namespace engine{
     void Engine::registerTarget (char selected){
         this->selected = selected;
         char old_attack_index = this->currentState->getCurrAttackIndex(this->currentState->getActualPlayerIndex());
-        std::unique_ptr<Action_Args> args = std::unique_ptr<Action_Args>(new Action_Args(this->currentState, VALUE_MASK(selected), old_attack_index));
+        auto args = std::unique_ptr<Action_Args>(new Action_Args(this->currentState, VALUE_MASK(selected), old_attack_index));
         this->cmdHolder = std::unique_ptr<Command>(new Command(this->selection[CODE_MASK(selected)], args));
         this->qcmd.push(std::move(cmdHolder));
     }
@@ -147,15 +148,21 @@ namespace engine{
     std::unique_ptr<Command> Engine::move_cmd (std::shared_ptr<state::State>& gstate, int x, int y){
         int old_mp = gstate->get_MP(gstate->getActualPlayerIndex());
         state::Position old_pos = gstate->playerPosition(gstate->getActualPlayerIndex());
+        void(*actions[2])(std::unique_ptr<Action_Args>&);
+        actions[0] = &Action::move;
+        actions[1] = &Action::cancel_move;
         auto args = std::unique_ptr<Action_Args>(new Action_Args(gstate, x, y, old_pos, old_mp));
-        auto cmd = std::unique_ptr<Command>(new Command(&Action::move, args));
+        auto cmd = std::unique_ptr<Command>(new Command(actions, args));
         return cmd;
     }
     std::unique_ptr<Command> Engine::atck_cmd (std::shared_ptr<state::State>& gstate, int x, int y){
         int old_ap_thp[2];
         gstate->pull_AP_THP(x, y, old_ap_thp);
+        void(*actions[2])(std::unique_ptr<Action_Args>&);
+        actions[0] = &Action::attack;
+        actions[1] = &Action::cancel_attack;
         auto args = std::unique_ptr<Action_Args>(new Action_Args(gstate, x, y, old_ap_thp));
-        auto cmd = std::unique_ptr<Command>(new Command(&Action::attack, args));
+        auto cmd = std::unique_ptr<Command>(new Command(actions, args));
         return cmd;
     }
 
