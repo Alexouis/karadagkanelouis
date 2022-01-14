@@ -256,6 +256,16 @@ namespace state {
     void Player::setIsAI(bool isAI){
         this->isAI = isAI;
     };
+
+    void Player::setMp (int mp){
+        this->stats.setMp(mp);
+    }
+    void Player::setAp (int ap){
+        this->stats.setAp(ap);
+    }
+    void Player::setHp (int hp){
+        this->stats.setHp(hp);
+    }
     
 
     Player::~Player(){};
