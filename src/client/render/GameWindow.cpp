@@ -94,6 +94,14 @@ namespace render {
         {
             this->update(event,(sf::Vector2i)mousePosScreen);
         }
+        if (event.type == sf::Event::KeyPressed) {
+            if(event.key.code == sf::Keyboard::B){
+                ngine.undo();
+            }
+            else if(event.key.code == sf::Keyboard::N){
+                ngine.redo();
+            }
+        }
     }
 
     /*  Fonctionne de manière similaire à handleEvents, cependant cette fonction n’écoute que la molette de la 
