@@ -68,6 +68,8 @@ namespace state {
 
         
     };
+
+    //  Pour initialise le state au lancement du jeu
     void State::init (){
         this->turn = 0;
         this->playersCount = 2;
@@ -76,63 +78,49 @@ namespace state {
         this->chrono = std::unique_ptr<Chrono>(new Chrono);
         this->chrono->bind(SIGALRM);
     };
-    void State::initPlayer (){
 
+    //  Pour créer les joueurs (objets Player) au lancement du jeu
+    void State::initPlayer (){
+    
     };
+
+    //  Pour charger la carte en début de partie.
     void State::initMap (){
 
     };
+
+    /*  Vérifie les points de vie des joueurs, si un des joueurs n’a plus de vie, 
+        la fonction repère le vainqueur et appelle la fonction endGame()   */
     bool State::isDead (char p_index){
         std::string id = this->players_id[p_index].id;
         return (this->players[id.back()-'0']->find(id)->second->getStatus() == DEAD);
     };
+
+    //  Permet de passer le tour du joueur actuel et donner la main au joueur suivant
     void State::passTurn (){
         this->actualPlayerIndex = this->players_id[this->actualPlayerIndex].next;
         std::string id = this->players_id[actualPlayerIndex].id;
         this->players[id.back()-'0']->find(id)->second->resetPoints();
         this->chrono->start(1,10);
     };
+
+    //  Incrémente la valeur turn quand on passe un tour
     void State::incrementTurn (){
         this->turn++;
     };
+
+    //  Cette fonction entame la fin du jeu, elle passe notamment la variable gameOver à true
     void State::endGame (){
         this->gameOver = true;
     };
+
+    //  Initialise la position des joueurs en début de partie
     void State::initPositions (){
         //efter
     };
-    State::~State (){
 
-    };
-    // Setters and Getters
-    const std::vector<std::vector<MapTile>>& State::getGameMap() const{
-        return this->gameMap;
-    };
-    void State::setGameMap(const std::vector<std::vector<MapTile>>& gameMap){
-        this->gameMap = gameMap;
-    };
-    int State::getTurn() const{
-        return this->turn;
-    };
-    void State::setTurn(int turn){
-        this->turn = turn;
-    };
-    // get the index of the actual player
-    char State::getActualPlayerIndex() const{
-        return this->actualPlayerIndex;
-    };
-    void State::setActualPlayerIndex(char actualPlayerIndex){
-        this->actualPlayerIndex = actualPlayerIndex;
-    };
-    bool State::getGameOver() const{
-        return this->gameOver;
-    };
-    void State::setGameOver(bool gameOver){
-        this->gameOver = gameOver;
-    };
-    playerClass State::getWinner() const{
-        return this->winner;
-    };
+    /*  Permet durant le tour d’un joueur de lancer une attaque à une position passée en argument. 
+        L’attaque n’aboutira que si un joueur se trouve à cette position   */
     void State::makeAttackOn (int targetX, int targetY){
         if((targetX >= 0) && (targetY >= 0) && (targetX < this->gameMap.size()) && (targetY < this->gameMap.size())){
             char st = this->gameMap[targetY][targetX].state;
@@ -148,6 +136,8 @@ namespace state {
             }
         }
     };
+
+    //  Permet à un joueur de se déplacer à une position passée en argument
     void State::moveCurrentPlayer (int dstX, int dstY){
         if((dstX >= 0) && (dstY >= 0) && (dstX < this->gameMap.size()) && (dstY < this->gameMap.size())){
             std::string id = this->players_id[this->actualPlayerIndex].id;
@@ -158,42 +148,53 @@ namespace state {
             this->gameMap[dstY][dstX].state = OCCUPIED;
         }
     };
+
+    //  Cette fonction retourne la position du joueur dont l’index a été passé en argument
     Position State::playerPosition (char playerIndex) {
         std::string id = this->players_id[playerIndex].id;
         return this->players[id.back()-'0']->find(id)->second->getPosition();
     };
+
+    //  Cette fonction retourne la classe du joueur dont l’index a été passé en argument
     state::playerClass State::getPlayerClass (char playerIndex) {
         const std::string id = this->players_id[playerIndex].id;
         return this->players[id.back()-'0']->find(id)->second->getPClass();
     }
 
+    //  Permet d’accéder au nombre de joueurs
     char  State::getPlayersCount () const{
         return this->playersCount;
     }
 
+    //  Permet de changer l’attaque sélectionnée/actuelle du joueur dont c’est le tour
     void State::setCurrPlayerAttack (char attackIndex){
         const std::string id = this->players_id[this->actualPlayerIndex].id;
         this->players[id.back()-'0']->find(id)->second->setCurrentAttackIndex(attackIndex);
     }
 
+    //  Passe la variable padlock à true
     void State::lock(){
         this->padlock = true;
     }
 
+    //  Passe la variable padlock à false
     void State::unlock(){
         this->padlock = false;
         this->ngine->execute();
     }
 
+    //  Permet de savoir si le joueur dont c’est le tour est une IA ou non
     bool State::isAI_Now(){
         const std::string id = this->players_id[this->actualPlayerIndex].id;
         return this->players[id.back()-'0']->find(id)->second->getIsAI();
     }
 
+    //  Permet d’initialiser la variable ngine avec l’engine du jeu
     void State::connect (engine::Engine* ngine){
         this->ngine = std::shared_ptr<engine::Engine>(ngine);
     }
 
+    //  Renvoie l’index de l’ennemi le plus proche
     char State::closestEnemyIndexTo (char p_index, int* pos){
         ID *id = &this->players_id[p_index];
         char enemies = !(id->id.back()-'0');
@@ -215,6 +216,7 @@ namespace state {
         return found;
     }
 
+    //  Renvoie l’index de l’ennemi le plus faible
     char State::weakestEnemyIndexTo (char p_index, int* pos){
         Player p;
         p.getLevel();
@@ -268,10 +270,18 @@ namespace state {
         return found;
     }
 
+    int State::damage(char p_index, char attacker_index, Attack attack)
+    {
+        return (attack.damage+this->get_Attack(attacker_index)-this->get_Shield(p_index));
+
+    }
+
+    //  Démarre l’horloge globale (lance le chrono).
     void State::chronoStart (char chronoStep, char chronoCount){
         this->chrono->start(chronoStep, chronoCount);
     }
 
+    //  Permet d’obtenir les stats de tous les joueurs 
     std::map<std::string,state::Stats> State::getPlayerStats() {
         std::map<std::string,state::Stats> playersStats;
         
@@ -284,10 +294,13 @@ namespace state {
         
     }
 
+    //  Permet d’obtenir un std ::vector contenant les structures ID des différents joueurs
     std::vector<ID> State::getPlayersID(){
         return(this->players_id);
     }
 
+    /*  Permet d’obtenir un std::map<std::string,std::vector<Attack>> qui associe à l’identifiant 
+        du joueur (nom concaténé à ‘0’ ou ‘1’) à sa liste d’attaques    */
     std::map<std::string,std::vector<Attack>> State::getPlayersAttacks(){
         std::map<std::string,std::vector<Attack>> playersAttacks;
         
@@ -299,7 +312,8 @@ namespace state {
 
         return(playersAttacks);
     }
-        
+
+    //  Permet d’obtenir les stats d’une d'un joueur donné 
     state::Stats State::getPlayerStats(char p_index){
         std::string id  = this->players_id[p_index].id;
         state::Stats st =this->players[id.back()-'0']->find(id)->second->getStats();
@@ -324,8 +338,12 @@ namespace state {
         return this->getPlayerStats(p_index).getMp();
     }
 
-    int State::get_HP (char p_index){
-        return this->getPlayerStats(p_index).getHp();
+    int State::get_Attack (char p_index){
+        return this->getPlayerStats(p_index).getAttack();
+    }
+
+    int State::get_Shield (char p_index){
+        return this->getPlayerStats(p_index).getShield();
     }
 
     char State::getCurrAttackIndex (char p_index){
@@ -353,4 +371,40 @@ namespace state {
         auto id = this->players_id[this->actualPlayerIndex].id;
         this->players[id.back()-'0']->find(id)->second->setCurrentAttackIndex(old_attack_index);
     }
+
+    State::~State (){
+
+    };
+
+    //-----------------------------Setters and Getters-----------------------------
+
+    const std::vector<std::vector<MapTile>>& State::getGameMap() const{
+        return this->gameMap;
+    };
+    void State::setGameMap(const std::vector<std::vector<MapTile>>& gameMap){
+        this->gameMap = gameMap;
+    };
+    int State::getTurn() const{
+        return this->turn;
+    };
+    void State::setTurn(int turn){
+        this->turn = turn;
+    };
+    // get the index of the actual player
+    char State::getActualPlayerIndex() const{
+        return this->actualPlayerIndex;
+    };
+    void State::setActualPlayerIndex(char actualPlayerIndex){
+        this->actualPlayerIndex = actualPlayerIndex;
+    };
+    bool State::getGameOver() const{
+        return this->gameOver;
+    };
+    void State::setGameOver(bool gameOver){
+        this->gameOver = gameOver;
+    };
+    playerClass State::getWinner() const{
+        return this->winner;
+    };
+
 };
