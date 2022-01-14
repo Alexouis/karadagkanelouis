@@ -16,26 +16,32 @@ namespace engine{
 
     }
 
+    // Pour modifier la position du joueur quand il désire se déplacer
     void Action::move (std::unique_ptr<Action_Args>& args){
         args->state->moveCurrentPlayer(args->point[0], args->point[1]);
     }
 
+    // attack() pour mettre à jour les points d’actions du joueur et diminuer les points de vie de l’adversaire concerné.
     void Action::attack (std::unique_ptr<Action_Args>& args){
         args->state->makeAttackOn(args->point[0], args->point[1]);
     }
 
+    //  Permet de préparer une attaque en sélectionnant un sort avant d’attaquer l’ennemi
     void Action::select (std::unique_ptr<Action_Args>& args){
         args->state->setCurrPlayerAttack(args->selected);
     }
 
+    //  Permet de passer le tour du joueur actuel et donner la main au joueur suivant
     void Action::passTurn (std::unique_ptr<Action_Args>& args){
         args->state->passTurn();
     }
 
+    // Implémente l’action réalisée par le joueur en attente, quand ce n’est pas son tour
     void Action::doNothing (std::unique_ptr<Action_Args>& args){
         return;
     }
 
+    // Permet d’initier le jeu après avoir cliquer sur le bouton JOUER du menu d’accueil
     void Action::startGame (std::unique_ptr<Action_Args>& args){
         args->state->chronoStart(state::State::chronoStep, state::State::chronoCount);
     }
