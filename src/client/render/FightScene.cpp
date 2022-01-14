@@ -119,6 +119,7 @@ namespace render{
 
     //  Permet d’actualiser le contenu de la fenêtre.
     void FightScene::update(){
+        this->gState->unlock();
         sf::Time t;
         state::Position p;
         std::stringstream ssChr,ssStats;
@@ -150,7 +151,6 @@ namespace render{
             this->gameOver = true;
             this->winner = this->gState->getWinner();
         }
-        this->gState->unlock();
     };
 
     /*  Permet d’actualiser le contenu de la fenêtre et de transmettre des informations tel que 

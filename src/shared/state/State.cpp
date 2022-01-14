@@ -353,9 +353,14 @@ namespace state {
 
     void State::cancel_move (int old_pos_mp[3]){
         std::string id = this->players_id[this->actualPlayerIndex].id;
+        Position prevPos = this->players[id.back()-'0']->find(id)->second->getPosition();
+        this->gameMap[prevPos.y][prevPos.x].state = FREE;
         this->players[id.back()-'0']->find(id)->second->setPosition(Position(old_pos_mp[0],old_pos_mp[1]));
         this->players[id.back()-'0']->find(id)->second->setMp(old_pos_mp[2]);
+        this->gameMap[old_pos_mp[1]][old_pos_mp[0]].player_index = this->actualPlayerIndex;
+        this->gameMap[old_pos_mp[1]][old_pos_mp[0]].state = OCCUPIED;
     }
+    
     void State::cancel_attack (int target[2], int old_ap_thp[2]){
         auto sourceID = this->players_id[this->actualPlayerIndex].id;
         this->players[sourceID.back()-'0']->find(sourceID)->second->setAp(old_ap_thp[0]);
