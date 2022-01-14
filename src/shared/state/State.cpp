@@ -248,7 +248,6 @@ namespace state {
                 found = this->gameMap[pos[1]][pos[0]].player_index;
             }
         }
-        std::cout << "L'ennemi ayant le moins de points de vie, a: " << weakest << " HP" << std::endl;
         return found;
     }
 
@@ -320,9 +319,15 @@ namespace state {
             }
         }
     }
+
     int State::get_MP (char p_index){
         return this->getPlayerStats(p_index).getMp();
     }
+
+    int State::get_HP (char p_index){
+        return this->getPlayerStats(p_index).getHp();
+    }
+
     char State::getCurrAttackIndex (char p_index){
         std::string id = this->players_id[p_index].id;
         return this->players[id.back()-'0']->find(id)->second->getCurrentAttackIndex();
