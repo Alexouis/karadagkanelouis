@@ -190,9 +190,6 @@ namespace render{
         for (const auto& [key, value] : boxes){
             target.draw(*value,states);
         }
-
-
-
     };
 
     //  Setter de frameInfos.
