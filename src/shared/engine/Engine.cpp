@@ -79,6 +79,7 @@ namespace engine{
             this->qcmd.front()->action(this->qcmd.front()->args);
             this->cmdHistory.push(std::move(this->qcmd.front()));
             this->qcmd.pop();
+            this->cmdUndid.clear();
             return;
         }
         if(Engine::timeOut()){
@@ -132,6 +133,7 @@ namespace engine{
 
     void Engine::undo(){
         if(!this->cmdHistory.empty()){
+            this->cmdHistory.top()->undo(this->cmdHistory.top()->args);
             this->cmdUndid.push_back(std::move(this->cmdHistory.top()));
             this->cmdHistory.pop();
         }
@@ -139,6 +141,7 @@ namespace engine{
 
     void Engine::redo(){
         if(!this->cmdUndid.empty()){
+            this->cmdUndid.back()->action(this->cmdUndid.back()->args);
             this->cmdHistory.push(std::move(this->cmdUndid.back()));
             this->cmdUndid.pop_back();
         }
