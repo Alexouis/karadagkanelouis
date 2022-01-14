@@ -22,15 +22,21 @@ namespace state{
     Chrono::~Chrono (){
 
     }
+
+    //  Lie le handler à l'alarme, de sorte que, quand il y a une interruption d'alarme, le handler est exécuté
     void Chrono::bind (int sigNum){
         signal(sigNum, &Chrono::handler);
     }
+
+    //  Met à jour le chrono quand le timer a fini de compter
     void Chrono::handler (int){
         State::chronoCount--;
         if(State::chronoCount){
             alarm(State::chronoStep);
         }
     }
+
+    //  Lance le comptage du temps.
     void Chrono::start (char chronoStep, char ChronoCount) {
         State::chronoStep = chronoStep;
         State::chronoCount = ChronoCount;

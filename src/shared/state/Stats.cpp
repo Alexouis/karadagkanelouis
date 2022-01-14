@@ -78,7 +78,7 @@ namespace state
         ap = coeffStats["ap"]+level/30;
     }
 
-    // Setters and Getters
+    //-----------------------------Setters and Getters-----------------------------
 
     int Stats::getAttack() const{
         return Stats::attack;
