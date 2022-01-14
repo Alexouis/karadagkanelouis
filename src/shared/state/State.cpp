@@ -234,6 +234,41 @@ namespace state {
         return found;
     }
 
+    char State::enemyWithLessHp_Of(char p_index, int* pos){
+        ID *id = &this->players_id[p_index];
+        char enemies = !(id->id.back()-'0');
+        int found, hp, weakest = 16000;
+
+        for(auto const& enemy : *(this->players[enemies])){
+            hp = enemy.second->getStats().getHp();
+            if(hp < weakest){
+                weakest = hp;
+                pos[0] = enemy.second->getPosition().x;
+                pos[1] = enemy.second->getPosition().y;
+                found = this->gameMap[pos[1]][pos[0]].player_index;
+            }
+        }
+        std::cout << "L'ennemi ayant le moins de points de vie, a: " << weakest << " HP" << std::endl;
+        return found;
+    }
+
+    char State::enemyWithLessMp_Of(char p_index, int* pos){
+        ID *id = &this->players_id[p_index];
+        char enemies = !(id->id.back()-'0');
+        char found, mp, weakest = 10;
+
+        for(auto const& enemy : *(this->players[enemies])){
+            mp = enemy.second->getStats().getMp();
+            if(mp < weakest){
+                weakest = mp;
+                pos[0] = enemy.second->getPosition().x;
+                pos[1] = enemy.second->getPosition().y;
+                found = this->gameMap[pos[1]][pos[0]].player_index;
+            }
+        }
+        return found;
+    }
+
     void State::chronoStart (char chronoStep, char chronoCount){
         this->chrono->start(chronoStep, chronoCount);
     }

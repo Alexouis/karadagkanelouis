@@ -88,6 +88,16 @@ namespace ai{
         return this->gstate->weakestEnemyIndexTo(p_index, pos);
     }
 
+    //  Renvoie l’index de l’ennemi ayant le moins de HP.
+    char AI::enemyWithLessHp_Of (char p_index, int* pos){
+        return this->gstate->enemyWithLessHp_Of(p_index, pos);
+    }
+
+    //  Renvoie l’index de l’ennemi ayant le moins de MP.
+    char AI::enemyWithLessMp_Of (char p_index, int* pos){
+        return this->gstate->enemyWithLessMp_Of(p_index, pos);
+    }
+
     //  Permet de mesurer le temps entre deux actions successives de l’IA.
     inline float AI::action_dt (){
         return (this->action_time_end.tv_sec - this->action_time_ini.tv_sec + (float)(this->action_time_end.tv_nsec - this->action_time_ini.tv_nsec)/1000000.f);
