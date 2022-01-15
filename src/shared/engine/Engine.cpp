@@ -80,12 +80,13 @@ namespace engine{
     void Engine::execute(){
         if(!this->qcmd.empty()){
             this->qcmd.front()->action(this->qcmd.front()->args);
-            this->cmdHistory.push(std::move(this->qcmd.front()));
+            this->cmdHistory.push_back(std::move(this->qcmd.front()));
             this->qcmd.pop();
             this->cmdUndid.clear();
             return;
         }
         if(Engine::timeOut()){
+            this->cmdHistory.clear();
             this->currentState->passTurn();
         }
     }
@@ -93,7 +94,7 @@ namespace engine{
     //  Prend en paramètre une commande et l’exécute.
     void Engine::execute(std::unique_ptr<Command>& cmd){
         cmd->action(cmd->args);
-        this->cmdHistory.push(std::move(cmd));
+        this->cmdHistory.push_back(std::move(cmd));
         this->currentState->lock();
     }
 
@@ -143,9 +144,9 @@ namespace engine{
         qui ont été réalisées. */
     void Engine::undo(){
         if(!this->cmdHistory.empty()){
-            this->cmdHistory.top()->undo(this->cmdHistory.top()->args);
-            this->cmdUndid.push_back(std::move(this->cmdHistory.top()));
-            this->cmdHistory.pop();
+            this->cmdHistory.back()->undo(this->cmdHistory.back()->args);
+            this->cmdUndid.push_back(std::move(this->cmdHistory.back()));
+            this->cmdHistory.pop_back();
         }
     }
 
@@ -153,7 +154,7 @@ namespace engine{
     void Engine::redo(){
         if(!this->cmdUndid.empty()){
             this->cmdUndid.back()->action(this->cmdUndid.back()->args);
-            this->cmdHistory.push(std::move(this->cmdUndid.back()));
+            this->cmdHistory.push_back(std::move(this->cmdUndid.back()));
             this->cmdUndid.pop_back();
         }
     }
