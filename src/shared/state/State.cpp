@@ -236,6 +236,7 @@ namespace state {
         return found;
     }
 
+    //  Renvoie l’index de l’ennemi ayant le moins de points de vie
     char State::enemyWithLessHp_Of(char p_index, int* pos){
         ID *id = &this->players_id[p_index];
         char enemies = !(id->id.back()-'0');
@@ -253,6 +254,7 @@ namespace state {
         return found;
     }
 
+    //  Renvoie l’index de l’ennemi ayant le moins de points de mouvement
     char State::enemyWithLessMp_Of(char p_index, int* pos){
         ID *id = &this->players_id[p_index];
         char enemies = !(id->id.back()-'0');
@@ -270,6 +272,7 @@ namespace state {
         return found;
     }
 
+    //  Retourne les dégâts qu’infligerait un joueur à un autre pour une attaque donnée
     int State::damage(char p_index, char attacker_index, Attack attack)
     {
         return (attack.damage+this->get_Attack(attacker_index)-this->get_Shield(p_index));
@@ -320,6 +323,7 @@ namespace state {
         return(st);
     }
 
+    //  Récupère l'AP du joueur actuel et les HP de sa cible
     void State::pull_AP_THP (int x, int y, int ap_thp[2]){
         if((x >= 0) && (y >= 0) && (x < this->gameMap.size()) && (y < this->gameMap.size())){
             ap_thp[0] = this->getPlayerStats(this->actualPlayerIndex).getAp();
@@ -334,23 +338,28 @@ namespace state {
         }
     }
 
+    //  Renvoie les MP du joueur dont l’index est passé en argument
     int State::get_MP (char p_index){
         return this->getPlayerStats(p_index).getMp();
     }
 
+    //  Renvoie l’attaque du joueur dont l’index est passé en argument
     int State::get_Attack (char p_index){
         return this->getPlayerStats(p_index).getAttack();
     }
 
+    //  Renvoie le shield du joueur dont l’index est passé en argument
     int State::get_Shield (char p_index){
         return this->getPlayerStats(p_index).getShield();
     }
 
+    //  Renvoie la valeur currentAttackPlayer du joueur dont l’index est passé en argument
     char State::getCurrAttackIndex (char p_index){
         std::string id = this->players_id[p_index].id;
         return this->players[id.back()-'0']->find(id)->second->getCurrentAttackIndex();
     }
 
+    //  Va permettre d’annuler un déplacement
     void State::cancel_move (int old_pos_mp[3]){
         std::string id = this->players_id[this->actualPlayerIndex].id;
         Position prevPos = this->players[id.back()-'0']->find(id)->second->getPosition();
@@ -360,7 +369,8 @@ namespace state {
         this->gameMap[old_pos_mp[1]][old_pos_mp[0]].player_index = this->actualPlayerIndex;
         this->gameMap[old_pos_mp[1]][old_pos_mp[0]].state = OCCUPIED;
     }
-    
+
+    //  Va permettre d’annuler une attaque
     void State::cancel_attack (int target[2], int old_ap_thp[2]){
         auto sourceID = this->players_id[this->actualPlayerIndex].id;
         this->players[sourceID.back()-'0']->find(sourceID)->second->setAp(old_ap_thp[0]);
@@ -372,6 +382,8 @@ namespace state {
             }
         }
     }
+
+    //  Va permettre d’annuler la sélection d’un sort
     void State::cancel_select (int old_attack_index){
         auto id = this->players_id[this->actualPlayerIndex].id;
         this->players[id.back()-'0']->find(id)->second->setCurrentAttackIndex(old_attack_index);

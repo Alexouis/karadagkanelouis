@@ -46,7 +46,7 @@ namespace engine{
         this->selection[3][1] = &Action::doNothing;
     }
 
-
+    //  Pour démarrer l’engine
     void Engine::start(){
         this->eThread = std::thread(&Engine::run, this);
         if(this->eThread.joinable()){ 
@@ -54,12 +54,13 @@ namespace engine{
         }
     }
 
-
+    //  Pour arrêter l’engine
     void Engine::stop(){
         this->fuel = false;
     }
 
-
+    /*  qui va mettre en route le moteur de jeu (écoute des actions des joueurs + mise à jour du state 
+        + exécution des IA).    */
     void Engine::run(){
         while(!this->currentState->getGameOver()){
             if(!this->qcmd.empty()){
@@ -70,10 +71,12 @@ namespace engine{
         this->cmdHolder.release();
     }
 
+    //  Afin d’ajouter une nouvelle commande à la queue actuelle
     void Engine::addCommand(std::unique_ptr<Command>& cmd){
         this->qcmd.push(std::move(cmd));
     }
 
+    //  Permet d’exécuter les commandes de la queue. Exécute la commande en tête de file
     void Engine::execute(){
         if(!this->qcmd.empty()){
             this->qcmd.front()->action(this->qcmd.front()->args);
@@ -88,17 +91,19 @@ namespace engine{
         }
     }
 
+    //  Prend en paramètre une commande et l’exécute.
     void Engine::execute(std::unique_ptr<Command>& cmd){
         cmd->action(cmd->args);
         this->cmdHistory.push_back(std::move(cmd));
         this->currentState->lock();
     }
 
+    //  Pour mettre à jour currentState et c’est-à-dire actualiser l’état de jeu dans l’engine
     void Engine::setState(std::shared_ptr<state::State>& gState){
         this->currentState = gState;
         this->currentState->connect(this);
     }
-
+    //  Permet d’enregistrer les commandes dans la queue
     void Engine::registerTarget (int x, int y, char selected){
         if(ACTION(selected)){
             this->cmdHolder = (this->cmd[CODE_ACTION(this->selected)])(this->currentState, x, y);
@@ -111,6 +116,7 @@ namespace engine{
         }
     }
 
+    //  Permet d’enregistrer les commandes dans la queue
     void Engine::registerTarget (char selected){
         this->selected = selected;
         char old_attack_index = this->currentState->getCurrAttackIndex(this->currentState->getActualPlayerIndex());
@@ -119,19 +125,23 @@ namespace engine{
         this->qcmd.push(std::move(cmdHolder));
     }
 
+    //  Pour vérifier si l’action provient d’une IA ou d’un joueur réel
     bool Engine::isActionFromAI (){
         return this->currentState->isAI_Now();
     }
 
+    //  Permet d’avertir l’engine quand le temps alloué au tour d’un joueur est atteint
     bool Engine::timeOut(){
         return (!state::State::chronoCount);
     }
 
+    //  Permet de partager le state et l'engine aux IA
     void Engine::bind (ai::AI* g_ai){
         g_ai->bind(this, this->currentState);
     }
 
-
+    /*  Permet comme le ferait un ctrl+Z de revenir en arrière durant un tour, en annulant les commandes 
+        qui ont été réalisées. */
     void Engine::undo(){
         if(!this->cmdHistory.empty()){
             this->cmdHistory.back()->undo(this->cmdHistory.back()->args);
@@ -140,6 +150,7 @@ namespace engine{
         }
     }
 
+    //  Permet comme le ferait un ctrl+Y de rétablir les commandes annulées
     void Engine::redo(){
         if(!this->cmdUndid.empty()){
             this->cmdUndid.back()->action(this->cmdUndid.back()->args);
@@ -148,7 +159,8 @@ namespace engine{
         }
     }
 
-
+    // move_cmd() et atck_cmd() génèrent des commandes selon une action (move : move_cmd() ou attaque: atck_cmd()).
+    
     std::unique_ptr<Command> Engine::move_cmd (std::shared_ptr<state::State>& gstate, int x, int y){
         int old_mp = gstate->get_MP(gstate->getActualPlayerIndex());
         state::Position old_pos = gstate->playerPosition(gstate->getActualPlayerIndex());
