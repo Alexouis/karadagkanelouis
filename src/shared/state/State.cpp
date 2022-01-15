@@ -323,6 +323,7 @@ namespace state {
         return(st);
     }
 
+    //  Récupère l'AP du joueur actuel et les HP de sa cible
     void State::pull_AP_THP (int x, int y, int ap_thp[2]){
         if((x >= 0) && (y >= 0) && (x < this->gameMap.size()) && (y < this->gameMap.size())){
             ap_thp[0] = this->getPlayerStats(this->actualPlayerIndex).getAp();

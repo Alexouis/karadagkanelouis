@@ -159,7 +159,8 @@ namespace engine{
         }
     }
 
-
+    // move_cmd() et atck_cmd() génèrent des commandes selon une action (move : move_cmd() ou attaque: atck_cmd()).
+    
     std::unique_ptr<Command> Engine::move_cmd (std::shared_ptr<state::State>& gstate, int x, int y){
         int old_mp = gstate->get_MP(gstate->getActualPlayerIndex());
         state::Position old_pos = gstate->playerPosition(gstate->getActualPlayerIndex());
