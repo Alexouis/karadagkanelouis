@@ -6,6 +6,7 @@
 #include <cstdlib>
 #include <csignal>
 #include <json/json.h>
+#include <limits>
 
 namespace state {
     /*
@@ -423,5 +424,38 @@ namespace state {
     playerClass State::getWinner() const{
         return this->winner;
     };
+    void State::BFS_Shortest_Path (Position src, Position dst){
+        std::queue<Position> toExplore;
+        Position directions[] = {Position(0,1), Position(1,0), Position(0,-1), Position(-1,0)};
+        (*this)[dst].distance = 0;
+        toExplore.push(dst);
+        while ( !toExplore.empty() ) {
+            Position curr = toExplore.front();
+            if (curr == src) { break; };
+            toExplore.pop();
+            for ( auto &direction : directions ) {
+                Position neighbor = curr + direction;
+                if(this->inMap(neighbor) && this->isFree(neighbor)){
+                    if ((*this)[neighbor].distance  == -1) {
+                        (*this)[neighbor].distance  = (*this)[curr].distance + 1;
+                        (*this)[neighbor].next_grid = curr;
+                        toExplore.push(neighbor);
+                    }
+                }
+            }
+        }
+    }
+
+    MapTile& State::operator[] (Position p){
+        return this->gameMap[p.y][p.x];
+    }
+
+    inline bool State::inMap (Position p){
+        return ( (p.x >= 0) && (p.y >= 0) && (p.x < this->gameMap.size()) && (p.y < this->gameMap.size()));
+    }
+
+    inline bool State::isFree (Position p){
+        return ( ((*this)[p].state == FREE) );
+    }
 
 };
