@@ -46,12 +46,17 @@ namespace engine{
         args->state->chronoStart(state::State::chronoStep, state::State::chronoCount);
     }
 
+    //  Va permettre d’annuler un déplacement
     void Action::cancel_move (std::unique_ptr<Action_Args>& args){
         args->state->cancel_move(args->old_pos_mp);
     }
+
+    //  Va permettre d’annuler une attaque
     void Action::cancel_attack (std::unique_ptr<Action_Args>& args){
         args->state->cancel_attack(args->point, args->old_ap_thp);
     }
+
+    //  Va permettre d’annuler la sélection d’un sort
     void Action::cancel_select (std::unique_ptr<Action_Args>& args){
         args->state->setCurrPlayerAttack(args->old_attack_index);
     }

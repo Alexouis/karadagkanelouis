@@ -52,6 +52,8 @@ namespace state
         ap = coeffStats["ap"]+level/30;
     };
     
+    /* permet de restituer les points de mouvement (MP) et d’action (AP) du joueur à chaque fois que 
+        son tour commence.  */
     void Stats::resetPoints(char playerClass, int level)
     {
         std::map<std::string, int> coeffStats;

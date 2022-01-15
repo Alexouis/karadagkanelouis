@@ -139,7 +139,8 @@ namespace engine{
         g_ai->bind(this, this->currentState);
     }
 
-
+    /*  Permet comme le ferait un ctrl+Z de revenir en arrière durant un tour, en annulant les commandes 
+        qui ont été réalisées. */
     void Engine::undo(){
         if(!this->cmdHistory.empty()){
             this->cmdHistory.top()->undo(this->cmdHistory.top()->args);
@@ -148,6 +149,7 @@ namespace engine{
         }
     }
 
+    //  Permet comme le ferait un ctrl+Y de rétablir les commandes annulées
     void Engine::redo(){
         if(!this->cmdUndid.empty()){
             this->cmdUndid.back()->action(this->cmdUndid.back()->args);
