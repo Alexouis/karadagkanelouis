@@ -237,6 +237,25 @@ namespace state {
         return found;
     }
 
+    char State::strngestEnemyIndexTo (char p_index, int* pos){
+        Player p;
+        p.getLevel();
+        ID *id = &this->players_id[p_index];
+        char enemies = !(id->id.back()-'0');
+        char found, level, strongest = 0;
+
+        for(auto const& enemy : *(this->players[enemies])){
+            level = enemy.second->getLevel();
+            if(level > strongest){
+                strongest = level;
+                pos[0] = enemy.second->getPosition().x;
+                pos[1] = enemy.second->getPosition().y;
+                found = this->gameMap[pos[1]][pos[0]].player_index;
+            }
+        }
+        return found;
+    }
+
     //  Renvoie l’index de l’ennemi ayant le moins de points de vie
     char State::enemyWithLessHp_Of(char p_index, int* pos){
         ID *id = &this->players_id[p_index];
