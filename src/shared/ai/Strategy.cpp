@@ -13,7 +13,7 @@
 
 
 namespace ai {
-    Strategy::Strategy (ai::DeepAI* g_ai){
+    Strategy::Strategy (DeepAI* g_ai){
         //this->g_ai = std::shared_ptr<DeepAI>(g_ai);
     }
 
