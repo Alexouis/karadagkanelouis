@@ -21,6 +21,13 @@ namespace ai{
         //char t_index = st->
     }
     int Attack_Strongest::test (std::shared_ptr<state::State> st, std::shared_ptr<engine::Engine> ng){
+        int t_pos[2];
+        char p_index = st->getActualPlayerIndex();
+        char t_index = st->strngestEnemyIndexTo(p_index, t_pos);
+        this->pick_GoodPosition(t_index, st);
 
+        if(this->p.x != -1){
+            //while(st);
+        }
     }
 }

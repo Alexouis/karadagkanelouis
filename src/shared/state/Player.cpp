@@ -282,6 +282,9 @@ namespace state {
     void Player::setHp (int hp){
         this->stats.setHp(hp);
     }
+    Attack Player::getAttack (char attack_index){
+        return this->attacks[attack_index];
+    }
     
 
     Player::~Player(){};

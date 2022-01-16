@@ -295,7 +295,7 @@ namespace state {
     //  Retourne les dégâts qu’infligerait un joueur à un autre pour une attaque donnée
     int State::damage(char p_index, char attacker_index, Attack attack)
     {
-        return (attack.damage+this->get_Attack(attacker_index)-this->get_Shield(p_index));
+        return (attack.damage+this->get_playerPower(attacker_index)-this->get_Shield(p_index));
 
     }
 
@@ -364,7 +364,7 @@ namespace state {
     }
 
     //  Renvoie l’attaque du joueur dont l’index est passé en argument
-    int State::get_Attack (char p_index){
+    int State::get_playerPower (char p_index){
         return this->getPlayerStats(p_index).getAttack();
     }
 
@@ -480,6 +480,17 @@ namespace state {
 
     inline bool State::isFree (Position p){
         return ( ((*this)[p].state == FREE) );
+    }
+
+    char State::getAttackIndex (char p_index){
+        std::string id = this->players_id[p_index].id;
+        return this->players[id.back()-'0']->find(id)->second->getCurrentAttackIndex();
+    }
+
+    Attack State::get_Attack (char p_index){
+        char attack_index = this->getAttackIndex(p_index);
+        std::string id = this->players_id[p_index].id;
+        return this->players[id.back()-'0']->find(id)->second->getAttack(attack_index);
     }
 
 };
