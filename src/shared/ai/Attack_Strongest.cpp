@@ -15,6 +15,7 @@ namespace ai{
 
     int Attack_Strongest::work (std::shared_ptr<state::State> st, std::shared_ptr<engine::Engine> ng){
         state::Position src = st->playerPosition(st->getActualPlayerIndex());
+        
         //char t_index = st->
     }
     int Attack_Strongest::test (std::shared_ptr<state::State> st, std::shared_ptr<engine::Engine> ng){

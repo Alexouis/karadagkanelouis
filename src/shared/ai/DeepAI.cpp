@@ -10,8 +10,15 @@
  */
 
 #include "DeepAI.h"
+#include "Attack_Strongest.h"
 
 namespace ai{
+    DeepAI::DeepAI(){
+        this->strategy.push_back(Attack_Strongest(this));
+        this->strategy.push_back(Attack_Strongest(this));
+        this->strategy.push_back(Attack_Strongest(this));
+        this->strategy.push_back(Attack_Strongest(this));
+    }
     DeepAI::~DeepAI(){}
 
     
