@@ -41,4 +41,11 @@ namespace ai {
         
         return good;
     }
+
+    int Strategy::simulate_attack (std::shared_ptr<state::State> st, std::shared_ptr<engine::Engine> ng, char selected_attack){
+        
+    }
+    int Strategy::simulateEnemyTurn (std::shared_ptr<engine::Engine> nd, std::shared_ptr<state::State> st){
+
+    }
 }

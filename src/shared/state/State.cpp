@@ -493,4 +493,8 @@ namespace state {
         return this->players[id.back()-'0']->find(id)->second->getAttack(attack_index);
     }
 
+    int State::get_AP (char p_index){
+        return this->getPlayerStats(p_index).getAp();
+    }
+
 };

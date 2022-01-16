@@ -11,6 +11,10 @@
 
 #include "Attack_Strongest.h"
 
+#define weak_attack 0x0
+#define strg_attack 0x1
+#define move_action 0x90
+
 namespace ai{
 
     Attack_Strongest::Attack_Strongest (DeepAI* g_ai) : Strategy(g_ai){}
@@ -25,9 +29,33 @@ namespace ai{
         char p_index = st->getActualPlayerIndex();
         char t_index = st->strngestEnemyIndexTo(p_index, t_pos);
         this->pick_GoodPosition(t_index, st);
-
+        
+        //if good position found
         if(this->p.x != -1){
-            //while(st);
+            //then move to good position
+            ng->registerTarget(this->p.x, this->p.y, (char)move_action);
+            char selected_attack = (char)weak_attack;
+            while(st->get_AP(p_index) && !st->isDead(t_index)){
+                ng->registerTarget((char)weak_attack);
+                ng->registerTarget(t_pos[0], t_pos[1], (char)move_action);
+                this->cmdCount += 2;
+            }
+            while(this->cmdCount){
+                ng->undo();
+                this->cmdCount--;
+            }
+            selected_attack = (char)strg_attack;
+            while(st->get_AP(p_index) && !st->isDead(t_index)){
+                ng->registerTarget((char)strg_attack);
+                ng->registerTarget(t_pos[0], t_pos[1], (char)move_action);
+                this->cmdCount += 2;
+            }
+            while(this->cmdCount){
+                ng->undo();
+                this->cmdCount--;
+            }
+
+            //then simulate enmy turn
         }
     }
 }
