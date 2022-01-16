@@ -9,10 +9,10 @@
  * __________________________________________________________________________
  */
 
-#include "AdvancedAI.h"
+#include "DeepAI.h"
 
 namespace ai{
-    AdvancedAI::~AdvancedAI(){}
+    DeepAI::~DeepAI(){}
 
     
 }

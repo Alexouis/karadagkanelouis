@@ -190,9 +190,6 @@ namespace render{
         for (const auto& [key, value] : boxes){
             target.draw(*value,states);
         }
-
-
-
     };
 
     //  Setter de frameInfos.
@@ -229,10 +226,10 @@ namespace render{
             for(int j=pos.y-dy_x; j<=pos.y+dy_x; j++)
             {
                 sf::VertexArray m_gridVertices;
-                m_gridVertices.append(sf::Vertex(this->gameMap->isometricToOrthogonal(sf::Vector2f(i*x    , j*y    )), debugColour));
-                m_gridVertices.append(sf::Vertex(this->gameMap->isometricToOrthogonal(sf::Vector2f(i*x + x, j*y    )), debugColour));
-                m_gridVertices.append(sf::Vertex(this->gameMap->isometricToOrthogonal(sf::Vector2f(i*x + x, j*y + y)), debugColour));
-                m_gridVertices.append(sf::Vertex(this->gameMap->isometricToOrthogonal(sf::Vector2f(i*x    , j*y + y)), debugColour));
+                m_gridVertices.append(sf::Vertex(this->gameMap->isometricToOrthogonal(sf::Vector2f(i*x + 20    , j*y + 20    )), debugColour));
+                m_gridVertices.append(sf::Vertex(this->gameMap->isometricToOrthogonal(sf::Vector2f(i*x + x - 20, j*y + 20    )), debugColour));
+                m_gridVertices.append(sf::Vertex(this->gameMap->isometricToOrthogonal(sf::Vector2f(i*x + x - 20, j*y + y - 20)), debugColour));
+                m_gridVertices.append(sf::Vertex(this->gameMap->isometricToOrthogonal(sf::Vector2f(i*x + 20    , j*y + y - 20)), debugColour));
                 m_gridVertices.setPrimitiveType(sf::Quads);
                 moveVertex.push_back(m_gridVertices);                
             }
@@ -305,20 +302,26 @@ namespace render{
     /*  Permet de passer des coordonnées orthogonales en pixel de la fenêtre aux coordonnées de la map 
         (cases) du jeu.*/
     sf::Vector2f FightScene::screenToWorld (sf::Vector2f position){
+        uint m_tileWidth = this->gameMap->getTileSize().x;
         uint m_tileHeight = this->gameMap->getTileSize().y;
-        float y = static_cast<float>(m_tileHeight); 
+        float m_tileRatio = static_cast<float>(m_tileWidth) / static_cast<float>(m_tileHeight);
+        float x = static_cast<float>(m_tileWidth) / m_tileRatio;
+        float y = static_cast<float>(m_tileHeight);
         sf::Vector2f worldPos = this->gameMap->orthogonalToIsometric(position);
-        worldPos.x = floor(worldPos.x/y);
-        worldPos.y = floor(worldPos.y/y);
+        worldPos.x = floor(worldPos.x/x-0.5);
+        worldPos.y = floor(worldPos.y/y-0.5);
         return worldPos;
     }
 
     //  Fait l’opération inverse.
     sf::Vector2f FightScene::worldToScreen (state::Position position){
+        uint m_tileWidth = this->gameMap->getTileSize().x;
         uint m_tileHeight = this->gameMap->getTileSize().y;
+        float m_tileRatio = static_cast<float>(m_tileWidth) / static_cast<float>(m_tileHeight);
+        float x = static_cast<float>(m_tileWidth) / m_tileRatio;
         float y = static_cast<float>(m_tileHeight); 
         sf::Vector2f screenPos = sf::Vector2f((float)position.x, (float)position.y);
-        screenPos = this->gameMap->isometricToOrthogonal(sf::Vector2f(position.x*y+y/2,position.y*y+y/2));
+        screenPos = this->gameMap->isometricToOrthogonal(sf::Vector2f(position.x*x+x/2,position.y*y+y/2));
         return screenPos;
     }
 
