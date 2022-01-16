@@ -427,7 +427,7 @@ namespace state {
     void State::BFS_Shortest_Path (Position src, Position dst){
         std::queue<Position> toExplore;
         Position directions[] = {Position(0,1), Position(1,0), Position(0,-1), Position(-1,0)};
-        (*this)[dst].distance = 0;
+        (*this)[dst].visited = 0;
         toExplore.push(dst);
         while ( !toExplore.empty() ) {
             Position curr = toExplore.front();
@@ -435,14 +435,17 @@ namespace state {
             toExplore.pop();
             for ( auto &direction : directions ) {
                 Position neighbor = curr + direction;
+                if(neighbor == (*this)[curr].next_grid) continue;
                 if(this->inMap(neighbor) && this->isFree(neighbor)){
-                    if ((*this)[neighbor].distance  == -1) {
-                        (*this)[neighbor].distance  = (*this)[curr].distance + 1;
+                    if ((*this)[neighbor].visited == false) {
+                        (*this)[neighbor].visited  = true;
                         (*this)[neighbor].next_grid = curr;
                         toExplore.push(neighbor);
                     }
                 }
             }
+
+            (*this)[curr].visited = false;
         }
     }
 
