@@ -25,7 +25,7 @@ namespace ai{
         this->strategy[3] = std::unique_ptr<Attack_Most_InDanger>(new Attack_Most_InDanger(this));
     }
 
-    DeepAI::exploit(){
+    void DeepAI::exploit(){
         if(this->mode == ANALYSIS){
             
         }
