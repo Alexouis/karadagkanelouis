@@ -29,7 +29,8 @@ namespace ai{
         if(this->mode == ANALYSIS){
             this->gstate->turn_all_in_AI();
             int score, maxScore = 0;
-            for(int i=0; auto &strategy : this->strategies){
+            int i=0; 
+            for(auto &strategy : this->strategies){
                 score = strategy->test(this->gstate, this->ngine);
                 if(score > maxScore){
                     maxScore = score;

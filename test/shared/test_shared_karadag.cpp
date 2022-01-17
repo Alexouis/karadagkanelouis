@@ -211,7 +211,7 @@ BOOST_AUTO_TEST_CASE(test_State)
     gameState.moveCurrentPlayer(9,10);
     BOOST_CHECK_EQUAL(gameState.playerPosition(0).x,9);
     BOOST_CHECK_EQUAL(gameState.playerPosition(0).y,10);
-    gameState.passTurn();
+    gameState.passTurn(0);
     BOOST_CHECK_EQUAL(gameState.getActualPlayerIndex(),1);
     gameState.setCurrPlayerAttack(0);
     gameState.getPlayerStats(1).setAttack(10000);

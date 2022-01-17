@@ -33,7 +33,7 @@ namespace engine{
 
     //  Permet de passer le tour du joueur actuel et donner la main au joueur suivant
     void Action::passTurn (std::unique_ptr<Action_Args>& args){
-        args->state->passTurn();
+        args->state->passTurn(args->selected);
     }
 
     // Implémente l’action réalisée par le joueur en attente, quand ce n’est pas son tour

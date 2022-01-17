@@ -102,7 +102,7 @@ namespace state {
         this->actualPlayerIndex = this->players_id[this->actualPlayerIndex].next;
         std::string id = this->players_id[actualPlayerIndex].id;
         this->players[id.back()-'0']->find(id)->second->resetPoints();
-        if(selected!=0)
+        if(selected==0)
         {
             this->chrono->start(1,10);
         }
@@ -110,7 +110,7 @@ namespace state {
 
     //  Permet d'annuler la fonction passTurn et de revenir au tour du joueur précédent
     void State::cancel_passTurn(char selected){
-        if(selected==0)
+        if(selected!=0)
         {
             this->actualPlayerIndex = this->players_id[this->actualPlayerIndex].prev;
         }

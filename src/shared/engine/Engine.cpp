@@ -87,7 +87,7 @@ namespace engine{
         }
         if(Engine::timeOut()){
             this->cmdHistory.clear();
-            this->currentState->passTurn();
+            this->currentState->passTurn(0);
         }
     }
 
