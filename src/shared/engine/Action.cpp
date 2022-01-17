@@ -61,5 +61,9 @@ namespace engine{
         args->state->setCurrPlayerAttack(args->old_attack_index);
     }
 
+    void Action::cancel_passTurn (std::unique_ptr<Action_Args>& args){
+        args->state->cancel_passTurn(args->selected);
+    }
+
 
 }
