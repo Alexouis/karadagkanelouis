@@ -35,25 +35,7 @@ namespace ai{
             //then move to good position
             ng->registerTarget(this->strategic_position.x, this->strategic_position.y, (char)move_action);
             this->judicious_attack = (char)weak_attack;
-            while(st->get_AP(p_index) && !st->isDead(t_index)){
-                ng->registerTarget((char)weak_attack);
-                ng->registerTarget(t_pos[0], t_pos[1], (char)move_action);
-                this->cmdCount += 2;
-            }
-            while(this->cmdCount){
-                ng->undo();
-                this->cmdCount--;
-            }
-            this->judicious_attack = (char)strg_attack;
-            while(st->get_AP(p_index) && !st->isDead(t_index)){
-                ng->registerTarget((char)strg_attack);
-                ng->registerTarget(t_pos[0], t_pos[1], (char)move_action);
-                this->cmdCount += 2;
-            }
-            while(this->cmdCount){
-                ng->undo();
-                this->cmdCount--;
-            }
+            
 
             //then simulate enmy turn
         }
