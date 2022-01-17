@@ -299,6 +299,16 @@ namespace state {
 
     }
 
+    // Permet de simuler les conséquences d'une attaque
+    void State::simu_attack(char p_index, char t_index, char atck_index, state::Stats& p_stats,  state::Stats& t_stats)
+    {
+        int new_ap = this->get_AP(p_index)-(this->get_Attack(atck_index)).cost;
+        new_ap = (new_ap > 0 ? new_ap : 0);
+        p_stats.setAp(new_ap);
+        int new_hp = (this->get_Shield(t_index)+this->get_HP(t_index)-(this->get_Attack(atck_index)).damage-this->get_playerPower(p_index));
+        t_stats.setHp(new_hp);
+    }
+
     //  Démarre l’horloge globale (lance le chrono).
     void State::chronoStart (char chronoStep, char chronoCount){
         this->chrono->start(chronoStep, chronoCount);
@@ -361,6 +371,11 @@ namespace state {
     //  Renvoie les MP du joueur dont l’index est passé en argument
     int State::get_MP (char p_index){
         return this->getPlayerStats(p_index).getMp();
+    }
+
+    //  Renvoie les HP du joueur dont l’index est passé en argument
+    int State::get_HP (char p_index){
+        return this->getPlayerStats(p_index).getHp();
     }
 
     //  Renvoie l’attaque du joueur dont l’index est passé en argument
