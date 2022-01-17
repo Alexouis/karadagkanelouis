@@ -47,10 +47,10 @@ namespace ai {
         state::Stats p_stats2 = p_stats1;
         state::Stats t_stats2 = t_stats1;
 
-        while(t_stats1.getAp()){
+        while(p_stats1.getAp()){
             st->simu_attack(p_index, t_index, 0, p_stats1, t_stats1);
         }
-        while(t_stats2.getAp()){
+        while(p_stats2.getAp()){
             st->simu_attack(p_index, t_index, 1, p_stats2, t_stats2);
         }
 

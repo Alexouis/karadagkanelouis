@@ -15,12 +15,20 @@
 #include "Attack_Weakest.h"
 #include "Attack_Most_InDanger.h"
 
+#define ANALYSIS true
+
 namespace ai{
     DeepAI::DeepAI(){
         this->strategy[0] = std::unique_ptr<Attack_Strongest    >(new Attack_Strongest    (this));
         this->strategy[1] = std::unique_ptr<Attack_Closest      >(new Attack_Closest      (this));
         this->strategy[2] = std::unique_ptr<Attack_Weakest      >(new Attack_Weakest      (this));
         this->strategy[3] = std::unique_ptr<Attack_Most_InDanger>(new Attack_Most_InDanger(this));
+    }
+
+    DeepAI::exploit(){
+        if(this->mode == ANALYSIS){
+            
+        }
     }
     DeepAI::~DeepAI(){}
 
