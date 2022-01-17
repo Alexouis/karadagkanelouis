@@ -20,13 +20,12 @@ namespace ai {
 
     Strategy::~Strategy(){}
 
-    void Strategy::pick_GoodPosition (char p_index, std::shared_ptr<state::State> st){
-        char src_index = st->getActualPlayerIndex();
-        state::Position src  = st->playerPosition(src_index);
-        state::Position dst  = st->playerPosition(p_index);
-        int mp = st->get_MP(src_index);
-        int attack_range = st->get_Attack(src_index).range;
-
+    void Strategy::pick_GoodPosition (char p_index, char t_index, std::shared_ptr<state::State> st){
+        state::Position src  = st->playerPosition(p_index);
+        state::Position dst  = st->playerPosition(t_index);
+        int mp = st->get_MP(p_index);
+        int attack_range = st->get_Attack(t_index).range;
+        
         st->BFS_Shortest_Path(dst, src);
         if(mp+attack_range < (*st)[dst].distance){
             this->strategic_position = state::Position(-1,-1);
@@ -67,7 +66,7 @@ namespace ai {
         while(st->get_AP(p_index) && !st->isDead(t_index)){
             ng->registerTarget(this->judicious_attack);
             ng->registerTarget(t_pos[0], t_pos[1], (char)move_action);
-            this->cmdCount += 2;
+            this->g_ai->incCmdCount(2);
         }
     }
 

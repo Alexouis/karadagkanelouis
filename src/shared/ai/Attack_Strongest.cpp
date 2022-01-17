@@ -27,18 +27,21 @@ namespace ai{
     int Attack_Strongest::test (std::shared_ptr<state::State> st, std::shared_ptr<engine::Engine> ng){
         int t_pos[2];
         char p_index = st->getActualPlayerIndex();
-        char t_index = st->strngestEnemyIndexTo(p_index, t_pos);
-        this->pick_GoodPosition(t_index, st);
+        char t_index = st->strngestEnemyIndexTo(t_index, t_pos);
+        //st->
+        this->pick_GoodPosition(p_index, t_index, st);
         
         //if good position found
         if(this->strategic_position.x != -1){
             //then move to good position
             ng->registerTarget(this->strategic_position.x, this->strategic_position.y, (char)move_action);
-            this->cmdCount++;
+            this->g_ai->incCmdCount(1);
             //the simulate attack
             this->simulate_attack(st, ng, p_index, t_index, t_pos);
             
             //then simulate enmy turn
         }
+
+        return 0;
     }
 }
