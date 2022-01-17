@@ -34,7 +34,9 @@ namespace ai{
         if(this->strategic_position.x != -1){
             //then move to good position
             ng->registerTarget(this->strategic_position.x, this->strategic_position.y, (char)move_action);
-            this->judicious_attack = (char)weak_attack;
+            this->cmdCount++;
+            //the simulate attack
+            this->simulate_attack(st, ng, p_index, t_index, t_pos);
             
 
             //then simulate enmy turn
