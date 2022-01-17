@@ -98,11 +98,22 @@ namespace state {
     };
 
     //  Permet de passer le tour du joueur actuel et donner la main au joueur suivant
-    void State::passTurn (){
+    void State::passTurn (char selected){
         this->actualPlayerIndex = this->players_id[this->actualPlayerIndex].next;
         std::string id = this->players_id[actualPlayerIndex].id;
         this->players[id.back()-'0']->find(id)->second->resetPoints();
-        this->chrono->start(1,10);
+        if(selected!=0)
+        {
+            this->chrono->start(1,10);
+        }
+    };
+
+    //  Permet d'annuler la fonction passTurn et de revenir au tour du joueur précédent
+    void State::cancel_passTurn(char selected){
+        if(selected==0)
+        {
+            this->actualPlayerIndex = this->players_id[this->actualPlayerIndex].prev;
+        }
     };
 
     //  Incrémente la valeur turn quand on passe un tour
