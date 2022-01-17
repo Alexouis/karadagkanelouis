@@ -19,7 +19,7 @@ namespace ai {
 
     Strategy::~Strategy(){}
 
-    state::Position Strategy::pick_GoodPosition (char p_index, std::shared_ptr<state::State> st){
+    void Strategy::pick_GoodPosition (char p_index, std::shared_ptr<state::State> st){
         char src_index = st->getActualPlayerIndex();
         state::Position src  = st->playerPosition(src_index);
         state::Position dst  = st->playerPosition(p_index);
@@ -28,18 +28,16 @@ namespace ai {
 
         st->BFS_Shortest_Path(dst, src);
         if(mp+attack_range < (*st)[dst].distance){
-            return state::Position(-1,-1);
+            this->strategic_position = state::Position(-1,-1);
+            return;
         }
 
-        state::Position good = dst;
+        this->strategic_position = dst;
         while(attack_range){
-            good = (*st)[good].next_grid;
+            this->strategic_position = (*st)[this->strategic_position].next_grid;
             attack_range--;
         }
 
-        this->p = good;
-        
-        return good;
     }
 
     int Strategy::simulate_attack (std::shared_ptr<state::State> st, std::shared_ptr<engine::Engine> ng, char selected_attack){

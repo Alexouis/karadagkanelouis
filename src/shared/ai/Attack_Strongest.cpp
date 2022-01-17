@@ -31,10 +31,10 @@ namespace ai{
         this->pick_GoodPosition(t_index, st);
         
         //if good position found
-        if(this->p.x != -1){
+        if(this->strategic_position.x != -1){
             //then move to good position
-            ng->registerTarget(this->p.x, this->p.y, (char)move_action);
-            char selected_attack = (char)weak_attack;
+            ng->registerTarget(this->strategic_position.x, this->strategic_position.y, (char)move_action);
+            this->judicious_attack = (char)weak_attack;
             while(st->get_AP(p_index) && !st->isDead(t_index)){
                 ng->registerTarget((char)weak_attack);
                 ng->registerTarget(t_pos[0], t_pos[1], (char)move_action);
@@ -44,7 +44,7 @@ namespace ai{
                 ng->undo();
                 this->cmdCount--;
             }
-            selected_attack = (char)strg_attack;
+            this->judicious_attack = (char)strg_attack;
             while(st->get_AP(p_index) && !st->isDead(t_index)){
                 ng->registerTarget((char)strg_attack);
                 ng->registerTarget(t_pos[0], t_pos[1], (char)move_action);
