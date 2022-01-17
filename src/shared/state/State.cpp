@@ -47,6 +47,7 @@ namespace state {
         p_id.next = 1;
         p_id.prev = 1;
         this->players_id.push_back(p_id);
+        this->users_index.push_back(0);
 
         this->players[0] = new std::map<std::string, std::unique_ptr<Player>>;
         this->players[1] = new std::map<std::string, std::unique_ptr<Player>>;
@@ -62,7 +63,6 @@ namespace state {
         p_id.prev = 0;
         this->players_id.push_back(p_id);
         this->players[p_id.id.back()-'0'][0][p_id.id] = std::move(player);
-
         
         this->gameMap[11][11].state = OCCUPIED;
         this->gameMap[11][11].player_index = 1;
@@ -423,6 +423,33 @@ namespace state {
         auto id = this->players_id[this->actualPlayerIndex].id;
         this->players[id.back()-'0']->find(id)->second->setCurrentAttackIndex(old_attack_index);
     }
+
+    void State::turn_all_in_AI()
+    {
+        for (char index : users_index){
+           this->turn_in_AI(index); 
+        }
+    }
+
+    void State::turn_in_AI(char p_index)
+    {
+        std::string id = this->players_id[p_index].id;
+        this->players[id.back()-'0']->find(id)->second->setIsAI(true);
+    }
+
+    void State::restore_all_users()
+    {
+        for (char index : users_index){
+           this->restore_user(index); 
+        }
+    }
+
+    void State::restore_user(char p_index)
+    {
+        std::string id = this->players_id[p_index].id;
+        this->players[id.back()-'0']->find(id)->second->setIsAI(false);
+    }
+
 
     State::~State (){
 
