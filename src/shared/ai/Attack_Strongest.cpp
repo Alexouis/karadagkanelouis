@@ -38,7 +38,6 @@ namespace ai{
             //the simulate attack
             this->simulate_attack(st, ng, p_index, t_index, t_pos);
             
-
             //then simulate enmy turn
         }
     }
