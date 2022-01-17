@@ -237,6 +237,25 @@ namespace state {
         return found;
     }
 
+    char State::strngestEnemyIndexTo (char p_index, int* pos){
+        Player p;
+        p.getLevel();
+        ID *id = &this->players_id[p_index];
+        char enemies = !(id->id.back()-'0');
+        char found, level, strongest = 0;
+
+        for(auto const& enemy : *(this->players[enemies])){
+            level = enemy.second->getLevel();
+            if(level > strongest){
+                strongest = level;
+                pos[0] = enemy.second->getPosition().x;
+                pos[1] = enemy.second->getPosition().y;
+                found = this->gameMap[pos[1]][pos[0]].player_index;
+            }
+        }
+        return found;
+    }
+
     //  Renvoie l’index de l’ennemi ayant le moins de points de vie
     char State::enemyWithLessHp_Of(char p_index, int* pos){
         ID *id = &this->players_id[p_index];
@@ -276,7 +295,7 @@ namespace state {
     //  Retourne les dégâts qu’infligerait un joueur à un autre pour une attaque donnée
     int State::damage(char p_index, char attacker_index, Attack attack)
     {
-        return (attack.damage+this->get_Attack(attacker_index)-this->get_Shield(p_index));
+        return (attack.damage+this->get_playerPower(attacker_index)-this->get_Shield(p_index));
 
     }
 
@@ -345,7 +364,7 @@ namespace state {
     }
 
     //  Renvoie l’attaque du joueur dont l’index est passé en argument
-    int State::get_Attack (char p_index){
+    int State::get_playerPower (char p_index){
         return this->getPlayerStats(p_index).getAttack();
     }
 
@@ -461,6 +480,21 @@ namespace state {
 
     inline bool State::isFree (Position p){
         return ( ((*this)[p].state == FREE) );
+    }
+
+    char State::getAttackIndex (char p_index){
+        std::string id = this->players_id[p_index].id;
+        return this->players[id.back()-'0']->find(id)->second->getCurrentAttackIndex();
+    }
+
+    Attack State::get_Attack (char p_index){
+        char attack_index = this->getAttackIndex(p_index);
+        std::string id = this->players_id[p_index].id;
+        return this->players[id.back()-'0']->find(id)->second->getAttack(attack_index);
+    }
+
+    int State::get_AP (char p_index){
+        return this->getPlayerStats(p_index).getAp();
     }
 
 };
