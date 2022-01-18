@@ -228,7 +228,7 @@ namespace state {
         return found;
     }
 
-    //  Renvoie l’index de l’ennemi le plus faible
+    //  Renvoie l’index de l’ennemi le plus faible par rapport au joueur dont on passe l’index.
     char State::weakestEnemyIndexTo (char p_index, int* pos){
         Player p;
         p.getLevel();
@@ -248,6 +248,8 @@ namespace state {
         return found;
     }
 
+    /*  Renvoie l’index de l’ennemi le plus fort (avec le niveau le plus élevé) par rapport au joueur 
+        dont on passe l’index   */
     char State::strngestEnemyIndexTo (char p_index, int* pos){
         Player p;
         p.getLevel();
@@ -267,7 +269,7 @@ namespace state {
         return found;
     }
 
-    //  Renvoie l’index de l’ennemi ayant le moins de points de vie
+    //  Renvoie l’index de l’ennemi ayant le moins de points de vie par rapport au joueur dont on passe l’index.
     char State::enemyWithLessHp_Of(char p_index, int* pos){
         ID *id = &this->players_id[p_index];
         char enemies = !(id->id.back()-'0');
@@ -435,6 +437,7 @@ namespace state {
         this->players[id.back()-'0']->find(id)->second->setCurrentAttackIndex(old_attack_index);
     }
 
+    //  Permet de changer tous les joueurs qui ne le sont pas en IA
     void State::turn_all_in_AI()
     {
         for (char index : users_index){
@@ -442,12 +445,14 @@ namespace state {
         }
     }
 
+    //  Permet de changer le statut du joueur dont l’index est passé en argument est de faire de lui un IA
     void State::turn_in_AI(char p_index)
     {
         std::string id = this->players_id[p_index].id;
         this->players[id.back()-'0']->find(id)->second->setIsAI(true);
     }
 
+    //  Permet de changer tous les joueurs qui n’étaient pas des IA à l’origine, de nouveau en joueurs réels
     void State::restore_all_users()
     {
         for (char index : users_index){
@@ -455,6 +460,8 @@ namespace state {
         }
     }
 
+    /*  Permet de changer le statut du joueur dont l’index est passé en argument est de faire de lui un joueur 
+    réel, qui n’est pas une IA. */
     void State::restore_user(char p_index)
     {
         std::string id = this->players_id[p_index].id;
@@ -496,6 +503,9 @@ namespace state {
     playerClass State::getWinner() const{
         return this->winner;
     };
+
+    /*  Prend en paramètres une position de départ et une position d’arrivée et détermine le chemin le plus 
+        court pour réaliser ce trajet en prenant en compte les obstacles   */
     bool State::BFS_Shortest_Path (Position src, Position dst){
         std::queue<Position> toExplore;
         Position directions[] = {Position(0,1), Position(1,0), Position(0,-1), Position(-1,0)};
@@ -523,29 +533,40 @@ namespace state {
         return false;
     }
 
+    /*  Il s'agit d'un opérateur nous permettant d’accéder plus simplement et plus rapidement à la variable 
+        gameMap. En effet, si on se trouve dans la classe State, il suffit désormais de faire (*this)[position] 
+        pour accéder à la case de la map souhaitée */
     MapTile& State::operator[] (Position p){
         return this->gameMap[p.y][p.x];
     }
 
+    /*  permet de vérifier qu’une position se trouve au sein de la map. Elle renvoie true si c’est le cas,
+        false sinon    */
     inline bool State::inMap (Position p){
         return ( (p.x >= 0) && (p.y >= 0) && (p.x < this->gameMap.size()) && (p.y < this->gameMap.size()));
     }
 
+    //  permet de vérifier qu’une case de la map est libre ou non. Elle renvoie true si c’est le cas, false sinon
     inline bool State::isFree (Position p){
         return ( ((*this)[p].state == FREE) );
     }
 
+    /*  prend en argument l’index du joueur qui nous intéresse et renvoie l’index de son attaque 
+        actuellement sélectionnée  */
     char State::getAttackIndex (char p_index){
         std::string id = this->players_id[p_index].id;
         return this->players[id.back()-'0']->find(id)->second->getCurrentAttackIndex();
     }
 
+    /*  prend en argument l’index du joueur qui nous intéresse et renvoie l’attaque (l’objet) actuellement 
+        sélectionnée par le joueur */
     Attack State::get_Attack (char p_index){
         char attack_index = this->getAttackIndex(p_index);
         std::string id = this->players_id[p_index].id;
         return this->players[id.back()-'0']->find(id)->second->getAttack(attack_index);
     }
 
+    //  Renvoie les AP du joueur dont l’index est passé en argument
     int State::get_AP (char p_index){
         return this->getPlayerStats(p_index).getAp();
     }
