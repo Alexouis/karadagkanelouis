@@ -23,14 +23,14 @@ namespace ai {
 
     Attack_Most_InDanger::Attack_Most_InDanger (DeepAI* g_ai) : Strategy(g_ai) {}
 
-    int Attack_Most_InDanger::work (std::shared_ptr<state::State> st, std::shared_ptr<engine::Engine> ng){
+    int Attack_Most_InDanger::apply (std::shared_ptr<state::State> st, std::shared_ptr<engine::Engine> ng, int buf_infex){
         state::Position src = st->playerPosition(st->getActualPlayerIndex());
         state::Stats stats = st->getPlayerStats(st->getActualPlayerIndex());
         if(!stats.getMp() && !stats.getAp()){
             ng->registerTarget(0, 0, (char)PASS);
         }
     }
-    int Attack_Most_InDanger::test (std::shared_ptr<state::State> st, std::shared_ptr<engine::Engine> ng){
+    int Attack_Most_InDanger::test (std::shared_ptr<state::State> st, std::shared_ptr<engine::Engine> ng, int buf_infex){
         int score = 0;
         state::Stats stats = st->getPlayerStats(st->getActualPlayerIndex());
         int target[2];

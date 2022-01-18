@@ -15,12 +15,13 @@ namespace ai {
 
     Attack_Weakest::Attack_Weakest (DeepAI* g_ai) : Strategy(g_ai) {}
 
-    int Attack_Weakest::work (std::shared_ptr<state::State> st, std::shared_ptr<engine::Engine> ng){
+    int Attack_Weakest::apply (std::shared_ptr<state::State> st, std::shared_ptr<engine::Engine> ng, int buf_infex){
         state::Position src = st->playerPosition(st->getActualPlayerIndex());
         
         //char t_index = st->
+        
     }
-    int Attack_Weakest::test (std::shared_ptr<state::State> st, std::shared_ptr<engine::Engine> ng){
+    int Attack_Weakest::test (std::shared_ptr<state::State> st, std::shared_ptr<engine::Engine> ng, int buf_infex){
         
     }
 }
