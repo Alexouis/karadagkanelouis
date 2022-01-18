@@ -16,6 +16,13 @@
 #include "Attack_Most_InDanger.h"
 
 #define ANALYSIS true
+#define CMDCOUNT1 0
+#define CMDCOUNT2 1
+#define BUF_INDEX_1 0
+#define BUF_INDEX_2 1
+#define PASS 0x20  //[targetCode code value] =  [0 010 0000]
+#define SIMU_PASS 0x21  //[targetCode code value] =  [0 010 0000]
+
 
 namespace ai{
     DeepAI::DeepAI(){
@@ -26,34 +33,73 @@ namespace ai{
     }
 
     void DeepAI::exploit(){
+        this->exploit(0);
+    }
+
+
+    void DeepAI::exploit(bool work_is_simu){
         if(this->mode == ANALYSIS){
             this->gstate->turn_all_in_AI();
+            char this_p_index = this->gstate->getActualPlayerIndex();
             int score, maxScore = 0;
-            int i=0; 
+            int i=0, max_hp = this->gstate->get_HP(this_p_index);
             for(auto &strategy : this->strategies){
-                score = strategy->test(this->gstate, this->ngine);
+                score = strategy->test(this->gstate, this->ngine, 0);
+                this->simu_othersTurn_for(this_p_index, BUF_INDEX_2);
+
+                score -= (max_hp - this->gstate->get_HP(this_p_index));
+
                 if(score > maxScore){
                     maxScore = score;
                     this->bestStrategy_index = i;
                 }
                 i++;
-                this->backup();
+                this->backup(BUF_INDEX_1);
             }
-
-            this->strategies[this->bestStrategy_index]->work(this->gstate, this->ngine);
         }
+
+        this->strategies[this->bestStrategy_index]->apply(this->gstate, this->ngine, BUF_INDEX_1);
+        
     }
 
-    void DeepAI::backup(){
-        while(this->cmdCount){
+
+    void DeepAI::backup(int buf_infex){
+        while(this->cmdCount[buf_infex]){
             this->ngine->undo();
-            this->cmdCount--;
+            this->cmdCount[buf_infex]--;
         }
     }
 
-    inline void DeepAI::incCmdCount(int count){
-        this->cmdCount += count;
+    inline void DeepAI::incCmdCount(int count, int buf_infex){
+        this->cmdCount[buf_infex] += count;
     }
+
+    void DeepAI::simu_othersTurn_for (char actu_p_index, int buf_infex){
+        char curr;
+        do{
+            this->ngine->registerTarget((char)SIMU_PASS);
+            this->incCmdCount(1,BUF_INDEX_1);
+            curr = this->gstate->getActualPlayerIndex();
+            this->simu_bestStrategyFor_curr();
+            this->strategies[this->bestStrategy_index]->apply(this->gstate, this->ngine, BUF_INDEX_2);
+        }while ((curr != actu_p_index) && this->gstate->get_HP(actu_p_index));
+    }
+
+    int DeepAI::simu_bestStrategyFor_curr (){
+        int score, maxScore = 0;
+        int i=0;
+        for(auto &strategy : this->strategies){
+            score = strategy->test(this->gstate, this->ngine, BUF_INDEX_2);
+            if(score > maxScore){
+                maxScore = score;
+                this->bestStrategy_index = i;
+            }
+            i++;
+            this->backup(BUF_INDEX_2);
+        }
+    }
+
+
     DeepAI::~DeepAI(){}
 
     

@@ -6,7 +6,7 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 # This is free software: you are free to change and redistribute it.
 # There is NO WARRANTY, to the extent permitted by law.
 
-# Make data base, printed on Mon Jan 10 23:03:51 2022
+# Make data base, printed on Tue Jan 18 07:55:58 2022
 
 # Variables
 
@@ -17,7 +17,7 @@ LC_ALL = C
 # environment
 GJS_DEBUG_OUTPUT = stderr
 # environment
-VSCODE_IPC_HOOK_EXTHOST = /run/user/1000/vscode-ipc-d3e6f25b-406e-40f6-9fd6-63a43b0bf4dc.sock
+VSCODE_IPC_HOOK_EXTHOST = /run/user/1000/vscode-ipc-d974476c-1751-4cf9-841d-67541aa84956.sock
 # environment
 VSCODE_CWD = /home/mkas
 # environment
@@ -87,13 +87,13 @@ MAKEFILE_LIST := Makefile
 # environment
 VSCODE_VERBOSE_LOGGING = true
 # environment
-VSCODE_PID = 2822
+VSCODE_PID = 2426
 # environment
 XDG_SESSION_TYPE = x11
 # automatic
 ?D = $(patsubst %/,%,$(dir $?))
 # environment
-SESSION_MANAGER = local/kalikane:@/tmp/.ICE-unix/1820,unix/kalikane:/tmp/.ICE-unix/1820
+SESSION_MANAGER = local/kalikane:@/tmp/.ICE-unix/1746,unix/kalikane:/tmp/.ICE-unix/1746
 # automatic
 *F = $(notdir $*)
 # environment
@@ -119,7 +119,7 @@ MAKECMDGOALS := all
 # environment
 XMODIFIERS = @im=ibus
 # makefile (from 'Makefile', line 15)
-HEADERS := src/shared/engine/Command.h src/shared/engine/Action_Args.h src/shared/engine/Engine.h src/shared/engine/Action.h src/shared/ai/AdvancedAI.h src/shared/ai/HeuristicAI.h src/shared/ai/AI.h src/shared/state/playerOrientation.h src/shared/state/playerStatus.h src/shared/state/Chrono.h src/shared/state/attackName.h src/shared/state/State.h src/shared/state/playerClass.h src/shared/state/Attack.h src/shared/state/Stats.h src/shared/state/Player.h src/shared/state/tileType.h src/shared/state/tileState.h src/shared/state/ID.h src/shared/state/MapTile.h src/shared/state/Position.h src/shared/state/attackType.h src/shared/state.h src/shared/ai.h src/shared/engine.h src/client/render.h src/client/render/TextOrTexture.h src/client/render/TextureSprite.h src/client/render/buttonState.h src/client/render/SceneId.h src/client/render/buttonStyle.h src/client/render/Button.h src/client/render/FightScene.h src/client/render/Box.h src/client/render/AnimatedObject.h src/client/render/Scene.h src/client/render/GameWindow.h src/client/render/Info.h
+HEADERS := src/shared/engine/Command.h src/shared/engine/Action_Args.h src/shared/engine/Engine.h src/shared/engine/Action.h src/shared/ai/Attack_Strongest.h src/shared/ai/Strategy.h src/shared/ai/Attack_Most_InDanger.h src/shared/ai/HeuristicAI.h src/shared/ai/Attack_Closest.h src/shared/ai/DeepAI.h src/shared/ai/Attack_Weakest.h src/shared/ai/AI.h src/shared/state/playerOrientation.h src/shared/state/playerStatus.h src/shared/state/Chrono.h src/shared/state/attackName.h src/shared/state/State.h src/shared/state/playerClass.h src/shared/state/Attack.h src/shared/state/Stats.h src/shared/state/Player.h src/shared/state/tileType.h src/shared/state/tileState.h src/shared/state/ID.h src/shared/state/MapTile.h src/shared/state/Position.h src/shared/state/attackType.h src/shared/state.h src/shared/ai.h src/shared/engine.h src/client/render.h src/client/render/TextOrTexture.h src/client/render/TextureSprite.h src/client/render/buttonState.h src/client/render/SceneId.h src/client/render/buttonStyle.h src/client/render/Button.h src/client/render/FightScene.h src/client/render/Box.h src/client/render/AnimatedObject.h src/client/render/Scene.h src/client/render/GameWindow.h src/client/render/Info.h
 # environment
 GJS_DEBUG_TOPICS = JS ERROR;JS LOG
 # environment
@@ -161,7 +161,7 @@ GIO_LAUNCHED_DESKTOP_FILE = /usr/share/applications/code.desktop
 # makefile
 .DEFAULT_GOAL := all
 # environment
-SYSTEMD_EXEC_PID = 1700
+SYSTEMD_EXEC_PID = 1675
 # environment
 DISPLAY = :1
 # environment
@@ -173,9 +173,9 @@ MAKE_VERSION := 4.3
 # 'override' directive
 .SHELLSTATUS := 0
 # environment
-GIO_LAUNCHED_DESKTOP_FILE_PID = 2822
+GIO_LAUNCHED_DESKTOP_FILE_PID = 2426
 # environment
-SSH_AGENT_PID = 1886
+SSH_AGENT_PID = 1845
 # environment
 _ = /usr/share/code/code
 # environment
@@ -276,6 +276,7 @@ rapport/ai.pdf: src/ai.dia
 	rm -f rapport/ai.ps
 
 # Not a target:
+ 
 src/render.dia:
 #  Implicit rule search has not been done.
 #  Modification time never checked.
@@ -287,7 +288,6 @@ install_extern_deps_rsa:
 #  File does not exist.
 #  File has not been updated.
 #  recipe to execute (from 'Makefile', line 165):
- 
 	@echo 'submodules intallation'
 	@rm -rf extern/tmx-loader
 	@git clone git@github.com:nskley/tmx-loader.git extern/tmx-loader
@@ -526,6 +526,6 @@ install_submodules:
 # strcache performance: lookups = 125 / hit rate = 54%
 # hash-table stats:
 # Load=57/8192=1%, Rehash=0, Collisions=0/125=0%
-# Finished Make data base on Mon Jan 10 23:03:51 2022
+# Finished Make data base on Tue Jan 18 07:55:58 2022
 
  
