@@ -36,7 +36,8 @@ namespace ai{
         this->exploit(0);
     }
 
-
+    /*  Permet de simuler l’action que l’IA a choisi d’effectuer comme le fait de cliquer sur un bouton 
+        ou sur la map par exemple  */
     void DeepAI::exploit(bool work_is_simu){
         if(this->mode == ANALYSIS){
             this->gstate->turn_all_in_AI();
@@ -62,7 +63,8 @@ namespace ai{
         
     }
 
-
+    /*  Annule les commandes exécutés selon le type de simulation effectuée (recherche de stratégie ou 
+        simulation d’action après avoir trouvé la meilleur stratégie)   */
     void DeepAI::backup(int buf_infex){
         while(this->cmdCount[buf_infex]){
             this->ngine->undo();
@@ -70,10 +72,13 @@ namespace ai{
         }
     }
 
+    //  Permet d’incrémenter la valeur de cmdCount lorsqu’un commande est exécutée.
     inline void DeepAI::incCmdCount(int count, int buf_infex){
         this->cmdCount[buf_infex] += count;
     }
 
+    /*  Permet de permet de simuler le tour des autres joueurs en prenant comme référence le joueur dont
+        l’index est passé en argument   */
     void DeepAI::simu_othersTurn_for (char actu_p_index, int buf_infex){
         char curr;
         do{
@@ -85,6 +90,7 @@ namespace ai{
         }while ((curr != actu_p_index) && this->gstate->get_HP(actu_p_index));
     }
 
+    //  Permet de tester les différentes stratégies et déterminer la meilleure pour l’IA actuelle.
     int DeepAI::simu_bestStrategyFor_curr (){
         int score, maxScore = 0;
         int i=0;

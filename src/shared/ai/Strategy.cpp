@@ -20,6 +20,8 @@ namespace ai {
 
     Strategy::~Strategy(){}
 
+    /*  permet de trouver la position optimale à laquelle le joueur devrait se placer. Il s’agit de la position 
+        la moins couteuse en PM, qui permettrait d’attaquer l’ennemi ciblé par la stratégie */
     void Strategy::pick_GoodPosition (char p_index, char t_index, std::shared_ptr<state::State> st, int buf_infex){
         state::Position src  = st->playerPosition(p_index);
         state::Position dst  = st->playerPosition(t_index);
@@ -40,6 +42,8 @@ namespace ai {
 
     }
 
+    /*  Permet comme son nom l’indique de simuler une attaque en actualisant une copie des stats des personnages 
+        impliquées : mise à jour des HP du joueur attaqué et des PA du joueur attaquant    */
     int Strategy::simulate_attack (std::shared_ptr<state::State> st, std::shared_ptr<engine::Engine> ng, char p_index, char t_index, int t_pos[2], int buf_infex){
         state::Stats p_stats1 = st->getPlayerStats(p_index);
         state::Stats t_stats1 = st->getPlayerStats(t_index);
@@ -70,6 +74,8 @@ namespace ai {
         }
     }
 
+    /*  Permet de simuler les tours des ennemis afin de déterminer les dégâts que l’on subirait en choisissant 
+        cette stratégie.    */ 
     int Strategy::simulateEnemyTurn (std::shared_ptr<engine::Engine> nd, std::shared_ptr<state::State> st){
         
     }
