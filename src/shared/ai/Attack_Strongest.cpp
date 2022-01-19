@@ -19,29 +19,40 @@ namespace ai{
 
     Attack_Strongest::Attack_Strongest (DeepAI* g_ai) : Strategy(g_ai){}
 
-    int Attack_Strongest::work (std::shared_ptr<state::State> st, std::shared_ptr<engine::Engine> ng){
-        state::Position src = st->playerPosition(st->getActualPlayerIndex());
-        
-        //char t_index = st->
-    }
-    int Attack_Strongest::test (std::shared_ptr<state::State> st, std::shared_ptr<engine::Engine> ng){
+    int Attack_Strongest::apply (std::shared_ptr<state::State> st, std::shared_ptr<engine::Engine> ng, int buf_infex){
         int t_pos[2];
         char p_index = st->getActualPlayerIndex();
         char t_index = st->strngestEnemyIndexTo(t_index, t_pos);
+        //char t_index = st->
+        if(this->strategic_position[0].x != -1){
+            //then move to good position
+            ng->registerTarget(this->strategic_position[buf_infex].x, this->strategic_position[buf_infex] .y, (char)move_action);
+            //the simulate attack
+            while(st->get_AP(p_index) && !st->isDead(t_index)){
+                ng->registerTarget(this->judicious_attack[buf_infex]);
+                ng->registerTarget(t_pos[0], t_pos[1], (char)move_action);
+                this->g_ai->incCmdCount(2, buf_infex);
+            }
+        }
+    }
+    int Attack_Strongest::test (std::shared_ptr<state::State> st, std::shared_ptr<engine::Engine> ng, int buf_infex){
+        int t_pos[2], score = 16000;
+        char p_index = st->getActualPlayerIndex();
+        char t_index = st->strngestEnemyIndexTo(t_index, t_pos);
         //st->
-        this->pick_GoodPosition(p_index, t_index, st);
+        this->pick_GoodPosition(p_index, t_index, st, buf_infex);
         
         //if good position found
-        if(this->strategic_position.x != -1){
+        if(this->strategic_position[buf_infex].x != -1){
             //then move to good position
-            ng->registerTarget(this->strategic_position.x, this->strategic_position.y, (char)move_action);
-            this->g_ai->incCmdCount(1);
+            ng->registerTarget(this->strategic_position[buf_infex].x, this->strategic_position[buf_infex] .y, (char)move_action);
+            this->g_ai->incCmdCount(1,buf_infex);
             //the simulate attack
-            this->simulate_attack(st, ng, p_index, t_index, t_pos);
-            
-            //then simulate enmy turn
+            this->simulate_attack(st, ng, p_index, t_index, t_pos, buf_infex);
+            score -= st->get_HP(t_index);
+            if(st->isDead(t_index)){ score *= 2;}
         }
 
-        return 0;
+        return score;
     }
 }
