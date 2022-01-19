@@ -24,7 +24,7 @@ namespace ai {
         state::Position src  = st->playerPosition(p_index);
         state::Position dst  = st->playerPosition(t_index);
         int mp = st->get_MP(p_index);
-        int attack_range = st->get_Attack(t_index).range;
+        int attack_range = st->get_Attack(p_index,t_index).range;
         
         st->BFS_Shortest_Path(dst, src);
         if(mp+attack_range < (*st)[dst].distance){

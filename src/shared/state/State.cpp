@@ -315,10 +315,10 @@ namespace state {
     // Permet de simuler les conséquences d'une attaque
     void State::simu_attack(char p_index, char t_index, char atck_index, state::Stats& p_stats,  state::Stats& t_stats)
     {
-        int new_ap = this->get_AP(p_index)-(this->get_Attack(atck_index)).cost;
+        int new_ap = this->get_AP(p_index)-(this->get_Attack(p_index,atck_index)).cost;
         new_ap = (new_ap > 0 ? new_ap : 0);
         p_stats.setAp(new_ap);
-        int new_hp = (this->get_Shield(t_index)+this->get_HP(t_index)-(this->get_Attack(atck_index)).damage-this->get_playerPower(p_index));
+        int new_hp = (this->get_Shield(t_index)+this->get_HP(t_index)-(this->get_Attack(p_index,atck_index)).damage-this->get_playerPower(p_index));
         t_stats.setHp(new_hp);
     }
 
@@ -560,10 +560,9 @@ namespace state {
 
     /*  prend en argument l’index du joueur qui nous intéresse et renvoie l’attaque (l’objet) actuellement 
         sélectionnée par le joueur */
-    Attack State::get_Attack (char p_index){
-        char attack_index = this->getAttackIndex(p_index);
+    Attack State::get_Attack (char p_index, char atck_index){
         std::string id = this->players_id[p_index].id;
-        return this->players[id.back()-'0']->find(id)->second->getAttack(attack_index);
+        return this->players[id.back()-'0']->find(id)->second->getAttack(atck_index);
     }
 
     //  Renvoie les AP du joueur dont l’index est passé en argument
