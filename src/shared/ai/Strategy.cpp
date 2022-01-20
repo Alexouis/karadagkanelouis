@@ -63,18 +63,18 @@ attack_again:      //then  attack
                 if(gstate->hasEnough_AP(p_index[buf_index].front(), judicious_attack[buf_index].front())){
                     iteration = 0;
                     if(t_pos[buf_index].size() > 1){
-                        popQueues ();
+                        popQueues (buf_index);
                         return apply(buf_index);
                     }
                 }
                 else{
-                    if(t_pos[buf_index].size() > 0){ popQueues (); }
+                    if(t_pos[buf_index].size() > 0){ popQueues (buf_index); }
                     return -1;
                 }
             }
         }
 
-        if(t_pos[buf_index].size() > 0){ popQueues ();  }
+        if(t_pos[buf_index].size() > 0){ popQueues (buf_index);  }
         return -1;
     }
 
@@ -182,7 +182,7 @@ attack_again:      //then  attack
     }
 
 
-    void Strategy::popQueues (){
+    void Strategy::popQueues (int buf_index){
         iteration = 0;
         t_pos[buf_index].pop();
         p_index[buf_index].pop();
