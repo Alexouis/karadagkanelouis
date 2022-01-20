@@ -390,6 +390,64 @@ void rollback(void){
 
 
 
+void deep_Ai(void){
+    render::GameWindow gamewindow;
+    engine::Engine ngine;
+    std::unique_ptr<engine::Command> cmdHolder;
+    ai::AI::initSrand();
+
+    gamewindow.shareStateWith(ngine);
+    ai::DeepAI g_ai(&ngine);
+    gamewindow.update();
+    //ngine.start();
+
+    bool debug = false, timeOut;
+    sf::Event event;
+    sf::Vector2f mousePosScreen = gamewindow.window.mapPixelToCoords(sf::Vector2i(0,0));
+    sf::Vector2f mousePosWorld  = gamewindow.screenToWorld(mousePosScreen);
+    gamewindow.update(event,(sf::Vector2i)mousePosScreen);
+
+    while(gamewindow.window.isOpen()){
+
+        mousePosScreen = gamewindow.window.mapPixelToCoords(sf::Mouse::getPosition(gamewindow.window));
+        mousePosWorld = gamewindow.screenToWorld(mousePosScreen);
+        
+        while(gamewindow.window.pollEvent(event)) {
+            timeOut = ngine.timeOut();
+            if (event.type == sf::Event::Closed) {
+                gamewindow.window.close();
+                return;
+            }
+            else{
+                gamewindow.handleZoom(event,mousePosScreen);
+                if(!ngine.isActionFromAI() && !timeOut){
+                    gamewindow.handleEvents (event, mousePosScreen, mousePosWorld, ngine);  
+                    gamewindow.update(); 
+                }
+
+            }
+        }
+
+        if(ngine.isActionFromAI() && !ngine.timeOut()){
+            g_ai.exploit();
+            gamewindow.update();
+        }
+        else if(ngine.timeOut()){
+            gamewindow.update();
+        }
+        
+        gamewindow.update();
+        gamewindow.window.clear();
+        gamewindow.draw();
+        gamewindow.window.display();
+
+    }
+    
+} 
+
+
+
+
 
 int main(int argc,char* argv[])
 {
@@ -416,6 +474,8 @@ int main(int argc,char* argv[])
         random_ai();
     }else if(strcmp(argv[1], "heuristic_ai") == 0){
         heuristic_ai();
+    }else if(strcmp(argv[1], "deep_ai") == 0){
+        deep_Ai();
     }else{
         std::cout << "Expected one argument like 'client' or 'render'" << std::endl;
     }

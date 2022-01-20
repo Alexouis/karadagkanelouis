@@ -105,7 +105,7 @@ BOOST_AUTO_TEST_CASE(test_Player)
     
     Player erza{};
     erza.resetPoints();
-    Player valla("hahaha",DEMON,Position(3,5),1,0);
+    Player valla("hahaha",DEMON,Position(3,5),1,user);
     valla.move(Position(2,5));
     valla.move(2,5);
     valla.setPosXY(5,8);
@@ -178,8 +178,8 @@ BOOST_AUTO_TEST_CASE(test_Player)
     target->setStats(stat);
     
     Player ai{};
-    ai.setIsAI(true);
-    BOOST_CHECK(ai.getIsAI());
+    ai.setInput(deep_ai);
+    BOOST_CHECK_EQUAL(ai.getInput(), deep_ai);
 
     //  faire attaquer
     BOOST_CHECK_EQUAL(target->getStats().getHp(),100);
@@ -199,6 +199,11 @@ BOOST_AUTO_TEST_CASE(test_State)
     //State gameState;
   //  State gameState{2000,1000};
     State gameState(22,22);
+    int old_ap_thp[2];
+    gameState.pull_AP_THP(9, 10, old_ap_thp);
+    auto gstate = std::shared_ptr<state::State>(&gameState);
+    auto args = std::unique_ptr<Action_Args>(new Action_Args(gstate, 9, 10, old_ap_thp));
+    args->p_index = gameState.getActualPlayerIndex();
     //(2000,1000);
     gameState.init();
     gameState.initPlayer();
@@ -208,14 +213,14 @@ BOOST_AUTO_TEST_CASE(test_State)
     gameState.isDead(0);
     BOOST_CHECK_EQUAL(gameState.playerPosition(0).x,10);
     BOOST_CHECK_EQUAL(gameState.playerPosition(0).y,10);
-    gameState.moveCurrentPlayer(9,10);
+    gameState.makeMove(args);
     BOOST_CHECK_EQUAL(gameState.playerPosition(0).x,9);
     BOOST_CHECK_EQUAL(gameState.playerPosition(0).y,10);
     gameState.passTurn(0);
     BOOST_CHECK_EQUAL(gameState.getActualPlayerIndex(),1);
     gameState.setCurrPlayerAttack(0);
     gameState.getPlayerStats(1).setAttack(10000);
-    gameState.makeAttackOn(9,10);
+    gameState.makeAttack(args);
     auto a = gameState.getPlayerClass(0);
     BOOST_CHECK_EQUAL(gameState.getPlayersCount(),2);
     BOOST_CHECK(gameState.isAI_Now());

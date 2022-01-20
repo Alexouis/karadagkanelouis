@@ -21,45 +21,15 @@
 
 namespace ai {
 
-    Attack_Most_InDanger::Attack_Most_InDanger (DeepAI* g_ai) : Strategy(g_ai) {}
+    Attack_Most_InDanger::Attack_Most_InDanger (DeepAI* g_ai, std::shared_ptr<state::State>& gstate, std::shared_ptr<engine::Engine>& ngine) : 
+    Strategy(g_ai, gstate, ngine) {}
 
-    int Attack_Most_InDanger::apply (std::shared_ptr<state::State> st, std::shared_ptr<engine::Engine> ng, int buf_infex){
-        state::Position src = st->playerPosition(st->getActualPlayerIndex());
-        state::Stats stats = st->getPlayerStats(st->getActualPlayerIndex());
-        if(!stats.getMp() && !stats.getAp()){
-            ng->registerTarget(0, 0, (char)PASS);
-        }
-    }
-    int Attack_Most_InDanger::test (std::shared_ptr<state::State> st, std::shared_ptr<engine::Engine> ng, int buf_infex){
-        int score = 0;
-        state::Stats stats = st->getPlayerStats(st->getActualPlayerIndex());
-        int target[2];
-        state::Position aim;
-        char actualPlayerIndex = st->getActualPlayerIndex();
-        char targetIndex, selected;
-
-        while(!stats.getMp() && !stats.getAp()){
-            selected = (char)MOVE;
-            targetIndex = st->enemyWithLessHp_Of(actualPlayerIndex,target);
-
-            if(st->BFS_Shortest_Path(st->playerPosition(actualPlayerIndex),st->playerPosition(targetIndex)))
-            {
-                aim.x = (*st)[st->playerPosition(actualPlayerIndex)].next_grid.x;
-                aim.y = (*st)[st->playerPosition(actualPlayerIndex)].next_grid.y;
-                while(st->get_MP(actualPlayerIndex) > 0)
-                {
-                    ng->registerTarget(aim.x, aim.y,selected);
-                    aim = (*st)[aim].next_grid;
-                }
-            }
-
-            while(stats.getAp() > 0)
-            {
-                ng->registerTarget(aim.x, aim.y,selected);
-                aim = (*st)[aim].next_grid;
-            }
-        }
-
+    int Attack_Most_InDanger::test (int buf_index){
+        t_pos[buf_index].push(new int[2]);
+        p_index[buf_index].push(gstate->getActualPlayerIndex());
+        t_index[buf_index].push(gstate->enemyWithLessHp_Of(p_index[buf_index].back(), t_pos[buf_index].back()));
+        int score = start_simulation(buf_index);
         return score;
     }
+
 }

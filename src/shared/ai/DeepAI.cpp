@@ -15,6 +15,8 @@
 #include "Attack_Weakest.h"
 #include "Attack_Most_InDanger.h"
 
+#include <iostream>
+
 #define ANALYSIS true
 #define CMDCOUNT1 0
 #define CMDCOUNT2 1
@@ -26,10 +28,26 @@
 
 namespace ai{
     DeepAI::DeepAI(){
-        this->strategies[0] = std::unique_ptr<Attack_Strongest    >(new Attack_Strongest    (this));
-        this->strategies[1] = std::unique_ptr<Attack_Closest      >(new Attack_Closest      (this));
-        this->strategies[2] = std::unique_ptr<Attack_Weakest      >(new Attack_Weakest      (this));
-        this->strategies[3] = std::unique_ptr<Attack_Most_InDanger>(new Attack_Most_InDanger(this));
+        this->cmdCount[0] =  0;
+        this->cmdCount[1] =  0;
+        this->strategies[0] = std::unique_ptr<Attack_Closest      >(new Attack_Closest      (this, gstate, ngine));
+        this->strategies[1] = std::unique_ptr<Attack_Strongest    >(new Attack_Strongest    (this, gstate, ngine));
+        this->strategies[2] = std::unique_ptr<Attack_Weakest      >(new Attack_Weakest      (this, gstate, ngine));
+        this->strategies[3] = std::unique_ptr<Attack_Most_InDanger>(new Attack_Most_InDanger(this, gstate, ngine));
+        this->bestStrategy_index[0] = 0;
+        this->bestStrategy_index[1] = 0;
+
+    }
+
+    DeepAI::DeepAI(engine::Engine* Ngine) : AI(Ngine) {
+        this->cmdCount[0] =  0;
+        this->cmdCount[1] =  0;
+        this->strategies[0] = std::unique_ptr<Attack_Strongest    >(new Attack_Strongest    (this, gstate, ngine));
+        this->strategies[1] = std::unique_ptr<Attack_Closest      >(new Attack_Closest      (this, gstate, ngine));
+        this->strategies[2] = std::unique_ptr<Attack_Weakest      >(new Attack_Weakest      (this, gstate, ngine));
+        this->strategies[3] = std::unique_ptr<Attack_Most_InDanger>(new Attack_Most_InDanger(this, gstate, ngine));
+        this->bestStrategy_index[0] = 0;
+        this->bestStrategy_index[1] = 0;
     }
 
     void DeepAI::exploit(){
@@ -39,28 +57,32 @@ namespace ai{
     /*  Permet de simuler l’action que l’IA a choisi d’effectuer comme le fait de cliquer sur un bouton 
         ou sur la map par exemple  */
     void DeepAI::exploit(bool work_is_simu){
-        if(this->mode == ANALYSIS){
-            this->gstate->turn_all_in_AI();
+        if(AI::test){
+            AI::test  = false;
+            int score = 16000, maxScore = 0;
+            //this->gstate->turn_all_in_AI();
             char this_p_index = this->gstate->getActualPlayerIndex();
-            int score, maxScore = 0;
-            int i=0, max_hp = this->gstate->get_HP(this_p_index);
+            int i=0, max_hp   = this->gstate->get_HP(this_p_index);
             for(auto &strategy : this->strategies){
-                score = strategy->test(this->gstate, this->ngine, 0);
+                score += strategy->test(BUF_INDEX_1);
+                std::cout << "exploit\n";
                 this->simu_othersTurn_for(this_p_index, BUF_INDEX_2);
-
+                std::cout << "exploit\n";
                 score -= (max_hp - this->gstate->get_HP(this_p_index));
-
                 if(score > maxScore){
                     maxScore = score;
-                    this->bestStrategy_index = i;
+                    this->bestStrategy_index[BUF_INDEX_1] = i;
                 }
                 i++;
                 this->backup(BUF_INDEX_1);
+                std::cout << "score = " << score << std::endl;
+                score = 16000;
             }
         }
 
-        this->strategies[this->bestStrategy_index]->apply(this->gstate, this->ngine, BUF_INDEX_1);
-        
+        if(this->strategies[this->bestStrategy_index[BUF_INDEX_1]]->apply(BUF_INDEX_1) == -1){
+            this->ngine->registerTarget((char)PASS);
+        }
     }
 
     /*  Annule les commandes exécutés selon le type de simulation effectuée (recherche de stratégie ou 
@@ -81,13 +103,20 @@ namespace ai{
         l’index est passé en argument   */
     void DeepAI::simu_othersTurn_for (char actu_p_index, int buf_infex){
         char curr;
-        do{
+        this->ngine->registerTarget((char)SIMU_PASS);
+        this->ngine->execute();
+        this->incCmdCount(1,BUF_INDEX_1);
+        std::cout << "others\n";
+        curr = this->gstate->getActualPlayerIndex();
+        while ((curr != actu_p_index) && this->gstate->get_HP(actu_p_index)){ 
+            std::cout << "others\n";
+            this->simu_bestStrategyFor_curr();
+            this->strategies[this->bestStrategy_index[BUF_INDEX_2]]->apply(BUF_INDEX_2);
             this->ngine->registerTarget((char)SIMU_PASS);
+            this->ngine->execute();
             this->incCmdCount(1,BUF_INDEX_1);
             curr = this->gstate->getActualPlayerIndex();
-            this->simu_bestStrategyFor_curr();
-            this->strategies[this->bestStrategy_index]->apply(this->gstate, this->ngine, BUF_INDEX_2);
-        }while ((curr != actu_p_index) && this->gstate->get_HP(actu_p_index));
+        }
     }
 
     //  Permet de tester les différentes stratégies et déterminer la meilleure pour l’IA actuelle.
@@ -95,10 +124,10 @@ namespace ai{
         int score, maxScore = 0;
         int i=0;
         for(auto &strategy : this->strategies){
-            score = strategy->test(this->gstate, this->ngine, BUF_INDEX_2);
+            score = strategy->test(BUF_INDEX_2);
             if(score > maxScore){
                 maxScore = score;
-                this->bestStrategy_index = i;
+                this->bestStrategy_index[BUF_INDEX_2] = i;
             }
             i++;
             this->backup(BUF_INDEX_2);
