@@ -79,6 +79,7 @@ namespace engine{
     //  Permet d’exécuter les commandes de la queue. Exécute la commande en tête de file
     void Engine::execute(){
         if(!this->qcmd.empty()){
+            //std::cout << "exec_" << std::endl;
             this->qcmd.front()->action(this->qcmd.front()->args);
             this->cmdHistory.push_back(std::move(this->qcmd.front()));
             this->qcmd.pop();
@@ -121,6 +122,7 @@ namespace engine{
         this->selected = selected;
         char old_attack_index = this->currentState->getCurrAttackIndex(this->currentState->getActualPlayerIndex());
         auto args = std::unique_ptr<Action_Args>(new Action_Args(this->currentState, VALUE_MASK(selected), old_attack_index));
+        args->p_index = this->currentState->getActualPlayerIndex();
         this->cmdHolder = std::unique_ptr<Command>(new Command(this->selection[CODE_MASK(selected)], args));
         this->qcmd.push(std::move(cmdHolder));
     }
@@ -168,6 +170,7 @@ namespace engine{
         actions[0] = &Action::move;
         actions[1] = &Action::cancel_move;
         auto args = std::unique_ptr<Action_Args>(new Action_Args(gstate, x, y, old_pos, old_mp));
+        args->p_index = gstate->getActualPlayerIndex();
         auto cmd = std::unique_ptr<Command>(new Command(actions, args));
         return cmd;
     }
@@ -178,6 +181,7 @@ namespace engine{
         actions[0] = &Action::attack;
         actions[1] = &Action::cancel_attack;
         auto args = std::unique_ptr<Action_Args>(new Action_Args(gstate, x, y, old_ap_thp));
+        args->p_index = gstate->getActualPlayerIndex();
         auto cmd = std::unique_ptr<Command>(new Command(actions, args));
         return cmd;
     }

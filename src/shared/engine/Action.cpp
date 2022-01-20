@@ -18,12 +18,12 @@ namespace engine{
 
     // Pour modifier la position du joueur quand il désire se déplacer
     void Action::move (std::unique_ptr<Action_Args>& args){
-        args->state->moveCurrentPlayer(args->point[0], args->point[1]);
+        args->state->makeMove(args);
     }
 
     // attack() pour mettre à jour les points d’actions du joueur et diminuer les points de vie de l’adversaire concerné.
     void Action::attack (std::unique_ptr<Action_Args>& args){
-        args->state->makeAttackOn(args->point[0], args->point[1]);
+        args->state->makeAttack(args);
     }
 
     //  Permet de préparer une attaque en sélectionnant un sort avant d’attaquer l’ennemi
@@ -48,12 +48,12 @@ namespace engine{
 
     //  Va permettre d’annuler un déplacement
     void Action::cancel_move (std::unique_ptr<Action_Args>& args){
-        args->state->cancel_move(args->old_pos_mp);
+        args->state->cancel_move(args);
     }
 
     //  Va permettre d’annuler une attaque
     void Action::cancel_attack (std::unique_ptr<Action_Args>& args){
-        args->state->cancel_attack(args->point, args->old_ap_thp);
+        args->state->cancel_attack(args);
     }
 
     //  Va permettre d’annuler la sélection d’un sort

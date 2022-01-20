@@ -40,7 +40,7 @@ namespace state {
         }
 
         this->players.resize(this->playersCount);
-        auto player = std::unique_ptr<Player>(new Player("goku",DEMON, Position(10,10), 1, false));
+        auto player = std::unique_ptr<Player>(new Player("goku",DEMON, Position(10,10), 1, user));
         ID p_id;
         p_id.id = player->getName();
         p_id.id.push_back('0');
@@ -56,7 +56,7 @@ namespace state {
         this->gameMap[10][10].state = OCCUPIED;
         this->gameMap[10][10].player_index = 0;
 
-        player = std::unique_ptr<Player>(new Player("buu",HERO, Position(11,11), 1, true));
+        player = std::unique_ptr<Player>(new Player("buu",HERO, Position(11,11), 1, deep_ai));
         p_id.id = player->getName();
         p_id.id.push_back('1');
         p_id.next = 0;
@@ -74,6 +74,8 @@ namespace state {
     void State::init (){
         this->turn = 0;
         this->playersCount = 2;
+        this->teamCount[0] = this->playersCount/2;
+        this->teamCount[1] = this->playersCount/2;
         this->actualPlayerIndex = 0;
         this->gameOver = false;
         this->chrono = std::unique_ptr<Chrono>(new Chrono);
@@ -102,16 +104,15 @@ namespace state {
         this->actualPlayerIndex = this->players_id[this->actualPlayerIndex].next;
         std::string id = this->players_id[actualPlayerIndex].id;
         this->players[id.back()-'0']->find(id)->second->resetPoints();
-        if(selected==0)
-        {
+        if(selected==0){
+            ai::AI::test = true;
             this->chrono->start(1,10);
         }
     };
 
     //  Permet d'annuler la fonction passTurn et de revenir au tour du joueur précédent
     void State::cancel_passTurn(char selected){
-        if(selected!=0)
-        {
+        if(selected!=0){
             this->actualPlayerIndex = this->players_id[this->actualPlayerIndex].prev;
         }
     };
@@ -133,16 +134,18 @@ namespace state {
 
     /*  Permet durant le tour d’un joueur de lancer une attaque à une position passée en argument. 
         L’attaque n’aboutira que si un joueur se trouve à cette position   */
-    void State::makeAttackOn (int targetX, int targetY){
-        if((targetX >= 0) && (targetY >= 0) && (targetX < this->gameMap.size()) && (targetY < this->gameMap.size())){
-            char st = this->gameMap[targetY][targetX].state;
+    void State::makeAttack (std::unique_ptr<engine::Action_Args>& args){
+        if(this->inMap(args->point)){
+            char st = (*this)[args->point].state;
+            //std::cout << "t attttt = " << targetX << " " << targetY << std::endl;
             if(st == OCCUPIED){
-                std::string attackerId = this->players_id[this->actualPlayerIndex].id;
-                std::string taregtId = this->players_id[this->gameMap[targetY][targetX].player_index].id;
-                this->players[attackerId.back()-'0']->find(attackerId)->second->attack(this->players[taregtId.back()-'0']->find(taregtId)->second);
-                if(this->isDead(this->gameMap[targetY][targetX].player_index))
-                {
-                    this->winner = this->players[attackerId.back()-'0']->find(attackerId)->second->getPClass();
+                //std::cout << "t attttt = " << args->point[0] << " " << args->point[1] << std::endl;
+                std::string attackerId = this->players_id[args->p_index].id;
+                std::string taregtId   = this->players_id[(*this)[args->point].player_index].id;
+                (*this)[attackerId]->attack((*this)[taregtId]);
+                if(this->isDead((*this)[args->point].player_index)){
+                    this->teamCount[(taregtId.back()-'0')]--;
+                    this->winner = (*this)[attackerId]->getPClass();
                     this->endGame();
                 }
             }
@@ -150,27 +153,32 @@ namespace state {
     };
 
     //  Permet à un joueur de se déplacer à une position passée en argument
-    void State::moveCurrentPlayer (int dstX, int dstY){
-        if((dstX >= 0) && (dstY >= 0) && (dstX < this->gameMap.size()) && (dstY < this->gameMap.size())){
-            std::string id = this->players_id[this->actualPlayerIndex].id;
-            Position prevPos = this->players[id.back()-'0']->find(id)->second->getPosition();
-            this->gameMap[prevPos.y][prevPos.x].state = FREE;
-            this->gameMap[dstY][dstX].player_index = this->actualPlayerIndex;
-            this->players[id.back()-'0']->find(id)->second->move(dstX,dstY);
-            this->gameMap[dstY][dstX].state = OCCUPIED;
+    void State::makeMove (std::unique_ptr<engine::Action_Args>& args){
+        if(this->inMap(args->point)){
+            if((*this)[args->point].state != OCCUPIED){
+                std::string id = this->players_id[args->p_index].id;
+                Position prevPos = (*this)[id]->getPosition();
+                (*this)[prevPos].state = FREE;
+                (*this)[args->point].player_index = args->p_index;
+                (*this)[id]->move(args->point[0],args->point[1]);
+                (*this)[args->point].state = OCCUPIED;
+            }
+            else{
+                args->old_pos_mp[0] = -1;
+            }
         }
     };
 
     //  Cette fonction retourne la position du joueur dont l’index a été passé en argument
     Position State::playerPosition (char playerIndex) {
         std::string id = this->players_id[playerIndex].id;
-        return this->players[id.back()-'0']->find(id)->second->getPosition();
+        return (*this)[id]->getPosition();
     };
 
     //  Cette fonction retourne la classe du joueur dont l’index a été passé en argument
     state::playerClass State::getPlayerClass (char playerIndex) {
         const std::string id = this->players_id[playerIndex].id;
-        return this->players[id.back()-'0']->find(id)->second->getPClass();
+        return (*this)[id]->getPClass();
     }
 
     //  Permet d’accéder au nombre de joueurs
@@ -181,7 +189,7 @@ namespace state {
     //  Permet de changer l’attaque sélectionnée/actuelle du joueur dont c’est le tour
     void State::setCurrPlayerAttack (char attackIndex){
         const std::string id = this->players_id[this->actualPlayerIndex].id;
-        this->players[id.back()-'0']->find(id)->second->setCurrentAttackIndex(attackIndex);
+        (*this)[id]->setCurrentAttackIndex(attackIndex);
     }
 
     //  Passe la variable padlock à true
@@ -198,7 +206,7 @@ namespace state {
     //  Permet de savoir si le joueur dont c’est le tour est une IA ou non
     bool State::isAI_Now(){
         const std::string id = this->players_id[this->actualPlayerIndex].id;
-        return this->players[id.back()-'0']->find(id)->second->getIsAI();
+        return ((*this)[id]->getInput() != from::user);
     }
 
     //  Permet d’initialiser la variable ngine avec l’engine du jeu
@@ -210,7 +218,7 @@ namespace state {
     char State::closestEnemyIndexTo (char p_index, int* pos){
         ID *id = &this->players_id[p_index];
         char enemies = !(id->id.back()-'0');
-        Position source = this->players[id->id.back()-'0']->find(id->id)->second->getPosition();
+        Position source = (*this)[id->id]->getPosition();
         Position target;
         char found;
         int d = 0, min = 2*this->gameMap.size();
@@ -222,7 +230,9 @@ namespace state {
                 min = d;
                 pos[0] = target.x;
                 pos[1] = target.y;
-                found = this->gameMap[pos[1]][pos[0]].player_index;
+                std::cout << "closest pos = " << pos[0] <<" " << pos[1] << std::endl;
+                
+                found = (*this)[pos].player_index;
             }
         }
         return found;
@@ -230,8 +240,6 @@ namespace state {
 
     //  Renvoie l’index de l’ennemi le plus faible par rapport au joueur dont on passe l’index.
     char State::weakestEnemyIndexTo (char p_index, int* pos){
-        Player p;
-        p.getLevel();
         ID *id = &this->players_id[p_index];
         char enemies = !(id->id.back()-'0');
         char found, level, weakest = 100;
@@ -242,7 +250,7 @@ namespace state {
                 weakest = level;
                 pos[0] = enemy.second->getPosition().x;
                 pos[1] = enemy.second->getPosition().y;
-                found = this->gameMap[pos[1]][pos[0]].player_index;
+                found = (*this)[pos].player_index;
             }
         }
         return found;
@@ -251,8 +259,6 @@ namespace state {
     /*  Renvoie l’index de l’ennemi le plus fort (avec le niveau le plus élevé) par rapport au joueur 
         dont on passe l’index   */
     char State::strngestEnemyIndexTo (char p_index, int* pos){
-        Player p;
-        p.getLevel();
         ID *id = &this->players_id[p_index];
         char enemies = !(id->id.back()-'0');
         char found, level, strongest = 0;
@@ -263,7 +269,7 @@ namespace state {
                 strongest = level;
                 pos[0] = enemy.second->getPosition().x;
                 pos[1] = enemy.second->getPosition().y;
-                found = this->gameMap[pos[1]][pos[0]].player_index;
+                found = (*this)[pos].player_index;
             }
         }
         return found;
@@ -281,7 +287,7 @@ namespace state {
                 weakest = hp;
                 pos[0] = enemy.second->getPosition().x;
                 pos[1] = enemy.second->getPosition().y;
-                found = this->gameMap[pos[1]][pos[0]].player_index;
+                found = (*this)[pos].player_index;
             }
         }
         return found;
@@ -299,7 +305,7 @@ namespace state {
                 weakest = mp;
                 pos[0] = enemy.second->getPosition().x;
                 pos[1] = enemy.second->getPosition().y;
-                found = this->gameMap[pos[1]][pos[0]].player_index;
+                found = (*this)[pos].player_index;
             }
         }
         return found;
@@ -313,12 +319,12 @@ namespace state {
     }
 
     // Permet de simuler les conséquences d'une attaque
-    void State::simu_attack(char p_index, char t_index, char atck_index, state::Stats& p_stats,  state::Stats& t_stats)
-    {
-        int new_ap = this->get_AP(p_index)-(this->get_Attack(atck_index)).cost;
+    void State::simu_attack(char p_index, char t_index, char atck_index, state::Stats& p_stats,  state::Stats& t_stats){
+        Attack atck = this->get_Attack(p_index, atck_index);
+        int new_ap = p_stats.getAp()-atck.cost;
         new_ap = (new_ap > 0 ? new_ap : 0);
         p_stats.setAp(new_ap);
-        int new_hp = (this->get_Shield(t_index)+this->get_HP(t_index)-(this->get_Attack(atck_index)).damage-this->get_playerPower(p_index));
+        int new_hp = t_stats.getShield()+t_stats.getHp()-atck.damage-p_stats.getAttack();
         t_stats.setHp(new_hp);
     }
 
@@ -333,7 +339,7 @@ namespace state {
         
         for(unsigned int i = 0; i < this->players_id.size(); i++) {
             std::string id = this->players_id[i].id;
-            playersStats[id]=this->players[id.back()-'0']->find(id)->second->getStats();  
+            playersStats[id]=(*this)[id]->getStats();  
         }
 
         return(playersStats);
@@ -353,7 +359,7 @@ namespace state {
         for(unsigned int i = 0; i < this->players_id.size(); i++)
         {
             std::string id = this->players_id[i].id;
-            playersAttacks[id]=this->players[id.back()-'0']->find(id)->second->getAttacks();  
+            playersAttacks[id]=(*this)[id]->getAttacks();  
         }
 
         return(playersAttacks);
@@ -362,18 +368,19 @@ namespace state {
     //  Permet d’obtenir les stats d’une d'un joueur donné 
     state::Stats State::getPlayerStats(char p_index){
         std::string id  = this->players_id[p_index].id;
-        state::Stats st =this->players[id.back()-'0']->find(id)->second->getStats();
+        state::Stats st =(*this)[id]->getStats();
         return(st);
     }
 
     //  Récupère l'AP du joueur actuel et les HP de sa cible
     void State::pull_AP_THP (int x, int y, int ap_thp[2]){
-        if((x >= 0) && (y >= 0) && (x < this->gameMap.size()) && (y < this->gameMap.size())){
+        if(this->inMap(x,y)){
             ap_thp[0] = this->getPlayerStats(this->actualPlayerIndex).getAp();
             char st = this->gameMap[y][x].state;
             if(st == OCCUPIED){
                 std::string taregtId = this->players_id[this->gameMap[y][x].player_index].id;
-                ap_thp[1] = this->players[taregtId.back()-'0']->find(taregtId)->second->getStats().getHp();
+                ap_thp[1] = (*this)[taregtId]->getStats().getHp();
+                std::cout << "t ap thp pos = " << x <<" " << y << std::endl;
             }
             else{
                 ap_thp[1] = -100;
@@ -391,7 +398,7 @@ namespace state {
         return this->getPlayerStats(p_index).getHp();
     }
 
-    //  Renvoie l’attaque du joueur dont l’index est passé en argument
+    //  Renvoie la puissance l’attaque du joueur dont l’index est passé en argument
     int State::get_playerPower (char p_index){
         return this->getPlayerStats(p_index).getAttack();
     }
@@ -404,37 +411,49 @@ namespace state {
     //  Renvoie la valeur currentAttackPlayer du joueur dont l’index est passé en argument
     char State::getCurrAttackIndex (char p_index){
         std::string id = this->players_id[p_index].id;
-        return this->players[id.back()-'0']->find(id)->second->getCurrentAttackIndex();
+        return (*this)[id]->getCurrentAttackIndex();
     }
 
     //  Va permettre d’annuler un déplacement
-    void State::cancel_move (int old_pos_mp[3]){
-        std::string id = this->players_id[this->actualPlayerIndex].id;
-        Position prevPos = this->players[id.back()-'0']->find(id)->second->getPosition();
-        this->gameMap[prevPos.y][prevPos.x].state = FREE;
-        this->players[id.back()-'0']->find(id)->second->setPosition(Position(old_pos_mp[0],old_pos_mp[1]));
-        this->players[id.back()-'0']->find(id)->second->setMp(old_pos_mp[2]);
-        this->gameMap[old_pos_mp[1]][old_pos_mp[0]].player_index = this->actualPlayerIndex;
-        this->gameMap[old_pos_mp[1]][old_pos_mp[0]].state = OCCUPIED;
+    void State::cancel_move (std::unique_ptr<engine::Action_Args>& args){
+        if(args->old_pos_mp[0] != -1){
+            std::string id = this->players_id[args->p_index].id;
+            Position prevPos = (*this)[id]->getPosition();
+            (*this)[prevPos].state = FREE;
+            (*this)[id]->setPosition(Position(args->old_pos_mp[0],args->old_pos_mp[1]));
+            (*this)[id]->setMp(args->old_pos_mp[2]);
+            (*this)[args->old_pos_mp].player_index = args->p_index;
+            (*this)[args->old_pos_mp].state = OCCUPIED;
+        }
     }
 
     //  Va permettre d’annuler une attaque
-    void State::cancel_attack (int target[2], int old_ap_thp[2]){
-        auto sourceID = this->players_id[this->actualPlayerIndex].id;
-        this->players[sourceID.back()-'0']->find(sourceID)->second->setAp(old_ap_thp[0]);
-        if(old_ap_thp[1] != -100){
-            char st = this->gameMap[target[1]][target[0]].state;
+    void State::cancel_attack (std::unique_ptr<engine::Action_Args>& args){
+        bool dead;
+        auto sourceID = this->players_id[args->p_index].id;
+        (*this)[sourceID]->setAp(args->old_ap_thp[0]);
+        if(args->old_ap_thp[1] != -100){
+            char st = (*this)[args->point].state;
             if(st == OCCUPIED){
-                std::string taregtId = this->players_id[this->gameMap[target[1]][target[0]].player_index].id;
-                this->players[taregtId.back()-'0']->find(taregtId)->second->setHp(old_ap_thp[1]);
+                char t_index = (*this)[args->point].player_index;
+                if(this->get_HP(t_index) <= 0){ dead = true; }
+                std::string taregtId = this->players_id[t_index].id;
+                (*this)[taregtId]->setHp(args->old_ap_thp[1]);
+                if(this->get_HP(t_index) > 0){
+                   (*this)[taregtId]->setStatus(state::playerStatus::WAITING);
+                   this->gameOver = false;
+                   if(dead){
+                       this->teamCount[(taregtId.back()-'0')]++;
+                   }
+                }
             }
         }
     }
 
     //  Va permettre d’annuler la sélection d’un sort
-    void State::cancel_select (int old_attack_index){
-        auto id = this->players_id[this->actualPlayerIndex].id;
-        this->players[id.back()-'0']->find(id)->second->setCurrentAttackIndex(old_attack_index);
+    void State::cancel_select (std::unique_ptr<engine::Action_Args>& args){
+        auto id = this->players_id[args->p_index].id;
+        (*this)[id]->setCurrentAttackIndex(args->old_attack_index);
     }
 
     //  Permet de changer tous les joueurs qui ne le sont pas en IA
@@ -449,7 +468,7 @@ namespace state {
     void State::turn_in_AI(char p_index)
     {
         std::string id = this->players_id[p_index].id;
-        this->players[id.back()-'0']->find(id)->second->setIsAI(true);
+        (*this)[id]->setInput(user);
     }
 
     //  Permet de changer tous les joueurs qui n’étaient pas des IA à l’origine, de nouveau en joueurs réels
@@ -465,7 +484,7 @@ namespace state {
     void State::restore_user(char p_index)
     {
         std::string id = this->players_id[p_index].id;
-        this->players[id.back()-'0']->find(id)->second->setIsAI(false);
+        (*this)[id]->setInput(user);
     }
 
 
@@ -507,18 +526,24 @@ namespace state {
     /*  Prend en paramètres une position de départ et une position d’arrivée et détermine le chemin le plus 
         court pour réaliser ce trajet en prenant en compte les obstacles   */
     bool State::BFS_Shortest_Path (Position src, Position dst){
+        std::cout << "bfs " <<std::endl;
+        this->clear ();
         std::queue<Position> toExplore;
         Position directions[] = {Position(0,1), Position(1,0), Position(0,-1), Position(-1,0)};
-        (*this)[dst].visited = 0;
+        (*this)[dst].visited = true;
+        (*this)[dst].distance = 0;
         toExplore.push(dst);
         while ( !toExplore.empty() ) {
             Position curr = toExplore.front();
+            std::cout << "bfs distance = " << (*this)[curr].distance <<std::endl;
+            std::cout << "bfs cuurr = " << curr.x << " " << curr.y << std::endl;
+
             if (curr == src) { return true; };
             toExplore.pop();
             for ( auto &direction : directions ) {
                 Position neighbor = curr + direction;
-                if(neighbor == (*this)[curr].next_grid) continue;
-                if(this->inMap(neighbor) && this->isFree(neighbor)){
+                bool condition = (this->isFree(neighbor) || neighbor == src);
+                if(this->inMap(neighbor) && condition){
                     if ((*this)[neighbor].visited   == false) {
                         (*this)[neighbor].visited   = true;
                         (*this)[neighbor].next_grid = curr;
@@ -527,8 +552,6 @@ namespace state {
                     }
                 }
             }
-
-            (*this)[curr].visited = false;
         }
         return false;
     }
@@ -536,14 +559,30 @@ namespace state {
     /*  Il s'agit d'un opérateur nous permettant d’accéder plus simplement et plus rapidement à la variable 
         gameMap. En effet, si on se trouve dans la classe State, il suffit désormais de faire (*this)[position] 
         pour accéder à la case de la map souhaitée */
-    MapTile& State::operator[] (Position p){
+    inline MapTile& State::operator[] (Position p){
         return this->gameMap[p.y][p.x];
+    }
+
+    inline MapTile& State::operator[] (int point[2]){
+        return this->gameMap[point[1]][point[0]];
+    }
+
+    inline std::unique_ptr<Player>& State::operator[] (std::string id){
+        return this->players[id.back()-'0']->find(id)->second;
     }
 
     /*  permet de vérifier qu’une position se trouve au sein de la map. Elle renvoie true si c’est le cas,
         false sinon    */
     inline bool State::inMap (Position p){
         return ( (p.x >= 0) && (p.y >= 0) && (p.x < this->gameMap.size()) && (p.y < this->gameMap.size()));
+    }
+
+    inline bool State::inMap (int p[2]){
+        return ( (p[0] >= 0) && (p[1] >= 0) && (p[0] < this->gameMap.size()) && (p[1] < this->gameMap.size()));
+    }
+
+    inline bool State::inMap (int x, int y){
+        return ( (x >= 0) && (y >= 0) && (x < this->gameMap.size()) && (y < this->gameMap.size()));
     }
 
     //  permet de vérifier qu’une case de la map est libre ou non. Elle renvoie true si c’est le cas, false sinon
@@ -555,7 +594,7 @@ namespace state {
         actuellement sélectionnée  */
     char State::getAttackIndex (char p_index){
         std::string id = this->players_id[p_index].id;
-        return this->players[id.back()-'0']->find(id)->second->getCurrentAttackIndex();
+        return (*this)[id]->getCurrentAttackIndex();
     }
 
     /*  prend en argument l’index du joueur qui nous intéresse et renvoie l’attaque (l’objet) actuellement 
@@ -563,12 +602,34 @@ namespace state {
     Attack State::get_Attack (char p_index){
         char attack_index = this->getAttackIndex(p_index);
         std::string id = this->players_id[p_index].id;
-        return this->players[id.back()-'0']->find(id)->second->getAttack(attack_index);
+        return (*this)[id]->getAttack(attack_index);
+    }
+    Attack State::get_Attack (char p_index, char attack_index){
+        std::string id = this->players_id[p_index].id;
+        return (*this)[id]->getAttack(attack_index);
     }
 
     //  Renvoie les AP du joueur dont l’index est passé en argument
     int State::get_AP (char p_index){
         return this->getPlayerStats(p_index).getAp();
+    }
+
+    bool State::hasEnough_AP (char p_index, char attack_index){
+        return (this->get_AP(p_index) >= this->get_Attack(p_index, attack_index).cost);
+    }
+
+    void State::clear (){
+        int sizeXY = this->gameMap.size();
+        for(int x = 0; x < sizeXY; x++){
+            for(int y = 0; y < sizeXY; y++){
+                (*this)[Position(x,y)].visited = false;
+            }
+        }
+    }
+
+    int State::enemiesCount(char p_index){
+        std::string id = this->players_id[p_index].id;
+        return this->teamCount[!(id.back()-'0')];
     }
 
 };

@@ -23,6 +23,7 @@
 
 
 namespace ai{
+    bool ai::AI::test = true;
     AI::AI (){
         this->selected = 6;
         this->selections[0] = (char)SPELL1; // attack selection
@@ -33,6 +34,18 @@ namespace ai{
         this->selections[5] = (char)MOVE;   // move instead of pass turn : AI never passes turn
         this->selections[6] = (char)MOVE;   // move
     }
+    AI::AI (engine::Engine* ngine) {
+            this->selected = 6;
+            this->selections[0] = (char)SPELL1; // attack selection
+            this->selections[1] = (char)SPELL2; // attack selection
+            this->selections[2] = (char)SPELL3; // attack selection
+            this->selections[3] = (char)SPELL4; // attack selection
+            this->selections[4] = (char)SPELL5; // attack selection
+            this->selections[5] = (char)MOVE;   // move instead of pass turn : AI never passes turn
+            this->selections[6] = (char)MOVE;
+            ngine->bind(this);
+        }
+
     AI::~AI (){
 
     }
@@ -57,6 +70,16 @@ namespace ai{
         this->ngine->registerTarget(this->targetX, this->targetY, this->selections[this->selected]);
     }
 
+    void AI::set_mode_analysis (){
+        this->analysis = true;
+    }
+    void AI::set_mode_execute (){
+        this->analysis = false;
+    }
+    bool AI::mode_analysis (){
+        return this->analysis;
+    }
+
     //  Reçoit le code du bouton associé à l'indice passé en paramètre de la fonction.
     char AI::getSelection (char sel){
         return this->selections[sel];
@@ -76,6 +99,7 @@ namespace ai{
     void AI::bind (engine::Engine* ngine, std::shared_ptr<state::State>& gstate){
         this->ngine  = std::shared_ptr<engine::Engine>(ngine);
         this->gstate = gstate;
+        std::cout << "ok state = " << (int)this->gstate->getActualPlayerIndex() << std::endl;
     }
 
     //  Renvoie l’index de l’ennemi le plus proche.

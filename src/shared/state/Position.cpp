@@ -1,3 +1,4 @@
+#include <stdlib.h> 
 #include "Position.h"
 
 namespace state
@@ -20,6 +21,15 @@ namespace state
     }
     bool Position::operator!= (Position p){
         return (x != p.x && y != p.y);
+    }
+    Position Position::operator*= (int x){
+        return Position(this->x*x, this->y*y);
+    }
+    Position Position::operator/= (int x){
+        return Position(this->x/x, this->y/y);
+    }
+    int Position::grid_distance (Position p){
+        return (abs(x-p.x) + abs(y-p.y));
     }
 
 } // namespace state

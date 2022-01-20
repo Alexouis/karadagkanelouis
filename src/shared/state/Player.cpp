@@ -1,5 +1,6 @@
 #include "Player.h"
 #include <vector>
+#include <iostream>
 
 namespace state {
     Player::Player(){
@@ -9,7 +10,7 @@ namespace state {
         position.y = 0;
         level = 1;
         orientation = WEST;
-        isAI = false;
+        input = user;
         playing = false;
         status = WAITING;
         stats = Stats(pClass,level);
@@ -23,13 +24,13 @@ namespace state {
         attacks.push_back(punch);
     };
 
-    Player::Player(std::string name, playerClass pClass, Position position, int level, bool isAI){
+    Player::Player(std::string name, playerClass pClass, Position position, int level, from input){
         Player::name = name;
         Player::pClass = pClass;
         Player::position = position;
         Player::level = level;
         Player::orientation = orientation;
-        Player::isAI = isAI;
+        Player::input = input;
 
         playing = false;
         status = WAITING;
@@ -96,7 +97,7 @@ namespace state {
         position.y = 0;
         level = 1;
         orientation = WEST;
-        isAI = false;
+        input = user;
         playing = false;
         status = WAITING;
         stats = Stats(pClass,level);
@@ -115,12 +116,21 @@ namespace state {
         et mettre à jour les stats du joueur attaqué (diminuer ses points de vie) mais également celles 
         du joueur attaquant (diminuer ses AP)    */
     void Player::attack(std::unique_ptr<Player>& player){
+        std::cout << "p_pos in player = " << this->position.x << " " << this->position.y << std::endl;
+        std::cout << "t_pos in player = " << player->getPosition().x << " " << player->getPosition().y << std::endl;
         int deltaX = abs(this->position.x-player->getPosition().x);
         int deltaY = abs(this->position.y-player->getPosition().y);
         bool can_attack = (stats.getAp() >= this->attacks[this->currentAttackIndex].cost);
+        std::cout << "deltain player = " << deltaX+deltaY << std::endl;
+        std::cout << "can attck 1 in player = " << can_attack << std::endl;
         can_attack = (can_attack && (this->attacks[this->currentAttackIndex].range >= deltaX + deltaY));
+        std::cout << "can attck 2 in player = " << can_attack << std::endl;
+        std::cout << "attack idx in player = " << (int)this->currentAttackIndex << std::endl;
+        std::cout << "ap in player = " << stats.getAp() << std::endl;
+        std::cout << "cost in player = " << this->attacks[this->currentAttackIndex].cost << std::endl;
         if(can_attack) 
         {
+            std::cout << "in player attack idx in player = " << (int)this->currentAttackIndex << std::endl;
             int new_ap = stats.getAp()-this->attacks[this->currentAttackIndex].cost;
             new_ap = (new_ap > 0 ? new_ap : 0);
             this->stats.setAp(new_ap);
@@ -265,12 +275,12 @@ namespace state {
         this->currentAttackIndex = currentAttackIndex;
     };
 
-    bool Player::getIsAI() const{
-        return this->isAI;
+    from Player::getInput() const{
+        return this->input;
     };
 
-    void Player::setIsAI(bool isAI){
-        this->isAI = isAI;
+    void Player::setInput(from input){
+        this->input = input;
     };
 
     void Player::setMp (int mp){
