@@ -81,6 +81,7 @@ namespace ai{
 
         if(this->strategies[this->bestStrategy_index[BUF_INDEX_1]]->apply(BUF_INDEX_1) == -1){
             this->ngine->registerTarget((char)PASS);
+            std::cout << "COUCOU" << std::endl;
         }
     }
 

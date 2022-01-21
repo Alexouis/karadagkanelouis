@@ -22,6 +22,7 @@ namespace ai{
     Strategy(g_ai, gstate, ngine){}
 
     int Attack_Strongest::test (int buf_index){
+        std::cout << "Attack_Strongest" << std::endl;
         t_pos[buf_index].push(new int[2]);
         p_index[buf_index].push(gstate->getActualPlayerIndex());
         t_index[buf_index].push(gstate->strngestEnemyIndexTo(p_index[buf_index].back(), t_pos[buf_index].back()));
@@ -29,6 +30,13 @@ namespace ai{
         std::cout << "p_index = " << (int)p_index[buf_index].back() << std::endl;
         std::cout << "t_index = " << (int)t_index[buf_index].back() << std::endl;
         std::cout << "t pos = " << t_pos[buf_index].back()[0] <<" " << t_pos[buf_index].back()[1] << std::endl;
+        if(t_index[buf_index].back()==-1)
+        {
+            t_pos[buf_index].pop();
+            p_index[buf_index].pop();
+            t_index[buf_index].pop();
+            return 0;
+        }
         score += start_simulation(buf_index);
         return score;
     }

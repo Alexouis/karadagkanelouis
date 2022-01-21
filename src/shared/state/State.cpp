@@ -113,6 +113,8 @@ namespace state {
     //  Permet d'annuler la fonction passTurn et de revenir au tour du joueur précédent
     void State::cancel_passTurn(char selected){
         if(selected!=0){
+            std::string id = this->players_id[actualPlayerIndex].id;
+            this->players[id.back()-'0']->find(id)->second->resetPoints();
             this->actualPlayerIndex = this->players_id[this->actualPlayerIndex].prev;
         }
     };
@@ -224,20 +226,24 @@ namespace state {
         char enemies = !(id->id.back()-'0');
         Position source = (*this)[id->id]->getPosition();
         Position target;
-        char found;
+        char found = -1;
         int d = 0, min = 2*this->gameMap.size();
 
         for(auto const& enemy : *(this->players[enemies])){
-            target = enemy.second->getPosition();
-            d = abs(target.x - source.x) + abs(target.y - source.y);
-            if(d < min){
-                min = d;
-                pos[0] = target.x;
-                pos[1] = target.y;
-                std::cout << "closest pos = " << pos[0] <<" " << pos[1] << std::endl;
-                
-                found = (*this)[pos].player_index;
+            if(enemy.second->getStatus() != DEAD)
+            {
+                target = enemy.second->getPosition();
+                d = abs(target.x - source.x) + abs(target.y - source.y);
+                if(d < min){
+                    min = d;
+                    pos[0] = target.x;
+                    pos[1] = target.y;
+                    std::cout << "closest pos = " << pos[0] <<" " << pos[1] << std::endl;
+                    
+                    found = (*this)[pos].player_index;
+                }
             }
+            
         }
         return found;
     }
@@ -246,16 +252,20 @@ namespace state {
     char State::weakestEnemyIndexTo (char p_index, int* pos){
         ID *id = &this->players_id[p_index];
         char enemies = !(id->id.back()-'0');
-        char found, level, weakest = 100;
+        char found=-1, level, weakest = 100;
 
         for(auto const& enemy : *(this->players[enemies])){
-            level = enemy.second->getLevel();
-            if(level < weakest){
-                weakest = level;
-                pos[0] = enemy.second->getPosition().x;
-                pos[1] = enemy.second->getPosition().y;
-                found = (*this)[pos].player_index;
+            if(enemy.second->getStatus() != DEAD)
+            {
+                level = enemy.second->getLevel();
+                if(level < weakest){
+                    weakest = level;
+                    pos[0] = enemy.second->getPosition().x;
+                    pos[1] = enemy.second->getPosition().y;
+                    found = (*this)[pos].player_index;
+                } 
             }
+            
         }
         return found;
     }
@@ -265,15 +275,18 @@ namespace state {
     char State::strngestEnemyIndexTo (char p_index, int* pos){
         ID *id = &this->players_id[p_index];
         char enemies = !(id->id.back()-'0');
-        char found, level, strongest = 0;
+        char found=-1, level, strongest = 0;
 
         for(auto const& enemy : *(this->players[enemies])){
-            level = enemy.second->getLevel();
-            if(level > strongest){
-                strongest = level;
-                pos[0] = enemy.second->getPosition().x;
-                pos[1] = enemy.second->getPosition().y;
-                found = (*this)[pos].player_index;
+            if(enemy.second->getStatus() != DEAD)
+            {
+                level = enemy.second->getLevel();
+                if(level > strongest){
+                    strongest = level;
+                    pos[0] = enemy.second->getPosition().x;
+                    pos[1] = enemy.second->getPosition().y;
+                    found = (*this)[pos].player_index;
+                } 
             }
         }
         return found;
@@ -283,16 +296,20 @@ namespace state {
     char State::enemyWithLessHp_Of(char p_index, int* pos){
         ID *id = &this->players_id[p_index];
         char enemies = !(id->id.back()-'0');
-        int found, hp, weakest = 16000;
+        int found = -1, hp, weakest = 16000;
 
         for(auto const& enemy : *(this->players[enemies])){
-            hp = enemy.second->getStats().getHp();
-            if(hp < weakest){
-                weakest = hp;
-                pos[0] = enemy.second->getPosition().x;
-                pos[1] = enemy.second->getPosition().y;
-                found = (*this)[pos].player_index;
+            if(enemy.second->getStatus() != DEAD)
+            {
+                hp = enemy.second->getStats().getHp();
+                if(hp < weakest){
+                    weakest = hp;
+                    pos[0] = enemy.second->getPosition().x;
+                    pos[1] = enemy.second->getPosition().y;
+                    found = (*this)[pos].player_index;
+                }  
             }
+            
         }
         return found;
     }
@@ -301,16 +318,20 @@ namespace state {
     char State::enemyWithLessMp_Of(char p_index, int* pos){
         ID *id = &this->players_id[p_index];
         char enemies = !(id->id.back()-'0');
-        char found, mp, weakest = 10;
+        char found=-1, mp, weakest = 10;
 
         for(auto const& enemy : *(this->players[enemies])){
-            mp = enemy.second->getStats().getMp();
-            if(mp < weakest){
-                weakest = mp;
-                pos[0] = enemy.second->getPosition().x;
-                pos[1] = enemy.second->getPosition().y;
-                found = (*this)[pos].player_index;
+            if(enemy.second->getStatus() != DEAD)
+            {
+                mp = enemy.second->getStats().getMp();
+                if(mp < weakest){
+                    weakest = mp;
+                    pos[0] = enemy.second->getPosition().x;
+                    pos[1] = enemy.second->getPosition().y;
+                    found = (*this)[pos].player_index;
+                } 
             }
+            
         }
         return found;
     }
@@ -433,7 +454,7 @@ namespace state {
 
     //  Va permettre d’annuler une attaque
     void State::cancel_attack (std::unique_ptr<engine::Action_Args>& args){
-        bool dead;
+        bool dead = false;
         auto sourceID = this->players_id[args->p_index].id;
         (*this)[sourceID]->setAp(args->old_ap_thp[0]);
         if(args->old_ap_thp[1] != -100){
@@ -630,6 +651,8 @@ namespace state {
 
     int State::enemiesCount(char p_index){
         std::string id = this->players_id[p_index].id;
+        std::cout << "enemy = " << (int)(!(id.back()-'0')) << std::endl;
+        std::cout << "count = " << this->teamCount[!(id.back()-'0')] << std::endl;
         return this->teamCount[!(id.back()-'0')];
     }
 

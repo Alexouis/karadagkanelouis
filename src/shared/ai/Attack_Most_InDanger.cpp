@@ -10,6 +10,8 @@
  */
 
 #include "Attack_Most_InDanger.h"
+#include <iostream>
+
 #define SPELL1 0x0 //[targetCode code value] =  [0 000 0000]
 #define SPELL2 0x1 //[targetCode code value] =  [0 000 0001]
 #define SPELL3 0x2 //[targetCode code value] =  [0 000 0010]
@@ -25,9 +27,17 @@ namespace ai {
     Strategy(g_ai, gstate, ngine) {}
 
     int Attack_Most_InDanger::test (int buf_index){
+        std::cout << "Attack_MID" << std::endl;
         t_pos[buf_index].push(new int[2]);
         p_index[buf_index].push(gstate->getActualPlayerIndex());
         t_index[buf_index].push(gstate->enemyWithLessHp_Of(p_index[buf_index].back(), t_pos[buf_index].back()));
+        if(t_index[buf_index].back()==-1)
+        {
+            t_pos[buf_index].pop();
+            p_index[buf_index].pop();
+            t_index[buf_index].pop();
+            return 0;
+        }
         int score = start_simulation(buf_index);
         return score;
     }

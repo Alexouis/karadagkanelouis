@@ -48,33 +48,54 @@ namespace ai {
         //abort();
 
 attack_again:      //then  attack
+        std::cout << "enemiesCount_attackAgain_out :" << gstate->enemiesCount(p_index[buf_index].front()) << std::endl;
+        std::cout << "get_AP_attackAgain_out :" << gstate->get_AP(p_index[buf_index].front()) << std::endl;
+        std::cout << "hasEnough_AP_attackAgain_out :" << gstate->hasEnough_AP(p_index[buf_index].front(), judicious_attack[buf_index].front()) << std::endl;
+
             if(gstate->hasEnough_AP(p_index[buf_index].front(), judicious_attack[buf_index].front()) && !gstate->isDead(t_index[buf_index].front())){
                 ngine->registerTarget(judicious_attack[buf_index].front());
                 ngine->registerTarget(t_pos[buf_index].front()[0], t_pos[buf_index].front()[1], (char)move_action);
                 if(buf_index){
+                    std::cout << "enemiesCount_attackAgain_in :" << gstate->enemiesCount(p_index[buf_index].front()) << std::endl;
+                    std::cout << "get_AP_attackAgain_in :" << gstate->get_AP(p_index[buf_index].front()) << std::endl;
+                    std::cout << "hasEnough_AP_attackAgain_in :" << gstate->hasEnough_AP(p_index[buf_index].front(), judicious_attack[buf_index].front()) << std::endl;
+
+                    int prev_tHP = gstate->get_HP(t_index[buf_index].front());
                     ngine->execute();
                     ngine->execute();
+
                     g_ai->incCmdCount(2, 0); 
-                    goto attack_again;
+                    if(gstate->get_HP(t_index[buf_index].front()) != prev_tHP){ 
+                        goto attack_again; 
+                    }
                 }
-                return 0;
+                else
+                {
+                    return 0;
+                }
+                
             }
             else if(gstate->isDead(t_index[buf_index].front()) && (gstate->enemiesCount(p_index[buf_index].front()) > 0)){ 
                 if(gstate->hasEnough_AP(p_index[buf_index].front(), judicious_attack[buf_index].front())){
+                    std::cout << "is dead_apply :" << gstate->isDead(t_index[buf_index].front()) << std::endl;
+        std::cout << "enemiesCount_apply :" << gstate->enemiesCount(p_index[buf_index].front()) << std::endl;
+        std::cout << "get_AP_apply :" << gstate->get_AP(p_index[buf_index].front()) << std::endl;
+        std::cout << "hasEnough_AP_apply :" << gstate->hasEnough_AP(p_index[buf_index].front(), judicious_attack[buf_index].front()) << std::endl;
+
+                    popQueues (buf_index);
                     iteration = 0;
                     if(t_pos[buf_index].size() > 1){
-                        popQueues (buf_index);
                         return apply(buf_index);
                     }
                 }
-                else{
-                    if(t_pos[buf_index].size() > 0){ popQueues (buf_index); }
-                    return -1;
-                }
+                // else{
+                //     if(t_pos[buf_index].size() > 0){ popQueues (buf_index); }
+                //     return -1;
+                // }
             }
         }
 
-        if(t_pos[buf_index].size() > 0){ popQueues (buf_index);  }
+        // if(t_pos[buf_index].size() > 0){ popQueues (buf_index);  }
         return -1;
     }
 
@@ -97,6 +118,7 @@ attack_again:      //then  attack
             if(attack_range[i] >= src.grid_distance(dst)){
                 savePos[i] = state::Position(-2,0);
                 while(p_stats[i].getAp()){
+                    std::cout << "IN GP 1" << std::endl;
                     gstate->simu_attack(p_index[buf_index].back(), t_index[buf_index].back(), i, p_stats[i], t_stats[i]);
                 }
 
@@ -113,17 +135,19 @@ attack_again:      //then  attack
                 }
                 else{
                     while(p_stats[i].getAp()){
+                        std::cout << "IN GP 2" << std::endl;
                         gstate->simu_attack(p_index[buf_index].back(), t_index[buf_index].back(), i, p_stats[i], t_stats[i]);
                     }
                     savePos[i] = dst;
                     while(attack_range[i]){
+                        std::cout << "IN GP 3" << std::endl;
                         savePos[i] = (*gstate)[savePos[i]].next_grid;
                         attack_range[i]--;
                     }  
                 }  
             }
         }
-
+        
         if((t_stats[0].getHp() > 0) && (t_stats[1].getHp() > 0)){
             judicious_attack[buf_index].push((t_stats[0].getHp() > t_stats[1].getHp()));
         }
@@ -134,12 +158,17 @@ attack_again:      //then  attack
             judicious_attack[buf_index].push((t_stats[0].getHp() < t_stats[1].getHp()));
         }
 
+        std::cout << "PGP t_stats0_HP: " << t_stats[0].getHp() << "et t_stats1_HP: " << t_stats[1].getHp() << std::endl;
+
+
         savedPos[buf_index].push(savePos[judicious_attack[buf_index].back()]);
     }
 
     void Strategy::simulate_attack (int buf_index){
         
         while(gstate->hasEnough_AP(p_index[buf_index].back(), judicious_attack[buf_index].back()) && !gstate->isDead(t_index[buf_index].back())){
+            std::cout << "IN SIMULATE ATTACK" << std::endl;
+            std::cout << "is dead = " << gstate->isDead(t_index[buf_index].back()) << std::endl;
             ngine->registerTarget(judicious_attack[buf_index].back());
             ngine->execute();
             ngine->registerTarget(t_pos[buf_index].back()[0], t_pos[buf_index].back()[1], (char)move_action);
@@ -170,9 +199,18 @@ attack_again:      //then  attack
         }
         score -= gstate->get_HP(t_index[buf_index].back());
 
+        std::cout << "is dead :" << gstate->isDead(t_index[buf_index].back()) << std::endl;
+        std::cout << "enemiesCount :" << gstate->enemiesCount(p_index[buf_index].back()) << std::endl;
+        std::cout << "get_AP :" << gstate->get_AP(p_index[buf_index].back()) << std::endl;
+        std::cout << "hasEnough_AP :" << gstate->hasEnough_AP(p_index[buf_index].back(), judicious_attack[buf_index].back()) << std::endl;
+
         if(gstate->isDead(t_index[buf_index].back()) && gstate->enemiesCount(p_index[buf_index].back())){ 
             score += bonus;
             if(gstate->hasEnough_AP(p_index[buf_index].back(), judicious_attack[buf_index].back())){
+                std::cout << "is dead_in :" << gstate->isDead(t_index[buf_index].back()) << std::endl;
+                std::cout << "enemiesCount_in :" << gstate->enemiesCount(p_index[buf_index].back()) << std::endl;
+                std::cout << "get_AP_in :" << gstate->get_AP(p_index[buf_index].back()) << std::endl;
+                std::cout << "hasEnough_AP_in :" << gstate->hasEnough_AP(p_index[buf_index].back(), judicious_attack[buf_index].back()) << std::endl;
                 score += test(buf_index);
             }
         }
