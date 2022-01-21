@@ -632,4 +632,48 @@ namespace state {
         return this->teamCount[!(id.back()-'0')];
     }
 
+    Position State::barycentre (char p_index){
+        ID *id = &this->players_id[p_index];
+        Position bar = Position(0,0), temp;
+        char enemies = !(id->id.back()-'0');
+        int w = 0, level;
+
+        for(auto const& enemy : *(this->players[enemies])){
+            level = enemy.second->getLevel();
+            temp  = enemy.second->getPosition();
+            bar   = bar + temp*level;
+            w    += level;  
+        }
+
+        return (bar/w);
+
+    }
+    Position State::searchFreeAround (Position p){
+        this->clear ();
+        std::queue<Position> toExplore;
+        Position directions[] = {Position(0,1), Position(1,0), Position(0,-1), Position(-1,0)};
+        (*this)[p].visited = true;
+        toExplore.push(p);
+        while ( !toExplore.empty() ) {
+            Position curr = toExplore.front();
+            std::cout << "bfs distance = " << (*this)[curr].distance <<std::endl;
+            std::cout << "bfs cuurr = " << curr.x << " " << curr.y << std::endl;
+            toExplore.pop();
+            for ( auto &direction : directions ) {
+                Position neighbor = curr + direction;
+                if(this->inMap(neighbor)){
+                    if(this->isFree(neighbor)) { return neighbor; }
+                    else{
+                        if ((*this)[neighbor].visited   == false) {
+                            (*this)[neighbor].visited   = true;
+                            toExplore.push(neighbor);
+                        }
+                    }
+                }
+            }
+        }
+
+        return Position(-1,0);
+    }
+
 };

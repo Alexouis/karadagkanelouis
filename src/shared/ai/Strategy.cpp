@@ -197,4 +197,11 @@ attack_again:      //then  attack
         savedPos[buf_index].pop();
         judicious_attack[buf_index].pop();
     }
+
+    void Strategy::escape (int buf_index){
+        state::Position src = gstate->playerPosition(p_index[buf_index].back());
+        state::Position tgt = gstate->barycentre(t_index[buf_index].back());
+        int t_attack_range  = gstate->get_Attack(t_index[buf_index].back(), 0).range;
+        int t_mp = gstate->get_MP(t_index[buf_index].back());
+    }
 }
