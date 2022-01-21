@@ -70,12 +70,17 @@ namespace ai{
         this->ngine->registerTarget(this->targetX, this->targetY, this->selections[this->selected]);
     }
 
+    //  Permet de passer analysis a true et ainsi passer l’IA en mode analyse
     void AI::set_mode_analysis (){
         this->analysis = true;
     }
+
+    //  Permet de passer analysis a false et ainsi passer l’IA en mode exécution de stratégie
     void AI::set_mode_execute (){
         this->analysis = false;
     }
+
+    //  renvoie la valeur du booléen analysis afin de déterminer si l’IA est en mode analyse ou non
     bool AI::mode_analysis (){
         return this->analysis;
     }

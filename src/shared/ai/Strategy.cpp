@@ -30,6 +30,7 @@ namespace ai {
 
     int Strategy::test (int buf_index){}
 
+    //  Applique la meilleur stratégie trouvée par la fonction test()
     int Strategy::apply (int buf_index){
         
         if(t_pos[buf_index].size() < 1){ return -1; }
@@ -78,6 +79,9 @@ attack_again:      //then  attack
         return -1;
     }
 
+    /*  Permet de trouver la position optimale à laquelle le joueur devrait se placer 
+        Il s’agit de la position la moins couteuse en PM, qui permettrait d’attaquer l’ennemi ciblé par 
+        la stratégie    */
     void Strategy::pick_GoodPosition (int buf_index){
         state::Position src  = gstate->playerPosition(p_index[buf_index].back());
         state::Position dst  = gstate->playerPosition(t_index[buf_index].back());
@@ -137,6 +141,8 @@ attack_again:      //then  attack
         savedPos[buf_index].push(savePos[judicious_attack[buf_index].back()]);
     }
 
+    /*  Permet comme son nom l’indique de simuler une attaque en actualisant une copie des stats des personnages 
+        impliquées : mise à jour des HP du joueur attaqué et des PA du joueur attaquant */
     void Strategy::simulate_attack (int buf_index){
         
         while(gstate->hasEnough_AP(p_index[buf_index].back(), judicious_attack[buf_index].back()) && !gstate->isDead(t_index[buf_index].back())){
@@ -148,6 +154,7 @@ attack_again:      //then  attack
         }
     }
 
+    //  Lance la simulation de la stratégie pour déterminer son efficacité
     int Strategy::start_simulation (int buf_index){
         int score = gstate->get_HP(t_index[buf_index].back());
         int bonus = score/2;
@@ -181,7 +188,7 @@ attack_again:      //then  attack
         return score;
     }
 
-
+    //  Permet de retirer des différentes queue les informations situées à l’index passé en argument
     void Strategy::popQueues (int buf_index){
         iteration = 0;
         t_pos[buf_index].pop();

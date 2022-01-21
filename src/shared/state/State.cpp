@@ -571,8 +571,8 @@ namespace state {
         return this->players[id.back()-'0']->find(id)->second;
     }
 
-    /*  permet de vérifier qu’une position se trouve au sein de la map. Elle renvoie true si c’est le cas,
-        false sinon    */
+    /*  Ces fonctions permettent de vérifier qu’une position se trouve au sein de la map. Elle renvoie true si 
+        c’est le cas, false sinon    */
     inline bool State::inMap (Position p){
         return ( (p.x >= 0) && (p.y >= 0) && (p.x < this->gameMap.size()) && (p.y < this->gameMap.size()));
     }
@@ -601,11 +601,7 @@ namespace state {
         sélectionnée par le joueur */
     Attack State::get_Attack (char p_index, char atck_index){
         std::string id = this->players_id[p_index].id;
-        return (*this)[id]->getAttack(attack_index);
-    }
-    Attack State::get_Attack (char p_index, char attack_index){
-        std::string id = this->players_id[p_index].id;
-        return (*this)[id]->getAttack(attack_index);
+        return (*this)[id]->getAttack(atck_index);
     }
 
     //  Renvoie les AP du joueur dont l’index est passé en argument
@@ -613,10 +609,14 @@ namespace state {
         return this->getPlayerStats(p_index).getAp();
     }
 
+    /*  Vérifie que le joueur dont on passe l'index en argument a suffisamment de PA pour réaliser l'attaque
+        dont l'index est passé en argument  */
     bool State::hasEnough_AP (char p_index, char attack_index){
         return (this->get_AP(p_index) >= this->get_Attack(p_index, attack_index).cost);
     }
 
+    /*  Permet de reinitialiser le statut 'visited' (utilisé pour le déplacement des IA) des cases de la map 
+        à false */
     void State::clear (){
         int sizeXY = this->gameMap.size();
         for(int x = 0; x < sizeXY; x++){
@@ -626,6 +626,7 @@ namespace state {
         }
     }
 
+    //  Renvoie le nombre d'ennemis du joueur dont l'index est passé en argument
     int State::enemiesCount(char p_index){
         std::string id = this->players_id[p_index].id;
         return this->teamCount[!(id.back()-'0')];
