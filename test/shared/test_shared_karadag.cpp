@@ -1,11 +1,37 @@
 
 #include <boost/test/unit_test.hpp>
 
+
+#include <SFML/System.hpp>
+#include <SFML/Window.hpp>
 #include <SFML/Graphics.hpp>
+#include <string.h>
 
-#include  <state.h>
+#include <iostream>
+#include <fstream>
+#include <math.h>
 
+#include "tmx/MapLoader.h"
+//#include <SFML/Graphics/RenderTexture.hpp>
 
+#include <sstream>
+#include <string>
+
+#include <stdio.h>      /* printf, scanf, puts, NULL */
+#include <stdlib.h>     /* srand, rand */
+#include <time.h>       /* time */
+
+#include <thread>
+#include <state.h>
+#include <engine.h>
+#include <render.h>
+#include <ai.h>
+
+#include <json/json.h>
+
+#include <unistd.h>
+#include <csignal>
+#include <utility>
 BOOST_AUTO_TEST_CASE(TestStaticAssert)
 {
   BOOST_CHECK(1);
@@ -13,6 +39,7 @@ BOOST_AUTO_TEST_CASE(TestStaticAssert)
 
 using namespace state;
 using namespace engine;
+using namespace render;
 
 BOOST_AUTO_TEST_CASE(testenumstate)
 {
@@ -189,7 +216,15 @@ BOOST_AUTO_TEST_CASE(test_Player)
     valla.attack(target);
     BOOST_CHECK_EQUAL(target->getStats().getHp(),0);
 
-
+    valla.setAp(10);
+    valla.setMp(10);
+    valla.setHp(100);
+    Attack a = valla.getAttack(0);
+    Position poss;
+    poss.operator!=(valla.getPosition());
+    poss.operator+(valla.getPosition());
+    poss.operator==(valla.getPosition());
+    
     //Chrono test
 
 }
@@ -218,23 +253,67 @@ BOOST_AUTO_TEST_CASE(test_State)
     BOOST_CHECK_EQUAL(gameState.playerPosition(0).y,10);
     gameState.passTurn(0);
     BOOST_CHECK_EQUAL(gameState.getActualPlayerIndex(),1);
+    gameState.passTurn(1);
+    BOOST_CHECK_EQUAL(gameState.getActualPlayerIndex(),0);
+    gameState.cancel_passTurn(1);
+    BOOST_CHECK_EQUAL(gameState.getActualPlayerIndex(),1);
+    gameState.passTurn(0);
+    
+    BOOST_CHECK_EQUAL(gameState.getActualPlayerIndex(),0);
+    BOOST_CHECK_EQUAL(gameState.playerPosition(0).x,9);
+    BOOST_CHECK_EQUAL(gameState.playerPosition(0).y,10);
+    gameState.passTurn(1);
+    BOOST_CHECK_EQUAL(gameState.getActualPlayerIndex(),1);
     gameState.setCurrPlayerAttack(0);
+    gameState.setCurrPlayerAttack(1);
+    gameState.cancel_select(0);
     gameState.getPlayerStats(1).setAttack(10000);
+    gameState.getPlayerStats(0).setAttack(10000);
+    gameState.getCurrAttackIndex(0);
+    gameState.getAttackIndex(0);
+    gameState.makeAttackOn(9,10);
+    int tgt[2] = {9,10};
+    int aptt[2];
+    gameState.cancel_attack(tgt,aptt);
+    gameState.cancel_passTurn(1);
     gameState.makeAttack(args);
     auto a = gameState.getPlayerClass(0);
     BOOST_CHECK_EQUAL(gameState.getPlayersCount(),2);
+    gameState.passTurn(0);
     BOOST_CHECK(gameState.isAI_Now());
     int target [2];
     char closest_enemy_index= gameState.closestEnemyIndexTo(1,target);
     char weakest_enemy_index= gameState.weakestEnemyIndexTo(1,target);
+    char strngest_enemy_index= gameState.strngestEnemyIndexTo(1,target);
+    char enemyWithLessHp= gameState.enemyWithLessHp_Of(1,target);
+    char enemyWithLessMp= gameState.enemyWithLessMp_Of(1,target);
+    struct Attack att;
+    
+    int dmg = gameState.damage(0,1,att);
+    Player valla{};
+    Stats d = valla.getStats();
+    gameState.simu_attack(0,1,0,d,d);
+    Position depart(10,6);
+    Position dest(5,5);
+    bool path = gameState.BFS_Shortest_Path(depart,dest);
+    valla.move(dest);
+    int prevpos[3];
+    gameState.cancel_move(prevpos);
     gameState.chronoStart(1,1);
     std::map<std::string,state::Stats> plStat = gameState.getPlayerStats();
     std::vector<ID> plId = gameState.getPlayersID();
     std::map<std::string,std::vector<Attack>> vectAttack = gameState.getPlayersAttacks();
-
-
+    int mp = gameState.get_MP(0);
+    int ap[2];
+    gameState.pull_AP_THP(9,10,ap);
+    gameState.pull_AP_THP(9,17,ap);
+    gameState.turn_in_AI(0);
+    gameState.turn_all_in_AI();
+    gameState.restore_user(0);
+    gameState.restore_all_users();
     gameState.lock();
     //gameState.unlock();
+    gameState.lock();
     gameState.endGame();
     bool gover = gameState.getGameOver();
     gameState.setGameOver(gover);
@@ -247,11 +326,57 @@ BOOST_AUTO_TEST_CASE(test_State)
 
 BOOST_AUTO_TEST_CASE(test_Engine)
 {
-    Engine ngin{};
+    
+    State gameState(22,22);
+    gameState.init();
+    gameState.initPlayer();
+    gameState.initPositions();
+   // gameState->State->initPlayer();
+    gameState.initMap();
+    gameState.isDead(0);
+    BOOST_CHECK_EQUAL(gameState.playerPosition(0).x,10);
+    BOOST_CHECK_EQUAL(gameState.playerPosition(0).y,10);
+    gameState.moveCurrentPlayer(9,10);
+    BOOST_CHECK_EQUAL(gameState.playerPosition(0).x,9);
+    BOOST_CHECK_EQUAL(gameState.playerPosition(0).y,10);
+    gameState.passTurn(0);
+    BOOST_CHECK_EQUAL(gameState.getActualPlayerIndex(),1);
+    gameState.setCurrPlayerAttack(0);
+    gameState.getPlayerStats(1).setAttack(10000);
+    gameState.makeAttackOn(9,10);
+    
+   // gameState.lock();
+    //gameState.unlock();
+    
+     render::GameWindow gamewindow;
+     engine::Engine ngine;
+     //gameState.connect(ngine);
+//     ngine.start();
+//     ai::AI g_ai;
+//     std::unique_ptr<engine::Command> cmdHolder;
+//     //void(*action[2])(std::unique_ptr<Action_Args>&) iii;
+//     //std::unique_ptr<Action_Args>& args;
+//     //engine::Command com();
+//     std::shared_ptr<state::State> gstate;
+//     state::Position old_pos;
+//     int old_ap_thp[2];
+//     engine::Action_Args ac_args1(gstate,1,1,old_pos,2);
+//     engine::Action_Args ac_args2(gstate,1,1,old_ap_thp);
+//     engine::Action_Args ac_args3(gstate,1,1);
+//     engine::Action_Args ac_args4(&ngine,1);
+
+//    // engine::Action ac1;
+//     std::unique_ptr<Action_Args> args =std::unique_ptr<Action_Args>(new Action_Args(gstate,1,1,old_ap_thp));
+    
+//     //args = std::unique_ptr<Action_Args(gstate,1,1,old_ap_thp)>;
+//     Action::doNothing(args);
+//     Action::move(args);
+    
+    //Engine ngin{};
    // ngin.start();
   //  ngin.stop();
  //   ngin.Start();
-
+    
 
 }
 
