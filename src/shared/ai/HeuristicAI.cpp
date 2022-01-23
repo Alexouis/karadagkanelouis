@@ -23,9 +23,9 @@
 
 namespace ai{
 
-    HeuristicAI::~HeuristicAI (){
-
-    }
+    HeuristicAI::HeuristicAI (){ }
+    HeuristicAI::HeuristicAI (engine::Engine* ngine) : AI(ngine){ }
+    HeuristicAI::~HeuristicAI (){ }
 
     /*  permet de simuler l’action que l’IA a choisi d’effectuer comme le fait de cliquer sur un bouton 
     ou sur la map par exemple. */

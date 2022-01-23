@@ -118,16 +118,16 @@ namespace state {
     void Player::attack(std::unique_ptr<Player>& player){
         std::cout << "p_pos in player = " << this->position.x << " " << this->position.y << std::endl;
         std::cout << "t_pos in player = " << player->getPosition().x << " " << player->getPosition().y << std::endl;
-        int deltaX = abs(this->position.x-player->getPosition().x);
-        int deltaY = abs(this->position.y-player->getPosition().y);
+        int range = this->position.grid_distance(player->getPosition());
         bool can_attack = (stats.getAp() >= this->attacks[this->currentAttackIndex].cost);
-        std::cout << "deltain player = " << deltaX+deltaY << std::endl;
+        std::cout << "range in player = " << range << std::endl;
         std::cout << "can attck 1 in player = " << can_attack << std::endl;
-        can_attack = (can_attack && (this->attacks[this->currentAttackIndex].range >= deltaX + deltaY));
+        can_attack = (can_attack && (this->attacks[this->currentAttackIndex].range >= range));
         std::cout << "can attck 2 in player = " << can_attack << std::endl;
         std::cout << "attack idx in player = " << (int)this->currentAttackIndex << std::endl;
         std::cout << "ap in player = " << stats.getAp() << std::endl;
         std::cout << "cost in player = " << this->attacks[this->currentAttackIndex].cost << std::endl;
+        std::cout << "attck range in player = " << this->attacks[this->currentAttackIndex].range << std::endl;
         if(can_attack) 
         {
             std::cout << "in player attack idx in player = " << (int)this->currentAttackIndex << std::endl;

@@ -7,6 +7,7 @@
 #include <csignal>
 #include <json/json.h>
 #include <limits>
+#include <math.h>
 
 namespace state {
     /*
@@ -40,7 +41,7 @@ namespace state {
         }
 
         this->players.resize(this->playersCount);
-        auto player = std::unique_ptr<Player>(new Player("goku",DEMON, Position(10,10), 1, user));
+        auto player = std::unique_ptr<Player>(new Player("goku",DEMON, Position(10,10), 1, heuristic));
         ID p_id;
         p_id.id = player->getName();
         p_id.id.push_back('0');
@@ -101,10 +102,11 @@ namespace state {
 
     //  Permet de passer le tour du joueur actuel et donner la main au joueur suivant
     void State::passTurn (char selected){
-        this->actualPlayerIndex = this->players_id[this->actualPlayerIndex].next;
         std::string id = this->players_id[actualPlayerIndex].id;
         this->players[id.back()-'0']->find(id)->second->resetPoints();
+        this->actualPlayerIndex = this->players_id[this->actualPlayerIndex].next;
         if(selected==0){
+            this->ngine->clearHistory();
             ai::AI::test = true;
             this->chrono->start(1,10);
         }
@@ -113,8 +115,8 @@ namespace state {
     //  Permet d'annuler la fonction passTurn et de revenir au tour du joueur précédent
     void State::cancel_passTurn(char selected){
         if(selected!=0){
-            std::string id = this->players_id[actualPlayerIndex].id;
-            this->players[id.back()-'0']->find(id)->second->resetPoints();
+            //std::string id = this->players_id[actualPlayerIndex].id;
+            //this->players[id.back()-'0']->find(id)->second->resetPoints();
             this->actualPlayerIndex = this->players_id[this->actualPlayerIndex].prev;
         }
     };
@@ -154,16 +156,21 @@ namespace state {
                     }
 
                 }
+                return;
             }
         }
+        args->old_ap_thp[0] = -100;
     };
 
     //  Permet à un joueur de se déplacer à une position passée en argument
     void State::makeMove (std::unique_ptr<engine::Action_Args>& args){
         if(this->inMap(args->point)){
-            if((*this)[args->point].state != OCCUPIED){
-                std::string id = this->players_id[args->p_index].id;
-                Position prevPos = (*this)[id]->getPosition();
+            std::string id   = this->players_id[args->p_index].id;
+            Position prevPos = (*this)[id]->getPosition();
+            Position target     = Position(args->point[0], args->point[1]);
+            bool move_condition = (this->isFree(args->point) && this->BFS_Shortest_Path(prevPos, target));
+            move_condition      = (move_condition && (this->get_MP(args->p_index) >= (*this)[prevPos].distance)); 
+            if(move_condition) {
                 (*this)[prevPos].state = FREE;
                 (*this)[args->point].player_index = args->p_index;
                 (*this)[id]->move(args->point[0],args->point[1]);
@@ -612,6 +619,10 @@ namespace state {
         return ( ((*this)[p].state == FREE) );
     }
 
+    inline bool State::isFree (int p[2]){
+        return ( ((*this)[p].state == FREE) );
+    }
+
     /*  prend en argument l’index du joueur qui nous intéresse et renvoie l’index de son attaque 
         actuellement sélectionnée  */
     char State::getAttackIndex (char p_index){
@@ -711,6 +722,53 @@ namespace state {
         char p_next = this->players_id[p_index].next;
         this->players_id[p_prev].next = p_next;
         this->players_id[p_next].prev = p_prev;
+    }
+
+    void State::putInMap (Position& p){
+        if(p.x < 0){ p.x = 0; }
+        else if(p.x >= this->gameMap.size()){ p.x = this->gameMap.size()-1; }
+        if(p.y < 0){ p.y = 0; }
+        else if(p.y >= this->gameMap.size()){ p.y = this->gameMap.size()-1; }
+    }
+
+    Position State::worldToPix (Position p){
+        int mapxy = 22;
+        int tileWidth  = 519;
+        int tileHeight = 268;
+        float tileRatio = static_cast<float>(tileWidth) / static_cast<float>(tileHeight);
+        float x = static_cast<float>(tileWidth) / tileRatio;
+        float y = static_cast<float>(tileHeight); 
+        float px = p.x*x+x/2;
+        float py = p.y*y+y/2;
+        
+        return Position(floor(px - py), floor((px / tileRatio) + (py / tileRatio)));
+    }
+    Position State::pixToWorld (Position p){
+        int mapxy = 22;
+        int tileWidth  = 519;
+        int tileHeight = 268;
+        float tileRatio = static_cast<float>(tileWidth) / static_cast<float>(tileHeight);
+        float x = static_cast<float>(tileWidth) / tileRatio;
+        float y = static_cast<float>(tileHeight); 
+        float px = (static_cast<float>(p.x) / tileRatio) + static_cast<float>(p.y);
+        float py = static_cast<float>(p.y) - (static_cast<float>(p.x) / tileRatio);
+        
+        return Position(floor(px/x-0.5), floor(py/y-0.5));
+    }
+
+    bool State::can_attack (char p_index, char t_index, int attack_index){
+        std::string p_id = this->players_id[p_index].id;
+        std::string t_id = this->players_id[t_index].id;
+        Position p_pos = (*this)[p_id]->getPosition();
+        Position t_pos = (*this)[t_id]->getPosition();
+        int range      = this->get_Attack(p_index, attack_index).range;
+        bool in_range  = (p_pos.grid_distance(t_pos) <= range);
+        return (in_range && this->hasEnough_AP(p_index, attack_index));
+    }
+
+    from State::get_Input (){
+        std::string id = this->players_id[this->actualPlayerIndex].id;
+        return (*this)[id]->getInput();
     }
 
 };

@@ -186,5 +186,13 @@ namespace engine{
         return cmd;
     }
 
+    void Engine::clearHistory (){
+        this->cmdHistory.clear();
+    }
+
+    void Engine::bind (ai::Robot* agent){
+        agent->bind(this->currentState);
+    }
+
     Engine::~Engine (){}
 }

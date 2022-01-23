@@ -397,7 +397,7 @@ void deep_Ai(void){
     ai::AI::initSrand();
 
     gamewindow.shareStateWith(ngine);
-    ai::DeepAI g_ai(&ngine);
+    ai::Robot robot(&ngine);
     gamewindow.update();
     //ngine.start();
 
@@ -429,7 +429,7 @@ void deep_Ai(void){
         }
 
         if(ngine.isActionFromAI() && !ngine.timeOut()){
-            g_ai.exploit();
+            robot.exploit();
             gamewindow.update();
         }
         else if(ngine.timeOut()){

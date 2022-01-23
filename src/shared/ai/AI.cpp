@@ -34,6 +34,8 @@ namespace ai{
         this->selections[5] = (char)MOVE;   // move instead of pass turn : AI never passes turn
         this->selections[6] = (char)MOVE;   // move
     }
+
+    
     AI::AI (engine::Engine* ngine) {
             this->selected = 6;
             this->selections[0] = (char)SPELL1; // attack selection

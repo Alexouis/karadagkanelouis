@@ -81,6 +81,7 @@ namespace ai{
 
         if(this->strategies[this->bestStrategy_index[BUF_INDEX_1]]->apply(BUF_INDEX_1) == -1){
             this->ngine->registerTarget((char)PASS);
+            this->bestStrategy_index[BUF_INDEX_1] = 0;
             std::cout << "COUCOU" << std::endl;
         }
     }
@@ -108,6 +109,7 @@ namespace ai{
             std::cout << "others\n";
             this->simu_bestStrategyFor_curr();
             this->strategies[this->bestStrategy_index[BUF_INDEX_2]]->apply(BUF_INDEX_2);
+            this->bestStrategy_index[BUF_INDEX_2] = 0;
             this->ngine->registerTarget((char)SIMU_PASS);
             this->ngine->execute();
             this->incCmdCount(1,BUF_INDEX_1);
