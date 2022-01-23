@@ -33,9 +33,7 @@ namespace ai {
     int Strategy::test (int buf_index){}
 
     int Strategy::apply (int buf_index){
-        
-        std::cout << "app :" << gstate->get_AP(p_index[buf_index].front()) << std::endl;
-        
+
         if(p_index[buf_index].size() < 1){ return -1; }
         if(savedPos[buf_index].front().x != -1){
             if(iteration == 0){
@@ -52,10 +50,6 @@ namespace ai {
         //abort();
 
 attack_again:      //then  attack
-            std::cout << "enemiesCount_attackAgain_out :" << gstate->enemiesCount(p_index[buf_index].front()) << std::endl;
-            std::cout << "get_AP_attackAgain_out :" << gstate->get_AP(p_index[buf_index].front()) << std::endl;
-            std::cout << "hasEnough_AP_attackAgain_out :" << gstate->hasEnough_AP(p_index[buf_index].front(), judicious_attack[buf_index].front()) << std::endl;
-
             if(
                 gstate->can_attack(
                     p_index[buf_index].front(), 
@@ -66,10 +60,6 @@ attack_again:      //then  attack
                 ngine->registerTarget(judicious_attack[buf_index].front());
                 ngine->registerTarget(t_pos[buf_index].front()[0], t_pos[buf_index].front()[1], (char)move_action);
                 if(buf_index){
-                    std::cout << "enemiesCount_attackAgain_in :" << gstate->enemiesCount(p_index[buf_index].front()) << std::endl;
-                    std::cout << "get_AP_attackAgain_in :" << gstate->get_AP(p_index[buf_index].front()) << std::endl;
-                    std::cout << "hasEnough_AP_attackAgain_in :" << gstate->hasEnough_AP(p_index[buf_index].front(), judicious_attack[buf_index].front()) << std::endl;
-
                     int prev_tHP = gstate->get_HP(t_index[buf_index].front());
                     ngine->execute();
                     ngine->execute();
@@ -80,29 +70,33 @@ attack_again:      //then  attack
                 
             }
             else if(gstate->isDead(t_index[buf_index].front()) && (gstate->enemiesCount(p_index[buf_index].front()) > 0)){ 
-                    std::cout << "is dead_apply :" << gstate->isDead(t_index[buf_index].front()) << std::endl;
-                    std::cout << "enemiesCount_apply :" << gstate->enemiesCount(p_index[buf_index].front()) << std::endl;
-                    std::cout << "get_AP_apply :" << gstate->get_AP(p_index[buf_index].front()) << std::endl;
-                    std::cout << "hasEnough_AP_apply :" << gstate->hasEnough_AP(p_index[buf_index].front(), judicious_attack[buf_index].front()) << std::endl;
                     iteration = 0;
                     popQueues (buf_index);
                     return apply(buf_index);
             }
-
-            iteration = 0;
-            while(p_index[buf_index].size()){ popQueues (buf_index); }
-            return -1;
+            else{
+                ngine->registerTarget(escapePos[buf_index].x, escapePos[buf_index].y, (char)move_action);
+                std::cout << "apply scp = " << escapePos[buf_index].x << " " << escapePos[buf_index].y << std::endl;
+                if(buf_index){
+                    ngine->execute();
+                    g_ai->incCmdCount(1,buf_index);
+                }
+            }
         }
-        ngine->registerTarget(escapePos[buf_index].x, escapePos[buf_index].y, (char)move_action);
-        std::cout << "apply scp = " << escapePos[buf_index].x << " " << escapePos[buf_index].y << std::endl;
-        if(buf_index){
-            ngine->execute();
-            g_ai->incCmdCount(1,buf_index);
+        else{
+            ngine->registerTarget(escapePos[buf_index].x, escapePos[buf_index].y, (char)move_action);
+            std::cout << "apply scp = " << escapePos[buf_index].x << " " << escapePos[buf_index].y << std::endl;
+            if(buf_index){
+                ngine->execute();
+                g_ai->incCmdCount(1,buf_index);
+            }
         }
-        popQueues (buf_index);
-        iteration = 0;
+                
+        
+        while(p_index[buf_index].size()){ popQueues (buf_index); }
+                
         // if(t_pos[buf_index].size() > 0){ popQueues (buf_index);  }
-        return -1;
+        return 0;
     }
 
     void Strategy::pick_GoodPosition (int buf_index){
@@ -124,7 +118,6 @@ attack_again:      //then  attack
             if(attack_range[i] >= src.grid_distance(dst)){
                 savePos[i] = state::Position(-2,0);
                 while(p_stats[i].getAp()){
-                    std::cout << "IN GP 1" << std::endl;
                     gstate->simu_attack(p_index[buf_index].back(), t_index[buf_index].back(), i, p_stats[i], t_stats[i]);
                 }
 
@@ -141,14 +134,9 @@ attack_again:      //then  attack
                 }  
                 // y
                 if(attack_range[i] < src.grid_distance(savePos[i])){
-                    //then esxape
-                    std::cout << "IN GP 2 nexptos = "<< (*gstate)[savePos[i]].next_grid.x << " " << (*gstate)[savePos[i]].next_grid.y << std::endl;
-                    //int t_attack_range  = gstate->get_Attack(t_index[buf_index].back(), 0).range;
-                    //if (!did_scp){ escape(buf_index, t_stats[i].getMp() + t_attack_range); }
-                    did_scp++;
+                    savePos[i] = state::Position(-1,0);
                 }
                 else{
-                    std::cout << "IN GP 3" << std::endl;
                     while(p_stats[i].getAp()){
                         gstate->simu_attack(p_index[buf_index].back(), t_index[buf_index].back(), i, p_stats[i], t_stats[i]);
                     }
@@ -160,11 +148,7 @@ attack_again:      //then  attack
                 }  
             }
         }
-        if(did_scp == 2){ 
-            savedPos[buf_index].push(state::Position(-1,0));
-            std::cout << "IN GP ecp cond" << std::endl;
-            return; 
-        }
+
         if((t_stats[0].getHp() > 0) && (t_stats[1].getHp() > 0)){
             judicious_attack[buf_index].push((t_stats[0].getHp() > t_stats[1].getHp()));
         }
@@ -174,10 +158,6 @@ attack_again:      //then  attack
         else{
             judicious_attack[buf_index].push((t_stats[0].getHp() < t_stats[1].getHp()));
         }
-
-        std::cout << "PGP t_stats0_HP: " << t_stats[0].getHp() << "et t_stats1_HP: " << t_stats[1].getHp() << std::endl;
-
-
         savedPos[buf_index].push(savePos[judicious_attack[buf_index].back()]);
     }
 
@@ -190,8 +170,6 @@ attack_again:      //then  attack
                 judicious_attack[buf_index].back()) && !gstate->isDead(t_index[buf_index].back()
             )
         ){
-            std::cout << "IN SIMULATE ATTACK" << std::endl;
-            std::cout << "is dead = " << gstate->isDead(t_index[buf_index].back()) << std::endl;
             ngine->registerTarget(judicious_attack[buf_index].back());
             ngine->execute();
             ngine->registerTarget(t_pos[buf_index].back()[0], t_pos[buf_index].back()[1], (char)move_action);
@@ -221,17 +199,8 @@ attack_again:      //then  attack
 
             score -= gstate->get_HP(t_index[buf_index].back());
 
-            std::cout << "is dead :" << gstate->isDead(t_index[buf_index].back()) << std::endl;
-            std::cout << "enemiesCount :" << gstate->enemiesCount(p_index[buf_index].back()) << std::endl;
-            std::cout << "get_AP :" << gstate->get_AP(p_index[buf_index].back()) << std::endl;
-            std::cout << "hasEnough_AP :" << gstate->hasEnough_AP(p_index[buf_index].back(), judicious_attack[buf_index].back()) << std::endl;
-
             if(gstate->isDead(t_index[buf_index].back()) && gstate->enemiesCount(p_index[buf_index].back())){ 
                 score += bonus;
-                std::cout << "is dead_in :" << gstate->isDead(t_index[buf_index].back()) << std::endl;
-                std::cout << "enemiesCount_in :" << gstate->enemiesCount(p_index[buf_index].back()) << std::endl;
-                std::cout << "get_AP_in :" << gstate->get_AP(p_index[buf_index].back()) << std::endl;
-                std::cout << "hasEnough_AP_in :" << gstate->hasEnough_AP(p_index[buf_index].back(), judicious_attack[buf_index].back()) << std::endl;
                 score += test(buf_index);
             }
         }
@@ -261,24 +230,66 @@ attack_again:      //then  attack
         if(!mp) { return; }
         state::Position src = gstate->playerPosition(p_index[buf_index].back());
         state::Position tgt = gstate->barycentre(t_index[buf_index].back());
+        std::cout << "in escape src scp = " << src.x << " " << src.y << std::endl;
+        std::cout << "in escape tgt scp = " << tgt.x << " " << tgt.y << std::endl;
         state::Position idealx, idealy, delta = src - tgt;
+        std::cout << "in escape delta scp = " << delta.x << " " << delta.y << std::endl;
         state::Position dp =  (delta > 0) - (delta < 0);
         state::Position limx = state::Position(dp.x * tot_t_range + tgt.x, tgt.y);
         state::Position limy = state::Position(tgt.x, dp.y * tot_t_range + tgt.y);
         dp.x *= -1; 
         int dist, d1,d2, mindist = src.grid_distance(tgt) + tot_t_range;
-        for( auto p = limx; p == limy; p += dp){
+        escapePos[buf_index]     = state::Position(-1,0);
+        std::cout << "in escape meth0" << std::endl;
+        std::cout << "in escape dp scp = " << dp.x << " " << dp.y << std::endl;
+        std::cout << "in escape limx scp = " << limx.x << " " << limx.y << std::endl;
+        std::cout << "in escape limy scp = " << limy.x << " " << limy.y << std::endl;
+        std::cout << "in escape test scp = " << (limx != limy) << std::endl;
+        for( state::Position p = limx; (p != (limy + dp)); p += dp){
             dist    = src.grid_distance(p);
+            std::cout << "in escape p scp = " << p.x << " " << p.y << std::endl;
             if(dist < mindist){
                 mindist = dist;
-                escapePos[buf_index]   = p; 
+                idealx  = p + state::Position(-dp.x, 0);
+                idealy  = p + state::Position(0, +dp.y);
+                std::cout << "in escape idealx scp = " << idealx.x << " " << idealx.y << std::endl;
+                std::cout << "in escape idealy scp = " << idealy.x << " " << idealy.y << std::endl;
+
+                if(gstate->inMap(idealx) && gstate->isFree(idealx)){
+                    if(gstate->BFS_Shortest_Path(src, idealx)){ d1 = (*gstate)[src].distance;  }
+                    else                                      { d1 = src.grid_distance(idealx);}
+                }
+                else{ d1 = 0; }
+
+                if(gstate->inMap(idealy) && gstate->isFree(idealy)){
+                    if(gstate->BFS_Shortest_Path(src, idealy)){ d2 = (*gstate)[src].distance;   }
+                    else                                      { d2 = src.grid_distance(idealy); }
+                }
+                else{ d2 = 0; }
+
+                if     (d1 < d2){ escapePos[buf_index] = idealx; }
+                else if(d1 > d2){ escapePos[buf_index] = idealy; }
+                
             }
+        }
+        std::cout << "in escape meth1" << std::endl;
+        if(escapePos[buf_index].x != -1){
+            while(!gstate->BFS_Shortest_Path(src, escapePos[buf_index])){ 
+                gstate->searchFreeAround(escapePos[buf_index]);
+            }
+            dist =  (*gstate)[src].distance;
+            escapePos[buf_index] = src;
+            while(mp && dist){
+                escapePos[buf_index] = (*gstate)[escapePos[buf_index]].next_grid;
+                mp--;
+                dist--;
+            }
+            std::cout << "in escape meth2 scp = " << escapePos[buf_index].x << " " << escapePos[buf_index].y << std::endl;
+            return;
         }
 
         dp.x   *= -1;
         mindist = 0;
-        idealx  = escapePos[buf_index] + state::Position(dp.x, 0);
-        idealy  = escapePos[buf_index] + state::Position(0, dp.y);
         d1 = src.grid_distance(idealx);
         d2 = src.grid_distance(idealy);
         if     (d1 < d2){ 

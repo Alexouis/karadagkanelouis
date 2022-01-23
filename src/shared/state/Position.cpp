@@ -21,7 +21,7 @@ namespace state
         return (x == p.x && y == p.y);
     }
     bool Position::operator!= (Position p){
-        return (x != p.x && y != p.y);
+        return (x != p.x || y != p.y);
     }
     Position Position::operator* (int x){
         return Position(this->x*x, this->y*y);

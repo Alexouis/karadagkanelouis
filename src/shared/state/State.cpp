@@ -41,7 +41,7 @@ namespace state {
         }
 
         this->players.resize(this->playersCount);
-        auto player = std::unique_ptr<Player>(new Player("goku",DEMON, Position(10,10), 1, heuristic));
+        auto player = std::unique_ptr<Player>(new Player("goku",DEMON, Position(10,10), 1, user));
         ID p_id;
         p_id.id = player->getName();
         p_id.id.push_back('0');
