@@ -144,9 +144,13 @@ namespace state {
                 std::string taregtId   = this->players_id[(*this)[args->point].player_index].id;
                 (*this)[attackerId]->attack((*this)[taregtId]);
                 if(this->isDead((*this)[args->point].player_index)){
+                    this->unlink((*this)[args->point].player_index);
                     this->teamCount[(taregtId.back()-'0')]--;
-                    this->winner = (*this)[attackerId]->getPClass();
-                    this->endGame();
+                    if(!teamCount[(taregtId.back()-'0')]){
+                        this->winner = (*this)[attackerId]->getPClass();
+                        this->endGame();
+                    }
+
                 }
             }
         }
@@ -440,9 +444,10 @@ namespace state {
                 std::string taregtId = this->players_id[t_index].id;
                 (*this)[taregtId]->setHp(args->old_ap_thp[1]);
                 if(this->get_HP(t_index) > 0){
-                   (*this)[taregtId]->setStatus(state::playerStatus::WAITING);
+                   (*this)[taregtId]->setStatus(WAITING);
                    this->gameOver = false;
                    if(dead){
+                       this->link(t_index);
                        this->teamCount[(taregtId.back()-'0')]++;
                    }
                 }
@@ -457,23 +462,20 @@ namespace state {
     }
 
     //  Permet de changer tous les joueurs qui ne le sont pas en IA
-    void State::turn_all_in_AI()
-    {
+    void State::turn_all_in_AI(){
         for (char index : users_index){
            this->turn_in_AI(index); 
         }
     }
 
     //  Permet de changer le statut du joueur dont l’index est passé en argument est de faire de lui un IA
-    void State::turn_in_AI(char p_index)
-    {
+    void State::turn_in_AI(char p_index){
         std::string id = this->players_id[p_index].id;
         (*this)[id]->setInput(user);
     }
 
     //  Permet de changer tous les joueurs qui n’étaient pas des IA à l’origine, de nouveau en joueurs réels
-    void State::restore_all_users()
-    {
+    void State::restore_all_users(){
         for (char index : users_index){
            this->restore_user(index); 
         }
@@ -481,8 +483,7 @@ namespace state {
 
     /*  Permet de changer le statut du joueur dont l’index est passé en argument est de faire de lui un joueur 
     réel, qui n’est pas une IA. */
-    void State::restore_user(char p_index)
-    {
+    void State::restore_user(char p_index){
         std::string id = this->players_id[p_index].id;
         (*this)[id]->setInput(user);
     }
@@ -674,6 +675,19 @@ namespace state {
         }
 
         return Position(-1,0);
+    }
+
+    void State::link (char p_index){
+        char p_prev = this->players_id[p_index].prev;
+        char p_next = this->players_id[p_index].next;
+        this->players_id[p_prev].next = p_index;
+        this->players_id[p_next].prev = p_index;
+    }
+    void State::unlink (char p_index){
+        char p_prev = this->players_id[p_index].prev;
+        char p_next = this->players_id[p_index].next;
+        this->players_id[p_prev].next = p_next;
+        this->players_id[p_next].prev = p_prev;
     }
 
 };
