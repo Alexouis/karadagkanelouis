@@ -69,4 +69,14 @@
     ------------------------------------------
 
     [3.final]
+    strategie strategie mise en place : 
+    l'ia fait des tests sur une liste de strategies et choisie celle avec un 
+    meilleur score. Les principales etapes de chaque strategie sont:
+    1- choix de la cible
+    2- attaque jusqu'à epuisement de points d'action
+    4- fuite.
+    les strategies se basent sur des estimations selon lesquelles un les autres joueurs, à leurs toutrs, agissent comme des IA avec des qui tendent à minimiser le score du joueur actuel. La prise de fuite dans une strategie
+    utilise un calcul de barycentre de positions de joueurs enemis ponderes par leur niveau afin de detecter les zones les plus à risques et un deplacement vers une direction opposee au barycentre.
+
+    execution : ./bin/client deep_ai
 ---
